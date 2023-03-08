@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using pruebasEF.Entities;
 using pruebasEF.Services;
 using Supabase.Gotrue;
 using System;
@@ -32,9 +33,7 @@ namespace pruebasEF.Services
         }
 
         #region Usuario
-        string Login(string login, string password) { return "";  }
-
-        string IPreguntadosService.Login(string login, string password)
+        bool IPreguntadosService.Login(string login, string password)
         {
             throw new NotImplementedException();
         }
@@ -46,9 +45,9 @@ namespace pruebasEF.Services
             throw new NotImplementedException();
         }
 
-        User SignUp(String username, String correo, String password, String img) { return new User(); }
+        Usuario SignUp(String username, String correo, String password, String img) { return new Usuario(); }
 
-        User IPreguntadosService.SignUp(string username, string correo, string password, string img)
+        Usuario IPreguntadosService.SignUp(string username, string correo, string password, string img)
         {
             throw new NotImplementedException();
         }

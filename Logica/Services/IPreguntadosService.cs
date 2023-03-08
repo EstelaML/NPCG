@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using pruebasEF.Entities;
 using Supabase.Gotrue;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace pruebasEF.Services
         void DBRestartData();
 
         #region Usuario
-        string Login(string login, string password);
+        bool Login(string login, string password);
         void Logout();
-        User SignUp(String username, String correo, String password, String img);
+        Usuario SignUp(String username, String correo, String password, String img);
 
         #endregion
 
