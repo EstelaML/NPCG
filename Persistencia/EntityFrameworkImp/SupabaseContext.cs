@@ -27,5 +27,6 @@ namespace pruebasEF.Persistencia
         public DbSet<Entities.Reto> Retos { get; set; }
         public DbSet<Entities.RetoPregunta> Preguntas { get; set; }
         public DbSet<Entities.Usuario> Usuarios { get; set; }
+        public DbSet<Entities.RetoPorPartida> RetosPorPartidas { get; set; }
     }
 }
