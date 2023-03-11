@@ -18,21 +18,21 @@ namespace pruebasEF.Entities
     {
         [Key]
         [Column("id")]
-        public int Id { get; set; }
+        public int? id { get; set; }
 
-        [Column("fecha_creacíon")]
-        public string FechaCreacion { get; set; }
+        [Column("fecha_creacion")]
+        public DateTime? fecha_creacion { get; set; }
 
         [Column("nombre")]
-        public string Nombre { get; set; }
+        public string nombre { get; set; }
 
         [Column("email")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Column("contraseña")]
-        public string Contraseña { get; set; }
+        public string contraseña { get; set; }
 
         [Column("avatar_url")]
-        public string Image { get; set; }
+        public string? avatar_url { get; set; }
     }
 }

@@ -15,14 +15,14 @@ namespace pruebasEF.Entities
     public partial class Usuario
     {
         public Usuario() { }
-        public Usuario(int id, string fechaCreacion, string nombre, string email, string contraseña, string image)
+        public Usuario(int id, DateTime fechaCreacion, string nombre, string email, string contraseña, string image)
         {
-            this.Id = id;
-            this.FechaCreacion = fechaCreacion;
-            this.Nombre = nombre;
-            this.Email = email;
-            this.Contraseña = contraseña;
-            this.Image = image;
+            this.id = id;
+            this.fecha_creacion = fechaCreacion;
+            this.nombre = nombre;
+            this.email = email;
+            this.contraseña = contraseña;
+            this.avatar_url = image;
         }
 
     }

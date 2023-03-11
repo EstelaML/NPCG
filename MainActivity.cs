@@ -2,6 +2,10 @@
 using Android.OS;
 using Android.Runtime;
 using AndroidX.AppCompat.App;
+using pruebasEF.Entities;
+using pruebasEF.Persistencia;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace pruebasEF
 {
@@ -14,6 +18,8 @@ namespace pruebasEF
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+            probarAsync();
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -21,5 +27,18 @@ namespace pruebasEF
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        public void probarAsync() {
+            using (var bd = new SupabaseContext()) {
+                Usuario e = new Usuario { nombre = "probando", email = "naa", contraseña = "nada" };
+                bd.User.Add(e);
+                bd.SaveChanges();
+
+
+                var lista = bd.User.ToList();
+                
+            }
+        }
+
     }
 }

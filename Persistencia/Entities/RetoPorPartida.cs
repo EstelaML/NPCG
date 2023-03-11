@@ -27,7 +27,7 @@ namespace pruebasEF.Entities
         [ForeignKey("PartidaId")]
         public Partida RPartida { get; set; }
 
-        [Key]
+        
         [Column("partidaId")]
         public int PartidaId { get; set; }
     }

@@ -82,6 +82,10 @@
     <Compile Include="Persistencia\EntityFrameworkImp\IDAL.cs" />
     <Compile Include="Persistencia\EntityFrameworkImp\SupabaseContext.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Persistencia\Repository\IRepository.cs" />
+    <Compile Include="Persistencia\Repository\Repositorycs.cs" />
+    <Compile Include="Persistencia\Repository\SupabaseContext.cs" />
+    <Compile Include="Persistencia\Repository\UserRepository.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
