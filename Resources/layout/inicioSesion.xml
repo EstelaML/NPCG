@@ -14,6 +14,54 @@
         android:paddingTop="100px"
         android:background="#00542A"
         android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Inicio de Sesión"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" 
+            android:paddingBottom="60px"
+            android:textColor="#fff"/>
+        <TextView
+            android:text="Nombre de Usuario"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2" 
+            android:textColor="#fff"/>
+        <EditText
+            android:inputType="textPersonName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nombreUsuario" />
+        <TextView
+            android:text="Contraseña"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" 
+            android:textColor="#fff"/>
+        <EditText
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contraseña" />
+        <Button
+            android:text="Iniciar Sesión"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inicioSesion" />
+        <Button
+            android:text="Atrás"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atras" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/error" />
        
         
     </LinearLayout>
