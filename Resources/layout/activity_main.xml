@@ -14,72 +14,27 @@
         android:paddingTop="100px"
         android:background="#00542A"
         android:id="@+id/linearLayout1">
-        <TextView
-            android:text="Registro"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView4" 
-            android:textColor="#ffff"
-            android:paddingBottom="60px"/>
-        <TextView
-            android:text="Nombre de usuario"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1" 
-            android:textColor="#ffff"/>
-        <EditText
-            android:inputType="textPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nombreUsuario" 
-            />
-        <TextView
-            android:text="Correo electrónico"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2" 
-            android:textColor="#ffff"/>
-        <EditText
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/correo" />
-        <TextView
-            android:text="Contraseña"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3" 
-            android:textColor="#ffff"/>
-        <EditText
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contraseña" />
-        <TextView
-            android:text="Repita la contraseña"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contraseña2" 
-            android:textColor="#ffff"/>
-        <EditText
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText4"
-            />
         <Button
-            android:text="Registrar"
+            android:text="NuevaPartida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/registroB" 
-            android:textColor="#000000"
-            android:backgroundTint="#8DFDC5"
-            />
+            android:id="@+id/partidaB" />
+        <Button
+            android:text="Inicio de Sesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sesionB" />
+        <Button
+            android:text="Registro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/registroB" />
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1" />
+        
     </LinearLayout>
 
 </RelativeLayout>

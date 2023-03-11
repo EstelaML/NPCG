@@ -1,9 +1,12 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Widget;
 using AndroidX.AppCompat.App;
 using pruebasEF.Entities;
 using pruebasEF.Persistencia;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,9 +21,21 @@ namespace pruebasEF
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-            //probarAsync();
+
+            Button registro = FindViewById<Button>(Resource.Id.registroB);
+            registro.Click += Registro_Click;
+
+            
 
         }
+
+        private void Registro_Click(object sender, EventArgs e)
+        {
+            Intent i = new Intent(this, typeof(registro));
+            StartActivity(i);
+        }
+
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

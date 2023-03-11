@@ -64,22 +64,29 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/contraseña2" 
+            android:id="@+id/ererere" 
             android:textColor="#ffff"/>
         <EditText
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"
+            android:id="@+id/contraseña2"
             />
         <Button
             android:text="Registrar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/registroB" 
+            android:layout_height="49.0dp"
+            android:id="@+id/registroB"
             android:textColor="#000000"
             android:backgroundTint="#8DFDC5"
             />
+        <Button
+            android:text="Atrás"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1" 
+            android:backgroundTint="#8DFDC5"/>
+      
     </LinearLayout>
 
 </RelativeLayout>
