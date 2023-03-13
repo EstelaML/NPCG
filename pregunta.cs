@@ -28,11 +28,14 @@ namespace pruebasEF
         private int turno;
         private TextView error;
         private RetoPregunta[] a;
+        private int aciertos;
+        private int errores;
+        private TextView textAciertos;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
-
+            aciertos = errores = 0;
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
             b1 = FindViewById<Button>(Resource.Id.button1);
             b2 = FindViewById<Button>(Resource.Id.button2);
@@ -46,6 +49,7 @@ namespace pruebasEF
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
             }
             a = preguntas.ToArray();
+            textAciertos = FindViewById<TextView>(Resource.Id.aciertos);
 
             b1.Click += B1_Click;
             b2.Click += B2_Click;
@@ -81,10 +85,13 @@ namespace pruebasEF
             if (turno == 10) return;
             if (text.Equals(a[turno].Correcta))
             {
+
                 error.Text = "CORRECTA";
+                aciertos++;
             }
             else {
-                error.Text = "Incorrecta";
+                error.Text = "INCORRECTA";
+                errores++;
             }
             turno++;
 
@@ -93,6 +100,7 @@ namespace pruebasEF
 
 
         private void Generarpregunta() {
+            textAciertos.Text = "Acieros: " + aciertos + "/" + (aciertos+errores);
             if (turno == 10) { return; }
             enunciado.Text = a[turno].Pregunta;
             b1.Text = a[turno].Respuesta1;
