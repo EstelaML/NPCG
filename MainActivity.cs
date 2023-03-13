@@ -25,9 +25,17 @@ namespace pruebasEF
             Button registro = FindViewById<Button>(Resource.Id.registroB);
             registro.Click += Registro_Click;
 
+            Button partida = FindViewById<Button>(Resource.Id.partidaB);
+            partida.Click += Partida_Click;
+
             Button inicio = FindViewById<Button>(Resource.Id.sesionB);
             inicio.Click += inicioSesion;
+        }
 
+        private void Partida_Click(object sender, EventArgs e)
+        {
+            Intent i = new Intent(this, typeof(pregunta));
+            StartActivity(i);
         }
 
         private void inicioSesion(object sender, EventArgs e)

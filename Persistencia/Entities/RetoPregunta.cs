@@ -7,30 +7,35 @@ using Android.Widget;
 using Postgrest.Attributes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
 namespace pruebasEF.Entities
 {
-    [Table("reto_pregunta")]
-    public partial class RetoPregunta : Reto
+    [Table("Reto_preguntas")]
+    public partial class RetoPregunta 
     {
-        [Column("pregunta")]
-        public string Enunciado { get; set; }
+        [Key]
+        [Column("id")]
+        public int? id { get; set; }
 
-        [Column("respuesta1")]
+        [Column("Pregunta")]
+        public string Pregunta { get; set; }
+
+        [Column("Respuesta1")]
         public string Respuesta1 { get; set; }
 
-        [Column("pregunta2")]
+        [Column("Respuesta2")]
         public string Respuesta2 { get; set; }
 
-        [Column("pregunta3")]
+        [Column("Respuesta3")]
         public string Respuesta3 { get; set; }
 
-        [Column("pregunta4")]
+        [Column("Respuesta4")]
         public string Respuesta4 { get; set; }
 
-        [Column("correcta")]
-        public string Solucion { get; set; }
+        [Column("Correcta")]
+        public string Correcta { get; set; }
     }
 }

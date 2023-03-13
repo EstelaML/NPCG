@@ -12,34 +12,47 @@
         android:layout_height="match_parent"
         android:padding="60px"
         android:paddingTop="100px"
-        android:background="#00542A"
+        android:background="#8DFDC5"
         android:id="@+id/linearLayout1">
         <TextView
-            android:text="Pregunta"
+            android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
+            android:gravity="center"
+            android:background="#FF8843"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1" />
+            android:id="@+id/pregunta" 
+          />
         <Button
-            android:text="Button"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFE743"
             android:id="@+id/button1" />
         <Button
-            android:text="Button"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFE743"
             android:id="@+id/button2" />
         <Button
-            android:text="Button"
+            android:text=""
+            android:backgroundTint="#FFE743"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button3" />
         <Button
-            android:text="Button"
+            android:text=""
+            android:backgroundTint="#FFE743"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button4" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text" />
 
 
     </LinearLayout>
