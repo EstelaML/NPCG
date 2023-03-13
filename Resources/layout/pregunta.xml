@@ -14,35 +14,64 @@
         android:paddingTop="100px"
         android:background="#8DFDC5"
         android:id="@+id/linearLayout1">
+
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/linearLayout2">
+        
         <TextView
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
+            android:layout_width="600px"
             android:gravity="center"
+            android:paddingLeft="30px"
+            android:paddingRight="30px"
             android:background="#FF8843"
-            android:layout_height="wrap_content"
+            android:layout_height="480px"
             android:id="@+id/pregunta" 
           />
+        
+        
+        </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:id="@+id/space1" />
+        
         <Button
             android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFE743"
+            android:textColor="#0000"
             android:id="@+id/button1" />
+
         <Button
             android:text=""
+            android:textColor="#0000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFE743"
             android:id="@+id/button2" />
         <Button
             android:text=""
+            android:textColor="#0000"
             android:backgroundTint="#FFE743"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button3" />
         <Button
             android:text=""
+            android:textColor="#0000"
             android:backgroundTint="#FFE743"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
