@@ -12,7 +12,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
+using Android.Graphics;
+using Android.Animation;
+using Android.Views.Animations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Timers;
 
 namespace pruebasEF
 {
@@ -28,6 +34,8 @@ namespace pruebasEF
         private int turno;
         private TextView error;
         private RetoPregunta[] a;
+        private LinearLayout fondo;
+        private int intentos = 2;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,9 +46,8 @@ namespace pruebasEF
             b2 = FindViewById<Button>(Resource.Id.button2);
             b3 = FindViewById<Button>(Resource.Id.button3);
             b4 = FindViewById<Button>(Resource.Id.button4);
-            // Create your application here
             error = FindViewById<TextView>(Resource.Id.text);
-
+            fondo = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
             using (var bd = new SupabaseContext())
             {
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
@@ -54,11 +61,14 @@ namespace pruebasEF
 
             turno = 0;
             Generarpregunta();
+
+
         }
 
         private void B4_Click(object sender, EventArgs e)
         {
             EsSolucion(b4.Text, b4);
+           
         }
 
         private void B3_Click(object sender, EventArgs e)
@@ -81,16 +91,39 @@ namespace pruebasEF
             if (turno == 10) return;
             if (text.Equals(a[turno].Correcta))
             {
+                Android.Graphics.Color rojoIntenso = new Android.Graphics.Color(213, 250, 121);
+                fondo.SetBackgroundColor(rojoIntenso);
                 error.Text = "CORRECTA";
             }
             else {
-                error.Text = "Incorrecta";
+                Android.Graphics.Color rojoIntenso = new Android.Graphics.Color(239, 87, 100);
+                error.Text = "INCORRECTA";
+                intentos--;
+                Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+                alert.SetTitle("Respuesta incorrecta");
+                alert.SetMessage("Recuerda que tienes "+ intentos + " intentos");
+
+                alert.SetPositiveButton("Aceptar", (senderAlert, argsAlert) =>
+                {
+                });
+                Dialog dialog = alert.Create();
+                dialog.Show();
+                fondo.SetBackgroundColor(rojoIntenso);
             }
             turno++;
 
-            Generarpregunta();
+            Timer timer1 = new Timer();
+            timer1.Interval = 2500;
+            timer1.Elapsed += Timer1_Elapsed;
+            timer1.Start();
+            
         }
 
+        private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Generarpregunta();
+
+        }
 
         private void Generarpregunta() {
             if (turno == 10) { return; }

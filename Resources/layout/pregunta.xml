@@ -15,10 +15,6 @@
         android:background="#8DFDC5"
         android:id="@+id/linearLayout1">
 
-
-
-
-
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
@@ -52,26 +48,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFE743"
-            android:textColor="#0000"
+            android:textColor="@android:color/black"
             android:id="@+id/button1" />
 
         <Button
             android:text=""
-            android:textColor="#0000"
+            android:textColor="@android:color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFE743"
             android:id="@+id/button2" />
         <Button
             android:text=""
-            android:textColor="#0000"
+            android:textColor="@android:color/black"
             android:backgroundTint="#FFE743"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/button3" />
         <Button
             android:text=""
-            android:textColor="#0000"
+            android:textColor="@android:color/black"
             android:backgroundTint="#FFE743"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +78,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text" />
-
 
     </LinearLayout>
 
