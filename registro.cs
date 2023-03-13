@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using pruebasEF.Persistencia;
+using Android.Hardware.Camera2;
 
 namespace pruebasEF
 {
@@ -26,6 +27,8 @@ namespace pruebasEF
         private bool passwordCorrect;
         private bool emailCorrect;
         private Button registroB;
+        private TextView error;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,12 +38,13 @@ namespace pruebasEF
             passwordCorrect = false;
             emailCorrect = false;
 
+            error = FindViewById<TextView>(Resource.Id.error);
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
             password = FindViewById<EditText>(Resource.Id.contraseña);
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
             email = FindViewById<EditText>(Resource.Id.correo);
 
-            Button atras = FindViewById<Button>(Resource.Id.button1);
+            ImageButton atras = FindViewById<ImageButton>(Resource.Id.button1);
             atras.Click += Atras;
             registroB = FindViewById<Button>(Resource.Id.registroB);
             registroB.Click += Registrar;
@@ -51,22 +55,37 @@ namespace pruebasEF
 
         private void Email_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            emailCorrect = (email.Text.Contains("@gmail.com"));
+            emailCorrect = true;
+            error.Text = "";
         }
 
         private void Password_Click(object sender, EventArgs e)
         {
-            passwordCorrect = (password.Text == password.Text);
+            if (password.Text != null && password2.Text != null) { passwordCorrect = true; }
+            error.Text = "";
         }
 
         private void Username_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         {
-            usernameCorrect = !(username.Text == null);
+            if (username.Text != null) { usernameCorrect = true; }
+            error.Text = "";
+            
         }
 
         private void Registrar(object sender, EventArgs e)
         {
             if (usernameCorrect && passwordCorrect && emailCorrect) {
+                if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
+                if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
+                using (var bd = new SupabaseContext())
+                {
+                    if (bd.User.Any(u => u.nombre == username.Text))
+                    {
+                        error.Text = "Ese nombre de usuario ya existe";
+                        usernameCorrect = false; return;
+                    }
+                }
+
                 using (var bd = new SupabaseContext())
                 {
                     Usuario almendro = new Usuario { nombre = username.Text, email = email.Text, contraseña = password.Text };

@@ -64,6 +64,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="pregunta.cs" />
     <Compile Include="inicioSesion.cs" />
     <Compile Include="registro.cs" />
     <Compile Include="Logica\Entities\ODS.cs" />
@@ -153,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\inicioSesion.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\pregunta.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>

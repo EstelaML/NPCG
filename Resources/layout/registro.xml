@@ -14,20 +14,36 @@
         android:paddingTop="100px"
         android:background="#00542A"
         android:id="@+id/linearLayout1">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+             <ImageButton
+            android:src="@android:drawable/ic_menu_revert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1" 
+            android:paddingBottom="100px"
+            android:background="@color/mtrl_btn_transparent_bg_color"/>
+            </LinearLayout>
+
         <TextView
             android:text="Registro"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView4" 
+            android:id="@+id/textView4"
             android:textColor="#ffff"
-            android:paddingBottom="60px"/>
+            android:paddingBottom="100px"/>
         <TextView
             android:text="Nombre de usuario"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1" 
+            android:id="@+id/textView1"
             android:textColor="#ffff"/>
         <EditText
             android:inputType="textPersonName"
@@ -40,7 +56,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2" 
+            android:id="@+id/textView2"
+            android:paddingTop="35px"
             android:textColor="#ffff"/>
         <EditText
             android:inputType="textEmailAddress"
@@ -48,11 +65,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/correo" />
         <TextView
+            android:paddingTop="35px"
             android:text="Contraseña"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3" 
+            android:id="@+id/textView3"
             android:textColor="#ffff"/>
         <EditText
             android:inputType="textPassword"
@@ -60,11 +78,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/contraseña" />
         <TextView
+            android:paddingTop="35px"
             android:text="Repita la contraseña"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ererere" 
+            android:id="@+id/ererere"
             android:textColor="#ffff"/>
         <EditText
             android:inputType="textEmailAddress"
@@ -72,6 +91,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/contraseña2"
             />
+        <TextView
+            android:text=""
+            android:paddingTop="40px"
+            android:paddingBottom="40px"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_height="wrap_content"
+            android:id="@+id/error" />
+
         <Button
             android:text="Registrar"
             android:layout_width="match_parent"
@@ -80,13 +109,7 @@
             android:textColor="#000000"
             android:backgroundTint="#8DFDC5"
             />
-        <Button
-            android:text="Atrás"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button1" 
-            android:backgroundTint="#8DFDC5"/>
-      
+
     </LinearLayout>
 
 </RelativeLayout>

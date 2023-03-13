@@ -34,7 +34,7 @@ namespace pruebasEF
             iniciarSesion = FindViewById<Button>(Resource.Id.inicioSesion);
             iniciarSesion.Click += IniciarSesion_Click;
             error = FindViewById<TextView>(Resource.Id.error);
-            Button atras = FindViewById<Button>(Resource.Id.atras);
+            ImageButton atras = FindViewById<ImageButton>(Resource.Id.atras);
             atras.Click += Atras;
         }
 
