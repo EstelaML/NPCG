@@ -95,6 +95,7 @@ namespace pruebasEF
             }
             turno++;
 
+            // time out de unos 2/3 segundos para que vea la respuesta correcta
             Generarpregunta();
         }
 
