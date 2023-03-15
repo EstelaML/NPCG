@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Content.Res;
+using Android.Media;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -31,6 +32,7 @@ namespace pruebasEF
         private int aciertos;
         private int errores;
         private TextView textAciertos;
+        private MediaPlayer mp;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -60,6 +62,28 @@ namespace pruebasEF
             Generarpregunta();
         }
 
+        private void hacerSonidoAcierto() {
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
+
+            // Configurar un objeto MediaPlayer para reproducir el sonido
+            mp = new MediaPlayer();
+            mp.SetDataSource(this, uri);
+            mp.Prepare();
+            mp.Start();
+        }
+
+        private void hacerSonidoError()
+        {
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_error);
+
+            // Configurar un objeto MediaPlayer para reproducir el sonido
+            mp = new MediaPlayer();
+            mp.SetDataSource(this, uri);
+            mp.Prepare();
+            mp.Start();
+        }
+
+
         private void B4_Click(object sender, EventArgs e)
         {
             EsSolucion(b4.Text, b4);
@@ -87,11 +111,13 @@ namespace pruebasEF
             {
 
                 error.Text = "CORRECTA";
+                hacerSonidoAcierto();
                 aciertos++;
             }
             else {
                 error.Text = "INCORRECTA";
                 errores++;
+                hacerSonidoError();
             }
             turno++;
 
