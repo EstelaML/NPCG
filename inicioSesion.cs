@@ -23,6 +23,7 @@ namespace pruebasEF
         private EditText username;
         private EditText password;
         private TextView error;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState); 

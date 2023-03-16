@@ -15,7 +15,7 @@
         android:background="#00542A"
         android:id="@+id/linearLayout1">
         <Button
-            android:text="NuevaPartida"
+            android:text="Nueva Partida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/partidaB" />
