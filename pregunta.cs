@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Android.Animation;
+using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Media;
@@ -25,6 +26,7 @@ namespace preguntaods
         private Button b2;
         private Button b3;
         private Button b4;
+        private ProgressBar tb;
         private List<RetoPregunta> preguntas;
         private int turno;
         private TextView error;
@@ -33,6 +35,7 @@ namespace preguntaods
         private int errores;
         private TextView textAciertos;
         private MediaPlayer mp;
+        private ObjectAnimator animation;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -43,6 +46,7 @@ namespace preguntaods
             b2 = FindViewById<Button>(Resource.Id.button2);
             b3 = FindViewById<Button>(Resource.Id.button3);
             b4 = FindViewById<Button>(Resource.Id.button4);
+            tb = FindViewById<ProgressBar>(Resource.Id.timeBar);
             // Create your application here
             error = FindViewById<TextView>(Resource.Id.text);
 
@@ -58,12 +62,14 @@ namespace preguntaods
             b3.Click += B3_Click;
             b4.Click += B4_Click;
 
+            animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
+            animation.SetDuration(10000);
             turno = 0;
             Generarpregunta();
         }
 
         private void hacerSonidoAcierto() {
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
+            Android.Net.Uri uri = Android.Net.Uri.Parse ("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
 
             // Configurar un objeto MediaPlayer para reproducir el sonido
             mp = new MediaPlayer();
@@ -131,6 +137,8 @@ namespace preguntaods
             b2.Text = a[turno].Respuesta2;
             b3.Text = a[turno].Respuesta3;
             b4.Text = a[turno].Respuesta4;
+
+            animation.Start();
         }
 
 

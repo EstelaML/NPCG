@@ -4116,10 +4116,10 @@ namespace preguntaods
 			public const int text_input_password_toggle = 2131230958;
 			
 			// aapt resource value: 0x7F0800F2
-			public const int tiempo = 2131230962;
+			public const int time = 2131230962;
 			
 			// aapt resource value: 0x7F0800F3
-			public const int time = 2131230963;
+			public const int timeBar = 2131230963;
 			
 			// aapt resource value: 0x7F0800F4
 			public const int title = 2131230964;
