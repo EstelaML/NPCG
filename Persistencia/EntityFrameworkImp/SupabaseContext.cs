@@ -10,10 +10,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using pruebasEF.Entities;
+using preguntaods.Entities;
 using Supabase.Gotrue;
 
-namespace pruebasEF.Persistencia
+namespace preguntaods.Persistencia
 {
     internal class SupabaseContext : DbContext
     {

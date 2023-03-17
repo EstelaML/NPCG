@@ -7,15 +7,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using pruebasEF.Entities;
-using pruebasEF.Persistencia;
+using preguntaods.Entities;
+using preguntaods.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace pruebasEF
+namespace preguntaods
 {
     [Activity(Label = "Activity1")]
     public class pregunta : AppCompatActivity

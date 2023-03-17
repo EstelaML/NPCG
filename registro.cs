@@ -5,15 +5,15 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using pruebasEF.Entities;
-using pruebasEF.Persistencia;
+using preguntaods.Entities;
+using preguntaods.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.Hardware.Camera2;
 
-namespace pruebasEF
+namespace preguntaods
 {
     [Activity(Label = "Activity2")]
     public class registro : AppCompatActivity

@@ -5,13 +5,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Microsoft.EntityFrameworkCore;
-using pruebasEF.Entities;
+using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace pruebasEF.Persistencia.Repository
+namespace preguntaods.Persistencia.Repository
 {
     public class AppDbContext : DbContext
     {

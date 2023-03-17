@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace pruebasEF.Entities
+namespace preguntaods.Entities
 {
     [Table("partida")]
     public partial class Partida

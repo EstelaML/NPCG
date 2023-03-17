@@ -6,14 +6,14 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Microsoft.EntityFrameworkCore;
-using pruebasEF.Entities;
-using pruebasEF.Persistencia;
+using preguntaods.Entities;
+using preguntaods.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace pruebasEF
+namespace preguntaods
 {
     [Activity(Label = "inicioSesion")]
     public class inicioSesion : AppCompatActivity

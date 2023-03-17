@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace pruebasEF.Persistencia.Repository
+namespace preguntaods.Persistencia.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {

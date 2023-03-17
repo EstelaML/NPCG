@@ -4,14 +4,14 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using pruebasEF.Entities;
+using preguntaods.Entities;
 using Supabase.Gotrue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace pruebasEF.Services
+namespace preguntaods.Services
 {
     public interface IPreguntadosService
     {

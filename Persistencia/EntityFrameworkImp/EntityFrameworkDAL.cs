@@ -6,15 +6,15 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
-using pruebasEF.EntityFrameworkImp;
+using preguntaods.EntityFrameworkImp;
 using System;
-using pruebasEF.Entities;
+using preguntaods.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace pruebasEF.EntityFrameworkImp
+namespace preguntaods.EntityFrameworkImp
 {
     public class EntityFrameworkDAL : IDAL
     {

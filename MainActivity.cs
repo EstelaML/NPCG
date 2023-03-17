@@ -4,13 +4,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using pruebasEF.Entities;
-using pruebasEF.Persistencia;
+using preguntaods.Entities;
+using preguntaods.Persistencia;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace pruebasEF
+namespace preguntaods
 {
     [Activity(Label = "@string/app_name", Theme = "@style/HiddenTitleTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
