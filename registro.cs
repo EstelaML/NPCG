@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using pruebasEF.Persistencia;
 using Android.Hardware.Camera2;
 
 namespace pruebasEF

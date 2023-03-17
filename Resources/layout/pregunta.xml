@@ -114,7 +114,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0sp"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_corners"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginVertical="5sp"
                 android:backgroundTint="#ffcd29"
                 android:id="@+id/button1"/>
 
@@ -124,7 +126,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0sp"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_corners"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginVertical="5sp"
                 android:backgroundTint="#ffcd29"
                 android:id="@+id/button2"/>
 
@@ -134,7 +138,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0sp"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_corners"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginVertical="5sp"
                 android:backgroundTint="#ffcd29"
                 android:id="@+id/button3"/>
 
@@ -144,7 +150,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0sp"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_corners"
                 android:layout_marginHorizontal="10sp"
+                android:layout_marginVertical="5sp"
                 android:backgroundTint="#ffcd29"
                 android:id="@+id/button4"/>
 
@@ -154,6 +162,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="10sp"
                 android:layout_marginHorizontal="80sp"
+                android:layout_marginTop="5sp"
+                android:layout_marginBottom="10sp"
                 android:layout_weight="1"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="#f24822"

@@ -109,13 +109,10 @@ namespace pruebasEF
             if (turno == 10) return;
             if (text.Equals(a[turno].Correcta))
             {
-
-                error.Text = "CORRECTA";
                 hacerSonidoAcierto();
                 aciertos++;
             }
             else {
-                error.Text = "INCORRECTA";
                 errores++;
                 hacerSonidoError();
             }
@@ -127,7 +124,7 @@ namespace pruebasEF
 
 
         private void Generarpregunta() {
-            textAciertos.Text = "Acieros: " + aciertos + "/" + (aciertos+errores);
+            textAciertos.Text = "Aciertos: " + aciertos + "/" + (aciertos+errores);
             if (turno == 10) { return; }
             enunciado.Text = a[turno].Pregunta;
             b1.Text = a[turno].Respuesta1;
