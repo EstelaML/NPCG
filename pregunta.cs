@@ -36,6 +36,15 @@ namespace preguntaods
         private TextView textAciertos;
         private MediaPlayer mp;
         private ObjectAnimator animation;
+
+        private TextView textValor;
+        private TextView textPenalizacion;
+        private TextView textPtsTotales;
+        private const int ptsAlta = 300;
+        private const int ptsMedia = 200;
+        private const int ptsBaja = 100;
+        private int ptsTotales;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -55,7 +64,10 @@ namespace preguntaods
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
             }
             a = preguntas.ToArray();
-            textAciertos = FindViewById<TextView>(Resource.Id.aciertos);
+            //textAciertos = FindViewById<TextView>(Resource.Id.aciertos);
+            textPtsTotales = FindViewById<TextView>(Resource.Id.ptsTotales);
+            textValor = FindViewById<TextView>(Resource.Id.valor);
+            textPenalizacion = FindViewById<TextView>(Resource.Id.penalizacion);
 
             b1.Click += B1_Click;
             b2.Click += B2_Click;
@@ -65,7 +77,39 @@ namespace preguntaods
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(10000);
             turno = 0;
+            ptsTotales = 0;
             Generarpregunta();
+        }
+
+        private void MostrarPtsPregunta(int turno)
+        {
+            if (turno <= 3) { textValor.Text = "Valor de la pregunta: " + ptsBaja; }
+            else if (turno <= 7) { textValor.Text = "Valor de la pregunta: " + ptsMedia; }
+            else { textValor.Text = "Valor de la pregunta: " + ptsAlta; }
+        }
+
+        private void MostrarPtsError(int turno)
+        {
+            if (turno <= 3) { textPenalizacion.Text = "Por cada error: " + -ptsBaja/2; }
+            else if (turno <= 7) { textPenalizacion.Text = "Por cada error: " + -ptsMedia / 2; }
+            else { textPenalizacion.Text = "Por cada error: " + -ptsAlta / 2; }
+        }
+        private void MostrarPtsTotales()
+        {
+            textPtsTotales.Text = "Puntuación total: " + ptsTotales;
+        }
+        private void AnyadirPts(int turno)
+        {
+            if (turno <= 3) { ptsTotales += ptsBaja; }
+            else if (turno <= 7) { ptsTotales += ptsMedia; }
+            else { ptsTotales += ptsAlta; }
+        }
+
+        private void QuitarPts(int turno)
+        {
+            if (turno <= 3) { ptsTotales += -ptsBaja / 2; }
+            else if (turno <= 7) { ptsTotales += -ptsMedia / 2; }
+            else { ptsTotales += -ptsAlta / 2; }
         }
 
         private void hacerSonidoAcierto() {
@@ -116,21 +160,27 @@ namespace preguntaods
             if (text.Equals(a[turno].Correcta))
             {
                 hacerSonidoAcierto();
+                AnyadirPts(turno);
                 aciertos++;
             }
             else {
-                errores++;
+                
                 hacerSonidoError();
+                QuitarPts(turno);
+                errores++;
             }
             turno++;
-
+            
             // time out de unos 2/3 segundos para que vea la respuesta correcta
             Generarpregunta();
         }
 
 
         private void Generarpregunta() {
-            textAciertos.Text = "Aciertos: " + aciertos + "/" + (aciertos+errores);
+            //textAciertos.Text = "Aciertos: " + aciertos + "/" + (aciertos+errores);
+            MostrarPtsTotales();
+            MostrarPtsPregunta(turno);
+            MostrarPtsError(turno);
             if (turno == 10) { return; }
             enunciado.Text = a[turno].Pregunta;
             b1.Text = a[turno].Respuesta1;

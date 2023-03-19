@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Puntuación total: "
-                    android:id="@+id/aciertos"/>
+                    android:id="@+id/ptsTotales"/>
             </LinearLayout>
 
             <Space
