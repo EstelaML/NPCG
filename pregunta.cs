@@ -90,9 +90,9 @@ namespace preguntaods
 
         private void MostrarPtsError(int turno)
         {
-            if (turno <= 3) { textPenalizacion.Text = "Por cada error: " + -ptsBaja/2; }
-            else if (turno <= 7) { textPenalizacion.Text = "Por cada error: " + -ptsMedia / 2; }
-            else { textPenalizacion.Text = "Por cada error: " + -ptsAlta / 2; }
+            if (turno <= 3) { textPenalizacion.Text = "Por cada error: " + -ptsBaja * 2; }
+            else if (turno <= 7) { textPenalizacion.Text = "Por cada error: " + -ptsMedia * 2; }
+            else { textPenalizacion.Text = "Por cada error: " + -ptsAlta * 2; }
         }
         private void MostrarPtsTotales()
         {
