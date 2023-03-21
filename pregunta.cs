@@ -29,11 +29,7 @@ namespace preguntaods
         private ProgressBar tb;
         private List<RetoPregunta> preguntas;
         private int turno;
-        private TextView error;
         private RetoPregunta[] a;
-        private int aciertos;
-        private int errores;
-        private TextView textAciertos;
         private MediaPlayer mp;
         private ObjectAnimator animation;
 
@@ -49,7 +45,6 @@ namespace preguntaods
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
-            aciertos = errores = 0;
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
             b1 = FindViewById<Button>(Resource.Id.button1);
             b2 = FindViewById<Button>(Resource.Id.button2);
@@ -57,14 +52,12 @@ namespace preguntaods
             b4 = FindViewById<Button>(Resource.Id.button4);
             tb = FindViewById<ProgressBar>(Resource.Id.timeBar);
             // Create your application here
-            error = FindViewById<TextView>(Resource.Id.text);
 
             using (var bd = new SupabaseContext())
             {
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
             }
             a = preguntas.ToArray();
-            //textAciertos = FindViewById<TextView>(Resource.Id.aciertos);
             textPtsTotales = FindViewById<TextView>(Resource.Id.ptsTotales);
             textValor = FindViewById<TextView>(Resource.Id.valor);
             textPenalizacion = FindViewById<TextView>(Resource.Id.penalizacion);
@@ -74,8 +67,11 @@ namespace preguntaods
             b3.Click += B3_Click;
             b4.Click += B4_Click;
 
+            //Animation of time bar
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
-            animation.SetDuration(10000);
+            animation.SetDuration(30000); //30 secs
+
+            // Initialization vars
             turno = 0;
             ptsTotales = 0;
             Generarpregunta();
@@ -107,9 +103,9 @@ namespace preguntaods
 
         private void QuitarPts(int turno)
         {
-            if (turno <= 3) { ptsTotales += -ptsBaja / 2; }
-            else if (turno <= 7) { ptsTotales += -ptsMedia / 2; }
-            else { ptsTotales += -ptsAlta / 2; }
+            if (turno <= 3) { ptsTotales += -ptsBaja * 2; }
+            else if (turno <= 7) { ptsTotales += -ptsMedia * 2; }
+            else { ptsTotales += -ptsAlta * 2; }
         }
 
         private void hacerSonidoAcierto() {
@@ -136,38 +132,41 @@ namespace preguntaods
 
         private void B4_Click(object sender, EventArgs e)
         {
-            EsSolucion(b4.Text, b4);
+            if (turno != 10)
+                EsSolucion(b4.Text, b4);
         }
 
         private void B3_Click(object sender, EventArgs e)
         {
-            EsSolucion(b3.Text, b3);
+            if (turno != 10)
+                EsSolucion(b3.Text, b3);
         }
 
         private void B2_Click(object sender, EventArgs e)
         {
-            EsSolucion(b2.Text, b2);
+            if (turno != 10)
+                EsSolucion(b2.Text, b2);
         }
 
         private void B1_Click(object sender, EventArgs e)
         {
-            EsSolucion(b1.Text, b1);
+            if (turno != 10)
+                EsSolucion(b1.Text, b1);
         }
 
-        private void EsSolucion(string text, Button b)
+        private Boolean EsSolucion(string text, Button b)
         {
-            if (turno == 10) return;
             if (text.Equals(a[turno].Correcta))
             {
                 hacerSonidoAcierto();
                 AnyadirPts(turno);
-                aciertos++;
+                return true;
             }
             else {
                 
                 hacerSonidoError();
                 QuitarPts(turno);
-                errores++;
+                return false;
             }
             turno++;
             
