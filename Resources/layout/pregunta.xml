@@ -157,19 +157,6 @@
                 android:backgroundTint="#ffcd29"
                 android:id="@+id/button4"/>
 
-            <Button
-                android:text="Consolidar"
-                android:textColor="#fabaac"
-                android:layout_width="match_parent"
-                android:layout_height="10sp"
-                android:layout_marginHorizontal="80sp"
-                android:layout_marginTop="5sp"
-                android:layout_marginBottom="10sp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corners"
-                android:backgroundTint="#f24822"
-                android:id="@+id/consolidar"/>
-
         </LinearLayout>
 
         <ProgressBar
