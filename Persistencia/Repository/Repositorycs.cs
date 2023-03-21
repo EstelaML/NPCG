@@ -25,7 +25,7 @@ namespace preguntaods.Persistencia.Repository
             table = _context.Set<T>();
         }
 
-        public async Task<T> Get(int id)
+        public async Task<T> GetById(int id)
         {
             return table.Find(id);
         }

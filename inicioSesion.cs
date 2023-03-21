@@ -45,12 +45,17 @@ namespace preguntaods
             StartActivity(i);
         }
 
-        private void IniciarSesion_Click(object sender, EventArgs e)
+        private async void IniciarSesion_Click(object sender, EventArgs e)
         {
             if (username.Text != null && password.Text != null) {
                     using (var bd = new SupabaseContext())
                     {
-                    Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
+                    var usuarioRepositorio = new UsuarioRepositorio(bd);
+                    // usando repositorio 
+                    Usuario user = usuarioRepositorio.GetByUsername(username.Text);
+
+                    // Usando entity framework sin ningun tipo de servicio
+                    //Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
                     if (user != null)
                     {
                         if (user.contraseña == password.Text)
