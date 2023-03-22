@@ -64,6 +64,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistencia\Repository\UsuarioRepositorio.cs" />
     <Compile Include="pregunta.cs" />
     <Compile Include="inicioSesion.cs" />
     <Compile Include="registro.cs" />
