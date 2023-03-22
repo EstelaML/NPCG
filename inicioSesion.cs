@@ -36,14 +36,25 @@ namespace preguntaods
 
             iniciarSesion = FindViewById<Button>(Resource.Id.inicioSesion);
             iniciarSesion.Click += IniciarSesion_Click;
+
             error = FindViewById<TextView>(Resource.Id.error);
+
             ImageButton atras = FindViewById<ImageButton>(Resource.Id.atras);
             atras.Click += Atras;
+
+            TextView registrar = FindViewById<TextView>(Resource.Id.registrar);
+            registrar.Click += Registrar;
         }
 
         private void Atras(object sender, EventArgs e)
         {
             Intent i = new Intent(this, typeof(menu));
+            StartActivity(i);
+        }
+
+        private void Registrar(object sender, EventArgs e)
+        {
+            Intent i = new Intent(this, typeof(registro));
             StartActivity(i);
         }
 

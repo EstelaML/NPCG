@@ -105,14 +105,16 @@
                 android:paddingTop="40px"
                 android:textSize="35px"
                 android:textColor="#000"/>
-            <TextView
+            <TextView    
                 android:text="Regístrate"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textRecuperarPass"
+                android:id="@+id/registrar"
                 android:paddingTop="20px"
                 android:textSize="30px"
+                android:clickable="true"
                 android:textColor="#5fdfd4"/>
 
         
