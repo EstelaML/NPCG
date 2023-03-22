@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:padding="60px"
         android:paddingTop="100px"
-        android:background="#00542A"
-        android:id="@+id/linearLayout1">
+        android:background="#fff"
+        android:id="@+id/linearLayoutMain">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -21,52 +21,60 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2">
-             <ImageButton
-            android:src="@android:drawable/ic_menu_revert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/atras" 
-            android:paddingBottom="120px"
-            android:background="@color/mtrl_btn_transparent_bg_color"/>
-            </LinearLayout>
+            android:id="@+id/linearLayoutImages">
+            <ImageButton
+                android:src="@android:drawable/ic_menu_revert" 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/atras"
+                android:paddingBottom="300px"
+                android:background="@color/mtrl_btn_transparent_bg_color"/>
+        </LinearLayout>
 
         <TextView
             android:text="Inicio de Sesión"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textSize="50px"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1"
-            android:paddingBottom="100px"
-            android:textColor="#fff"/>
+            android:id="@+id/textViewLogIn"
+            android:paddingBottom="30px"
+            android:textColor="#000"/>
         <TextView
             android:text="Nombre de Usuario"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:textColor="#fff"/>
+            android:id="@+id/textViewUserName"
+            android:textColor="#000"/>
         <EditText
             android:inputType="textPersonName"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70px"
+            android:background="@drawable/rounded_corners"
             android:id="@+id/nombreUsuario" />
         <TextView
             android:text="Contraseña"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:paddingTop="45px"
-            android:textColor="#fff"/>
+            android:id="@+id/textViewPass"
+            android:paddingTop="40px"
+            android:textColor="#000"/>
         <EditText
             android:inputType="textPassword"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70px"
+            android:background="@drawable/rounded_corners"
+            
             android:id="@+id/contraseña" />
-        <TextView
+         <TextView
             android:paddingTop="15px"
-            android:paddingBottom="60px"
+            android:paddingBottom="10px"
+            android:layout_marginTop="20px"
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -76,11 +84,39 @@
         <Button
             android:text="Iniciar Sesión"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textColor="#000000"
-            android:backgroundTint="#8DFDC5"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="#5fdfd4"
             android:id="@+id/inicioSesion" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="20px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/linearLayoutRecuperarPass">
+            <TextView
+                android:text="¿Aun no tienes cuenta?"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textHasOlvidado"
+                android:paddingTop="40px"
+                android:textSize="35px"
+                android:textColor="#000"/>
+            <TextView
+                android:text="Regístrate"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textRecuperarPass"
+                android:paddingTop="20px"
+                android:textSize="30px"
+                android:textColor="#5fdfd4"/>
 
+        
+        </LinearLayout>
 
 
     </LinearLayout>

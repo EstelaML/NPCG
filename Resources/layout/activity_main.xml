@@ -12,12 +12,16 @@
         android:layout_height="match_parent"
         android:padding="60px"
         android:paddingTop="100px"
-        android:background="#00542A"
+        android:background="#fff"
         android:id="@+id/linearLayout1">
         <Button
             android:text="Nueva Partida"
+            android:textColor="#000"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#5fdfd4"
+            android:layout_marginTop="40dp"
             android:id="@+id/partidaB" />
         <Button
             android:text="Inicio de Sesion"
@@ -31,5 +35,6 @@
             android:id="@+id/registroB" />
 
     </LinearLayout>
+
 
 </RelativeLayout>
