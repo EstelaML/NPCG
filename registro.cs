@@ -96,7 +96,7 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(MainActivity));
+            Intent i = new Intent(this, typeof(menu));
             StartActivity(i);
         }
     }

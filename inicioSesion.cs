@@ -15,7 +15,7 @@ using System.Text;
 
 namespace preguntaods
 {
-    [Activity(Label = "inicioSesion")]
+    [Activity(Label = "@string/app_name", Theme = "@style/HiddenTitleTheme", MainLauncher = true)]
     public class inicioSesion : AppCompatActivity
     {
         private Button atras;
@@ -26,7 +26,9 @@ namespace preguntaods
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState); 
+            base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             SetContentView(Resource.Layout.inicioSesion);
             // Create your application here
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
@@ -41,9 +43,10 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(MainActivity));
+            Intent i = new Intent(this, typeof(menu));
             StartActivity(i);
         }
+
 
         private async void IniciarSesion_Click(object sender, EventArgs e)
         {
@@ -61,7 +64,8 @@ namespace preguntaods
                         if (user.contraseña == password.Text)
                         {
                             // inicia sesion
-                            error.Text = "Todo ha ido correctamente";
+                            Intent i = new Intent(this, typeof(menu));
+                            StartActivity(i);
                         }
                         else 
                         {
