@@ -64,32 +64,32 @@ namespace preguntaods
             if (username.Text != null && password.Text != null) {
                     using (var bd = new SupabaseContext())
                     {
-                    var usuarioRepositorio = new UsuarioRepositorio(bd);
-                    // usando repositorio 
-                    Usuario user = usuarioRepositorio.GetByUsername(username.Text);
+                        var usuarioRepositorio = new UsuarioRepositorio(bd);
+                        // usando repositorio 
+                        Usuario user = usuarioRepositorio.GetByUsername(username.Text);
 
-                    // Usando entity framework sin ningun tipo de servicio
-                    //Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
-                    if (user != null)
-                    {
-                        if (user.contraseña == password.Text)
+                        // Usando entity framework sin ningun tipo de servicio
+                        //Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
+                        if (user != null)
                         {
-                            // inicia sesion
-                            Intent i = new Intent(this, typeof(menu));
-                            StartActivity(i);
+                            if (user.contraseña == password.Text)
+                            {
+                                // inicia sesion
+                                Intent i = new Intent(this, typeof(menu));
+                                StartActivity(i);
+                            }
+                            else 
+                            {
+                                // contraseña incorrecta    
+                                error.Text = "Contraseña Incorrecta";
+                            }
+                        
                         }
                         else 
                         {
-                            // contraseña incorrecta    
-                            error.Text = "Contraseña Incorrecta";
+                            // no existe, ofrecer registro
+                            error.Text = "Usuario no existente";
                         }
-                        
-                    }
-                    else 
-                    {
-                        // no existe, ofrecer registro
-                        error.Text = "Usuario no existente";
-                    }
                     
                     }
             }
