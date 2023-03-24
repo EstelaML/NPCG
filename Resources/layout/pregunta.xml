@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#aff4c6">
+        android:background="#FFFFFF">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,31 +20,28 @@
             android:paddingVertical="5sp"
             android:paddingHorizontal="10sp"
             android:orientation="horizontal"
-            android:background="#094826">
+            android:gravity="center"
+            android:background="@color/colorPrimary">
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_gravity="left"
                 android:text="Abandonar"
-                android:textColor="#8CC63F"
+                android:textColor="@color/colorSecundary"
                 android:id="@+id/volver"/>
 
-
-            <TextView
-                android:layout_width="0px"
+            <Space
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical|right"
-                android:paddingRight="20px"
-                android:layout_weight="1"
-                android:text="Nombre de usuario"
-                android:textSize="7pt"
-                android:textColor="#8CC63F"/>
+                android:layout_weight="1"/>
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="right"
+                android:layout_gravity="right"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true"
                 android:src="@drawable/userNotLog"
@@ -55,7 +52,7 @@
 
         <Space
              android:layout_width="match_parent"
-             android:layout_height="50px"/>
+             android:layout_height="50sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,123 +64,91 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Valor de la pregunta: "
-                android:id="@+id/valor"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Por cada error: "
-                    android:id="@+id/penalizacion"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Puntuación total: "
-                    android:id="@+id/ptsTotales"/>
-                    android:id="@+id/ptsTotales"/>
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="15sp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30sp"
-                android:layout_weight="1"
-                android:background="#ffa629"
+                android:layout_height="100sp"
+                android:background="@drawable/camposInf"
                 android:text="Pregunta aleatoria totalmente verdadera"
-                android:textColor="#332108"
+                android:textColor="@color/colorSecundary"
                 android:autoSizeTextType="uniform"
                 android:padding="10sp"
                 android:gravity="center"
+ 
                 android:id="@+id/pregunta"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
             <Button
                 android:text="Respuesta 1"
-                android:textColor="#332108"
+                android:textColor="@color/colorSecundary"
                 android:layout_width="match_parent"
-                android:layout_height="0sp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corners"
+                android:layout_height="50sp"
+                android:background="@drawable/pre"
                 android:layout_marginHorizontal="10sp"
                 android:layout_marginVertical="5sp"
-                android:backgroundTint="#ffcd29"
                 android:id="@+id/button1"/>
 
             <Button
                 android:text="Respuesta 2"
-                android:textColor="#332108"
+                android:textColor="@color/colorSecundary"
                 android:layout_width="match_parent"
-                android:layout_height="0sp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corners"
+                android:layout_height="50sp"
+                android:background="@drawable/pre"
                 android:layout_marginHorizontal="10sp"
                 android:layout_marginVertical="5sp"
-                android:backgroundTint="#ffcd29"
                 android:id="@+id/button2"/>
 
             <Button
                 android:text="Respuesta 3"
-                android:textColor="#332108"
+                android:textColor="@color/colorSecundary"
                 android:layout_width="match_parent"
-                android:layout_height="0sp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corners"
+                android:layout_height="50sp"
+                android:background="@drawable/pre"
                 android:layout_marginHorizontal="10sp"
                 android:layout_marginVertical="5sp"
-                android:backgroundTint="#ffcd29"
                 android:id="@+id/button3"/>
 
             <Button
                 android:text="Respuesta 4"
-                android:textColor="#332108"
+                android:textColor="@color/colorSecundary"
                 android:layout_width="match_parent"
-                android:layout_height="0sp"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_corners"
+                android:layout_height="50sp"
+                android:background="@drawable/pre"
                 android:layout_marginHorizontal="10sp"
                 android:layout_marginVertical="5sp"
-                android:backgroundTint="#ffcd29"
                 android:id="@+id/button4"/>
 
         </LinearLayout>
 
         <ProgressBar
             android:id="@+id/timeBar"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="25sp"
-            android:progress="100"
-/>
+            android:layout_height="5sp"
+            android:layout_marginHorizontal="10sp"
+            android:layout_marginVertical="10sp"
+            android:progress="100"/>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100px"
-            android:paddingTop="10px"
-            android:paddingBottom="10px"
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
+            android:layout_height="50sp"
+            android:paddingVertical="5sp"
+            android:paddingHorizontal="10sp"
             android:orientation="horizontal"
-            android:background="#094826">
+            android:gravity="center"
+            android:background="@color/colorPrimary">
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_weight="1"
                 android:text="Juego"
                 android:textSize="11sp"
-                android:textColor="#8CC63F"
+                android:textColor="#000000"
                 android:enabled="false"
                 android:id="@+id/juego"/>
 
@@ -191,21 +156,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_weight="1"
                 android:text="Estadísticas"
                 android:textSize="10sp"
-                android:textColor="#8CC63F"
+                android:textColor="#000000"
                 android:enabled="true"
                 android:id="@+id/estadisticas"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_weight="1"
                 android:text="Trofeos"
                 android:textSize="10sp"
-                android:textColor="#8CC63F"
+                android:textColor="#000000"
                 android:enabled="true"
                 android:id="@+id/trofeos"/>
 
@@ -213,10 +185,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_weight="1"
                 android:text="Equipo"
                 android:textSize="10sp"
-                android:textColor="#8CC63F"
+                android:textColor="#000000"
                 android:enabled="true"
                 android:id="@+id/equipo"/>
             

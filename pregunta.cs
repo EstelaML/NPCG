@@ -2,12 +2,14 @@
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
+using Android.Graphics;
 using Android.Media;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using AndroidX.Core.Content;
 using preguntaods.Entities;
 using preguntaods.Persistencia;
 using System;
@@ -58,9 +60,9 @@ namespace preguntaods
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
             }
             a = preguntas.ToArray();
-            textPtsTotales = FindViewById<TextView>(Resource.Id.ptsTotales);
-            textValor = FindViewById<TextView>(Resource.Id.valor);
-            textPenalizacion = FindViewById<TextView>(Resource.Id.penalizacion);
+            //textPtsTotales = FindViewById<TextView>(Resource.Id.ptsTotales);
+            //textValor = FindViewById<TextView>(Resource.Id.valor);
+            //textPenalizacion = FindViewById<TextView>(Resource.Id.penalizacion);
 
             b1.Click += B1_Click;
             b2.Click += B2_Click;
@@ -160,26 +162,31 @@ namespace preguntaods
             {
                 hacerSonidoAcierto();
                 AnyadirPts(turno);
-                return true;
+                b.SetBackgroundResource(Resource.Drawable.preAcierto);
             }
             else {
                 
                 hacerSonidoError();
                 QuitarPts(turno);
-                return false;
+                b.SetBackgroundResource(Resource.Drawable.preFallo);
             }
-            turno++;
+
+            Console.WriteLine("wasd");
             
-            // time out de unos 2/3 segundos para que vea la respuesta correcta
+
+            System.Threading.Thread.Sleep(2000);
+
+            turno++;
             Generarpregunta();
+            return true;
         }
 
 
         private void Generarpregunta() {
             //textAciertos.Text = "Aciertos: " + aciertos + "/" + (aciertos+errores);
-            MostrarPtsTotales();
-            MostrarPtsPregunta(turno);
-            MostrarPtsError(turno);
+            //MostrarPtsTotales();
+            //MostrarPtsPregunta(turno);
+            //MostrarPtsError(turno);
             if (turno == 10) { return; }
             enunciado.Text = a[turno].Pregunta;
             b1.Text = a[turno].Respuesta1;
