@@ -14,29 +14,26 @@
         android:paddingTop="100px"
         android:background="@android:color/white"
         android:id="@+id/linearLayout1">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout2">
-            <ImageButton
-                android:src="@android:drawable/ic_menu_revert"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:paddingBottom="100px"
-                android:background="@color/mtrl_btn_transparent_bg_color"/>
-            <ImageButton
-                android:src="@drawable/usernotLog"
-                android:scaleType="fitCenter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/buttonAvatar"
-                android:background="@color/mtrl_btn_transparent_bg_color"/>
-        </LinearLayout>
 
+
+        <ImageButton
+            android:src="@android:drawable/ic_menu_revert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1"
+            android:background="@color/mtrl_btn_transparent_bg_color"/>
+            
+        <ImageButton
+            android:src="@drawable/userNotLog"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/buttonAvatar"
+            android:background="@color/mtrl_btn_transparent_bg_color"/>
+        
         <TextView
             android:text="Registro"
             android:textAppearance="?android:attr/textAppearanceLarge"

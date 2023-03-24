@@ -29,6 +29,7 @@ namespace preguntaods
         private Button b3;
         private Button b4;
         private ProgressBar tb;
+        private Button abandonar;
         private List<RetoPregunta> preguntas;
         private int turno;
         private RetoPregunta[] a;
@@ -52,7 +53,10 @@ namespace preguntaods
             b2 = FindViewById<Button>(Resource.Id.button2);
             b3 = FindViewById<Button>(Resource.Id.button3);
             b4 = FindViewById<Button>(Resource.Id.button4);
+
             tb = FindViewById<ProgressBar>(Resource.Id.timeBar);
+
+            abandonar = FindViewById<Button>(Resource.Id.volver);
             // Create your application here
 
             using (var bd = new SupabaseContext())
@@ -70,6 +74,8 @@ namespace preguntaods
             b3.Click += B3_Click;
             b4.Click += B4_Click;
 
+            abandonar.Click += Atras;
+
             //Animation of time bar
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
@@ -85,6 +91,11 @@ namespace preguntaods
             if (turno <= 3) { textValor.Text = "Valor de la pregunta: " + ptsBaja; }
             else if (turno <= 7) { textValor.Text = "Valor de la pregunta: " + ptsMedia; }
             else { textValor.Text = "Valor de la pregunta: " + ptsAlta; }
+        }
+        private void Atras(object sender, EventArgs e)
+        {
+            Intent i = new Intent(this, typeof(menu));
+            StartActivity(i);
         }
 
         private void MostrarPtsError(int turno)

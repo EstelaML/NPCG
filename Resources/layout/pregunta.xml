@@ -70,6 +70,7 @@
                 android:textColor="@color/colorSecundary"
                 android:autoSizeTextType="uniform"
                 android:padding="10sp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
  
                 android:id="@+id/pregunta"/>
@@ -125,73 +126,27 @@
             android:id="@+id/timeBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="5sp"
+            android:layout_height="7sp"
             android:layout_marginHorizontal="10sp"
-            android:layout_marginVertical="10sp"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="20sp"
             android:progress="100"/>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:paddingVertical="5sp"
-            android:paddingHorizontal="10sp"
+            android:layout_height="50dp"
+            android:paddingVertical="1dp"
             android:orientation="horizontal"
             android:gravity="center"
             android:background="@color/colorPrimary">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_weight="1"
-                android:text="Juego"
-                android:textSize="11sp"
-                android:textColor="#000000"
-                android:enabled="false"
-                android:id="@+id/juego"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_weight="1"
-                android:text="Estadísticas"
-                android:textSize="10sp"
-                android:textColor="#000000"
-                android:enabled="true"
-                android:id="@+id/estadisticas"/>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_weight="1"
-                android:text="Trofeos"
-                android:textSize="10sp"
-                android:textColor="#000000"
-                android:enabled="true"
-                android:id="@+id/trofeos"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/mtrl_btn_transparent_bg_color"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_weight="1"
-                android:text="Equipo"
-                android:textSize="10sp"
-                android:textColor="#000000"
-                android:enabled="true"
-                android:id="@+id/equipo"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/icon"/>
             
         </LinearLayout>
         

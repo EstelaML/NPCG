@@ -17,7 +17,7 @@ namespace preguntaods.Entities
         {
             Id = id;
             Fecha = fecha;
-            RetoPorPartidas = new List<RetoPorPartida> { retoPorPartida };
+            RetoPorPartidas = new List<RetoPorPartida> { retoPorPartida };  
         }
         public Partida()
         {
