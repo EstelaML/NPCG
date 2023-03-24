@@ -85,7 +85,7 @@
     <Compile Include="Persistencia\EntityFrameworkImp\EntityFrameworkDAL.cs" />
     <Compile Include="Persistencia\EntityFrameworkImp\IDAL.cs" />
     <Compile Include="Persistencia\EntityFrameworkImp\SupabaseContext.cs" />
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="menu.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />
     <Compile Include="Persistencia\Repository\Repositorycs.cs" />
     <Compile Include="Persistencia\Repository\SupabaseContext.cs" />
@@ -98,7 +98,7 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\activity_main.xml">
+    <AndroidResource Include="Resources\layout\menu.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />
