@@ -23,11 +23,13 @@ namespace preguntaods
         private EditText username;
         private EditText password;
         private TextView error;
+        private SingletonConexion conexion;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            conexion = SingletonConexion.getInstance();
 
             SetContentView(Resource.Layout.inicioSesion);
             // Create your application here
@@ -70,6 +72,8 @@ namespace preguntaods
 
                         // Usando entity framework sin ningun tipo de servicio
                         //Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
+
+
                         if (user != null)
                         {
                             if (user.contraseña == password.Text)

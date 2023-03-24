@@ -16,38 +16,27 @@ namespace preguntaods.Services
 {
     public class PreguntadosService : IPreguntadosService
     {
-        void DBInitialization() { 
-        
-        }
-
-        void IPreguntadosService.DBInitialization()
+        public void DBInitialization()
         {
             throw new NotImplementedException();
         }
 
-        void DBRestartData() { }
-
-        void IPreguntadosService.DBRestartData()
+        public void DBRestartData()
         {
             throw new NotImplementedException();
         }
 
         #region Usuario
-        bool IPreguntadosService.Login(string login, string password)
+        public bool Login(string login, string password)
         {
             throw new NotImplementedException();
         }
 
-        void Logout() { }
-
-        void IPreguntadosService.Logout()
+        public void Logout()
         {
             throw new NotImplementedException();
         }
-
-        Usuario SignUp(String username, String correo, String password, String img) { return new Usuario(); }
-
-        Usuario IPreguntadosService.SignUp(string username, string correo, string password, string img)
+        public Usuario SignUp(string username, string correo, string password, string img)
         {
             throw new NotImplementedException();
         }

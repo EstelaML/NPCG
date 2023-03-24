@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Persistencia\Repository\UsuarioRepositorio.cs" />
+    <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="pregunta.cs" />
     <Compile Include="inicioSesion.cs" />
     <Compile Include="registro.cs" />
