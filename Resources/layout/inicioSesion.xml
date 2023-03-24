@@ -12,13 +12,11 @@
         android:layout_height="match_parent"
         android:padding="60px"
         android:paddingTop="100px"
-        android:background="#fff"
+        android:background="@android:color/white"
         android:id="@+id/linearLayoutMain">
 
         <LinearLayout
             android:orientation="horizontal"
-            android:minWidth="25px"
-            android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayoutImages">
@@ -27,9 +25,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/atras"
-                android:paddingBottom="300px"
                 android:background="@color/mtrl_btn_transparent_bg_color"/>
         </LinearLayout>
+        
+        <Space
+             android:layout_width="match_parent"
+             android:layout_height="100sp"/>
 
         <TextView
             android:text="Inicio de Sesión"
@@ -40,14 +41,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewLogIn"
             android:paddingBottom="30px"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <TextView
             android:text="Nombre de Usuario"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewUserName"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textPersonName"
             android:layout_marginTop="10dp"
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewPass"
             android:paddingTop="40px"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textPassword"
             android:layout_marginTop="10dp"
@@ -79,16 +80,16 @@
             android:text=""
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="?android:attr/colorError"
             android:layout_height="wrap_content"
             android:id="@+id/error" />
         <Button
             android:text="Iniciar Sesión"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:textColor="#000000"
+            android:textColor="@android:color/black"
             android:background="@drawable/camposInf"
-            android:backgroundTint="#96DCF0"
+            android:backgroundTint="@color/colorPrimary"
             android:id="@+id/inicioSesion" />
         <LinearLayout
             android:orientation="vertical"
@@ -105,7 +106,7 @@
                 android:id="@+id/textHasOlvidado"
                 android:paddingTop="40px"
                 android:textSize="35px"
-                android:textColor="#000"/>
+                android:textColor="@android:color/black"/>
             <TextView    
                 android:text="@string/underline"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -113,10 +114,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/registrar"
-                android:paddingTop="20px"
-                android:textSize="30px"
+                android:paddingTop="10sp"
+                android:gravity="left"
+                android:textSize="10sp"
+                android:layout_marginLeft="-10sp"
                 android:clickable="true"
-                android:textColor="#5fdfd4"/>
+                android:textColor="@color/colorPrimary"/>
 
 
 

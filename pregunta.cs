@@ -59,6 +59,7 @@ namespace preguntaods
             {
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
             }
+
             a = preguntas.ToArray();
             //textPtsTotales = FindViewById<TextView>(Resource.Id.ptsTotales);
             //textValor = FindViewById<TextView>(Resource.Id.valor);

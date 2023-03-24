@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:padding="60px"
         android:paddingTop="100px"
-        android:background="#fff"
+        android:background="@android:color/white"
         android:id="@+id/linearLayout1">
         <LinearLayout
             android:orientation="horizontal"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:id="@+id/textView4"
-            android:textColor="#000"
+            android:textColor="@android:color/black"
             android:paddingBottom="100px"/>
         <TextView
             android:text="Nombre de usuario"
@@ -52,11 +52,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView1"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textPersonName"
             android:layout_marginTop="10px"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/camposinf"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:id="@+id/nombreUsuario" 
@@ -68,11 +68,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:paddingTop="35px"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textEmailAddress"
             android:layout_marginTop="10px"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/camposinf"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:id="@+id/correo" />
@@ -83,10 +83,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView3"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textPassword"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/camposinf"
             android:layout_marginTop="10px"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -98,11 +98,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ererere"
-            android:textColor="#000"/>
+            android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textEmailAddress"
             android:layout_marginTop="10px"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/camposinf"
             android:textAlignment="textStart"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -114,18 +114,18 @@
             android:paddingBottom="40px"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="?android:attr/colorError"
             android:layout_height="wrap_content"
             android:id="@+id/error" />
 
         <Button
             android:text="Registrar"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/camposinf"
             android:layout_width="match_parent"
             android:layout_height="49.0dp"
             android:id="@+id/registroB"
-            android:textColor="#000000"
-            android:backgroundTint="#5fdfd4"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/colorPrimary"
             />
 
     </LinearLayout>
