@@ -107,7 +107,7 @@
                 android:textSize="35px"
                 android:textColor="#000"/>
             <TextView    
-                android:text="Regístrate"
+                android:text="@string/underline"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -117,6 +117,8 @@
                 android:textSize="30px"
                 android:clickable="true"
                 android:textColor="#5fdfd4"/>
+
+
 
         
         </LinearLayout>
