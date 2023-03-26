@@ -29,9 +29,9 @@ namespace preguntaods
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            SetContentView(Resource.Layout.inicioSesion);
             conexion = SingletonConexion.getInstance();
 
-            SetContentView(Resource.Layout.inicioSesion);
             // Create your application here
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
             password = FindViewById<EditText>(Resource.Id.contraseña);
@@ -75,44 +75,6 @@ namespace preguntaods
             {
                 error.Text = "Correo o contraseña incorrecta";
             }
-            
-
-            /*
-            if (username.Text != null && password.Text != null) {
-                    using (var bd = new SupabaseContext())
-                    {
-                        var usuarioRepositorio = new UsuarioRepositorio(bd);
-                        // usando repositorio 
-                        Usuario user = usuarioRepositorio.GetByUsername(username.Text);
-
-                        // Usando entity framework sin ningun tipo de servicio
-                        //Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
-
-
-                        if (user != null)
-                        {
-                            if (user.contraseña == password.Text)
-                            {
-                                // inicia sesion
-                                Intent i = new Intent(this, typeof(Menu));
-                                StartActivity(i);
-                            }
-                            else 
-                            {
-                                // contraseña incorrecta    
-                                error.Text = "Contraseña Incorrecta";
-                            }
-                        
-                        }
-                        else 
-                        {
-                            // no existe, ofrecer registro
-                            error.Text = "Usuario no existente";
-                        }
-                    
-                    }
-            }
-            */
         }
     }
 }

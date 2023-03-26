@@ -195,9 +195,6 @@ namespace preguntaods
             }
 
             Console.WriteLine("wasd");
-            
-
-            //System.Threading.Thread.Sleep(2000);
 
             turno++;
             Generarpregunta();
