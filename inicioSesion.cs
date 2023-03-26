@@ -63,6 +63,21 @@ namespace preguntaods
 
         private async void IniciarSesion_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var session = await conexion.cliente.Auth.SignIn(username.Text, password.Text);
+
+                // inicia sesion
+                Intent i = new Intent(this, typeof(Menu));
+                StartActivity(i);
+            }
+            catch (Exception ex)
+            {
+                error.Text = "Correo o contraseña incorrecta";
+            }
+            
+
+            /*
             if (username.Text != null && password.Text != null) {
                     using (var bd = new SupabaseContext())
                     {
@@ -97,6 +112,7 @@ namespace preguntaods
                     
                     }
             }
+            */
         }
     }
 }

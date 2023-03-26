@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Postgrest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace preguntaods.Entities
 {
-    public partial class RetoPregunta 
+    public partial class RetoPregunta : BaseModel
     { 
         public RetoPregunta() { }
         public RetoPregunta(string enunciado, string respuesta1, string respuesta2, string respuesta3, string respuesta4, string solucion)

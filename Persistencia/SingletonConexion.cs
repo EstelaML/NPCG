@@ -1,7 +1,8 @@
 ﻿using Postgrest;
+using preguntaods.Entities;
 using Supabase;
 using System;
-
+using System.Linq;
 
 namespace preguntaods.Persistencia
 {
@@ -12,17 +13,14 @@ namespace preguntaods.Persistencia
         private const string supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsc3VsZmNrZGZodmdsanZ2bWhiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY3Njk4MjUxOSwiZXhwIjoxOTkyNTU4NTE5fQ.5jq8QpYDhX2TeuiZZR9_DE41w28fgnpLpr127UkYKTA";
         
         public Supabase.Client cliente;
-        private  SingletonConexion()
+        private SingletonConexion()
         {
-            var url = Environment.GetEnvironmentVariable(supabaseURL);
-            var key = Environment.GetEnvironmentVariable(supabaseKEY);
-
             var options = new Supabase.SupabaseOptions
             {
                 AutoConnectRealtime = true
             };
 
-            cliente = new Supabase.Client(url, key, options);
+            cliente = new Supabase.Client(supabaseURL, supabaseKEY, options);
             cliente.InitializeAsync();
         }
 
