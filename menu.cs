@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace preguntaods
 {
     [Activity(Label = "menu")]
-    public class menu : AppCompatActivity
+    public class Menu : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,7 +27,7 @@ namespace preguntaods
 
         private void Partida_Click(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(pregunta));
+            Intent i = new Intent(this, typeof(Pregunta));
             StartActivity(i);
         }
     }

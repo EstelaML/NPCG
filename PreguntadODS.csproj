@@ -70,17 +70,17 @@
   <ItemGroup>
     <Compile Include="Persistencia\Repository\UsuarioRepositorio.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
-    <Compile Include="pregunta.cs" />
-    <Compile Include="inicioSesion.cs" />
-    <Compile Include="registro.cs" />
-    <Compile Include="Logica\Entities\ODS.cs" />
-    <Compile Include="Logica\Entities\Partida.cs" />
-    <Compile Include="Logica\Entities\Reto.cs" />
-    <Compile Include="Logica\Entities\RetoPorPartida.cs" />
-    <Compile Include="Logica\Entities\RetoPregunta.cs" />
-    <Compile Include="Logica\Entities\Usuario.cs" />
-    <Compile Include="Logica\Services\IPreguntadosService.cs" />
-    <Compile Include="Logica\Services\PreguntadosService.cs" />
+    <Compile Include="Pregunta.cs" />
+    <Compile Include="InicioSesion.cs" />
+    <Compile Include="Registro.cs" />
+    <Compile Include="BusinessLogic\Entities\ODS.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida.cs" />
+    <Compile Include="BusinessLogic\Entities\Reto.cs" />
+    <Compile Include="BusinessLogic\Entities\RetoPorPartida.cs" />
+    <Compile Include="BusinessLogic\Entities\RetoPregunta.cs" />
+    <Compile Include="BusinessLogic\Entities\Usuario.cs" />
+    <Compile Include="BusinessLogic\Services\IPreguntadosService.cs" />
+    <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
     <Compile Include="Persistencia\Entities\Partida.cs" />
     <Compile Include="Persistencia\Entities\Reto.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Persistencia\EntityFrameworkImp\EntityFrameworkDAL.cs" />
     <Compile Include="Persistencia\EntityFrameworkImp\IDAL.cs" />
     <Compile Include="Persistencia\EntityFrameworkImp\SupabaseContext.cs" />
-    <Compile Include="menu.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />
     <Compile Include="Persistencia\Repository\Repositorycs.cs" />
     <Compile Include="Persistencia\Repository\SupabaseContext.cs" />

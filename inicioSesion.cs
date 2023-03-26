@@ -16,7 +16,7 @@ using System.Text;
 namespace preguntaods
 {
     [Activity(Label = "@string/app_name", Theme = "@style/HiddenTitleTheme", MainLauncher = true)]
-    public class inicioSesion : AppCompatActivity
+    public class InicioSesion : AppCompatActivity
     {
         private Button atras;
         private Button iniciarSesion;
@@ -50,13 +50,13 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(menu));
+            Intent i = new Intent(this, typeof(Menu));
             StartActivity(i);
         }
 
         private void Registrar(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(registro));
+            Intent i = new Intent(this, typeof(Registro));
             StartActivity(i);
         }
 
@@ -79,7 +79,7 @@ namespace preguntaods
                             if (user.contraseña == password.Text)
                             {
                                 // inicia sesion
-                                Intent i = new Intent(this, typeof(menu));
+                                Intent i = new Intent(this, typeof(Menu));
                                 StartActivity(i);
                             }
                             else 

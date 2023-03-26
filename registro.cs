@@ -16,7 +16,7 @@ using Android.Hardware.Camera2;
 namespace preguntaods
 {
     [Activity(Label = "Activity2")]
-    public class registro : AppCompatActivity
+    public class Registro : AppCompatActivity
     {
         private EditText username;
         private EditText password;
@@ -96,7 +96,7 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(inicioSesion));
+            Intent i = new Intent(this, typeof(InicioSesion));
             StartActivity(i);
         }
     }

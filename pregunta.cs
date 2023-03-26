@@ -21,7 +21,7 @@ using System.Text;
 namespace preguntaods
 {
     [Activity(Label = "Activity1")]
-    public class pregunta : AppCompatActivity
+    public class Pregunta : AppCompatActivity
     {
         private TextView enunciado;
         private Button b1;
@@ -94,7 +94,7 @@ namespace preguntaods
         }
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(menu));
+            Intent i = new Intent(this, typeof(Menu));
             StartActivity(i);
         }
 
