@@ -16,7 +16,7 @@ using Android.Hardware.Camera2;
 namespace preguntaods
 {
     [Activity(Label = "Activity2")]
-    public class registro : AppCompatActivity
+    public class Registro : AppCompatActivity
     {
         private EditText username;
         private EditText password;
@@ -28,10 +28,13 @@ namespace preguntaods
         private Button registroB;
         private TextView error;
 
+        private SingletonConexion conexion;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.registro);
+            conexion = SingletonConexion.getInstance();
 
             usernameCorrect = false;
             passwordCorrect = false;
@@ -71,32 +74,30 @@ namespace preguntaods
             
         }
 
-        private void Registrar(object sender, EventArgs e)
+        private async void Registrar(object sender, EventArgs e)
         {
             if (usernameCorrect && passwordCorrect && emailCorrect) {
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
-                using (var bd = new SupabaseContext())
-                {
-                    if (bd.User.Any(u => u.nombre == username.Text))
+
+                    try
+                    {
+                        var session = await conexion.cliente.Auth.SignUp(username.Text, password.Text);
+
+                        // se registra
+                        Intent i = new Intent(this, typeof(Menu));
+                        StartActivity(i);
+                    }
+                    catch (Exception ex)
                     {
                         error.Text = "Ese nombre de usuario ya existe";
-                        usernameCorrect = false; return;
                     }
-                }
-
-                using (var bd = new SupabaseContext())
-                {
-                    Usuario almendro = new Usuario { nombre = username.Text, email = email.Text, contraseña = password.Text };
-                    bd.User.Add(almendro);
-                    bd.SaveChanges();
-                }
             }
         }
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(inicioSesion));
+            Intent i = new Intent(this, typeof(InicioSesion));
             StartActivity(i);
         }
     }

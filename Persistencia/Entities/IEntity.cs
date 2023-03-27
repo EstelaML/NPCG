@@ -14,15 +14,8 @@ using System.Text;
 
 namespace preguntaods.Entities
 {
-    [Table("partida")]
-    public partial class Partida : BaseModel, IEntity
+    public interface IEntity
     {
-        [PrimaryKey("id")]
-        public int Id { get; set; }
-
-        [Column("fecha")]
-        public DateTime Fecha { get; set; }
-
-        public List<RetoPorPartida> RetoPorPartidas { get; set; }
+        int Id { get; set; }
     }
 }

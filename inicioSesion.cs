@@ -16,7 +16,7 @@ using System.Text;
 namespace preguntaods
 {
     [Activity(Label = "@string/app_name", Theme = "@style/HiddenTitleTheme", MainLauncher = true)]
-    public class inicioSesion : AppCompatActivity
+    public class InicioSesion : AppCompatActivity
     {
         private Button atras;
         private Button iniciarSesion;
@@ -29,9 +29,9 @@ namespace preguntaods
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            SetContentView(Resource.Layout.inicioSesion);
             conexion = SingletonConexion.getInstance();
 
-            SetContentView(Resource.Layout.inicioSesion);
             // Create your application here
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
             password = FindViewById<EditText>(Resource.Id.contraseña);
@@ -50,52 +50,30 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(menu));
+            Intent i = new Intent(this, typeof(Menu));
             StartActivity(i);
         }
 
         private void Registrar(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(registro));
+            Intent i = new Intent(this, typeof(Registro));
             StartActivity(i);
         }
 
 
         private async void IniciarSesion_Click(object sender, EventArgs e)
         {
-            if (username.Text != null && password.Text != null) {
-                    using (var bd = new SupabaseContext())
-                    {
-                        var usuarioRepositorio = new UsuarioRepositorio(bd);
-                        // usando repositorio 
-                        Usuario user = usuarioRepositorio.GetByUsername(username.Text);
+            try
+            {
+                var session = await conexion.cliente.Auth.SignIn(username.Text, password.Text);
 
-                        // Usando entity framework sin ningun tipo de servicio
-                        //Usuario user = bd.User.FirstOrDefault(u => u.nombre == username.Text);
-
-
-                        if (user != null)
-                        {
-                            if (user.contraseña == password.Text)
-                            {
-                                // inicia sesion
-                                Intent i = new Intent(this, typeof(menu));
-                                StartActivity(i);
-                            }
-                            else 
-                            {
-                                // contraseña incorrecta    
-                                error.Text = "Contraseña Incorrecta";
-                            }
-                        
-                        }
-                        else 
-                        {
-                            // no existe, ofrecer registro
-                            error.Text = "Usuario no existente";
-                        }
-                    
-                    }
+                // inicia sesion
+                Intent i = new Intent(this, typeof(Menu));
+                StartActivity(i);
+            }
+            catch (Exception ex)
+            {
+                error.Text = "Correo o contraseña incorrecta";
             }
         }
     }

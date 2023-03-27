@@ -17,7 +17,7 @@ namespace preguntaods.Entities
         public Usuario() { }
         public Usuario(int id, DateTime fechaCreacion, string nombre, string email, string contraseña, string image)
         {
-            this.id = id;
+            this.Id = id;
             this.fecha_creacion = fechaCreacion;
             this.nombre = nombre;
             this.email = email;

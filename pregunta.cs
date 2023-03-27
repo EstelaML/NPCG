@@ -11,17 +11,18 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using preguntaods.Entities;
-using preguntaods.Persistencia;
+using preguntaods.Persistencia.Repository;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace preguntaods
 {
     [Activity(Label = "Activity1")]
-    public class pregunta : AppCompatActivity
+    public class Pregunta : AppCompatActivity
     {
         private TextView enunciado;
         private Button b1;
@@ -44,7 +45,9 @@ namespace preguntaods
         private const int ptsBaja = 100;
         private int ptsTotales;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        private PreguntaRepositorioSingleton repositorio;
+
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
@@ -59,10 +62,18 @@ namespace preguntaods
             abandonar = FindViewById<Button>(Resource.Id.volver);
             // Create your application here
 
+            
+            repositorio = new PreguntaRepositorioSingleton();
+
+            var preguntas = await repositorio.GetAll();
+            Console.WriteLine(preguntas.ToList().ToString());
+            
+            /*
             using (var bd = new SupabaseContext())
             {
                 preguntas = bd.Reto_preguntas.Take(10).ToList();
             }
+            */
 
             a = preguntas.ToArray();
             //textPtsTotales = FindViewById<TextView>(Resource.Id.ptsTotales);
@@ -94,7 +105,7 @@ namespace preguntaods
         }
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(menu));
+            Intent i = new Intent(this, typeof(Menu));
             StartActivity(i);
         }
 
@@ -184,9 +195,6 @@ namespace preguntaods
             }
 
             Console.WriteLine("wasd");
-            
-
-            System.Threading.Thread.Sleep(2000);
 
             turno++;
             Generarpregunta();

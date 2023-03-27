@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Postgrest.Attributes;
+using Postgrest.Models;
 using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,14 +13,15 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using ColumnAttribute = Postgrest.Attributes.ColumnAttribute;
+using TableAttribute = Postgrest.Attributes.TableAttribute;
 
 namespace preguntaods.Entities
 {
     [Table("reto")]
-    public partial class Reto
+    public partial class Reto : BaseModel, IEntity
     {
-        [Key]
-        [Column("id")]
+        [PrimaryKey("id")]
         public int Id { get; set; }
 
         [Column("dificultad")]
