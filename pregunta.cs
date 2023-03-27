@@ -232,13 +232,11 @@ namespace preguntaods
             else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  puntosText.Text = "Puntuación de la pregunta: 200"; }
             else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 300"; }
 
-            var a = preguntaActual.OdsRelacionada;
-            String imagePath = "Resources.Drawable.ods" + a;
-            Bitmap bitmap = BitmapFactory.DecodeFile(imagePath);
-
-            imagenOds.SetImageResource(Resource.Drawable.ods1);
-            //imagenOds.SetImageResource((int) bitmap);   
-            //imagenOds.SetImageResource(Resource.Drawable.ods1);
+            String a = preguntaActual.OdsRelacionada;
+            string nombreDeImagen = "ods" + a; // construir el nombre del recurso dinámicamente
+            int idDeImagen = Resources.GetIdentifier(nombreDeImagen, "drawable", PackageName); // obtener el identificador de recurso correspondiente
+            imagenOds.SetImageResource(idDeImagen);
+            
 
             enunciado.Text = preguntaActual.Pregunta;
             b1.Text = preguntaActual.Respuesta1;

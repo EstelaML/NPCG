@@ -90,7 +90,7 @@
              
             <ImageView
                 android:paddingTop="30dp"
-                android:src=""
+                android:src="@drawable/abc_ab_share_pack_mtrl_alpha"
                 android:layout_width="170sp"
                 android:layout_height="170sp"
                 android:layout_gravity="center"
