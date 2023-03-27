@@ -90,7 +90,7 @@
              
             <ImageView
                 android:paddingTop="30dp"
-                android:src="@drawable/ods1"
+                android:src=""
                 android:layout_width="170sp"
                 android:layout_height="170sp"
                 android:layout_gravity="center"

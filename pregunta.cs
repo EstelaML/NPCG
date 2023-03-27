@@ -42,19 +42,18 @@ namespace preguntaods
         private TextView puntuacionPregunta;
         private RetoPregunta preguntaActual;
         private PreguntaRepositorioSingleton repositorio;
-        private ImageView imagenOds;
+        public ImageView imagenOds;
         public TextView puntosText;
         public TextView puntosTotalesText;
         public bool consolidado;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            consolidado = false;
-            errores = 0;
+            // musica 
             musicaFondo = new Sonido();
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.fondo_molon);
             musicaFondo.HacerSonido(this, uri);
-            imagenOds = FindViewById<ImageView>(Resource.Id.imagenOds);
-            //puntuacionPregunta = FindViewById<TextView>(Resource.Id.puntuacionPreguntaActual);
+
+            // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
@@ -64,15 +63,13 @@ namespace preguntaods
             b4 = FindViewById<Button>(Resource.Id.button4);
             tb = FindViewById<ProgressBar>(Resource.Id.timeBar);
             abandonar = FindViewById<Button>(Resource.Id.volver);
-
-            /* repositorio = new PreguntaRepositorioSingleton();
-             var preguntas = await repositorio.GetAll();
-             a = preguntas.ToArray();
-            */
             puntosText = FindViewById<TextView>(Resource.Id.textView1);
             puntosTotalesText = FindViewById<TextView>(Resource.Id.textView2);
-
+            imagenOds = FindViewById<ImageView>(Resource.Id.imagenOds);
             repositorio = new PreguntaRepositorioSingleton();
+            
+
+            // Conseguir preguntas 
             var preguntasFaciles = await repositorio.GetByDificultad("baja");
             var preguntasMedias = await repositorio.GetByDificultad("media");
             var preguntasAltas = await repositorio.GetByDificultad("alta");
@@ -83,21 +80,25 @@ namespace preguntaods
             Shuffle(medias);
             Shuffle(altas);
 
+            // Initialization vars
+            turno = 0;
+            ptsTotales = 0;
+            consolidado = false;
+            errores = 0;
+
+            // botones soluciones
             b1.Click += B1_Click;
             b2.Click += B2_Click;
             b3.Click += B3_Click;
             b4.Click += B4_Click;
 
-            abandonar.Click += Atras;
-
             //Animation of time bar
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
 
-            // Initialization vars
-            turno = 0;
-            ptsTotales = 0;
             Generarpregunta();
+
+            abandonar.Click += Atras;
         }
 
         public static void Shuffle<T>(List<T> list)
@@ -114,7 +115,6 @@ namespace preguntaods
             }
 
         }
-
 
         private void Atras(object sender, EventArgs e)
         {
@@ -236,7 +236,7 @@ namespace preguntaods
             String imagePath = "Resources.Drawable.ods" + a;
             Bitmap bitmap = BitmapFactory.DecodeFile(imagePath);
 
-
+            imagenOds.SetImageResource(Resource.Drawable.ods1);
             //imagenOds.SetImageResource((int) bitmap);   
             //imagenOds.SetImageResource(Resource.Drawable.ods1);
 
