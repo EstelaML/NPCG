@@ -1,14 +1,9 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.Entities;
-using preguntaods.Persistencia;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace preguntaods
 {
