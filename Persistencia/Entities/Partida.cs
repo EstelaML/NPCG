@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Postgrest.Attributes;
+using Postgrest.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,10 +15,9 @@ using System.Text;
 namespace preguntaods.Entities
 {
     [Table("partida")]
-    public partial class Partida
+    public partial class Partida : BaseModel, IEntity
     {
-        [Key]
-        [Column("id")]
+        [PrimaryKey("id")]
         public int Id { get; set; }
 
         [Column("fecha")]
