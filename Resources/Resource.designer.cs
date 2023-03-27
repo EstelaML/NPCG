@@ -4116,10 +4116,10 @@ namespace preguntaods
 			public const int textView4 = 2131230954;
 			
 			// aapt resource value: 0x7F0800EB
-			public const int textViewPass = 2131230955;
+			public const int textViewMail = 2131230955;
 			
 			// aapt resource value: 0x7F0800EC
-			public const int textViewUserName = 2131230956;
+			public const int textViewPass = 2131230956;
 			
 			// aapt resource value: 0x7F0800ED
 			public const int text_input_password_toggle = 2131230957;
