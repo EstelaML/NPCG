@@ -14,10 +14,11 @@ namespace preguntaods.Entities
 {
     public partial class ODS
     {
-        public ODS(string nombre, string descripcion)
+        public ODS(string nombre, string descripcion, string imagen)
         {
             this.Nombre = nombre;
             this.Descripcion = descripcion;
+            this.Imagen = imagen;
         }
 
         public ODS() { }

@@ -40,6 +40,7 @@ namespace preguntaods
         private TextView puntuacionPregunta;
         private RetoPregunta preguntaActual;
         private PreguntaRepositorioSingleton repositorio;
+        private ImageView imagenOds;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -47,8 +48,8 @@ namespace preguntaods
             musicaFondo = new Sonido();
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.fondo_molon);
             musicaFondo.HacerSonido(this, uri);
-
-            puntuacionPregunta = FindViewById<TextView>(Resource.Id.puntuacionPreguntaActual);
+            imagenOds = FindViewById<ImageView>(Resource.Id.imagenOds);
+            //puntuacionPregunta = FindViewById<TextView>(Resource.Id.puntuacionPreguntaActual);
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
@@ -85,7 +86,7 @@ namespace preguntaods
             //Animation of time bar
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
-            
+
             // Initialization vars
             turno = 0;
             ptsTotales = 0;
@@ -117,7 +118,7 @@ namespace preguntaods
         {
             int res;
             if (turno <= 3) { textValor.Text = "Valor de la pregunta: " + ptsBaja; res = ptsBaja; }
-            else if (turno <= 7) { textValor.Text = "Valor de la pregunta: " + ptsMedia; res = ptsMedia;  }
+            else if (turno <= 7) { textValor.Text = "Valor de la pregunta: " + ptsMedia; res = ptsMedia; }
             else { textValor.Text = "Valor de la pregunta: " + ptsAlta; res = ptsAlta; }
             return res;
         }
@@ -174,7 +175,7 @@ namespace preguntaods
             {
                 acertado = true;
                 uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
-    
+
                 AnyadirPts(turno);
                 b.SetBackgroundResource(Resource.Drawable.preAcierto);
             }
@@ -198,9 +199,11 @@ namespace preguntaods
             b3.SetBackgroundResource(Resource.Drawable.pre);
             b4.SetBackgroundResource(Resource.Drawable.pre);
 
-            if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); puntuacionPregunta.Text = "Puntuación de la pregunta: 100"; }
-            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual); puntuacionPregunta.Text = "Puntuación de la pregunta: 200"; }
-            else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntuacionPregunta.Text = "Puntuación de la pregunta: 300"; }
+            if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); }//puntuacionPregunta.Text = "Puntuación de la pregunta: 100"; }
+            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual); }// puntuacionPregunta.Text = "Puntuación de la pregunta: 200"; }
+            else { preguntaActual = altas.First(); altas.Remove(preguntaActual); }// puntuacionPregunta.Text = "Puntuación de la pregunta: 300"; }
+
+            //imagenOds.SetImageResource(Resource.Drawable.ods1);
 
             enunciado.Text = preguntaActual.Pregunta;
             b1.Text = preguntaActual.Respuesta1;

@@ -73,24 +73,15 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:id="@+id/pregunta"/>
-            <TextView
-                android:text=""
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/puntuacionPreguntaActual" />
-            <TextView
-                android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3" />
-            <TextView
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2" />
+             
+            <ImageView
+                android:src="@drawable/ods1"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:layout_gravity="center"
+                android:id="@+id/imagenOds" />
+           
+            
 
             <Space
                 android:layout_width="match_parent"
