@@ -41,7 +41,7 @@
             android:textStyle="bold"
             android:id="@+id/textView4"
             android:textColor="@android:color/black"
-            android:paddingBottom="100px"/>
+            android:paddingBottom="20dp"/>
         <TextView
             android:text="Nombre de usuario"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -51,7 +51,7 @@
             android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textPersonName"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:background="@drawable/camposinf"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -63,17 +63,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
-            android:paddingTop="35px"
+            android:paddingTop="12dp"
             android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textEmailAddress"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:background="@drawable/camposinf"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:id="@+id/correo" />
         <TextView
-            android:paddingTop="35px"
+            android:paddingTop="12dp"
             android:text="Contraseña"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -83,12 +83,12 @@
         <EditText
             android:inputType="textPassword"
             android:background="@drawable/camposinf"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:id="@+id/contraseña" />
         <TextView
-            android:paddingTop="35px"
+            android:paddingTop="12dp"
             android:text="Repita la contraseña"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -97,7 +97,7 @@
             android:textColor="@android:color/black"/>
         <EditText
             android:inputType="textPassword"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:background="@drawable/camposinf"
             android:textAlignment="textStart"
             android:layout_width="match_parent"
@@ -106,8 +106,8 @@
             />
         <TextView
             android:text=""
-            android:paddingTop="40px"
-            android:paddingBottom="40px"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:textColor="?android:attr/colorError"
@@ -118,7 +118,7 @@
             android:text="Registrar"
             android:background="@drawable/camposinf"
             android:layout_width="match_parent"
-            android:layout_height="49.0dp"
+            android:layout_height="49dp"
             android:id="@+id/registroB"
             android:textColor="@android:color/black"
             android:backgroundTint="@color/colorPrimary"
