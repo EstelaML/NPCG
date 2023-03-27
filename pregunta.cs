@@ -11,7 +11,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.Core.Content;
 using preguntaods.Entities;
-using preguntaods.Persistencia;
+using preguntaods.Persistencia.Repository;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

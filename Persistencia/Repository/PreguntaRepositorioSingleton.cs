@@ -17,42 +17,11 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace preguntaods.Persistencia
+namespace preguntaods.Persistencia.Repository
 {
-    public class PreguntaRepositorioSingleton : IRepository<RetoPregunta>
-    {
-        private readonly SingletonConexion conexion;
-
-        public PreguntaRepositorioSingleton() { 
-            conexion = SingletonConexion.getInstance();
-        }
-        public Task Add(RetoPregunta entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<RetoPregunta>> GetAll()
-        {
-            var response = await conexion.cliente
-                .From<RetoPregunta>()
-                .Get();
-
-            return response.Models.AsEnumerable();
-        }
-
-        public Task<RetoPregunta> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(RetoPregunta entity)
-        {
-            throw new NotImplementedException();
-        }
+    public class PreguntaRepositorioSingleton : Repository<RetoPregunta>
+    { 
+    
     }
+        
 }

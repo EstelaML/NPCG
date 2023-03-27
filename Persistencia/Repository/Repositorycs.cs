@@ -6,6 +6,8 @@ using Android.Views;
 using Android.Widget;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using Postgrest.Models;
+using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,42 +16,54 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : BaseModel, IEntity, new()
     {
-        protected readonly DbContext _context = null;
-        protected DbSet<T> table = null;
+        private readonly SingletonConexion conexion;
 
-        public Repository(DbContext context)
+        public Repository()
         {
-            this._context = context;
-            table = _context.Set<T>();
+            conexion = SingletonConexion.getInstance();
         }
 
         public async Task<T> GetById(int id)
         {
-            return table.Find(id);
+            var response = await conexion.cliente
+                .From<T>()
+                .Where(x => x.Id == id)
+                .Single();
+
+            return response;
         }
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return table.ToList();
+            var response = await conexion.cliente
+                .From<T>()
+                .Get();
+
+            return response.Models.AsEnumerable();
         }
 
         public async Task Add(T entity)
         {
-            table.Add(entity);
+            await conexion.cliente
+                .From<T>()
+                .Insert(entity);
         }
 
         public async Task Update(T entity)
         {
-            table.Attach(entity);
-            _context.Entry(entity).State = EntityState.Modified;
+            await conexion.cliente
+                .From<T>()
+                .Update(entity);
         }
 
         public async Task Delete(int id)
         {
-            T entity = table.Find(id);
-            table.Remove(entity);
+            await conexion.cliente
+                .From<T>()
+                .Where (x => x.Id == id)
+                .Delete();
         }
     }
 }

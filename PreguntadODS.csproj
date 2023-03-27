@@ -68,8 +68,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistencia\Entities\IEntity.cs" />
     <Compile Include="Persistencia\Repository\PreguntaRepositorioSingleton.cs" />
-    <Compile Include="Persistencia\Repository\UsuarioRepositorio.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="Pregunta.cs" />
     <Compile Include="InicioSesion.cs" />
@@ -94,7 +94,6 @@
     <Compile Include="Menu.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />
     <Compile Include="Persistencia\Repository\Repositorycs.cs" />
-    <Compile Include="Persistencia\Repository\SupabaseContext.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
