@@ -12,7 +12,6 @@ namespace preguntaods
     [Activity(Label = "@string/app_name", Theme = "@style/HiddenTitleTheme", MainLauncher = true)]
     public class InicioSesion : AppCompatActivity
     {
-        private Button atras;
         private Button iniciarSesion;
         private EditText correo;
         private EditText password;
@@ -44,21 +43,30 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
+            Sonido s = new Sonido();
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
+            s.HacerSonido(this, uri);
             Intent i = new Intent(this, typeof(Menu));
             StartActivity(i);
         }
 
         private void Registrar(object sender, EventArgs e)
         {
+            Sonido s = new Sonido();
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
+            s.HacerSonido(this, uri);
             Intent i = new Intent(this, typeof(Registro));
             StartActivity(i);
         }
-
 
         private async void IniciarSesion_Click(object sender, EventArgs e)
         {
             try
             {
+                Sonido s = new Sonido();
+                Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
+                s.HacerSonido(this, uri);
+
                 var session = await conexion.cliente.Auth.SignIn(correo.Text, password.Text);
 
                 // inicia sesion

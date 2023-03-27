@@ -20,10 +20,13 @@ namespace preguntaods.Entities
         [PrimaryKey("id")]
         public int Id { get; set; }
 
-        [Column("nombre")]
+        [Column("Nombre")]
         public string Nombre { get; set; }
 
-        [Column("descripcion")]
+        [Column("Descripcion")]
         public string Descripcion { get; set; }
+
+        [Column("Imagen")]
+        public string Imagen { get; set; }
     }
 }

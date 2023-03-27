@@ -74,12 +74,16 @@ namespace preguntaods
 
         private async void Registrar(object sender, EventArgs e)
         {
+            Sonido s = new Sonido();
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
+            s.HacerSonido(this, uri);
             if (usernameCorrect && passwordCorrect && emailCorrect) {
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
                     try
                     {
+
                         var session = await conexion.cliente.Auth.SignUp(email.Text, password.Text);
 
                         // se registra
@@ -95,6 +99,9 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
+            Sonido s = new Sonido();
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
+            s.HacerSonido(this, uri);
             Intent i = new Intent(this, typeof(InicioSesion));
             StartActivity(i);
         }

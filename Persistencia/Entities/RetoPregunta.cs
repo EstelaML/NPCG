@@ -37,5 +37,11 @@ namespace preguntaods.Entities
 
         [Column("Correcta")]
         public string Correcta { get; set; }
+
+        [Column("Dificultad")]
+        public string Dificultad { get; set; }
+
+        [Column("OdsRelacionada")]
+        public string OdsRelacionada { get; set; }
     }
 }
