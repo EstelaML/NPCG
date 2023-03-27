@@ -14,7 +14,7 @@ namespace preguntaods
     {
         private Button atras;
         private Button iniciarSesion;
-        private EditText username;
+        private EditText correo;
         private EditText password;
         private TextView error;
         private SingletonConexion conexion;
@@ -27,7 +27,7 @@ namespace preguntaods
             conexion = SingletonConexion.getInstance();
 
             // Create your application here
-            username = FindViewById<EditText>(Resource.Id.nombreUsuario);
+            correo = FindViewById<EditText>(Resource.Id.correo);
             password = FindViewById<EditText>(Resource.Id.contraseña);
 
             iniciarSesion = FindViewById<Button>(Resource.Id.inicioSesion);
@@ -59,7 +59,7 @@ namespace preguntaods
         {
             try
             {
-                var session = await conexion.cliente.Auth.SignIn(username.Text, password.Text);
+                var session = await conexion.cliente.Auth.SignIn(correo.Text, password.Text);
 
                 // inicia sesion
                 Intent i = new Intent(this, typeof(Menu));
@@ -67,7 +67,7 @@ namespace preguntaods
             }
             catch (Exception ex)
             {
-                error.Text = "Correo o contraseña incorrecta";
+                error.Text = "Correo electrónico o contraseña incorrecta";
             }
         }
     }
