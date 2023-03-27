@@ -14,7 +14,7 @@ namespace preguntaods
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.93")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.0.5")]
 	public partial class Resource
 	{
 		
@@ -4541,10 +4541,19 @@ namespace preguntaods
 		{
 			
 			// aapt resource value: 0x7F0D0000
-			public const int megaman_acierto = 2131558400;
+			public const int click = 2131558400;
 			
 			// aapt resource value: 0x7F0D0001
-			public const int megaman_error = 2131558401;
+			public const int error_pato = 2131558401;
+			
+			// aapt resource value: 0x7F0D0002
+			public const int fondo_molon = 2131558402;
+			
+			// aapt resource value: 0x7F0D0003
+			public const int megaman_acierto = 2131558403;
+			
+			// aapt resource value: 0x7F0D0004
+			public const int megaman_error = 2131558404;
 			
 			static Raw()
 			{

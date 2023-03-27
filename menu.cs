@@ -22,6 +22,9 @@ namespace preguntaods
 
         private void Partida_Click(object sender, EventArgs e)
         {
+            Sonido s = new Sonido();
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
+            s.HacerSonido(this, uri);
             Intent i = new Intent(this, typeof(Pregunta));
             StartActivity(i);
         }

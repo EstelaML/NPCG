@@ -37,11 +37,17 @@ namespace preguntaods
         private const int ptsMedia = 200;
         private const int ptsBaja = 100;
         private int ptsTotales;
+        private Sonido musicaFondo;
 
         private PreguntaRepositorioSingleton repositorio;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            musicaFondo = new Sonido();
+            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.fondo_molon);
+            musicaFondo.HacerSonido(this, uri);
+
+
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
@@ -126,28 +132,6 @@ namespace preguntaods
             else { ptsTotales += -ptsAlta * 2; }
         }
 
-        private void hacerSonidoAcierto() {
-            Android.Net.Uri uri = Android.Net.Uri.Parse ("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
-
-            // Configurar un objeto MediaPlayer para reproducir el sonido
-            mp = new MediaPlayer();
-            mp.SetDataSource(this, uri);
-            mp.Prepare();
-            mp.Start();
-        }
-
-        private void hacerSonidoError()
-        {
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_error);
-
-            // Configurar un objeto MediaPlayer para reproducir el sonido
-            mp = new MediaPlayer();
-            mp.SetDataSource(this, uri);
-            mp.Prepare();
-            mp.Start();
-        }
-
-
         private void B4_Click(object sender, EventArgs e)
         {
             if (turno != 10)
@@ -174,20 +158,22 @@ namespace preguntaods
 
         private Boolean EsSolucion(string text, Button b)
         {
+            Android.Net.Uri uri = null;
             if (text.Equals(a[turno].Correcta))
             {
-                hacerSonidoAcierto();
+                uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
+    
                 AnyadirPts(turno);
                 b.SetBackgroundResource(Resource.Drawable.preAcierto);
             }
             else {
+                uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.error_pato);
                 
-                hacerSonidoError();
                 QuitarPts(turno);
                 b.SetBackgroundResource(Resource.Drawable.preFallo);
             }
-
-            Console.WriteLine("wasd");
+            Sonido s = new Sonido();
+            s.HacerSonido(this, uri);
 
             turno++;
             Generarpregunta();
