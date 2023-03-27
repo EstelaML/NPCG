@@ -23,7 +23,7 @@ namespace preguntaods.Entities
             PartidaId = p.Id;
 
             RReto = r;
-            RetoId = r.Id;
+            Id = r.Id;
         }
     }
 }
