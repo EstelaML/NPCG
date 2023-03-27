@@ -20,8 +20,15 @@ using System.Threading.Tasks;
 namespace preguntaods.Persistencia.Repository
 {
     public class PreguntaRepositorioSingleton : Repository<RetoPregunta>
-    { 
-    
-    }
-        
+    {
+        public async Task<IEnumerable<RetoPregunta>> GetByDificultad(string dificultad)
+        {
+            var a = SingletonConexion.getInstance();
+            var response = await a.cliente
+                .From<RetoPregunta>()
+                .Where(Xamarin => Xamarin.Dificultad == dificultad).Get();
+
+            return response.Models.AsEnumerable();
+        }
+    }       
 }

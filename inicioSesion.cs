@@ -66,6 +66,7 @@ namespace preguntaods
                 Sonido s = new Sonido();
                 Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
                 s.HacerSonido(this, uri);
+
                 var session = await conexion.cliente.Auth.SignIn(correo.Text, password.Text);
 
                 // inicia sesion
