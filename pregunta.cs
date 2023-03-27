@@ -1,6 +1,7 @@
 ﻿using Android.Animation;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -9,6 +10,7 @@ using preguntaods.Persistencia.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Android.Icu.Text.CaseMap;
 
 namespace preguntaods
 {
@@ -41,9 +43,12 @@ namespace preguntaods
         private RetoPregunta preguntaActual;
         private PreguntaRepositorioSingleton repositorio;
         private ImageView imagenOds;
-
+        public TextView puntosText;
+        public TextView puntosTotalesText;
+        public bool consolidado;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            consolidado = false;
             errores = 0;
             musicaFondo = new Sonido();
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.fondo_molon);
@@ -64,6 +69,8 @@ namespace preguntaods
              var preguntas = await repositorio.GetAll();
              a = preguntas.ToArray();
             */
+            puntosText = FindViewById<TextView>(Resource.Id.textView1);
+            puntosTotalesText = FindViewById<TextView>(Resource.Id.textView2);
 
             repositorio = new PreguntaRepositorioSingleton();
             var preguntasFaciles = await repositorio.GetByDificultad("baja");
@@ -105,13 +112,31 @@ namespace preguntaods
                 list[i] = list[j];
                 list[j] = temp;
             }
+
         }
 
 
         private void Atras(object sender, EventArgs e)
         {
-            Intent i = new Intent(this, typeof(Menu));
-            StartActivity(i);
+            Android.App.AlertDialog alertDialog = null;
+            string titulo = "¿Estás seguro?";
+            string mensaje = "Una vez aceptes perderás tu progreso por completo.";
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+            builder.SetMessage(mensaje);
+            builder.SetTitle(titulo);
+            builder.SetPositiveButton("Aceptar", (sender, args) =>
+            {
+                Intent i = new Intent(this, typeof(Menu));
+                StartActivity(i);
+                musicaFondo.PararSonido();
+            });
+            builder.SetNegativeButton("Cancelar", (sender, args) =>
+            {
+                
+            });
+            builder.SetCancelable(false);
+            alertDialog = builder.Create();
+            alertDialog.Show();
         }
 
         private int MostrarPtsPregunta(int turno)
@@ -188,21 +213,31 @@ namespace preguntaods
             Sonido s = new Sonido();
             s.HacerSonido(this, uri);
             animation.End();
-            MostrarAlerta(acertado);
+            MostrarAlerta(acertado, false);
             turno++;
+            puntosTotalesText.Text = "Puntos totales: " + ptsTotales;
             return true;
         }
         private void Generarpregunta() {
-            if (turno == 10) { return; }
+            if (turno == 10) {
+                MostrarAlerta(false, true);
+            
+            }
             b1.SetBackgroundResource(Resource.Drawable.pre);
             b2.SetBackgroundResource(Resource.Drawable.pre);
             b3.SetBackgroundResource(Resource.Drawable.pre);
             b4.SetBackgroundResource(Resource.Drawable.pre);
 
-            if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); }//puntuacionPregunta.Text = "Puntuación de la pregunta: 100"; }
-            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual); }// puntuacionPregunta.Text = "Puntuación de la pregunta: 200"; }
-            else { preguntaActual = altas.First(); altas.Remove(preguntaActual); }// puntuacionPregunta.Text = "Puntuación de la pregunta: 300"; }
+            if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 100"; }
+            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  puntosText.Text = "Puntuación de la pregunta: 200"; }
+            else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 300"; }
 
+            var a = preguntaActual.OdsRelacionada;
+            String imagePath = "Resources.Drawable.ods" + a;
+            Bitmap bitmap = BitmapFactory.DecodeFile(imagePath);
+
+
+            //imagenOds.SetImageResource((int) bitmap);   
             //imagenOds.SetImageResource(Resource.Drawable.ods1);
 
             enunciado.Text = preguntaActual.Pregunta;
@@ -214,62 +249,112 @@ namespace preguntaods
             //puntuacionP.Text = "Puntuación de esta pregunta: 100";
             animation.Start();
         }
-        public void MostrarAlerta(bool acertado)
+        public void MostrarAlerta(bool acertado, bool fin)
         {
-            string consolidar = "consolidar";
-            string abandonar = "abandonar";
-            string seguir = "seguir jugando";
-            string titulo = "";
+            if (!fin)
+            {
+                string titulo = "";
+                Android.App.AlertDialog alertDialog = null;
+                if (acertado)
+                {
+                    string mensaje;
+                    titulo = "Enhorabuena, ¡has acertado!";
+                    if (consolidado) 
+                    {
+                        mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
+                    } else mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                    builder.SetMessage(mensaje);
+                    builder.SetTitle(titulo);
+                    builder.SetPositiveButton("Seguir", (sender, args) =>
+                    {
+                        Generarpregunta();
+                    });
 
-            if (acertado) titulo = "Enhorabuena, ¡has acertado!";
+                    builder.SetNegativeButton("Abandonar", (sender, args) =>
+                    {
+                        Intent i = new Intent(this, typeof(Menu));
+                        StartActivity(i);
+                        musicaFondo.PararSonido();
+                    });
+                    if (!consolidado) {
+                        builder.SetNeutralButton("Consolidar", (sender, args) =>
+                        {
+                            // añadir puntos a su usuario en la base de datos
+                            consolidado = true;
+                            Generarpregunta();
+                        });
+                    }
+
+                    builder.SetCancelable(false);
+                    alertDialog = builder.Create();
+                    alertDialog.Show();
+                }
+                else
+                {
+                    if (errores == 2)
+                    {
+                        titulo = "Lo siento, ¡has perdido!";
+                        string mensaje = $"Tienes 0 puntos.";
+                        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                        builder.SetMessage(mensaje);
+                        builder.SetTitle(titulo);
+                        builder.SetNegativeButton("Salir", (sender, args) =>
+                        {
+                            Intent i = new Intent(this, typeof(Menu));
+                            StartActivity(i);
+                            musicaFondo.PararSonido();
+                        });
+
+                        builder.SetCancelable(false);
+                        alertDialog = builder.Create();
+                        alertDialog.Show();
+                    }
+                    else
+                    {
+                        titulo = "Ooooooh, solo te queda una vida, ¡cuidado!";
+                        string mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
+                        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                        builder.SetMessage(mensaje);
+                        builder.SetTitle(titulo);
+                        builder.SetPositiveButton("Seguir", (sender, args) =>
+                        {
+                            Generarpregunta();
+                        });
+
+                        builder.SetNegativeButton("Abandonar", (sender, args) =>
+                        {
+                            Intent i = new Intent(this, typeof(Menu));
+                            StartActivity(i);
+                            musicaFondo.PararSonido();
+                        });
+
+                        builder.SetCancelable(false);
+                        alertDialog = builder.Create();
+                        alertDialog.Show();
+
+                    }
+                }
+            }
             else
             {
-                titulo = "Oooooh, solo te queda una vida, ¡ten cuidado!";
-            }
-
-            string mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos, abandonarlos o seguir?";
-            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-
-            if (errores != 2)
-            {
+                Android.App.AlertDialog alertDialog = null;
+                string titulo = "Ole mi arma, ¡lo has conseguido!";
+                string mensaje = $"Te llevas {ptsTotales} puntos.";
+                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                builder.SetMessage(mensaje);
                 builder.SetTitle(titulo);
-                builder.SetMessage($"Tu puntuación es de {ptsTotales} puntos. ¿Deseas {seguir}, {consolidar} o {abandonar}?");
-                builder.SetPositiveButton("Seguir", (sender, args) =>
-                {
-                    Generarpregunta();
-                });
-
-                builder.SetNegativeButton("Abandonar", (sender, args) =>
+                builder.SetNegativeButton("Salir", (sender, args) =>
                 {
                     Intent i = new Intent(this, typeof(Menu));
                     StartActivity(i);
                     musicaFondo.PararSonido();
                 });
 
-                builder.SetNeutralButton("Consolidar", (sender, args) =>
-                {
-                    // añadir puntos a su usuario en la base de datos
-                    Intent i = new Intent(this, typeof(Menu));
-                    StartActivity(i);
-                    musicaFondo.PararSonido();
-                });
+                builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Show();
             }
-            else // si comete dos fallos
-            {
-                builder.SetTitle("Lo siento, ¡has perdido!");
-                builder.SetMessage($"Tu puntuación es 0. Ya no puedes seguir jugando :(");
-                builder.SetPositiveButton("Salir", (sender, args) =>
-                {
-                    Intent i = new Intent(this, typeof(Menu));
-                    StartActivity(i);
-                    musicaFondo.PararSonido();
-                });
-            }
-            builder.SetCancelable(false);
-            Android.App.AlertDialog alertDialog = builder.Create();
-            alertDialog.Show();
         }
-
-
     }
 }
