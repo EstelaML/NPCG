@@ -75,7 +75,7 @@ namespace preguntaods
 
                     try
                     {
-                        var session = await conexion.cliente.Auth.SignUp(username.Text, password.Text);
+                        var session = await conexion.cliente.Auth.SignUp(email.Text, password.Text);
 
                         // se registra
                         Intent i = new Intent(this, typeof(Menu));

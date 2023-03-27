@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/atras"
             android:background="@color/mtrl_btn_transparent_bg_color"
-            android:contentDescription="" />
+            android:contentDescription=""/>
 
         <ImageView
             android:layout_width="match_parent"
