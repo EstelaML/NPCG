@@ -12,10 +12,10 @@ using System.Text;
 
 namespace preguntaods.Entities
 {
-    public partial class Usuario
+    public partial class Configuracion
     {
-        public Usuario() { }
-        public Usuario(int id, string nombre, bool sonidos, int puntos, int musica)
+        public Configuracion() { }
+        public Configuracion(int id, string nombre, bool sonidos, int puntos, int musica)
         {
             this.Id = id;
             this.Nombre = nombre;

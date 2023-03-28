@@ -15,7 +15,7 @@ using System.Text;
 namespace preguntaods.Entities
 {
     [Table("Configuracion")]
-    public partial class Usuario : BaseModel, IEntity
+    public partial class Configuracion : BaseModel, IEntity
     {
         [PrimaryKey("Id")]
         public int Id { get; set; }
