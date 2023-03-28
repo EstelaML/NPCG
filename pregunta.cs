@@ -136,6 +136,7 @@ namespace preguntaods
             });
             builder.SetCancelable(false);
             alertDialog = builder.Create();
+            alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
         }
 
