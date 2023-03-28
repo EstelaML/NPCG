@@ -9,7 +9,7 @@ using System;
 
 namespace preguntaods
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/HiddenTitleTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class InicioSesion : AppCompatActivity
     {
         private Button iniciarSesion;

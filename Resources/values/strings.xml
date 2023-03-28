@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PreguntadODS</string>
+  <string name="app_name">PreguntadODS</string>
 	<string name="underline"><u>Regístrate</u></string>
 	<string name="action_settings">Settings</string>
 </resources>

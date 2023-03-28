@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace preguntaods
 {
-    [Activity(Label = "Activity1")]
+    [Activity(Label = "Activity1", Theme = "@style/HiddenTitleTheme")]
     public class Pregunta : AppCompatActivity
     {
         private TextView enunciado;
@@ -189,19 +189,19 @@ namespace preguntaods
                 uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
 
                 AnyadirPts(turno);
-                b.SetBackgroundResource(Resource.Drawable.preAcierto);
+                b.SetBackgroundResource(Resource.Drawable.style_preAcierto);
             }
             else {
                 uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.error_pato);
 
                 if (errores < 1)
-                    heart1.SetImageResource(Resource.Drawable.emptyHeart);
+                    heart1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else
-                    heart2.SetImageResource(Resource.Drawable.emptyHeart);
+                    heart2.SetImageResource(Resource.Drawable.icon_emptyHeart);
 
                 errores++;
                 QuitarPts(turno);
-                b.SetBackgroundResource(Resource.Drawable.preFallo);
+                b.SetBackgroundResource(Resource.Drawable.style_preFallo);
             }
             Sonido s = new Sonido();
             s.HacerSonido(this, uri);
@@ -216,10 +216,10 @@ namespace preguntaods
                 MostrarAlerta(false, true);
             
             }
-            b1.SetBackgroundResource(Resource.Drawable.pre);
-            b2.SetBackgroundResource(Resource.Drawable.pre);
-            b3.SetBackgroundResource(Resource.Drawable.pre);
-            b4.SetBackgroundResource(Resource.Drawable.pre);
+            b1.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            b2.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            b3.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            b4.SetBackgroundResource(Resource.Drawable.style_pregunta);
 
             if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 100"; }
             else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  puntosText.Text = "Puntuación de la pregunta: 200"; }

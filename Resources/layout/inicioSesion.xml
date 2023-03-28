@@ -28,7 +28,8 @@
             android:scaleType="centerInside"
             android:adjustViewBounds="true"
             android:layout_marginVertical="20dp"
-            android:src="@drawable/icon"/>
+            android:src="@drawable/icon_logo"
+            android:contentDescription="" />
 
 
         <Space
@@ -41,15 +42,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewMail"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText" />
+
         <EditText
             android:inputType="textPersonName"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/camposInf"
+            android:background="@drawable/style_camposInf"
             android:id="@+id/correo" />
+
         <TextView
             android:text="Contraseña"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -57,16 +61,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewPass"
             android:paddingTop="20dp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText" />
+
         <EditText
             android:inputType="textPassword"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:paddingLeft="10dp"
-            android:background="@drawable/camposInf"
+            android:background="@drawable/style_camposInf"
             android:id="@+id/contraseña" />
-         <TextView
+
+        <TextView
             android:paddingTop="7dp"
             android:paddingBottom="5dp"
             android:layout_marginTop="10dp"
@@ -76,14 +83,16 @@
             android:layout_height="wrap_content"
             android:textColor="?android:attr/colorError"
             android:id="@+id/error" />
+
         <Button
             android:text="Iniciar Sesión"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:textColor="@android:color/black"
-            android:background="@drawable/camposInf"
+            android:background="@drawable/style_camposInf"
             android:backgroundTint="@color/colorPrimary"
-            android:id="@+id/inicioSesion" />
+            android:id="@+id/inicioSesion"
+            tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -99,9 +108,10 @@
                 android:id="@+id/textHasOlvidado"
                 android:paddingTop="20dp"
                 android:textSize="16sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                tools:ignore="HardcodedText" />
 
-            <TextView    
+            <TextView
                 android:text="@string/underline"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 style="?android:attr/borderlessButtonStyle"
@@ -109,11 +119,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/registrar"
                 android:paddingTop="10dp"
-                android:gravity="left"  
+                android:gravity="left"
                 android:textSize="10sp"
                 android:layout_marginLeft="-10dp"
                 android:clickable="true"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="@color/colorPrimary"
+                tools:ignore="UnresolvedResource,HardcodedSize,NegativeMargin" />
 
 
 

@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="@android:color/white">
+
+    <ImageButton
+        android:src="@android:drawable/ic_menu_revert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:id="@+id/button1"
+        android:background="@color/mtrl_btn_transparent_bg_color"
+        android:contentDescription=""/>
+
+    <ImageButton
+        android:src="@drawable/icon_userNotLog"
+        android:scaleType="centerInside"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginVertical="10dp"
+        android:id="@+id/buttonAvatar"
+        android:background="@color/mtrl_btn_transparent_bg_color"
+        android:contentDescription="" />
+
+    <TextView
+        android:text="Registro"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="30dp"
-        android:paddingTop="50dp"
-        android:background="@android:color/white"
-        android:id="@+id/linearLayout1">
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:id="@+id/textView4"
+        android:textColor="@android:color/black"
+        android:paddingBottom="20dp"
+        tools:ignore="HardcodedText" />
+    <TextView
+        android:text="Nombre de usuario"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText" />
+    <EditText
+        android:inputType="textPersonName"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/style_camposinf"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/nombreUsuario" 
+        />
+    <TextView
+        android:text="Correo electrónico"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:paddingTop="12dp"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText" />
+    <EditText
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/style_camposinf"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/correo" />
+    <TextView
+        android:paddingTop="12dp"
+        android:text="Contraseña"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText" />
+    <EditText
+        android:inputType="textPassword"
+        android:background="@drawable/style_camposinf"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/contraseña" />
+    <TextView
+        android:paddingTop="12dp"
+        android:text="Repita la contraseña"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ererere"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText" />
+    <EditText
+        android:inputType="textPassword"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/style_camposinf"
+        android:textAlignment="textStart"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/contraseña2"
+        />
+    <TextView
+        android:text=""
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:textColor="?android:attr/colorError"
+        android:layout_height="wrap_content"
+        android:id="@+id/error" />
 
+    <Button
+        android:text="Registrar"
+        android:background="@drawable/style_camposinf"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:id="@+id/registroB"
+        android:textColor="@android:color/black"
+        android:backgroundTint="@color/colorPrimary"
+        tools:ignore="HardcodedText" 
+        />
 
-        <ImageButton
-            android:src="@android:drawable/ic_menu_revert"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button1"
-            android:background="@color/mtrl_btn_transparent_bg_color"
-            android:contentDescription=""/>
-            
-        <ImageButton
-            android:src="@drawable/userNotLog"
-            android:scaleType="centerInside"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginVertical="10dp"
-            android:id="@+id/buttonAvatar"
-            android:background="@color/mtrl_btn_transparent_bg_color"/>
-        
-        <TextView
-            android:text="Registro"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:id="@+id/textView4"
-            android:textColor="@android:color/black"
-            android:paddingBottom="20dp"/>
-        <TextView
-            android:text="Nombre de usuario"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView1"
-            android:textColor="@android:color/black"/>
-        <EditText
-            android:inputType="textPersonName"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/camposinf"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:id="@+id/nombreUsuario" 
-            />
-        <TextView
-            android:text="Correo electrónico"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:paddingTop="12dp"
-            android:textColor="@android:color/black"/>
-        <EditText
-            android:inputType="textEmailAddress"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/camposinf"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:id="@+id/correo" />
-        <TextView
-            android:paddingTop="12dp"
-            android:text="Contraseña"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:textColor="@android:color/black"/>
-        <EditText
-            android:inputType="textPassword"
-            android:background="@drawable/camposinf"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:id="@+id/contraseña" />
-        <TextView
-            android:paddingTop="12dp"
-            android:text="Repita la contraseña"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ererere"
-            android:textColor="@android:color/black"/>
-        <EditText
-            android:inputType="textPassword"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/camposinf"
-            android:textAlignment="textStart"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:id="@+id/contraseña2"
-            />
-        <TextView
-            android:text=""
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:textColor="?android:attr/colorError"
-            android:layout_height="wrap_content"
-            android:id="@+id/error" />
-
-        <Button
-            android:text="Registrar"
-            android:background="@drawable/camposinf"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:id="@+id/registroB"
-            android:textColor="@android:color/black"
-            android:backgroundTint="@color/colorPrimary"
-            />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

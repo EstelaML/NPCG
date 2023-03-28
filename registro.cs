@@ -90,7 +90,7 @@ namespace preguntaods
                         Intent i = new Intent(this, typeof(Menu));
                         StartActivity(i);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         error.Text = "Ese nombre de usuario ya existe";
                     }
