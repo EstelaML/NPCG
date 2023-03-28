@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    public class PreguntaRepositorioSingleton : Repository<RetoPregunta>
+    public class RepositorioPregunta : Repository<RetoPregunta>
     {
         public async Task<IEnumerable<RetoPregunta>> GetByDificultad(string dificultad)
         {

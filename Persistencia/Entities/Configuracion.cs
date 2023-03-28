@@ -14,15 +14,22 @@ using System.Text;
 
 namespace preguntaods.Entities
 {
-    [Table("partida")]
-    public partial class Partida : BaseModel, IEntity
+    [Table("Configuracion")]
+    public partial class Configuracion : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("Id")]
         public int Id { get; set; }
 
-        [Column("fecha")]
-        public DateTime Fecha { get; set; }
+        [Column("Nombre")]
+        public string Nombre{ get; set; }
 
-        public List<RetoPorPartida> RetoPorPartidas { get; set; }
+        [Column("Puntos")]
+        public int Puntos { get; set; }
+
+        [Column("Sonnidos")]
+        public bool Sonidos { get; set; }
+
+        [Column("Musica")]
+        public int Musica { get; set; }
     }
 }

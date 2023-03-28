@@ -21,7 +21,7 @@ namespace preguntaods.Services
         #region Usuario
         bool Login(string login, string password);
         void Logout();
-        Usuario SignUp(String username, String correo, String password, String img);
+        Configuracion SignUp(String username, String correo, String password, String img);
 
         #endregion
 

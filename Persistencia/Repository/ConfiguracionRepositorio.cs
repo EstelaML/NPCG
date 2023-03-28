@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    internal class UsuarioRepositorio : Repository<Usuario>
+    internal class ConfiguracionRepositorio : Repository<Configuracion>
     {
-        public async Task<Usuario> GetUserByName(String id)
+        public async Task<Configuracion> GetUserByName(int id)
         {
             var a = SingletonConexion.getInstance();
             var response = await a.cliente
-                .From<Usuario>()
-                .Where(x => x.nombre == id)
+                .From<Configuracion>()
+                .Where(x => x.Id == id)
                 .Single();
 
             return response;

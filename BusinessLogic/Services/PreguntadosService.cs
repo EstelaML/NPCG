@@ -36,7 +36,7 @@ namespace preguntaods.Services
         {
             throw new NotImplementedException();
         }
-        public Usuario SignUp(string username, string correo, string password, string img)
+        public Configuracion SignUp(string username, string correo, string password, string img)
         {
             throw new NotImplementedException();
         }
