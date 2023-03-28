@@ -41,7 +41,7 @@ namespace preguntaods
         private Sonido musicaFondo;
         private TextView puntuacionPregunta;
         private RetoPregunta preguntaActual;
-        private PreguntaRepositorioSingleton repositorio;
+        private RepositorioPregunta repositorio;
         public ImageView imagenOds;
         public TextView puntosText;
         public TextView puntosTotalesText;
@@ -66,7 +66,7 @@ namespace preguntaods
             puntosText = FindViewById<TextView>(Resource.Id.textView1);
             puntosTotalesText = FindViewById<TextView>(Resource.Id.textView2);
             imagenOds = FindViewById<ImageView>(Resource.Id.imagenOds);
-            repositorio = new PreguntaRepositorioSingleton();
+            repositorio = new RepositorioPregunta();
             
 
             // Conseguir preguntas 

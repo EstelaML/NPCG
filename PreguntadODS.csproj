@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Persistencia\Entities\IEntity.cs" />
-    <Compile Include="Persistencia\Repository\PreguntaRepositorioSingleton.cs" />
+    <Compile Include="Persistencia\Repository\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\UsuarioRepositorio.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="Pregunta.cs" />
