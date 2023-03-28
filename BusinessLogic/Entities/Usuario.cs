@@ -15,15 +15,13 @@ namespace preguntaods.Entities
     public partial class Usuario
     {
         public Usuario() { }
-        public Usuario(int id, DateTime fechaCreacion, string nombre, string email, string contraseña, string image)
+        public Usuario(int id, string nombre, bool sonidos, int puntos, int musica)
         {
             this.Id = id;
-            this.fecha_creacion = fechaCreacion;
-            this.nombre = nombre;
-            this.email = email;
-            this.contraseña = contraseña;
-            this.avatar_url = image;
+            this.Nombre = nombre;
+            this.Sonidos = sonidos;
+            this.Puntos = puntos;
+            this.Musica = musica;
         }
-
     }
 }

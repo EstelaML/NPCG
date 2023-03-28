@@ -76,17 +76,13 @@
     <Compile Include="InicioSesion.cs" />
     <Compile Include="Registro.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />
-    <Compile Include="BusinessLogic\Entities\Partida.cs" />
     <Compile Include="BusinessLogic\Entities\Reto.cs" />
-    <Compile Include="BusinessLogic\Entities\RetoPorPartida.cs" />
     <Compile Include="BusinessLogic\Entities\RetoPregunta.cs" />
     <Compile Include="BusinessLogic\Entities\Usuario.cs" />
     <Compile Include="BusinessLogic\Services\IPreguntadosService.cs" />
     <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
-    <Compile Include="Persistencia\Entities\Partida.cs" />
     <Compile Include="Persistencia\Entities\Reto.cs" />
-    <Compile Include="Persistencia\Entities\RetoPorPartida.cs" />
     <Compile Include="Persistencia\Entities\RetoPregunta.cs" />
     <Compile Include="Persistencia\Entities\Usuario.cs" />
     <Compile Include="Persistencia\EntityFrameworkImp\EntityFrameworkDAL.cs" />

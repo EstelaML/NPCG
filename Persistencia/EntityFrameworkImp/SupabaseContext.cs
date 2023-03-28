@@ -32,6 +32,5 @@ namespace preguntaods.Persistencia
         public DbSet<Entities.Reto> Retos { get; set; }
         public DbSet<Entities.RetoPregunta> Reto_preguntas { get; set; }
         public DbSet<Entities.Usuario> User { get; set; }
-        public DbSet<Entities.RetoPorPartida> RetosPorPartidas { get; set; }
     }
 }

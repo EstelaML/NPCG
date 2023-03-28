@@ -20,13 +20,7 @@ namespace preguntaods.Entities
             this.Dificultad = dificultad;
             this.Ods_tratada = oDSFk;
             this.Ods = oDS;
-            RetoPorPartidas = new List<RetoPorPartida>();
         }
-        public Reto() { RetoPorPartidas = new List<RetoPorPartida>(); }
-
-        public void AddRetoPorPartida(RetoPorPartida retoPorPartida)
-        {
-            RetoPorPartidas.Add(retoPorPartida);
-        }
+ 
     }
 }

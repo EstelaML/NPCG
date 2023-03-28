@@ -32,7 +32,5 @@ namespace preguntaods.Entities
 
         [ForeignKey("ods_tratada")]
         public ODS Ods { get; set; }
-        public List<RetoPorPartida> RetoPorPartidas { get; set; }
-
     }
 }

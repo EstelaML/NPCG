@@ -14,25 +14,22 @@ using System.Text;
 
 namespace preguntaods.Entities
 {
-    [Table("User")]
+    [Table("Configuracion")]
     public partial class Usuario : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("Id")]
         public int Id { get; set; }
 
-        [Column("fecha_creacion")]
-        public DateTime? fecha_creacion { get; set; }
+        [Column("Nombre")]
+        public string Nombre{ get; set; }
 
-        [Column("nombre")]
-        public string nombre { get; set; }
+        [Column("Puntos")]
+        public int Puntos { get; set; }
 
-        [Column("email")]
-        public string email { get; set; }
+        [Column("Sonnidos")]
+        public bool Sonidos { get; set; }
 
-        [Column("contraseña")]
-        public string contraseña { get; set; }
-
-        [Column("avatar_url")]
-        public string? avatar_url { get; set; }
+        [Column("Musica")]
+        public int Musica { get; set; }
     }
 }
