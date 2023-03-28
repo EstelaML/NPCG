@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -10,7 +11,6 @@ using preguntaods.Persistencia.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Android.Icu.Text.CaseMap;
 
 namespace preguntaods
 {
@@ -24,28 +24,27 @@ namespace preguntaods
         private Button b4;
         private ProgressBar tb;
         private Button abandonar;
-        private List<RetoPregunta> preguntas;
-        private int turno;
         private List<RetoPregunta> faciles;
         private List<RetoPregunta> medias;
         private List<RetoPregunta> altas;
         private ObjectAnimator animation;
-        private int errores;
-        private TextView textValor;
-        private TextView textPenalizacion;
-        private TextView textPtsTotales;
+        private Sonido musicaFondo;
+        private RetoPregunta preguntaActual;
+        private RepositorioPregunta repositorio;
+        private ImageView imagenOds;
+        private TextView puntosText;
+        private TextView puntosTotalesText;
+        private ImageView heart1;
+        private ImageView heart2;
+
         private const int ptsAlta = 300;
         private const int ptsMedia = 200;
         private const int ptsBaja = 100;
+        private bool consolidado;
+        private int turno;
+        private int errores;
         private int ptsTotales;
-        private Sonido musicaFondo;
-        private TextView puntuacionPregunta;
-        private RetoPregunta preguntaActual;
-        private RepositorioPregunta repositorio;
-        public ImageView imagenOds;
-        public TextView puntosText;
-        public TextView puntosTotalesText;
-        public bool consolidado;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             // musica 
@@ -56,6 +55,8 @@ namespace preguntaods
             // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
+            repositorio = new RepositorioPregunta();
+
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
             b1 = FindViewById<Button>(Resource.Id.button1);
             b2 = FindViewById<Button>(Resource.Id.button2);
@@ -66,16 +67,19 @@ namespace preguntaods
             puntosText = FindViewById<TextView>(Resource.Id.textView1);
             puntosTotalesText = FindViewById<TextView>(Resource.Id.textView2);
             imagenOds = FindViewById<ImageView>(Resource.Id.imagenOds);
-            repositorio = new RepositorioPregunta();
-            
+            heart1 = FindViewById<ImageView>(Resource.Id.heart1);
+            heart2 = FindViewById<ImageView>(Resource.Id.heart2);
+
 
             // Conseguir preguntas 
             var preguntasFaciles = await repositorio.GetByDificultad("baja");
             var preguntasMedias = await repositorio.GetByDificultad("media");
             var preguntasAltas = await repositorio.GetByDificultad("alta");
+
             faciles = preguntasFaciles.ToList();
             medias = preguntasMedias.ToList();
             altas = preguntasAltas.ToList();
+
             Shuffle(faciles);
             Shuffle(medias);
             Shuffle(altas);
@@ -96,9 +100,10 @@ namespace preguntaods
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
 
-            Generarpregunta();
-
+            //Abandonar
             abandonar.Click += Atras;
+
+            Generarpregunta();
         }
 
         public static void Shuffle<T>(List<T> list)
@@ -138,25 +143,6 @@ namespace preguntaods
             alertDialog = builder.Create();
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
-        }
-
-        private int MostrarPtsPregunta(int turno)
-        {
-            int res;
-            if (turno <= 3) { textValor.Text = "Valor de la pregunta: " + ptsBaja; res = ptsBaja; }
-            else if (turno <= 7) { textValor.Text = "Valor de la pregunta: " + ptsMedia; res = ptsMedia; }
-            else { textValor.Text = "Valor de la pregunta: " + ptsAlta; res = ptsAlta; }
-            return res;
-        }
-        private void MostrarPtsError(int turno)
-        {
-            if (turno <= 3) { textPenalizacion.Text = "Por cada error: " + -ptsBaja * 2; }
-            else if (turno <= 7) { textPenalizacion.Text = "Por cada error: " + -ptsMedia * 2; }
-            else { textPenalizacion.Text = "Por cada error: " + -ptsAlta * 2; }
-        }
-        private void MostrarPtsTotales()
-        {
-            textPtsTotales.Text = "Puntuación total: " + ptsTotales;
         }
         private void AnyadirPts(int turno)
         {
@@ -207,6 +193,12 @@ namespace preguntaods
             }
             else {
                 uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.error_pato);
+
+                if (errores < 1)
+                    heart1.SetImageResource(Resource.Drawable.emptyHeart);
+                else
+                    heart2.SetImageResource(Resource.Drawable.emptyHeart);
+
                 errores++;
                 QuitarPts(turno);
                 b.SetBackgroundResource(Resource.Drawable.preFallo);
