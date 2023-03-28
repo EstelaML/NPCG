@@ -33,19 +33,24 @@ namespace preguntaods
             passwordCorrect = false;
             emailCorrect = false;
 
-            error = FindViewById<TextView>(Resource.Id.error);
-            username = FindViewById<EditText>(Resource.Id.nombreUsuario);
-            password = FindViewById<EditText>(Resource.Id.contraseña);
-            password2 = FindViewById<EditText>(Resource.Id.contraseña2);
-            email = FindViewById<EditText>(Resource.Id.correo);
-
             ImageButton atras = FindViewById<ImageButton>(Resource.Id.button1);
             atras.Click += Atras;
+
+            username = FindViewById<EditText>(Resource.Id.nombreUsuario);
+            username.TextChanged += Username_TextChanged;
+
+            email = FindViewById<EditText>(Resource.Id.correo);
+            email.TextChanged += Email_TextChanged;
+
+            password = FindViewById<EditText>(Resource.Id.contraseña);
+
+            password2 = FindViewById<EditText>(Resource.Id.contraseña2);
+            password2.TextChanged += Password_Click;
+
+            error = FindViewById<TextView>(Resource.Id.error);
+
             registroB = FindViewById<Button>(Resource.Id.registroB);
             registroB.Click += Registrar;
-            password2.TextChanged += Password_Click;
-            email.TextChanged += Email_TextChanged;
-            username.TextChanged += Username_TextChanged;
         }
 
         private void Email_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
