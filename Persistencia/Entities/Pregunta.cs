@@ -15,7 +15,7 @@ using System.Text;
 namespace preguntaods.Entities
 {
     [Table("Reto_preguntas")]
-    public partial class RetoPregunta : BaseModel, IEntity
+    public partial class Pregunta : BaseModel, IEntity
     {
         [PrimaryKey("id")]
         public int Id { get; set; }

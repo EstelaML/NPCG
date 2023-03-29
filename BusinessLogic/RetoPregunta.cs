@@ -15,7 +15,7 @@ using System.Linq;
 namespace preguntaods
 {
     [Activity(Label = "Activity1", Theme = "@style/HiddenTitleTheme")]
-    public class Pregunta : AppCompatActivity
+    public class RetoPregunta : AppCompatActivity
     {
         private TextView enunciado;
         private Button b1;
@@ -30,12 +30,12 @@ namespace preguntaods
         private ImageView heart1;
         private ImageView heart2;
 
-        private List<RetoPregunta> faciles;
-        private List<RetoPregunta> medias;
-        private List<RetoPregunta> altas;
+        private List<Pregunta> faciles;
+        private List<Pregunta> medias;
+        private List<Pregunta> altas;
         private ObjectAnimator animation;
         private Sonido musicaFondo;
-        private RetoPregunta preguntaActual;
+        private Pregunta preguntaActual;
         private RepositorioPregunta repositorio;
         private const int ptsAlta = 300;
         private const int ptsMedia = 200;

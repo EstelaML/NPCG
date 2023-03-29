@@ -12,10 +12,10 @@ using System.Text;
 
 namespace preguntaods.Entities
 {
-    public partial class RetoPregunta : BaseModel
+    public partial class Pregunta : BaseModel
     { 
-        public RetoPregunta() { }
-        public RetoPregunta(string enunciado, string respuesta1, string respuesta2, string respuesta3, string respuesta4, string solucion, string dificultad, string ods)
+        public Pregunta() { }
+        public Pregunta(string enunciado, string respuesta1, string respuesta2, string respuesta3, string respuesta4, string solucion, string dificultad, string ods)
         {
             Pregunta = enunciado;
             Respuesta1 = respuesta1;

@@ -19,13 +19,13 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    public class RepositorioPregunta : Repository<RetoPregunta>
+    public class RepositorioPregunta : Repository<Pregunta>
     {
-        public async Task<IEnumerable<RetoPregunta>> GetByDificultad(string dificultad)
+        public async Task<IEnumerable<Pregunta>> GetByDificultad(string dificultad)
         {
             var a = SingletonConexion.GetInstance();
             var response = await a.cliente
-                .From<RetoPregunta>()
+                .From<Pregunta>()
                 .Where(Xamarin => Xamarin.Dificultad == dificultad).Get();
 
             return response.Models.AsEnumerable();
