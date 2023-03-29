@@ -9,6 +9,7 @@ namespace preguntaods
     {
         private static MediaPlayer mp;
         public EstrategiaSonidoMusica() {
+            //Si el MediaPlayer de la Musica no existe, lo crea
             if (mp == null)
             {
                 mp = new MediaPlayer();
