@@ -1,20 +1,11 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Postgrest.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Postgrest.Models;
 
 namespace preguntaods.Entities
 {
-    public partial class Pregunta : BaseModel
+    public partial class Pregunta : BaseModel, IEntity
     { 
         public Pregunta() { }
+
         public Pregunta(string enunciado, string respuesta1, string respuesta2, string respuesta3, string respuesta4, string solucion, string dificultad, string ods)
         {
             Enunciado = enunciado;

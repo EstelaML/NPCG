@@ -3,7 +3,6 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.Persistencia;
 using preguntaods.Services;
 using System;
 

@@ -1,10 +1,4 @@
-﻿using Postgrest;
-using preguntaods.Entities;
-using Supabase;
-using System;
-using System.Linq;
-
-namespace preguntaods.Persistencia
+﻿namespace preguntaods.Persistencia
 {
     internal class SingletonConexion
     {
