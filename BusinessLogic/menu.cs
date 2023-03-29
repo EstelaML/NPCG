@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.Services;
 using System;
 
 namespace preguntaods
@@ -11,11 +12,12 @@ namespace preguntaods
     [Activity(Label = "", Theme = "@style/AppTheme")]
     public class Menu : AppCompatActivity
     {
+        private PreguntadosService servicio;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.menu);
+            servicio = new PreguntadosService();
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);
             partida.Click += Partida_Click;
@@ -43,7 +45,7 @@ namespace preguntaods
                     }
                 case Resource.Id.menuItem3:
                     {
-                        // add your code  
+                        servicio.LogoutAsync();
                         break;
                     }
             }
