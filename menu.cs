@@ -12,12 +12,12 @@ namespace preguntaods
     [Activity(Label = "", Theme = "@style/AppTheme")]
     public class Menu : AppCompatActivity
     {
-        private PreguntadosService servicio;
+        private Facade fachada;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.menu);
-            servicio = new PreguntadosService();
+            fachada = new Facade();
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);
             partida.Click += Partida_Click;
@@ -45,7 +45,7 @@ namespace preguntaods
                     }
                 case Resource.Id.menuItem3:
                     {
-                        servicio.LogoutAsync();
+                        fachada.LogoutAsync();
                         break;
                     }
             }
@@ -55,9 +55,8 @@ namespace preguntaods
 
         private void Partida_Click(object sender, EventArgs e)
         {
-            Sonido s = new Sonido();
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
-            s.HacerSonido(this, uri);
+            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+
             Intent i = new Intent(this, typeof(RetoPregunta));
             StartActivity(i);
         }

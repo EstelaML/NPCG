@@ -6,6 +6,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
+using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,9 @@ namespace preguntaods
         private List<Pregunta> medias;
         private List<Pregunta> altas;
         private ObjectAnimator animation;
-        private Sonido musicaFondo;
         private Pregunta preguntaActual;
         private RepositorioPregunta repositorio;
+        private Facade fachada;
         private const int ptsAlta = 300;
         private const int ptsMedia = 200;
         private const int ptsBaja = 100;
@@ -45,15 +46,13 @@ namespace preguntaods
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            // musica 
-            musicaFondo = new Sonido();
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.fondo_molon);
-            musicaFondo.HacerSonido(this, uri);
-
             // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
             repositorio = new RepositorioPregunta();
+            fachada = new Facade();
+
+            fachada.EjecutarSonido(this, new EstrategiaSonidoMusica());
 
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
             b1 = FindViewById<Button>(Resource.Id.button1);
@@ -131,7 +130,7 @@ namespace preguntaods
             {
                 Intent i = new Intent(this, typeof(Menu));
                 StartActivity(i);
-                musicaFondo.PararSonido();
+                fachada.PararSonido(new EstrategiaSonidoMusica());
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
@@ -180,17 +179,16 @@ namespace preguntaods
         private Boolean EsSolucion(string text, Button b)
         {
             bool acertado = false;
-            Android.Net.Uri uri = null;
             if (text.Equals(preguntaActual.Correcta))
             {
                 acertado = true;
-                uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.megaman_acierto);
+                fachada.EjecutarSonido(this, new EstrategiaSonidoAcierto());
 
                 AnyadirPts(turno);
                 b.SetBackgroundResource(Resource.Drawable.style_preAcierto);
             }
             else {
-                uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.error_pato);
+                fachada.EjecutarSonido(this, new EstrategiaSonidoError());
 
                 if (errores < 1)
                     heart1.SetImageResource(Resource.Drawable.icon_emptyHeart);
@@ -201,8 +199,7 @@ namespace preguntaods
                 QuitarPts(turno);
                 b.SetBackgroundResource(Resource.Drawable.style_preFallo);
             }
-            Sonido s = new Sonido();
-            s.HacerSonido(this, uri);
+
             animation.End();
             MostrarAlerta(acertado, false);
             turno++;
@@ -223,7 +220,7 @@ namespace preguntaods
             else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  puntosText.Text = "Puntuación de la pregunta: 200"; }
             else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 300"; }
 
-            String a = preguntaActual.OdsRelacionada;
+            string a = preguntaActual.OdsRelacionada;
             string nombreDeImagen = "ods" + a; // construir el nombre del recurso dinámicamente
             int idDeImagen = Resources.GetIdentifier(nombreDeImagen, "drawable", PackageName); // obtener el identificador de recurso correspondiente
             imagenOds.SetImageResource(idDeImagen);
@@ -264,7 +261,7 @@ namespace preguntaods
                     {
                         Intent i = new Intent(this, typeof(Menu));
                         StartActivity(i);
-                        musicaFondo.PararSonido();
+                        fachada.PararSonido(new EstrategiaSonidoMusica());
                     });
                     if (!consolidado) {
                         builder.SetNeutralButton("Consolidar", (sender, args) =>
@@ -292,7 +289,7 @@ namespace preguntaods
                         {
                             Intent i = new Intent(this, typeof(Menu));
                             StartActivity(i);
-                            musicaFondo.PararSonido();
+                            fachada.PararSonido(new EstrategiaSonidoMusica());
                         });
 
                         builder.SetCancelable(false);
@@ -315,7 +312,7 @@ namespace preguntaods
                         {
                             Intent i = new Intent(this, typeof(Menu));
                             StartActivity(i);
-                            musicaFondo.PararSonido();
+                            fachada.PararSonido(new EstrategiaSonidoMusica());
                         });
 
                         builder.SetCancelable(false);
@@ -337,7 +334,7 @@ namespace preguntaods
                 {
                     Intent i = new Intent(this, typeof(Menu));
                     StartActivity(i);
-                    musicaFondo.PararSonido();
+                    fachada.PararSonido(new EstrategiaSonidoMusica());
                 });
 
                 builder.SetCancelable(false);

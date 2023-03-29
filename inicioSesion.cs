@@ -16,14 +16,14 @@ namespace preguntaods
         private EditText correo;
         private EditText password;
         private TextView error;
-        private PreguntadosService servicio;
+        private Facade fachada;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.inicioSesion);
-            servicio = new PreguntadosService();
+            fachada = new Facade();
 
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);
@@ -35,26 +35,24 @@ namespace preguntaods
             error = FindViewById<TextView>(Resource.Id.error);
 
             ImageButton atras = FindViewById<ImageButton>(Resource.Id.atras);
-            atras.Click += Atras;
+            atras.Click += SaltarMenu;
 
             TextView registrar = FindViewById<TextView>(Resource.Id.registrar);
-            registrar.Click += Registrar;
+            registrar.Click += NavigateRegistro;
         }
 
-        private void Atras(object sender, EventArgs e)
+        private void SaltarMenu(object sender, EventArgs e)
         {
-            Sonido s = new Sonido();
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
-            s.HacerSonido(this, uri);
+            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+
             Intent i = new Intent(this, typeof(Menu));
             StartActivity(i);
         }
 
-        private void Registrar(object sender, EventArgs e)
+        private void NavigateRegistro(object sender, EventArgs e)
         {
-            Sonido s = new Sonido();
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
-            s.HacerSonido(this, uri);
+            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+
             Intent i = new Intent(this, typeof(Registro));
             StartActivity(i);
         }
@@ -63,11 +61,9 @@ namespace preguntaods
         {
             try
             {
-                Sonido s = new Sonido();
-                Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
-                s.HacerSonido(this, uri);
+                fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
-                await servicio.LoginAsync(correo.Text, password.Text);
+                await fachada.LoginAsync(correo.Text, password.Text);
 
                 // inicia sesion
                 Intent i = new Intent(this, typeof(Menu));

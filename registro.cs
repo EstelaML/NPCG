@@ -21,13 +21,13 @@ namespace preguntaods
         private Button registroB;
         private TextView error;
 
-        private PreguntadosService servicio;
+        private Facade fachada;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.registro);
-            servicio = new PreguntadosService();
+            fachada = new Facade();
 
             usernameCorrect = false;
             passwordCorrect = false;
@@ -74,9 +74,7 @@ namespace preguntaods
 
         private async void Registrar(object sender, EventArgs e)
         {
-            Sonido s = new Sonido();
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
-            s.HacerSonido(this, uri);
+            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
             if (usernameCorrect && passwordCorrect && emailCorrect) {
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
@@ -84,7 +82,7 @@ namespace preguntaods
                     try
                     {
 
-                        await servicio.SignUpAsync(email.Text, password.Text);
+                        await fachada.SignUpAsync(email.Text, password.Text);
 
                         // se registra
                         Intent i = new Intent(this, typeof(Menu));
@@ -99,9 +97,7 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            Sonido s = new Sonido();
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
-            s.HacerSonido(this, uri);
+            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
             Intent i = new Intent(this, typeof(InicioSesion));
             StartActivity(i);
         }

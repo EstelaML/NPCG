@@ -11044,19 +11044,16 @@ namespace preguntaods
 		{
 			
 			// aapt resource value: 0x7F100000
-			public const int click = 2131755008;
+			public const int sonido_acierto = 2131755008;
 			
 			// aapt resource value: 0x7F100001
-			public const int error_pato = 2131755009;
+			public const int sonido_click = 2131755009;
 			
 			// aapt resource value: 0x7F100002
-			public const int fondo_molon = 2131755010;
+			public const int sonido_error = 2131755010;
 			
 			// aapt resource value: 0x7F100003
-			public const int megaman_acierto = 2131755011;
-			
-			// aapt resource value: 0x7F100004
-			public const int megaman_error = 2131755012;
+			public const int sonido_musica = 2131755011;
 			
 			static Raw()
 			{
