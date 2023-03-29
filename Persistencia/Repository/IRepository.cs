@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Postgrest.Models;
+using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : BaseModel, IEntity, new()
     {
         Task<T> GetById(int id);
         Task<IEnumerable<T>> GetAll();

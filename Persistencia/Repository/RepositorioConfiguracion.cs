@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    internal class ConfiguracionRepositorio : Repository<Configuracion>
+    internal class RepositorioConfiguracion : Repository<Configuracion>
     {
         public async Task<Configuracion> GetUserByName(int id)
         {

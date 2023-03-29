@@ -5,40 +5,42 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using preguntaods.Entities;
+using preguntaods.Persistencia;
 using preguntaods.Services;
 using Supabase.Gotrue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace preguntaods.Services
 {
     public class PreguntadosService : IPreguntadosService
     {
-        public void DBInitialization()
+        private readonly SingletonConexion conexion;
+        public PreguntadosService()
         {
-            throw new NotImplementedException();
-        }
-
-        public void DBRestartData()
-        {
-            throw new NotImplementedException();
+            conexion = SingletonConexion.GetInstance();
         }
 
         #region Usuario
-        public bool Login(string login, string password)
+        public async Task<Session> LoginAsync(string correo, string password)
         {
-            throw new NotImplementedException();
+            var session = await conexion.cliente.Auth.SignIn(correo, password);
+
+            return session;
         }
 
-        public void Logout()
+        public async Task LogoutAsync()
         {
-            throw new NotImplementedException();
+            await conexion.cliente.Auth.SignOut();
         }
-        public Configuracion SignUp(string username, string correo, string password, string img)
+        public async Task<Session> SignUpAsync(string correo, string password)
         {
-            throw new NotImplementedException();
+            var session = await conexion.cliente.Auth.SignUp(correo, password);
+
+            return session;
         }
 
         #endregion
