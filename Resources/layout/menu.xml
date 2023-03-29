@@ -9,33 +9,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:paddingVertical="5sp"
-        android:paddingHorizontal="10sp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="@color/colorPrimary">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:src="@drawable/icon_userNotLog"
-            android:background="@color/mtrl_btn_transparent_bg_color"
-            android:id="@+id/perfil"
-            android:contentDescription="" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingLeft="75px"
