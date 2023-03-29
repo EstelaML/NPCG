@@ -23,7 +23,7 @@ namespace preguntaods.Persistencia.Repository
     {
         public async Task<IEnumerable<RetoPregunta>> GetByDificultad(string dificultad)
         {
-            var a = SingletonConexion.getInstance();
+            var a = SingletonConexion.GetInstance();
             var response = await a.cliente
                 .From<RetoPregunta>()
                 .Where(Xamarin => Xamarin.Dificultad == dificultad).Get();

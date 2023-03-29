@@ -27,7 +27,7 @@ namespace preguntaods
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.registro);
-            conexion = SingletonConexion.getInstance();
+            conexion = SingletonConexion.GetInstance();
 
             usernameCorrect = false;
             passwordCorrect = false;

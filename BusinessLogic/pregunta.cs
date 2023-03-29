@@ -24,6 +24,12 @@ namespace preguntaods
         private Button b4;
         private ProgressBar tb;
         private Button abandonar;
+        private ImageView imagenOds;
+        private TextView puntosText;
+        private TextView puntosTotalesText;
+        private ImageView heart1;
+        private ImageView heart2;
+
         private List<RetoPregunta> faciles;
         private List<RetoPregunta> medias;
         private List<RetoPregunta> altas;
@@ -31,12 +37,6 @@ namespace preguntaods
         private Sonido musicaFondo;
         private RetoPregunta preguntaActual;
         private RepositorioPregunta repositorio;
-        private ImageView imagenOds;
-        private TextView puntosText;
-        private TextView puntosTotalesText;
-        private ImageView heart1;
-        private ImageView heart2;
-
         private const int ptsAlta = 300;
         private const int ptsMedia = 200;
         private const int ptsBaja = 100;

@@ -22,7 +22,7 @@ namespace preguntaods.Persistencia.Repository
 
         public Repository()
         {
-            conexion = SingletonConexion.getInstance();
+            conexion = SingletonConexion.GetInstance();
         }
 
         public async Task<T> GetById(int id)

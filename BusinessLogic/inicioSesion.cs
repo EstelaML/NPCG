@@ -23,7 +23,7 @@ namespace preguntaods
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.inicioSesion);
-            conexion = SingletonConexion.getInstance();
+            conexion = SingletonConexion.GetInstance();
 
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);

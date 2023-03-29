@@ -24,7 +24,7 @@ namespace preguntaods.Persistencia
             cliente.InitializeAsync();
         }
 
-        public static SingletonConexion getInstance()
+        public static SingletonConexion GetInstance()
         {
             if (instance == null)
             {
