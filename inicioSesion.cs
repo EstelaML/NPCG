@@ -3,7 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.Persistencia;
+using preguntaods.Services;
 using System;
 
 
@@ -16,14 +16,14 @@ namespace preguntaods
         private EditText correo;
         private EditText password;
         private TextView error;
-        private SingletonConexion conexion;
+        private PreguntadosService servicio;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.inicioSesion);
-            conexion = SingletonConexion.getInstance();
+            servicio = new PreguntadosService();
 
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);
@@ -67,7 +67,7 @@ namespace preguntaods
                 Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + PackageName + "/" + Resource.Raw.click);
                 s.HacerSonido(this, uri);
 
-                var session = await conexion.cliente.Auth.SignIn(correo.Text, password.Text);
+                await servicio.LoginAsync(correo.Text, password.Text);
 
                 // inicia sesion
                 Intent i = new Intent(this, typeof(Menu));

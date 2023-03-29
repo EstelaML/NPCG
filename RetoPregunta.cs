@@ -1,8 +1,6 @@
 ﻿using Android.Animation;
 using Android.App;
 using Android.Content;
-using Android.Graphics;
-using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -15,7 +13,7 @@ using System.Linq;
 namespace preguntaods
 {
     [Activity(Label = "Activity1", Theme = "@style/HiddenTitleTheme")]
-    public class Pregunta : AppCompatActivity
+    public class RetoPregunta : AppCompatActivity
     {
         private TextView enunciado;
         private Button b1;
@@ -24,19 +22,19 @@ namespace preguntaods
         private Button b4;
         private ProgressBar tb;
         private Button abandonar;
-        private List<RetoPregunta> faciles;
-        private List<RetoPregunta> medias;
-        private List<RetoPregunta> altas;
-        private ObjectAnimator animation;
-        private Sonido musicaFondo;
-        private RetoPregunta preguntaActual;
-        private RepositorioPregunta repositorio;
         private ImageView imagenOds;
         private TextView puntosText;
         private TextView puntosTotalesText;
         private ImageView heart1;
         private ImageView heart2;
 
+        private List<Pregunta> faciles;
+        private List<Pregunta> medias;
+        private List<Pregunta> altas;
+        private ObjectAnimator animation;
+        private Sonido musicaFondo;
+        private Pregunta preguntaActual;
+        private RepositorioPregunta repositorio;
         private const int ptsAlta = 300;
         private const int ptsMedia = 200;
         private const int ptsBaja = 100;
@@ -231,7 +229,7 @@ namespace preguntaods
             imagenOds.SetImageResource(idDeImagen);
             
 
-            enunciado.Text = preguntaActual.Pregunta;
+            enunciado.Text = preguntaActual.Enunciado;
             b1.Text = preguntaActual.Respuesta1;
             b2.Text = preguntaActual.Respuesta2;
             b3.Text = preguntaActual.Respuesta3;

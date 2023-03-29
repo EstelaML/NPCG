@@ -1,27 +1,14 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using preguntaods.Entities;
-using Supabase.Gotrue;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Supabase.Gotrue;
+using System.Threading.Tasks;
 
 namespace preguntaods.Services
 {
     public interface IPreguntadosService
     {
-        void DBInitialization();
-        void DBRestartData();
-
         #region Usuario
-        bool Login(string login, string password);
-        void Logout();
-        Configuracion SignUp(String username, String correo, String password, String img);
+        Task<Session> LoginAsync(string correo, string password);
+        Task LogoutAsync();
+        Task<Session> SignUpAsync(string correo, string password);
 
         #endregion
 

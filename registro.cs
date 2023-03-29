@@ -3,7 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.Persistencia;
+using preguntaods.Services;
 using System;
 
 namespace preguntaods
@@ -21,13 +21,13 @@ namespace preguntaods
         private Button registroB;
         private TextView error;
 
-        private SingletonConexion conexion;
+        private PreguntadosService servicio;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.registro);
-            conexion = SingletonConexion.getInstance();
+            servicio = new PreguntadosService();
 
             usernameCorrect = false;
             passwordCorrect = false;
@@ -84,7 +84,7 @@ namespace preguntaods
                     try
                     {
 
-                        var session = await conexion.cliente.Auth.SignUp(email.Text, password.Text);
+                        await servicio.SignUpAsync(email.Text, password.Text);
 
                         // se registra
                         Intent i = new Intent(this, typeof(Menu));

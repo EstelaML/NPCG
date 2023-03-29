@@ -1,27 +1,16 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Postgrest.Attributes;
+﻿using Postgrest.Attributes;
 using Postgrest.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 
 namespace preguntaods.Entities
 {
     [Table("Reto_preguntas")]
-    public partial class RetoPregunta : BaseModel, IEntity
+    public partial class Pregunta : BaseModel, IEntity
     {
         [PrimaryKey("id")]
         public int Id { get; set; }
 
         [Column("Pregunta")]
-        public string Pregunta { get; set; }
+        public string Enunciado { get; set; }
 
         [Column("Respuesta1")]
         public string Respuesta1 { get; set; }

@@ -1,17 +1,7 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
-using Postgrest.Models;
+﻿using Postgrest.Models;
 using preguntaods.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
@@ -22,7 +12,7 @@ namespace preguntaods.Persistencia.Repository
 
         public Repository()
         {
-            conexion = SingletonConexion.getInstance();
+            conexion = SingletonConexion.GetInstance();
         }
 
         public async Task<T> GetById(int id)

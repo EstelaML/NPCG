@@ -1,10 +1,4 @@
-﻿using Postgrest;
-using preguntaods.Entities;
-using Supabase;
-using System;
-using System.Linq;
-
-namespace preguntaods.Persistencia
+﻿namespace preguntaods.Persistencia
 {
     internal class SingletonConexion
     {
@@ -24,7 +18,7 @@ namespace preguntaods.Persistencia
             cliente.InitializeAsync();
         }
 
-        public static SingletonConexion getInstance()
+        public static SingletonConexion GetInstance()
         {
             if (instance == null)
             {

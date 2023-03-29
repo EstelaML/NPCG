@@ -1,19 +1,10 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Systems;
-using Android.Views;
-using Android.Widget;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Postgrest.Models;
 
 namespace preguntaods.Entities
 {
-    public partial class Reto
+    public partial class Reto : BaseModel, IEntity
     {
+        public Reto() { }
         public Reto(int id, int dificultad, int oDSFk, ODS oDS)
         {
             this.Id = id;
