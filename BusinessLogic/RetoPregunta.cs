@@ -231,7 +231,7 @@ namespace preguntaods
             imagenOds.SetImageResource(idDeImagen);
             
 
-            enunciado.Text = preguntaActual.Pregunta;
+            enunciado.Text = preguntaActual.Enunciado;
             b1.Text = preguntaActual.Respuesta1;
             b2.Text = preguntaActual.Respuesta2;
             b3.Text = preguntaActual.Respuesta3;

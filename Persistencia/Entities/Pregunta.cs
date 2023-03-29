@@ -21,7 +21,7 @@ namespace preguntaods.Entities
         public int Id { get; set; }
 
         [Column("Pregunta")]
-        public string Pregunta { get; set; }
+        public string Enunciado { get; set; }
 
         [Column("Respuesta1")]
         public string Respuesta1 { get; set; }
