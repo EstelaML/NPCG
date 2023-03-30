@@ -99,6 +99,7 @@ namespace preguntaods
             animation.SetDuration(30000); //30 secs
             animation.AnimationEnd += (sender, e) =>
             {
+                fachada.PararSonido(new EstrategiaSonidoReloj());
                 if (!contesta)
                 {
                     turno++;
@@ -111,8 +112,10 @@ namespace preguntaods
                 contesta = true;
 
             };
-            
-            
+            new Handler().PostDelayed(() => {
+                // Acciones a realizar cuando quedan 10 segundos o menos
+                fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
+            }, 20000);
 
             //Abandonar
             abandonar.Click += Atras;

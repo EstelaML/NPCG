@@ -11055,6 +11055,9 @@ namespace preguntaods
 			// aapt resource value: 0x7F100003
 			public const int sonido_musica = 2131755011;
 			
+			// aapt resource value: 0x7F100004
+			public const int sonido_reloj = 2131755012;
+			
 			static Raw()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
