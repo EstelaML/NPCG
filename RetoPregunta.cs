@@ -4,12 +4,14 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using Org.Apache.Commons.Logging;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using static Android.Icu.Text.CaseMap;
 
 namespace preguntaods
@@ -45,8 +47,11 @@ namespace preguntaods
         private int errores;
         private int ptsTotales;
         private bool contesta;
+        private Android.App.AlertDialog alertDialog;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+            alertDialog = builder.Create(); ;
             // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.pregunta);
@@ -104,6 +109,10 @@ namespace preguntaods
                 {
                     turno++;
                     errores++;
+                    if (errores < 1)
+                        heart1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                    else
+                        heart2.SetImageResource(Resource.Drawable.icon_emptyHeart);
                     MostrarAlerta(false, errores == 2);
                 }
             };
@@ -112,9 +121,12 @@ namespace preguntaods
                 contesta = true;
 
             };
+            // sonido de tic tac
             new Handler().PostDelayed(() => {
                 // Acciones a realizar cuando quedan 10 segundos o menos
-                fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
+                if (!alertDialog.IsShowing) {
+                    fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
+                }
             }, 20000);
 
             //Abandonar
@@ -254,7 +266,6 @@ namespace preguntaods
         {
             string titulo = "";
             string mensaje = "";
-            Android.App.AlertDialog alertDialog = null;
             if (fin && acertado)
             {
                 titulo = "Felicitaciones";
@@ -323,10 +334,10 @@ namespace preguntaods
                     {
                         // añadir puntos a su usuario en la base de datos
                         consolidado = true;
+                        animation.Cancel();
                         Generarpregunta();
                     });
                 }
-
                 builder.SetCancelable(false);
                 alertDialog = builder.Create();
                 alertDialog.Show();
@@ -343,7 +354,6 @@ namespace preguntaods
                 {
                     Generarpregunta();
                 });
-
                 builder.SetCancelable(false);
                 alertDialog = builder.Create();
                 alertDialog.Show();
