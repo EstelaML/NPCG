@@ -97,6 +97,10 @@ namespace preguntaods
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
 
+            animation.AnimationEnd += (sender, e) =>
+            {
+                errores++; MostrarAlerta(false, errores == 2);
+            };
             //Abandonar
             abandonar.Click += Atras;
 
@@ -200,7 +204,7 @@ namespace preguntaods
                 b.SetBackgroundResource(Resource.Drawable.style_preFallo);
             }
 
-            animation.End();
+            animation.Cancel();
             MostrarAlerta(acertado, false);
             turno++;
             puntosTotalesText.Text = "Puntos totales: " + ptsTotales;
