@@ -221,7 +221,7 @@ namespace preguntaods
             else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 300"; }
 
             string a = preguntaActual.OdsRelacionada;
-            string nombreDeImagen = "ods" + a; // construir el nombre del recurso dinámicamente
+            string nombreDeImagen = "icon_ods" + a; // construir el nombre del recurso dinámicamente
             int idDeImagen = Resources.GetIdentifier(nombreDeImagen, "drawable", PackageName); // obtener el identificador de recurso correspondiente
             imagenOds.SetImageResource(idDeImagen);
             
