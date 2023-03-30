@@ -26,7 +26,7 @@ namespace preguntaods
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.registro);
+            SetContentView(Resource.Layout.vistaRegistro);
             fachada = new Facade();
 
             usernameCorrect = false;

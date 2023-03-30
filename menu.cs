@@ -16,7 +16,7 @@ namespace preguntaods
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.menu);
+            SetContentView(Resource.Layout.vistaMenu);
             fachada = new Facade();
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);

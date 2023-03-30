@@ -2,18 +2,14 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using Org.Apache.Commons.Logging;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using static Android.Icu.Text.CaseMap;
 
 namespace preguntaods
 {
@@ -21,17 +17,17 @@ namespace preguntaods
     public class RetoPregunta : AppCompatActivity
     {
         private TextView enunciado;
-        private Button b1;
-        private Button b2;
-        private Button b3;
-        private Button b4;
-        private ProgressBar tb;
-        private Button abandonar;
+        private Button botonPregunta1;
+        private Button botonPregunta2;
+        private Button botonPregunta3;
+        private Button botonPregunta4;
+        private ProgressBar barTime;
+        private Button botonAbandonar;
         private ImageView imagenOds;
-        private TextView puntosText;
-        private TextView puntosTotalesText;
-        private ImageView heart1;
-        private ImageView heart2;
+        private TextView textoPuntos;
+        private TextView textoPuntosTotales;
+        private ImageView imagenCorazon1;
+        private ImageView imagenCorazon2;
 
         private List<Pregunta> faciles;
         private List<Pregunta> medias;
@@ -43,6 +39,8 @@ namespace preguntaods
         private const int ptsAlta = 300;
         private const int ptsMedia = 200;
         private const int ptsBaja = 100;
+        private const int añadir = 10000;
+        private const int restar = 10001;
         private bool consolidado;
         private int turno;
         private int errores;
@@ -51,29 +49,28 @@ namespace preguntaods
         private Android.App.AlertDialog alertDialog;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-            alertDialog = builder.Create(); ;
             // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.pregunta);
+            SetContentView(Resource.Layout.vistaPregunta);
             repositorio = new RepositorioPregunta();
             fachada = new Facade();
 
-            fachada.EjecutarSonido(this, new EstrategiaSonidoMusica());
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+            alertDialog = builder.Create();
 
+            //inicialización de los UI Elements
             enunciado = FindViewById<TextView>(Resource.Id.pregunta);
-            b1 = FindViewById<Button>(Resource.Id.button1);
-            b2 = FindViewById<Button>(Resource.Id.button2);
-            b3 = FindViewById<Button>(Resource.Id.button3);
-            b4 = FindViewById<Button>(Resource.Id.button4);
-            tb = FindViewById<ProgressBar>(Resource.Id.timeBar);
-            abandonar = FindViewById<Button>(Resource.Id.volver);
-            puntosText = FindViewById<TextView>(Resource.Id.textView1);
-            puntosTotalesText = FindViewById<TextView>(Resource.Id.textView2);
+            botonPregunta1 = FindViewById<Button>(Resource.Id.button1);
+            botonPregunta2 = FindViewById<Button>(Resource.Id.button2);
+            botonPregunta3 = FindViewById<Button>(Resource.Id.button3);
+            botonPregunta4 = FindViewById<Button>(Resource.Id.button4);
+            barTime = FindViewById<ProgressBar>(Resource.Id.timeBar);
+            botonAbandonar = FindViewById<Button>(Resource.Id.volver);
+            textoPuntos = FindViewById<TextView>(Resource.Id.textView1);
+            textoPuntosTotales = FindViewById<TextView>(Resource.Id.textView2);
             imagenOds = FindViewById<ImageView>(Resource.Id.imagenOds);
-            heart1 = FindViewById<ImageView>(Resource.Id.heart1);
-            heart2 = FindViewById<ImageView>(Resource.Id.heart2);
-
+            imagenCorazon1 = FindViewById<ImageView>(Resource.Id.heart1);
+            imagenCorazon2 = FindViewById<ImageView>(Resource.Id.heart2);
 
             // Conseguir preguntas 
             var preguntasFaciles = await repositorio.GetByDificultad("baja");
@@ -95,13 +92,13 @@ namespace preguntaods
             errores = 0;
 
             // botones soluciones
-            b1.Click += ButtonClick;
-            b2.Click += ButtonClick;
-            b3.Click += ButtonClick;
-            b4.Click += ButtonClick;
+            botonPregunta1.Click += ButtonClick;
+            botonPregunta2.Click += ButtonClick;
+            botonPregunta3.Click += ButtonClick;
+            botonPregunta4.Click += ButtonClick;
 
             //Animation of time bar
-            animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
+            animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
             animation.AnimationEnd += (sender, e) =>
             {
@@ -111,9 +108,9 @@ namespace preguntaods
                     turno++;
                     errores++;
                     if (errores < 1)
-                        heart1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                     else
-                        heart2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                        imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
                     MostrarAlerta(false, errores == 2);
                 }
             };
@@ -130,10 +127,12 @@ namespace preguntaods
                     fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
                 }
             };
-            
 
-            //Abandonar
-            abandonar.Click += Atras;
+            //Empezar música
+            fachada.EjecutarSonido(this, new EstrategiaSonidoMusica());
+
+            //botonAbandonar
+            botonAbandonar.Click += EventoAbandonar;
 
             Generarpregunta();
         }
@@ -150,10 +149,9 @@ namespace preguntaods
                 list[i] = list[j];
                 list[j] = temp;
             }
-
         }
 
-        private void Atras(object sender, EventArgs e)
+        private void EventoAbandonar(object sender, EventArgs e)
         {
             Android.App.AlertDialog alertDialog = null;
             string titulo = "¿Estás seguro?";
@@ -176,18 +174,40 @@ namespace preguntaods
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
         }
-        private void AnyadirPts(int turno)
+
+        private int ActualizarPts(int turno, int puntos, int decision)
         {
-            if (turno <= 3) { ptsTotales += ptsBaja; }
-            else if (turno <= 7) { ptsTotales += ptsMedia; }
-            else { ptsTotales += ptsAlta; }
+            switch (decision)
+            {
+                case añadir:
+                {
+                    return AnyadirPts(turno, puntos);
+                }
+                case restar:
+                {
+                    return QuitarPts(turno, puntos);
+                }
+            }
+
+            return 0;
         }
-        private void QuitarPts(int turno)
+        private int AnyadirPts(int turno, int puntos)
         {
-            if (turno <= 3) { ptsTotales += -ptsBaja * 2; }
-            else if (turno <= 7) { ptsTotales += -ptsMedia * 2; }
-            else { ptsTotales += -ptsAlta * 2; }
-            if (ptsTotales < 0) ptsTotales = 0;
+            if (turno <= 3) { puntos += ptsBaja; }
+            else if (turno <= 7) { puntos += ptsMedia; }
+            else { puntos += ptsAlta; }
+
+            return puntos;
+        }
+        private int QuitarPts(int turno, int puntos)
+        {
+            if (turno <= 3) { puntos += -ptsBaja * 2; }
+            else if (turno <= 7) { puntos += -ptsMedia * 2; }
+            else { puntos += -ptsAlta * 2; }
+
+            if (puntos < 0) puntos = 0;
+
+            return puntos;
         }
 
         private void ButtonClick(object sender, EventArgs e)
@@ -207,47 +227,47 @@ namespace preguntaods
                 acertado = true;
                 fachada.EjecutarSonido(this, new EstrategiaSonidoAcierto());
 
-                AnyadirPts(turno);
+                ptsTotales = ActualizarPts(turno, ptsTotales, añadir);
                 b.SetBackgroundResource(Resource.Drawable.style_preAcierto);
             }
             else {
                 fachada.EjecutarSonido(this, new EstrategiaSonidoError());
 
                 if (errores < 1)
-                    heart1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                    imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else
-                    heart2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                    imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
 
                 errores++;
-                QuitarPts(turno);
+                ptsTotales = ActualizarPts(turno, ptsTotales, restar);
                 b.SetBackgroundResource(Resource.Drawable.style_preFallo);
             }
 
             animation.Cancel();
             MostrarAlerta(acertado, ++turno == 9 || errores == 2);
-            puntosTotalesText.Text = "Puntos totales: " + ptsTotales;
+            textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
             return true;
         }
 
         private void Generarpregunta() {
-            b1.SetBackgroundResource(Resource.Drawable.style_pregunta);
-            b2.SetBackgroundResource(Resource.Drawable.style_pregunta);
-            b3.SetBackgroundResource(Resource.Drawable.style_pregunta);
-            b4.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            botonPregunta1.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            botonPregunta2.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            botonPregunta3.SetBackgroundResource(Resource.Drawable.style_pregunta);
+            botonPregunta4.SetBackgroundResource(Resource.Drawable.style_pregunta);
 
-            if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 100"; }
-            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  puntosText.Text = "Puntuación de la pregunta: 200"; }
-            else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 300"; }
+            if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); textoPuntos.Text = "Puntuación de la pregunta: 100"; }
+            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  textoPuntos.Text = "Puntuación de la pregunta: 200"; }
+            else { preguntaActual = altas.First(); altas.Remove(preguntaActual); textoPuntos.Text = "Puntuación de la pregunta: 300"; }
 
             string nombreDeImagen = "icon_ods" + preguntaActual.OdsRelacionada; // construir el nombre del recurso dinámicamente
             int idDeImagen = Resources.GetIdentifier(nombreDeImagen, "drawable", PackageName); // obtener el identificador de recurso correspondiente
             imagenOds.SetImageResource(idDeImagen);
 
             enunciado.Text = preguntaActual.Enunciado;
-            b1.Text = preguntaActual.Respuesta1;
-            b2.Text = preguntaActual.Respuesta2;
-            b3.Text = preguntaActual.Respuesta3;
-            b4.Text = preguntaActual.Respuesta4;
+            botonPregunta1.Text = preguntaActual.Respuesta1;
+            botonPregunta2.Text = preguntaActual.Respuesta2;
+            botonPregunta3.Text = preguntaActual.Respuesta3;
+            botonPregunta4.Text = preguntaActual.Respuesta4;
            
             animation.Start();
         }
@@ -298,11 +318,11 @@ namespace preguntaods
                 titulo = "Has acertado";
                 if (consolidado)
                 {
-                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
+                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas botonAbandonar o seguir?";
                 }
                 else
                 {
-                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), botonAbandonar o seguir?";
                 }
 
                 Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
@@ -314,9 +334,10 @@ namespace preguntaods
                 });
                 builder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
+                    fachada.PararSonido(new EstrategiaSonidoMusica());
+
                     Intent i = new Intent(this, typeof(Menu));
                     StartActivity(i);
-                    fachada.PararSonido(new EstrategiaSonidoMusica());
                 });
                 if (!consolidado)
                 {
