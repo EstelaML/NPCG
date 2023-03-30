@@ -10,6 +10,7 @@ using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Android.Icu.Text.CaseMap;
 
 namespace preguntaods
 {
@@ -328,22 +329,44 @@ namespace preguntaods
             }
             else
             {
-                Android.App.AlertDialog alertDialog = null;
-                string titulo = "Ole mi arma, ¡lo has conseguido!";
-                string mensaje = $"Te llevas {ptsTotales} puntos.";
-                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-                builder.SetMessage(mensaje);
-                builder.SetTitle(titulo);
-                builder.SetNegativeButton("Salir", (sender, args) =>
+                if (acertado)
                 {
-                    Intent i = new Intent(this, typeof(Menu));
-                    StartActivity(i);
-                    fachada.PararSonido(new EstrategiaSonidoMusica());
-                });
+                    Android.App.AlertDialog alertDialog = null;
+                    string titulo = "Ole mi arma, ¡lo has conseguido!";
+                    string mensaje = $"Te llevas {ptsTotales} puntos.";
+                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                    builder.SetMessage(mensaje);
+                    builder.SetTitle(titulo);
+                    builder.SetNegativeButton("Salir", (sender, args) =>
+                    {
+                        Intent i = new Intent(this, typeof(Menu));
+                        StartActivity(i);
+                        fachada.PararSonido(new EstrategiaSonidoMusica());
+                    });
 
-                builder.SetCancelable(false);
-                alertDialog = builder.Create();
-                alertDialog.Show();
+                    builder.SetCancelable(false);
+                    alertDialog = builder.Create();
+                    alertDialog.Show();
+                }
+                else
+                {
+                    Android.App.AlertDialog alertDialog = null;
+                    String titulo = "Lo siento, ¡has perdido!";
+                    string mensaje = $"Tienes 0 puntos.";
+                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                    builder.SetMessage(mensaje);
+                    builder.SetTitle(titulo);
+                    builder.SetNegativeButton("Salir", (sender, args) =>
+                    {
+                        Intent i = new Intent(this, typeof(Menu));
+                        StartActivity(i);
+                        fachada.PararSonido(new EstrategiaSonidoMusica());
+                    });
+
+                    builder.SetCancelable(false);
+                    alertDialog = builder.Create();
+                    alertDialog.Show();
+                }
             }
         }
     }
