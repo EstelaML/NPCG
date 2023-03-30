@@ -228,6 +228,7 @@ namespace preguntaods
             puntosTotalesText.Text = "Puntos totales: " + ptsTotales;
             return true;
         }
+
         private void Generarpregunta() {
             b1.SetBackgroundResource(Resource.Drawable.style_pregunta);
             b2.SetBackgroundResource(Resource.Drawable.style_pregunta);
@@ -248,7 +249,6 @@ namespace preguntaods
             b3.Text = preguntaActual.Respuesta3;
             b4.Text = preguntaActual.Respuesta4;
            
-            //puntuacionP.Text = "Puntuación de esta pregunta: 100";
             animation.Start();
         }
         public void MostrarAlerta(bool acertado, bool fin)
@@ -295,7 +295,6 @@ namespace preguntaods
             }
             else if (acertado && !fin)
             {
-                fachada.PararSonido(new EstrategiaSonidoReloj());
                 titulo = "Has acertado";
                 if (consolidado)
                 {
