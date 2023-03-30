@@ -97,14 +97,10 @@ namespace preguntaods
             //Animation of time bar
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
-
-
             animation.AnimationEnd += (sender, e) =>
             {
                 if (!contesta)
                 {
-                    // Acciones a realizar cuando la animación se completa correctamente
-                    // ...
                     turno++;
                     errores++;
                     MostrarAlerta(false, errores == 2);
@@ -113,10 +109,9 @@ namespace preguntaods
             animation.AnimationCancel += (sender, e) =>
             {
                 contesta = true;
-                // Acciones a realizar cuando la animación se cancela
-                // ...
 
             };
+            
             
 
             //Abandonar
