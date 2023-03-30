@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Org.Apache.Commons.Logging;
@@ -94,10 +95,10 @@ namespace preguntaods
             errores = 0;
 
             // botones soluciones
-            b1.Click += B1_Click;
-            b2.Click += B2_Click;
-            b3.Click += B3_Click;
-            b4.Click += B4_Click;
+            b1.Click += ButtonClick;
+            b2.Click += ButtonClick;
+            b3.Click += ButtonClick;
+            b4.Click += ButtonClick;
 
             //Animation of time bar
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
@@ -187,25 +188,11 @@ namespace preguntaods
             if (ptsTotales < 0) ptsTotales = 0;
         }
 
-        private void B4_Click(object sender, EventArgs e)
+        private void ButtonClick(object sender, EventArgs e)
         {
+            Button boton = sender as Button;
             if (turno != 10)
-                EsSolucion(b4.Text, b4);
-        }
-        private void B3_Click(object sender, EventArgs e)
-        {
-            if (turno != 10)
-                EsSolucion(b3.Text, b3);
-        }
-        private void B2_Click(object sender, EventArgs e)
-        {
-            if (turno != 10)
-                EsSolucion(b2.Text, b2);
-        }
-        private void B1_Click(object sender, EventArgs e)
-        {
-            if (turno != 10)
-                EsSolucion(b1.Text, b1);
+                EsSolucion(boton.Text, boton);
         }
 
         private Boolean EsSolucion(string text, Button b)
