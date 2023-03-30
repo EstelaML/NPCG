@@ -3,7 +3,7 @@ using Postgrest.Models;
 
 namespace preguntaods.Entities
 {
-    [Table("Reto_preguntas")]
+    [Table("Pregunta")]
     public partial class Pregunta : BaseModel, IEntity
     {
         [PrimaryKey("id")]
