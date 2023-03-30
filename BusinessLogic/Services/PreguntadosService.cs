@@ -1,6 +1,4 @@
 ﻿using preguntaods.Persistencia;
-using Supabase.Gotrue;
-using System.Threading.Tasks;
 
 namespace preguntaods.Services
 {
