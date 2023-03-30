@@ -44,7 +44,7 @@ namespace preguntaods
         private int turno;
         private int errores;
         private int ptsTotales;
-
+        private bool contesta;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             // inicializacion de todo lo necesario
@@ -98,10 +98,27 @@ namespace preguntaods
             animation = ObjectAnimator.OfInt(tb, "Progress", 100, 0);
             animation.SetDuration(30000); //30 secs
 
+
             animation.AnimationEnd += (sender, e) =>
             {
-                errores++; MostrarAlerta(false, errores == 2);
+                if (!contesta)
+                {
+                    // Acciones a realizar cuando la animación se completa correctamente
+                    // ...
+                    turno++;
+                    errores++;
+                    MostrarAlerta(false, errores == 2);
+                }
             };
+            animation.AnimationCancel += (sender, e) =>
+            {
+                contesta = true;
+                // Acciones a realizar cuando la animación se cancela
+                // ...
+
+            };
+            
+
             //Abandonar
             abandonar.Click += Atras;
 
@@ -206,16 +223,11 @@ namespace preguntaods
             }
 
             animation.Cancel();
-            MostrarAlerta(acertado, false);
-            turno++;
+            MostrarAlerta(acertado, ++turno == 9 || errores == 2);
             puntosTotalesText.Text = "Puntos totales: " + ptsTotales;
             return true;
         }
         private void Generarpregunta() {
-            if (turno == 10) {
-                MostrarAlerta(false, true);
-            
-            }
             b1.SetBackgroundResource(Resource.Drawable.style_pregunta);
             b2.SetBackgroundResource(Resource.Drawable.style_pregunta);
             b3.SetBackgroundResource(Resource.Drawable.style_pregunta);
@@ -242,131 +254,103 @@ namespace preguntaods
         }
         public void MostrarAlerta(bool acertado, bool fin)
         {
-            if (!fin)
+            string titulo = "";
+            string mensaje = "";
+            Android.App.AlertDialog alertDialog = null;
+            if (fin && acertado)
             {
-                string titulo = "";
-                Android.App.AlertDialog alertDialog = null;
-                if (acertado)
+                // código a ejecutar si "fin" y "acertado" son verdaderos
+                titulo = "Felicitaciones";
+                mensaje = $"Sumas {ptsTotales} a tu puntuación total.";
+                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                builder.SetMessage(mensaje);
+                builder.SetTitle(titulo);
+                builder.SetNegativeButton("Salir", (sender, args) =>
                 {
-                    string mensaje;
-                    titulo = "Enhorabuena, ¡has acertado!";
-                    if (consolidado) 
+                    Intent i = new Intent(this, typeof(Menu));
+                    StartActivity(i);
+                    fachada.PararSonido(new EstrategiaSonidoMusica());
+                });
+
+                builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Show();
+            }
+            else if (fin && !acertado)
+            {
+                // código a ejecutar si "fin" es verdadero y "acertado" es falso
+                titulo = "Game Over";
+                mensaje = "No sumas ningún punto.";
+                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                builder.SetMessage(mensaje);
+                builder.SetTitle(titulo);
+                builder.SetNegativeButton("Salir", (sender, args) =>
+                {
+                    Intent i = new Intent(this, typeof(Menu));
+                    StartActivity(i);
+                    fachada.PararSonido(new EstrategiaSonidoMusica());
+                });
+
+                builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Show();
+            }
+            else if (acertado && !fin)
+            {
+                // código a ejecutar si "acertado" es verdadero y "fin" es falso
+                titulo = "Has acertado";
+                if (consolidado)
+                {
+                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
+                }
+                else
+                {
+                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                }
+
+                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                builder.SetMessage(mensaje);
+                builder.SetTitle(titulo);
+                builder.SetPositiveButton("Seguir", (sender, args) =>
+                {
+                    Generarpregunta();
+                });
+                builder.SetNeutralButton("Abandonar", (sender, args) =>
+                {
+                    Intent i = new Intent(this, typeof(Menu));
+                    StartActivity(i);
+                    fachada.PararSonido(new EstrategiaSonidoMusica());
+                });
+                if (!consolidado)
+                {
+                    builder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
-                        mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
-                    } else mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
-                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-                    builder.SetMessage(mensaje);
-                    builder.SetTitle(titulo);
-                    builder.SetPositiveButton("Seguir", (sender, args) =>
-                    {
+                        // añadir puntos a su usuario en la base de datos
+                        consolidado = true;
                         Generarpregunta();
                     });
-
-                    builder.SetNegativeButton("Abandonar", (sender, args) =>
-                    {
-                        Intent i = new Intent(this, typeof(Menu));
-                        StartActivity(i);
-                        fachada.PararSonido(new EstrategiaSonidoMusica());
-                    });
-                    if (!consolidado) {
-                        builder.SetNeutralButton("Consolidar", (sender, args) =>
-                        {
-                            // añadir puntos a su usuario en la base de datos
-                            consolidado = true;
-                            Generarpregunta();
-                        });
-                    }
-
-                    builder.SetCancelable(false);
-                    alertDialog = builder.Create();
-                    alertDialog.Show();
                 }
-                else
-                {
-                    if (errores == 2)
-                    {
-                        titulo = "Lo siento, ¡has perdido!";
-                        string mensaje = $"Tienes 0 puntos.";
-                        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-                        builder.SetMessage(mensaje);
-                        builder.SetTitle(titulo);
-                        builder.SetNegativeButton("Salir", (sender, args) =>
-                        {
-                            Intent i = new Intent(this, typeof(Menu));
-                            StartActivity(i);
-                            fachada.PararSonido(new EstrategiaSonidoMusica());
-                        });
 
-                        builder.SetCancelable(false);
-                        alertDialog = builder.Create();
-                        alertDialog.Show();
-                    }
-                    else
-                    {
-                        titulo = "Ooooooh, solo te queda una vida, ¡cuidado!";
-                        string mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
-                        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-                        builder.SetMessage(mensaje);
-                        builder.SetTitle(titulo);
-                        builder.SetPositiveButton("Seguir", (sender, args) =>
-                        {
-                            Generarpregunta();
-                        });
-
-                        builder.SetNegativeButton("Abandonar", (sender, args) =>
-                        {
-                            Intent i = new Intent(this, typeof(Menu));
-                            StartActivity(i);
-                            fachada.PararSonido(new EstrategiaSonidoMusica());
-                        });
-
-                        builder.SetCancelable(false);
-                        alertDialog = builder.Create();
-                        alertDialog.Show();
-
-                    }
-                }
+                builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Show();
             }
-            else
+            else if (!acertado && !fin)
             {
-                if (acertado)
+                // código a ejecutar si "acertado" es falso y "fin" es verdadero
+                titulo = "Vuelve a intentarlo";
+                mensaje = $"Tienes {ptsTotales} puntos.";
+                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
+                builder.SetMessage(mensaje);
+                builder.SetTitle(titulo);
+                builder.SetNegativeButton("Seguir", (sender, args) =>
                 {
-                    Android.App.AlertDialog alertDialog = null;
-                    string titulo = "Ole mi arma, ¡lo has conseguido!";
-                    string mensaje = $"Te llevas {ptsTotales} puntos.";
-                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-                    builder.SetMessage(mensaje);
-                    builder.SetTitle(titulo);
-                    builder.SetNegativeButton("Salir", (sender, args) =>
-                    {
-                        Intent i = new Intent(this, typeof(Menu));
-                        StartActivity(i);
-                        fachada.PararSonido(new EstrategiaSonidoMusica());
-                    });
+                    Generarpregunta();
+                });
 
-                    builder.SetCancelable(false);
-                    alertDialog = builder.Create();
-                    alertDialog.Show();
-                }
-                else
-                {
-                    Android.App.AlertDialog alertDialog = null;
-                    String titulo = "Lo siento, ¡has perdido!";
-                    string mensaje = $"Tienes 0 puntos.";
-                    Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
-                    builder.SetMessage(mensaje);
-                    builder.SetTitle(titulo);
-                    builder.SetNegativeButton("Salir", (sender, args) =>
-                    {
-                        Intent i = new Intent(this, typeof(Menu));
-                        StartActivity(i);
-                        fachada.PararSonido(new EstrategiaSonidoMusica());
-                    });
-
-                    builder.SetCancelable(false);
-                    alertDialog = builder.Create();
-                    alertDialog.Show();
-                }
+                builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Show();
             }
         }
     }
