@@ -259,7 +259,6 @@ namespace preguntaods
             Android.App.AlertDialog alertDialog = null;
             if (fin && acertado)
             {
-                // código a ejecutar si "fin" y "acertado" son verdaderos
                 titulo = "Felicitaciones";
                 mensaje = $"Sumas {ptsTotales} a tu puntuación total.";
                 Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
@@ -278,8 +277,8 @@ namespace preguntaods
             }
             else if (fin && !acertado)
             {
-                // código a ejecutar si "fin" es verdadero y "acertado" es falso
                 titulo = "Game Over";
+                // si ha consolidado suma los que tenia
                 mensaje = "No sumas ningún punto.";
                 Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
                 builder.SetMessage(mensaje);
@@ -297,7 +296,6 @@ namespace preguntaods
             }
             else if (acertado && !fin)
             {
-                // código a ejecutar si "acertado" es verdadero y "fin" es falso
                 titulo = "Has acertado";
                 if (consolidado)
                 {
@@ -337,7 +335,7 @@ namespace preguntaods
             }
             else if (!acertado && !fin)
             {
-                // código a ejecutar si "acertado" es falso y "fin" es verdadero
+                // sumar los consolidados
                 titulo = "Vuelve a intentarlo";
                 mensaje = $"Tienes {ptsTotales} puntos.";
                 Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
