@@ -12,7 +12,7 @@ namespace preguntaods.Persistencia.Repository
             var a = SingletonConexion.GetInstance();
             var response = await a.cliente
                 .From<Pregunta>()
-                .Where(Xamarin => Xamarin.Dificultad == dificultad).Get();
+                .Where(x => x.Dificultad == dificultad).Get();
 
             return response.Models.AsEnumerable();
         }

@@ -7,19 +7,19 @@ using TableAttribute = Postgrest.Attributes.TableAttribute;
 
 namespace preguntaods.Entities
 {
-    [Table("reto")]
+    [Table("Reto")]
     public partial class Reto : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("Id")]
         public int Id { get; set; }
 
-        [Column("dificultad")]
+        [Column("Dificultad")]
         public int Dificultad { get; set; }
 
-        [Column("ods_tratada")]
+        [Column("OdsTratada")]
         public int Ods_tratada { get; set; }
 
-        [ForeignKey("ods_tratada")]
+        [ForeignKey("OdsTratada")]
         public ODS Ods { get; set; }
     }
 }
