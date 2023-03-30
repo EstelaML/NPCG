@@ -1,7 +1,4 @@
 ﻿using Android.Media;
-using Java.IO;
-using System;
-using Console = System.Console;
 
 namespace preguntaods
 {

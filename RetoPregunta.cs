@@ -119,16 +119,18 @@ namespace preguntaods
             };
             animation.AnimationCancel += (sender, e) =>
             {
+                fachada.PararSonido(new EstrategiaSonidoReloj());
                 contesta = true;
 
             };
-            // sonido de tic tac
-            new Handler().PostDelayed(() => {
-                // Acciones a realizar cuando quedan 10 segundos o menos
-                if (!alertDialog.IsShowing) {
+            animation.Update += (sender, e) =>
+            {
+                if (animation.CurrentPlayTime == animation.Duration * 0.9f)
+                {
                     fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
                 }
-            }, 20000);
+            };
+            
 
             //Abandonar
             abandonar.Click += Atras;
@@ -198,6 +200,8 @@ namespace preguntaods
         private Boolean EsSolucion(string text, Button b)
         {
             bool acertado = false;
+            
+
             if (text.Equals(preguntaActual.Correcta))
             {
                 acertado = true;
@@ -234,11 +238,9 @@ namespace preguntaods
             else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  puntosText.Text = "Puntuación de la pregunta: 200"; }
             else { preguntaActual = altas.First(); altas.Remove(preguntaActual); puntosText.Text = "Puntuación de la pregunta: 300"; }
 
-            string a = preguntaActual.OdsRelacionada;
-            string nombreDeImagen = "icon_ods" + a; // construir el nombre del recurso dinámicamente
+            string nombreDeImagen = "icon_ods" + preguntaActual.OdsRelacionada; // construir el nombre del recurso dinámicamente
             int idDeImagen = Resources.GetIdentifier(nombreDeImagen, "drawable", PackageName); // obtener el identificador de recurso correspondiente
             imagenOds.SetImageResource(idDeImagen);
-            
 
             enunciado.Text = preguntaActual.Enunciado;
             b1.Text = preguntaActual.Respuesta1;
@@ -253,6 +255,7 @@ namespace preguntaods
         {
             string titulo = "";
             string mensaje = "";
+
             if (fin && acertado)
             {
                 titulo = "Felicitaciones";
@@ -292,6 +295,7 @@ namespace preguntaods
             }
             else if (acertado && !fin)
             {
+                fachada.PararSonido(new EstrategiaSonidoReloj());
                 titulo = "Has acertado";
                 if (consolidado)
                 {
