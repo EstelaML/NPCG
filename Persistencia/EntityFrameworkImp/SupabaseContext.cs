@@ -30,7 +30,7 @@ namespace preguntaods.Persistencia
 
         public DbSet<Entities.ODS> ODSs { get; set; }
         public DbSet<Entities.Reto> Retos { get; set; }
-        public DbSet<Entities.Pregunta> Reto_preguntas { get; set; }
+        public DbSet<Entities.Pregunta> Pregunta { get; set; }
         public DbSet<Entities.Configuracion> User { get; set; }
     }
 }

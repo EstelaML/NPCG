@@ -14,7 +14,7 @@ namespace preguntaods
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.93")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.0.5")]
 	public partial class Resource
 	{
 		
@@ -11054,6 +11054,9 @@ namespace preguntaods
 			
 			// aapt resource value: 0x7F100003
 			public const int sonido_musica = 2131755011;
+			
+			// aapt resource value: 0x7F100004
+			public const int sonido_reloj = 2131755012;
 			
 			static Raw()
 			{

@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\Entities\Configuracion.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonidoReloj.cs" />
     <Compile Include="BusinessLogic\Entities\EstrategiaSonidoAcierto.cs" />
     <Compile Include="BusinessLogic\Entities\EstrategiaSonidoError.cs" />
     <Compile Include="BusinessLogic\Entities\EstrategiaSonidoMusica.cs" />
@@ -258,6 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\menu_user.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\sonido_reloj.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
