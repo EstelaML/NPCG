@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Org.Apache.Commons.Logging;
+using preguntaods.BusinessLogic.Entities;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
@@ -121,10 +122,11 @@ namespace preguntaods
                 contesta = true;
 
             };
+
             // sonido de tic tac
             new Handler().PostDelayed(() => {
                 // Acciones a realizar cuando quedan 10 segundos o menos
-                if (!alertDialog.IsShowing) {
+                if (!alertDialog.IsShowing && !contesta) {
                     fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
                 }
             }, 20000);
@@ -238,6 +240,7 @@ namespace preguntaods
             return true;
         }
         private void Generarpregunta() {
+            contesta = false;
             b1.SetBackgroundResource(Resource.Drawable.style_pregunta);
             b2.SetBackgroundResource(Resource.Drawable.style_pregunta);
             b3.SetBackgroundResource(Resource.Drawable.style_pregunta);
@@ -341,6 +344,15 @@ namespace preguntaods
                 builder.SetCancelable(false);
                 alertDialog = builder.Create();
                 alertDialog.Show();
+
+                new Handler().PostDelayed(() => {
+                    // Acciones a realizar cuando quedan 10 segundos o menos
+                    if (alertDialog.IsShowing)
+                    {
+                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                    }
+                }, 10000);
             }
             else if (!acertado && !fin)
             {
@@ -357,6 +369,15 @@ namespace preguntaods
                 builder.SetCancelable(false);
                 alertDialog = builder.Create();
                 alertDialog.Show();
+
+                new Handler().PostDelayed(() => {
+                    // Acciones a realizar cuando quedan 10 segundos o menos
+                    if (alertDialog.IsShowing)
+                    {
+                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
+                    }
+                }, 10000);
             }
         }
     }
