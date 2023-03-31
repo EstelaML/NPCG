@@ -1,10 +1,11 @@
 ﻿using Postgrest.Attributes;
 using Postgrest.Models;
+using System.Collections.Generic;
 
 namespace preguntaods.Entities
 {
     [Table("Configuracion")]
-    public partial class Configuracion : BaseModel, IEntity
+    public partial class Usuario : BaseModel, IEntity
     {
         [PrimaryKey("Id")]
         public int Id { get; set; }
@@ -20,5 +21,8 @@ namespace preguntaods.Entities
 
         [Column("Musica")]
         public int Musica { get; set; }
+
+        [Column("PreguntasRealizadas")]
+        public IEnumerable<int> PreguntasRealizadas { get; set; }
     }
 }

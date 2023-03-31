@@ -26,7 +26,7 @@ namespace preguntaods
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.registro);
+            SetContentView(Resource.Layout.vistaRegistro);
             fachada = new Facade();
 
             usernameCorrect = false;
@@ -81,7 +81,6 @@ namespace preguntaods
 
                     try
                     {
-
                         await fachada.SignUpAsync(email.Text, password.Text);
 
                         // se registra
@@ -98,6 +97,7 @@ namespace preguntaods
         private void Atras(object sender, EventArgs e)
         {
             fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+
             Intent i = new Intent(this, typeof(InicioSesion));
             StartActivity(i);
         }

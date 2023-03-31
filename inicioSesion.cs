@@ -22,7 +22,7 @@ namespace preguntaods
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.inicioSesion);
+            SetContentView(Resource.Layout.vistaInicioSesion);
             fachada = new Facade();
 
             // Create your application here

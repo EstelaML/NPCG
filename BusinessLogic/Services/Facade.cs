@@ -1,6 +1,5 @@
 ﻿using preguntaods.Persistencia;
 using System.Threading.Tasks;
-using preguntaods.Entities;
 
 namespace preguntaods.Services
 {
@@ -44,6 +43,10 @@ namespace preguntaods.Services
         {
             estrategia.Stop();
         }
+
+        #endregion
+
+        #region nose
 
         #endregion
     }

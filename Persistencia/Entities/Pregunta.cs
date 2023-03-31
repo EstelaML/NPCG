@@ -6,7 +6,7 @@ namespace preguntaods.Entities
     [Table("Pregunta")]
     public partial class Pregunta : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey("Id")]
         public int Id { get; set; }
 
         [Column("Pregunta")]
@@ -28,7 +28,7 @@ namespace preguntaods.Entities
         public string Correcta { get; set; }
 
         [Column("Dificultad")]
-        public string Dificultad { get; set; }
+        public int Dificultad { get; set; }
 
         [Column("OdsRelacionada")]
         public string OdsRelacionada { get; set; }

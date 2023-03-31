@@ -68,46 +68,50 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\Entities\Configuracion.cs" />
-    <Compile Include="BusinessLogic\Entities\EstrategiaSonidoReloj.cs" />
-    <Compile Include="BusinessLogic\Entities\EstrategiaSonidoAcierto.cs" />
-    <Compile Include="BusinessLogic\Entities\EstrategiaSonidoError.cs" />
-    <Compile Include="BusinessLogic\Entities\EstrategiaSonidoMusica.cs" />
-    <Compile Include="BusinessLogic\Entities\EstrategiaSonidoClick.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoFrase.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoSopa.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoAhorcado.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoPre.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\Reto.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\Partida.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\PartidaBuilder.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\IPartidaBuilder.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\PartidaDirector.cs" />
+    <Compile Include="BusinessLogic\Entities\Usuario.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\EstrategiaSonidoReloj.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\EstrategiaSonidoAcierto.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\EstrategiaSonidoError.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\EstrategiaSonidoMusica.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\EstrategiaSonidoClick.cs" />
     <Compile Include="BusinessLogic\Services\IPreguntadosService.cs" />
     <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
-    <Compile Include="Persistencia\Entities\Configuracion.cs" />
+    <Compile Include="Persistencia\Entities\Usuario.cs" />
     <Compile Include="Persistencia\Entities\IEntity.cs" />
-    <Compile Include="Persistencia\Repository\RepositorioConfiguracion.cs" />
-    <Compile Include="Persistencia\Repository\RepositorioPregunta.cs" />
+    <Compile Include="Persistencia\Repository\impl\RepositorioConfiguracion.cs" />
+    <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="RetoPregunta.cs" />
     <Compile Include="InicioSesion.cs" />
     <Compile Include="Registro.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />
-    <Compile Include="BusinessLogic\Entities\Reto.cs" />
     <Compile Include="BusinessLogic\Entities\Pregunta.cs" />
     <Compile Include="BusinessLogic\Services\IFacade.cs" />
     <Compile Include="BusinessLogic\Services\Facade.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
-    <Compile Include="Persistencia\Entities\Reto.cs" />
     <Compile Include="Persistencia\Entities\Pregunta.cs" />
-    <Compile Include="Persistencia\EntityFrameworkImp\EntityFrameworkDAL.cs" />
-    <Compile Include="Persistencia\EntityFrameworkImp\IDAL.cs" />
-    <Compile Include="Persistencia\EntityFrameworkImp\SupabaseContext.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />
-    <Compile Include="Persistencia\Repository\Repositorycs.cs" />
+    <Compile Include="Persistencia\Repository\impl\Repositorycs.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BusinessLogic\Entities\IEstrategiaSonido.cs" />
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\IEstrategiaSonido.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\menu.xml">
+    <AndroidResource Include="Resources\layout\vistaMenu.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />
@@ -136,14 +140,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations">
       <Version>2.2.0</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
-      <Version>5.0.10</Version>
-    </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL">
-      <Version>5.0.0</Version>
-    </PackageReference>
     <PackageReference Include="supabase-csharp">
-      <Version>0.8.7</Version>
+      <Version>0.8.8</Version>
     </PackageReference>
     <PackageReference Include="System.ComponentModel.Annotations">
       <Version>5.0.0</Version>
@@ -153,19 +151,19 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\registro.xml">
+    <AndroidResource Include="Resources\layout\vistaRegistro.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\inicioSesion.xml">
+    <AndroidResource Include="Resources\layout\vistaInicioSesion.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\pregunta.xml">
+    <AndroidResource Include="Resources\layout\vistaPregunta.xml">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
