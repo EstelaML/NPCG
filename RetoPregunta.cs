@@ -73,9 +73,9 @@ namespace preguntaods
             imagenCorazon2 = FindViewById<ImageView>(Resource.Id.heart2);
 
             // Conseguir preguntas 
-            var preguntasFaciles = await repositorio.GetByDificultad("baja");
-            var preguntasMedias = await repositorio.GetByDificultad("media");
-            var preguntasAltas = await repositorio.GetByDificultad("alta");
+            var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
+            var preguntasMedias = await repositorio.GetByDificultad(Pregunta.difMedia);
+            var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta);
 
             faciles = preguntasFaciles.ToList();
             medias = preguntasMedias.ToList();

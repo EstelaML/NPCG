@@ -46,6 +46,10 @@ namespace preguntaods
                 case Resource.Id.menuItem3:
                     {
                         fachada.LogoutAsync();
+
+                        Intent i = new Intent(this, typeof(InicioSesion));
+                        StartActivity(i);
+                        
                         break;
                     }
             }

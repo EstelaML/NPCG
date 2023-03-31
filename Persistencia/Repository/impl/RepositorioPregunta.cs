@@ -7,7 +7,12 @@ namespace preguntaods.Persistencia.Repository
 {
     public class RepositorioPregunta : Repository<Pregunta>
     {
-        public async Task<IEnumerable<Pregunta>> GetByDificultad(string dificultad)
+        SingletonConexion conexion;
+        public RepositorioPregunta()
+        {
+            conexion = SingletonConexion.GetInstance();
+        }
+        public async Task<IEnumerable<Pregunta>> GetByDificultad(int dificultad)
         {
             var a = SingletonConexion.GetInstance();
             var response = await a.cliente

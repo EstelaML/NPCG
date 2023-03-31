@@ -68,6 +68,11 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\Entities\Partida\RetoFrase.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoSopa.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoAhorcado.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\RetoPre.cs" />
+    <Compile Include="BusinessLogic\Entities\Partida\Reto.cs" />
     <Compile Include="BusinessLogic\Entities\Partida\Partida.cs" />
     <Compile Include="BusinessLogic\Entities\Partida\PartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Entities\Partida\IPartidaBuilder.cs" />
@@ -89,12 +94,10 @@
     <Compile Include="InicioSesion.cs" />
     <Compile Include="Registro.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />
-    <Compile Include="BusinessLogic\Entities\Reto.cs" />
     <Compile Include="BusinessLogic\Entities\Pregunta.cs" />
     <Compile Include="BusinessLogic\Services\IFacade.cs" />
     <Compile Include="BusinessLogic\Services\Facade.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
-    <Compile Include="Persistencia\Entities\Reto.cs" />
     <Compile Include="Persistencia\Entities\Pregunta.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />

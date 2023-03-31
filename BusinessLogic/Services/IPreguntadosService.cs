@@ -1,4 +1,6 @@
-﻿using Supabase.Gotrue;
+﻿using preguntaods.Entities;
+using Supabase.Gotrue;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace preguntaods.Services
@@ -14,6 +16,8 @@ namespace preguntaods.Services
         #endregion
 
         #region RetoPregunta
+
+        List<Pregunta> SolicitarPreguntas();
         #endregion
 
     }

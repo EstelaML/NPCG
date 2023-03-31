@@ -5,13 +5,16 @@
   <!-- Add menu Item 1 -->
   <item android:id="@+id/menuItem1"
         android:icon="@android:drawable/btn_plus"
-        android:title="Perfil"/>
+        android:title="Perfil"
+        android:showAsAction="always"/>
 
   <!-- Add menu Item 2 -->
   <item android:id="@+id/menuItem2"
-         android:title="Configuración"/>
+        android:title="Configuración"
+        android:showAsAction="always"/>
 
   <!-- Add menu Item 3 -->
   <item android:id="@+id/menuItem3"
-         android:title="Cerrar sesión"/>
+        android:title="Cerrar sesión"
+        android:showAsAction="always"/>
 </menu>

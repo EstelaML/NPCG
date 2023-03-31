@@ -2,6 +2,8 @@
 {
     public interface IPartidaBuilder
     {
+        void BuildPlayer();
+        void BuildReto();
         Partida GetPartida();
     }
 }
