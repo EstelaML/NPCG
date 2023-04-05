@@ -28,7 +28,6 @@ namespace preguntaods
         private TextView textoPuntosTotales;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
-
         private List<Pregunta> faciles;
         private List<Pregunta> medias;
         private List<Pregunta> altas;
@@ -220,7 +219,6 @@ namespace preguntaods
         private Boolean EsSolucion(string text, Button b)
         {
             bool acertado = false;
-            
 
             if (text.Equals(preguntaActual.Correcta))
             {
