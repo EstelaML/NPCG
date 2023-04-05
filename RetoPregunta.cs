@@ -46,8 +46,10 @@ namespace preguntaods
         private int ptsTotales;
         private bool contesta;
         private Android.App.AlertDialog alertDialog;
+        private EstrategiaSonidoMusica musica;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
+            musica = new EstrategiaSonidoMusica();
             // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPregunta);
@@ -128,7 +130,7 @@ namespace preguntaods
             };
 
             //Empezar música
-            fachada.EjecutarSonido(this, new EstrategiaSonidoMusica());
+            fachada.EjecutarSonido(this, musica);
 
             //botonAbandonar
             botonAbandonar.Click += EventoAbandonar;
@@ -160,9 +162,9 @@ namespace preguntaods
             builder.SetTitle(titulo);
             builder.SetPositiveButton("Aceptar", (sender, args) =>
             {
+                fachada.PararSonido(musica);
                 Intent i = new Intent(this, typeof(Menu));
                 StartActivity(i);
-                fachada.PararSonido(new EstrategiaSonidoMusica());
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
@@ -285,7 +287,7 @@ namespace preguntaods
                 {
                     Intent i = new Intent(this, typeof(Menu));
                     StartActivity(i);
-                    fachada.PararSonido(new EstrategiaSonidoMusica());
+                    fachada.PararSonido(musica);
                 });
 
                 builder.SetCancelable(false);
@@ -304,7 +306,7 @@ namespace preguntaods
                 {
                     Intent i = new Intent(this, typeof(Menu));
                     StartActivity(i);
-                    fachada.PararSonido(new EstrategiaSonidoMusica());
+                    fachada.PararSonido(musica);
                 });
 
                 builder.SetCancelable(false);
@@ -332,7 +334,7 @@ namespace preguntaods
                 });
                 builder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
-                    fachada.PararSonido(new EstrategiaSonidoMusica());
+                    fachada.PararSonido(musica);
 
                     Intent i = new Intent(this, typeof(Menu));
                     StartActivity(i);
