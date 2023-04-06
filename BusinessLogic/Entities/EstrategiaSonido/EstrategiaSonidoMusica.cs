@@ -4,7 +4,7 @@ namespace preguntaods
 {
     internal class EstrategiaSonidoMusica : IEstrategiaSonido
     {
-        private MediaPlayer mp;
+        private static MediaPlayer mp;
         public EstrategiaSonidoMusica() {
             //Si el MediaPlayer de la Musica no existe, lo crea
             if (mp == null)
@@ -22,6 +22,7 @@ namespace preguntaods
 
         public void Stop() {
             mp.Stop();
+            mp.Reset();
         }
     }
 }
