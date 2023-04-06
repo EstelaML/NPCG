@@ -45,9 +45,5 @@ namespace preguntaods.Services
         }
 
         #endregion
-
-        #region nose
-
-        #endregion
     }
 }

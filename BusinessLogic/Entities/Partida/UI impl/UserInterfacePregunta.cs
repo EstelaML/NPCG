@@ -1,6 +1,6 @@
 ﻿namespace preguntaods.Entities
 {
-    public abstract class Reto
+    public class UserInterfacePregunta : UserInterface
     {
         
     }

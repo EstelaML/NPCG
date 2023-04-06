@@ -1,6 +1,6 @@
 ﻿namespace preguntaods.Entities
 {
-    public class RetoFrase : Reto
+    public class UserInterfaceAhorcado : UserInterface
     {
         
     }

@@ -10,7 +10,7 @@ using System;
 namespace preguntaods
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]
-    public class InicioSesion : AppCompatActivity
+    public class InicioSesionViewModel : AppCompatActivity
     {
         private Button iniciarSesion;
         private EditText correo;
@@ -45,7 +45,7 @@ namespace preguntaods
         {
             fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
-            Intent i = new Intent(this, typeof(Menu));
+            Intent i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
         }
 
@@ -53,7 +53,7 @@ namespace preguntaods
         {
             fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
-            Intent i = new Intent(this, typeof(Registro));
+            Intent i = new Intent(this, typeof(RegistroViewModel));
             StartActivity(i);
         }
 
@@ -66,7 +66,7 @@ namespace preguntaods
                 await fachada.LoginAsync(correo.Text, password.Text);
 
                 // inicia sesion
-                Intent i = new Intent(this, typeof(Menu));
+                Intent i = new Intent(this, typeof(MenuViewModel));
                 StartActivity(i);
             }
             catch (Exception)

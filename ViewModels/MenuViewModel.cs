@@ -10,7 +10,7 @@ using System;
 namespace preguntaods
 {
     [Activity(Label = "", Theme = "@style/AppTheme")]
-    public class Menu : AppCompatActivity
+    public class MenuViewModel : AppCompatActivity
     {
         private Facade fachada;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -47,7 +47,7 @@ namespace preguntaods
                     {
                         fachada.LogoutAsync();
 
-                        Intent i = new Intent(this, typeof(InicioSesion));
+                        Intent i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
                         
                         break;
@@ -61,7 +61,7 @@ namespace preguntaods
         {
             fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
-            Intent i = new Intent(this, typeof(RetoPregunta));
+            Intent i = new Intent(this, typeof(VistaPartidaViewModel));
             StartActivity(i);
         }
     }

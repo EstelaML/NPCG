@@ -14,7 +14,7 @@ namespace preguntaods
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.0.5")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.93")]
 	public partial class Resource
 	{
 		
@@ -10981,10 +10981,13 @@ namespace preguntaods
 			public const int vistaMenu = 2131427436;
 			
 			// aapt resource value: 0x7F0B006D
-			public const int vistaPregunta = 2131427437;
+			public const int vistaPartida = 2131427437;
 			
 			// aapt resource value: 0x7F0B006E
 			public const int vistaRegistro = 2131427438;
+			
+			// aapt resource value: 0x7F0B006F
+			public const int vistaRetoPregunta = 2131427439;
 			
 			static Layout()
 			{

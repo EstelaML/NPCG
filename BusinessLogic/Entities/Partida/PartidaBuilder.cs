@@ -10,35 +10,46 @@ namespace preguntaods.Entities
         {
             partida.user = new Usuario();
         }
-        public void BuildReto()
-        {
-            Random random = new Random();
 
-            switch (1) //ampliar conforme se añadan nuevos >> random.Next(1,5)
+        public void BuildRetos()
+        {
+            for (int i = 0; i < 10; i++)
             {
-                case 1:
-                    {
-                        partida.reto = new RetoPre();
-                        break;
-                    }
-                case 2:
-                    {
-                        partida.reto = new RetoAhorcado();
-                        break;
-                    }
-                case 3:
-                    {
-                        partida.reto = new RetoSopa();
-                        break;
-                    }
-                case 4:
-                    {
-                        partida.reto = new RetoFrase();
-                        break;
-                    }
+                Random random = new Random();
+
+                switch (1) //ampliar conforme se añadan nuevos >> random.Next(1,5)
+                {
+                    case 1:
+                        {
+                            partida.AddReto(new RetoPre());
+                            break;
+                        }
+                    case 2:
+                        {
+                            partida.AddReto(new RetoAhorcado());
+                            break;
+                        }
+                    case 3:
+                        {
+                            partida.AddReto(new RetoFrase());
+                            break;
+                        }
+                    case 4:
+                        {
+                            partida.AddReto(new RetoSopa());
+                            break;
+                        }
+                }
             }
-            
+
+            partida.NextReto();
         }
+
+        public void BuildUserInterface()
+        {
+            partida.UpdateUI();
+        }
+
         public Partida GetPartida() {
             return partida;
         }

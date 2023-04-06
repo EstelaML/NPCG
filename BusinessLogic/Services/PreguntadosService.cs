@@ -9,7 +9,10 @@ namespace preguntaods.Services
     public class PreguntadosService : IPreguntadosService
     {
         private readonly RepositorioPregunta repositorioPre;
-        public PreguntadosService() { }
+        public PreguntadosService()
+        {
+            repositorioPre = new RepositorioPregunta();
+        }
 
         #region ODS
 
@@ -19,13 +22,11 @@ namespace preguntaods.Services
         #endregion
 
         #region RetoPregunta
-        public List<Pregunta> SolicitarPreguntas()
+        public async Task<Pregunta> SolicitarPregunta(int dificultad)
         {
-            var preguntasBajas = repositorioPre.GetByDificultad(Pregunta.difBaja).Result.Take(3);
-            var preguntasMedias = repositorioPre.GetByDificultad(Pregunta.difMedia).Result.Take(4);
-            var preguntasAltas = repositorioPre.GetByDificultad(Pregunta.difAlta).Result.Take(3);
-
-            return preguntasBajas.Concat(preguntasMedias.Concat(preguntasAltas)).ToList();
+            var respuesta = await repositorioPre.GetByDificultad(dificultad);
+                
+            return respuesta.FirstOrDefault();
         }
         #endregion
     }

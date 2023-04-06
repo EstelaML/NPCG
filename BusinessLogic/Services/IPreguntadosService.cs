@@ -17,7 +17,7 @@ namespace preguntaods.Services
 
         #region RetoPregunta
 
-        List<Pregunta> SolicitarPreguntas();
+        Task<Pregunta> SolicitarPregunta(int dificultad);
         #endregion
 
     }

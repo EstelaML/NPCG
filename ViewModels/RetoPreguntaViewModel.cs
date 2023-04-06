@@ -14,7 +14,7 @@ using System.Linq;
 namespace preguntaods
 {
     [Activity(Label = "Activity1", Theme = "@style/HiddenTitleTheme")]
-    public class RetoPregunta : AppCompatActivity
+    public class RetoPreguntaViewModel : AppCompatActivity
     {
         private TextView enunciado;
         private Button botonPregunta1;
@@ -52,7 +52,7 @@ namespace preguntaods
             musica = new EstrategiaSonidoMusica();
             // inicializacion de todo lo necesario
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.vistaPregunta);
+            SetContentView(Resource.Layout.vistaRetoPregunta);
             repositorio = new RepositorioPregunta();
             fachada = new Facade();
 
@@ -163,7 +163,7 @@ namespace preguntaods
             builder.SetPositiveButton("Aceptar", (sender, args) =>
             {
                 fachada.PararSonido(musica);
-                Intent i = new Intent(this, typeof(Menu));
+                Intent i = new Intent(this, typeof(MenuViewModel));
                 StartActivity(i);
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
@@ -285,7 +285,7 @@ namespace preguntaods
                 builder.SetTitle(titulo);
                 builder.SetNegativeButton("Salir", (sender, args) =>
                 {
-                    Intent i = new Intent(this, typeof(Menu));
+                    Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
                     fachada.PararSonido(musica);
                 });
@@ -304,7 +304,7 @@ namespace preguntaods
                 builder.SetTitle(titulo);
                 builder.SetNegativeButton("Salir", (sender, args) =>
                 {
-                    Intent i = new Intent(this, typeof(Menu));
+                    Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
                     fachada.PararSonido(musica);
                 });
@@ -336,7 +336,7 @@ namespace preguntaods
                 {
                     fachada.PararSonido(musica);
 
-                    Intent i = new Intent(this, typeof(Menu));
+                    Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
                 });
                 if (!consolidado)

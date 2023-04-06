@@ -9,7 +9,7 @@ using System;
 namespace preguntaods
 {
     [Activity(Label = "Activity2")]
-    public class Registro : AppCompatActivity
+    public class RegistroViewModel : AppCompatActivity
     {
         private EditText username;
         private EditText password;
@@ -84,7 +84,7 @@ namespace preguntaods
                         await fachada.SignUpAsync(email.Text, password.Text);
 
                         // se registra
-                        Intent i = new Intent(this, typeof(Menu));
+                        Intent i = new Intent(this, typeof(MenuViewModel));
                         StartActivity(i);
                     }
                     catch (Exception)
@@ -98,7 +98,7 @@ namespace preguntaods
         {
             fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
-            Intent i = new Intent(this, typeof(InicioSesion));
+            Intent i = new Intent(this, typeof(InicioSesionViewModel));
             StartActivity(i);
         }
     }
