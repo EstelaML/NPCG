@@ -26,5 +26,10 @@ namespace preguntaods.Entities
         {
             throw new System.NotImplementedException();
         }
+
+        public override void SetValues(int fallos, int puntuacion)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

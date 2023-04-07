@@ -42,8 +42,6 @@ namespace preguntaods.Entities
                         }
                 }
             }
-
-            partida.NextReto();
         }
 
         public void BuildUserInterface()

@@ -18,12 +18,17 @@ namespace preguntaods.Entities
 
         private Activity _activity;
         private Button botonAbandonar;
+        private TextView textoPuntosTotales;
 
         private int contadorRetoSiguiente;
+        private int fallos;
+        private EstrategiaSonidoMusica musica;
+        private int ptsTotales;
 
         public Partida()
         {
             contadorRetoSiguiente = 0;
+            
         }
 
         public Reto GetRetoActual()
@@ -42,10 +47,20 @@ namespace preguntaods.Entities
             listaRetos.Add(reto);
         }
 
-        public void NextReto()
+        public void NextReto(int fallos, int ptsTotales)
         {
-            retoActual = listaRetos[contadorRetoSiguiente];
-            contadorRetoSiguiente++;
+            this.fallos = fallos;
+            this.ptsTotales = ptsTotales;
+
+            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count)
+            {
+                retoActual = listaRetos[contadorRetoSiguiente];
+                contadorRetoSiguiente++;
+            } 
+            else
+            {
+                EventoAbandonar(new object(), new EventArgs());
+            }
         }
 
         public UserInterface GetUI()
@@ -60,7 +75,7 @@ namespace preguntaods.Entities
 
         public void UpdateUI()
         {
-            switch (retoActual.GetType())
+            switch (listaRetos[0].GetType())
             {
                 case Reto.typePregunta:
                     {
@@ -98,20 +113,27 @@ namespace preguntaods.Entities
 
         public void InitValues()
         {
+            userInterface.SetValues(fallos, ptsTotales);
             userInterface.Init();
             userInterface.SetDatosReto(retoActual);
 
-            _fachada.EjecutarSonido(_activity, new EstrategiaSonidoMusica());
+            textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
+            textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
-            botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
-            botonAbandonar.Click += EventoAbandonar;
+            if (musica == null)
+            {
+                musica = new EstrategiaSonidoMusica(); _fachada.EjecutarSonido(_activity, musica);
+
+                botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
+                botonAbandonar.Click += EventoAbandonar;
+            }
         }
 
         public void EventoAbandonar(object sender, EventArgs e)
         {
             userInterface.FinReto();
 
-            _fachada.PararSonido(new EstrategiaSonidoMusica());
+            _fachada.PararSonido(musica);
 
             Intent i = new Intent(_activity, typeof(MenuViewModel));
             _activity.StartActivity(i);

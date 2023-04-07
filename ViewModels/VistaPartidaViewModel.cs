@@ -16,8 +16,8 @@ namespace preguntaods
     public class VistaPartidaViewModel : AppCompatActivity
     {
         // Vars
-        private PartidaDirector director;
         private Reto reto;
+        private Partida partida;
 
         private Animator animation;
         private ProgressBar progressBar;
@@ -29,27 +29,22 @@ namespace preguntaods
             SetContentView(Resource.Layout.vistaPartida);
 
             // Cargar partida
-            director = new PartidaDirector();
-            PartidaBuilder builder = new PartidaBuilder();
+            var director = new PartidaDirector();
+            var builder = new PartidaBuilder();
             director.ConstructPartida(builder);
-            Partida partida = builder.GetPartida();
-
-            reto = partida.GetRetoActual();
+            partida = builder.GetPartida();
 
             // Animar Circulo Loading
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             animation = ObjectAnimator.OfInt(progressBar, "ProgressBar", 100, 0);
-            animation.SetDuration(4000); //4 secs
+            animation.SetDuration(5000); //5 secs
             animation.Start();
 
             // Cuando termine el tiempo de carga
             animation.AnimationEnd += (sender, e) =>
             {
                 // Poner la vista del tipo de reto concreto
-                UpdateView();
-                partida.UpdateUI();
-                partida.SetActivity(this);
-                partida.InitValues();
+                RetoSiguiente(0, 0);
             };
         }
 
@@ -78,6 +73,18 @@ namespace preguntaods
                         break;
                     }
             }
+        }
+
+        public void RetoSiguiente(int fallos, int ptsTotales)
+        {
+            partida.NextReto(fallos, ptsTotales);
+
+            reto = partida.GetRetoActual();
+
+            UpdateView();
+            partida.UpdateUI();
+            partida.SetActivity(this);
+            partida.InitValues();
         }
     }
 }

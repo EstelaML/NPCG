@@ -6,6 +6,7 @@ using Postgrest.Models;
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
 using System;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace preguntaods.Entities
 {
@@ -14,8 +15,11 @@ namespace preguntaods.Entities
         // Class Elements
         private Activity _activity;
         private Facade fachada;
-        private int fallos;
+        private int _fallos;
+        private int _puntuacionTotal;
+        private int puntuacion;
         private string correcta;
+        private EstrategiaSonidoReloj reloj;
 
         // UI Elements
         private TextView enunciado;
@@ -26,7 +30,6 @@ namespace preguntaods.Entities
         private ProgressBar barTime;
         private ImageView imagenOds;
         private TextView textoPuntos;
-        private TextView textoPuntosTotales;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
 
@@ -40,6 +43,12 @@ namespace preguntaods.Entities
             _activity = activity;
         }
 
+        public override void SetValues(int fallos, int puntuacion)
+        {
+            _fallos = fallos;
+            _puntuacionTotal = puntuacion;
+        }
+
         public override void Init()
         {
             // Initialization of UI Elements
@@ -50,16 +59,20 @@ namespace preguntaods.Entities
             botonPregunta4      = _activity.FindViewById<Button>(Resource.Id.button4);
             barTime             = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
             textoPuntos         = _activity.FindViewById<TextView>(Resource.Id.textView1);
-            textoPuntosTotales  = _activity.FindViewById<TextView>(Resource.Id.textView2);
             imagenOds           = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1      = _activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2      = _activity.FindViewById<ImageView>(Resource.Id.heart2);
+
+            if (_fallos == 1) {
+                imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+            }
+                
 
             // Initialization of Services
             fachada = new Facade();
 
             // Initialization of Vars
-            fallos = 0;
+            reloj = new EstrategiaSonidoReloj();
 
             // Animation
             animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
@@ -76,17 +89,17 @@ namespace preguntaods.Entities
                 var playtime = animation.CurrentPlayTime;
                 if (playtime >= 20000 && playtime < 20020)
                 {
-                    fachada.EjecutarSonido(_activity, new EstrategiaSonidoReloj());
+                    fachada.EjecutarSonido(_activity, reloj);
                 }
             };
             animation.AnimationEnd += (sender, e) =>
             {
-                if (fallos == 1)        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
-                else if (fallos == 2)   imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                if (_fallos == 1)        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                else if (_fallos == 2)   imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
 
-                fachada.PararSonido(new EstrategiaSonidoReloj());
+                fachada.PararSonido(reloj);
             };
-            animation.AnimationCancel += (sender, e) => { fachada.PararSonido(new EstrategiaSonidoReloj()); };
+            animation.AnimationCancel += (sender, e) => { fachada.PararSonido(reloj); };
         }
 
         public override void SetDatosReto(Reto reto)
@@ -98,6 +111,15 @@ namespace preguntaods.Entities
             botonPregunta2.Text = pregunta.Respuesta2;
             botonPregunta3.Text = pregunta.Respuesta3;
             botonPregunta4.Text = pregunta.Respuesta4;
+
+            switch(pregunta.Dificultad)
+            {
+                case Pregunta.difBaja:  puntuacion = 100; break;
+                case Pregunta.difMedia: puntuacion = 200; break;
+                case Pregunta.difAlta:  puntuacion = 200; break;
+            }
+
+            textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
 
             correcta = pregunta.Correcta;
 
@@ -116,12 +138,23 @@ namespace preguntaods.Entities
             {
                 fachada.EjecutarSonido(_activity, new EstrategiaSonidoAcierto());
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
+
+                _puntuacionTotal += puntuacion;
             }
             else
             {
                 fachada.EjecutarSonido(_activity, new EstrategiaSonidoError());
                 boton.SetBackgroundResource(Resource.Drawable.style_preFallo);
+
+                _puntuacionTotal -= puntuacion * 2;
+                if(_puntuacionTotal < 0) _puntuacionTotal = 0;
+
+                _fallos++;
             }
+
+            FinReto();
+            MostrarAlerta();
+            (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
         }
 
         public override void FinReto()
@@ -132,7 +165,14 @@ namespace preguntaods.Entities
             botonPregunta4.Click += null;
 
             animation.Cancel();
-            fachada.PararSonido(new EstrategiaSonidoReloj());
+
+            //actualizar datos usuario
+
+        }
+
+        private void MostrarAlerta()
+        {
+            //implementar
         }
     }
 }

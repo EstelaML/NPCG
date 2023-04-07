@@ -4,13 +4,9 @@ namespace preguntaods
 {
     internal class EstrategiaSonidoMusica : IEstrategiaSonido
     {
-        private static MediaPlayer mp;
+        private MediaPlayer mp;
         public EstrategiaSonidoMusica() {
-            //Si el MediaPlayer de la Musica no existe, lo crea
-            if (mp == null)
-            {
-                mp = new MediaPlayer();
-            }
+            mp = new MediaPlayer();
         }
         public void Play(Android.Content.Context t)
         {

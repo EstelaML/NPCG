@@ -1,4 +1,5 @@
-﻿using preguntaods.Services;
+﻿using Java.Util;
+using preguntaods.Services;
 
 namespace preguntaods.Entities
 {
@@ -26,7 +27,27 @@ namespace preguntaods.Entities
 
         private async void SetPregunta()
         {
-            pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
+            Random random = new Random();
+
+            switch (random.NextInt(3) + 1)
+            {
+                case 1:
+                    {
+                        pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
+                        break;
+                    }
+                case 2:
+                    {
+                        pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia);
+                        break;
+                    }
+                case 3:
+                    {
+                        pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta);
+                        break;
+                    }
+            }
+            
         }
     }
 }
