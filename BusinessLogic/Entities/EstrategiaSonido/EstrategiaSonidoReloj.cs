@@ -4,15 +4,10 @@ namespace preguntaods
 {
     internal class EstrategiaSonidoReloj : IEstrategiaSonido
     {
-        private static MediaPlayer mp;
+        private MediaPlayer mp;
         public EstrategiaSonidoReloj()
         {
-            //Si el MediaPlayer de la Musica no existe, lo crea
-            if (mp == null)
-            {
-                mp = new MediaPlayer();
-            }
-            
+            mp = new MediaPlayer();
         }
         public void Play(Android.Content.Context t)
         {
@@ -24,6 +19,7 @@ namespace preguntaods
 
         public void Stop() {
             mp.Stop();
+            mp.Reset();
         }
     }
 }

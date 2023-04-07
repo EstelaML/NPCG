@@ -1,4 +1,5 @@
-﻿using System;
+﻿using preguntaods.Services;
+using System;
 
 namespace preguntaods.Entities
 {
@@ -48,6 +49,11 @@ namespace preguntaods.Entities
         public void BuildUserInterface()
         {
             partida.UpdateUI();
+        }
+
+        public void BuildFacade()
+        {
+            partida.SetFacade(new Facade());
         }
 
         public Partida GetPartida() {

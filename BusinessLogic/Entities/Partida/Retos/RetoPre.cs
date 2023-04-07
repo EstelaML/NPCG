@@ -26,7 +26,7 @@ namespace preguntaods.Entities
 
         private async void SetPregunta()
         {
-            await servicio.SolicitarPregunta(Pregunta.difBaja);
+            pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
         }
     }
 }

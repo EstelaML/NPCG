@@ -7,6 +7,7 @@
             builder.BuildPlayer();
             builder.BuildRetos();
             builder.BuildUserInterface();
+            builder.BuildFacade();
 
             return builder.GetPartida();
         }
