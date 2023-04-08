@@ -9,12 +9,20 @@ namespace preguntaods.Services
     public class PreguntadosService : IPreguntadosService
     {
         private readonly RepositorioPregunta repositorioPre;
+        private readonly Repository<Usuario> repositoryUser;
         public PreguntadosService()
         {
             repositorioPre = new RepositorioPregunta();
         }
 
-        #region ODS
+        #region Usuario
+
+        public async Task<Usuario> GetUser(int id)
+        {
+            var respuesta = await repositoryUser.GetById(id);
+
+            return respuesta;
+        }
 
         #endregion
 
