@@ -10,7 +10,7 @@ namespace preguntaods.Entities
         public void BuildPlayer()
         {
             partida.user = new Usuario();
-            partida._fachada.GetUser();
+            partida._fachada.GetUsario();
         }
 
         public void BuildRetos()
