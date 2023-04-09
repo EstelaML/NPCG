@@ -94,6 +94,7 @@
     <Compile Include="Persistencia\Entities\IEntity.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioConfiguracion.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
+    <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="ViewModels\VistaPartidaViewModel.cs" />
     <Compile Include="ViewModels\RetoPreguntaViewModel.cs" />
