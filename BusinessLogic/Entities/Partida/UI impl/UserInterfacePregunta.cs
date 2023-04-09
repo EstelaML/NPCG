@@ -1,7 +1,10 @@
 ﻿using Android.Animation;
 using Android.App;
+using Android.Content;
 using Android.Content.Res;
+using Android.OS;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using Postgrest.Models;
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
@@ -32,6 +35,7 @@ namespace preguntaods.Entities
         private TextView textoPuntos;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
+        private int numRetos = 10;
 
         // Interactive Elements
         private ObjectAnimator animation;
@@ -62,6 +66,7 @@ namespace preguntaods.Entities
             imagenOds           = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1      = _activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2      = _activity.FindViewById<ImageView>(Resource.Id.heart2);
+            
 
             if (_fallos == 1) {
                 imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
@@ -100,6 +105,8 @@ namespace preguntaods.Entities
                 fachada.PararSonido(reloj);
             };
             animation.AnimationCancel += (sender, e) => { fachada.PararSonido(reloj); };
+
+
         }
 
         public override void SetDatosReto(Reto reto)
@@ -132,6 +139,7 @@ namespace preguntaods.Entities
 
         private void ButtonClick(object sender, EventArgs e)
         {
+            numRetos--;
             Button boton = sender as Button;
             
             if(boton.Text.Equals(correcta))
@@ -140,6 +148,8 @@ namespace preguntaods.Entities
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
 
                 _puntuacionTotal += puntuacion;
+
+                MostrarAlerta(true, numRetos == 0);
             }
             else
             {
@@ -150,11 +160,13 @@ namespace preguntaods.Entities
                 if(_puntuacionTotal < 0) _puntuacionTotal = 0;
 
                 _fallos++;
+
+                MostrarAlerta(false, _fallos == 2);
             }
 
             FinReto();
-            MostrarAlerta();
             (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
+
         }
 
         public override void FinReto()
@@ -170,9 +182,114 @@ namespace preguntaods.Entities
 
         }
 
-        private void MostrarAlerta()
+        private void MostrarAlerta(bool acertado, bool fin)
         {
-            //implementar
+            bool consolidado = false;
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            string titulo = "";
+            string mensaje = "";
+
+            if (fin && acertado)
+            {
+                titulo = "Felicitaciones";
+                mensaje = $"Sumas {_puntuacionTotal} a tu puntuación total.";
+                alertBuilder.SetMessage(mensaje);
+                alertBuilder.SetTitle(titulo);
+                alertBuilder.SetNegativeButton("Salir", (sender, args) =>
+                {
+                    // volver al menú
+                    // quitar musica ambiente
+                });
+
+                alertBuilder.SetCancelable(false);
+                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                alertDialog.Show();
+            }
+            else if (fin && !acertado)
+            {
+                titulo = "Game Over";
+                mensaje = "No sumas ningún punto.";
+                alertBuilder.SetMessage(mensaje);
+                alertBuilder.SetTitle(titulo);
+                alertBuilder.SetNegativeButton("Salir", (sender, args) =>
+                {
+                    // volver al menú
+                    // quitar musica ambiente
+
+                });
+
+                alertBuilder.SetCancelable(false);
+                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                alertDialog.Show();
+            }
+            else if (acertado && !fin)
+            {
+                titulo = "Has acertado";
+                if (consolidado)
+                {
+                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas botonAbandonar o seguir?";
+                }
+                else
+                {
+                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas consolidarlos (solo una vez por partida), botonAbandonar o seguir?";
+                }
+
+                alertBuilder.SetMessage(mensaje);
+                alertBuilder.SetTitle(titulo);
+                alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
+                {
+                    // sigue generando pregunta
+                });
+                alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                {
+                    // vuelves a menu principal
+                });
+                if (!consolidado)
+                {
+                    alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                    {
+                        // añadir puntos a su usuario en la base de datos
+                        animation.Cancel();
+                    });
+                }
+                alertBuilder.SetCancelable(false);
+                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                alertDialog.Show();
+
+                new Handler().PostDelayed(() => {
+                    // Acciones a realizar cuando quedan 10 segundos o menos
+                    if (alertDialog.IsShowing)
+                    {
+                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                    }
+                }, 10000);
+            }
+            else if (!acertado && !fin)
+            {
+                // sumar los consolidados
+                titulo = "Vuelve a intentarlo";
+                mensaje = $"Tienes {_puntuacionTotal} puntos.";
+                alertBuilder.SetMessage(mensaje);
+                alertBuilder.SetTitle(titulo);
+                alertBuilder.SetNegativeButton("Seguir", (sender, args) =>
+                {
+                    // se genera nueva pregunta
+                });
+                alertBuilder.SetCancelable(false);
+                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                alertDialog.Show();
+
+                new Handler().PostDelayed(() => {
+                    // Acciones a realizar cuando quedan 10 segundos o menos
+                    if (alertDialog.IsShowing)
+                    {
+                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
+                    }
+                }, 10000);
+            }
+
         }
     }
 }
