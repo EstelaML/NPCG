@@ -10,7 +10,7 @@ namespace preguntaods.Persistencia.Repository
             var a = SingletonConexion.GetInstance();
             var response = await a.cliente
                 .From<Usuario>()
-                .Where(x => x.Nombre == nombre)
+                .Where(x => x.Nombre.Equals(nombre))
                 .Single();
 
             return response;
