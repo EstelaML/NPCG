@@ -1,6 +1,7 @@
 ﻿using Android.Animation;
 using Android.App;
 using Android.Content;
+using Android.Hardware.Usb;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -85,6 +86,10 @@ namespace preguntaods
             partida.UpdateUI();
             partida.SetActivity(this);
             partida.InitValues();
+        }
+
+        public void Abandonar() {
+            partida.EventoAbandonarBoton(new object(), new System.EventArgs());
         }
     }
 }
