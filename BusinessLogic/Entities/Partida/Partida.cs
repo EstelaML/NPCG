@@ -14,7 +14,7 @@ namespace preguntaods.Entities
         private List<Reto> listaRetos;
         private Reto retoActual;
         private UserInterface userInterface;
-        public Facade _fachada;
+        private Facade _fachada;
 
         private Activity _activity;
         private Button botonAbandonar;
@@ -75,7 +75,7 @@ namespace preguntaods.Entities
 
         public void UpdateUI()
         {
-            switch (listaRetos[contadorRetoSiguiente].GetType())
+            switch (listaRetos[0].GetType())
             {
                 case Reto.typePregunta:
                     {
@@ -120,8 +120,7 @@ namespace preguntaods.Entities
             textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
             textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
-            // Primera vez solo
-            if (musica == null) 
+            if (musica == null)
             {
                 musica = new EstrategiaSonidoMusica(); _fachada.EjecutarSonido(_activity, musica);
 
@@ -135,7 +134,6 @@ namespace preguntaods.Entities
             userInterface.FinReto();
 
             _fachada.PararSonido(musica);
-            // posible solución a implementar bug reloj
 
             Intent i = new Intent(_activity, typeof(MenuViewModel));
             _activity.StartActivity(i);
