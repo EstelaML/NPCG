@@ -35,7 +35,7 @@ namespace preguntaods.Services
 
         public Usuario GetUsario()
         {
-            var respuesta = servicio.GetUser(conexion.usuario.Id); //echar un vistazo al tipo del Id en Supabase
+            var respuesta = servicio.GetUser(conexion.usuario.Id); //echar un vistazo al tipo del Id en Supabase. Andreu: el tipo del Id es uuid
             return respuesta.Result;
         }
 
