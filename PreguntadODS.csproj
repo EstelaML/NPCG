@@ -92,7 +92,6 @@
     <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
     <Compile Include="Persistencia\Entities\Usuario.cs" />
     <Compile Include="Persistencia\Entities\IEntity.cs" />
-    <Compile Include="Persistencia\Repository\impl\RepositorioConfiguracion.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />

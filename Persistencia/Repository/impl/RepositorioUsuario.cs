@@ -1,18 +1,20 @@
-﻿using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Java.Util;
 using preguntaods.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
-namespace preguntaods.Persistencia.Repository.impl
+namespace preguntaods.Persistencia.Repository
 {
-    public class RepositorioUsuario : Repository<Usuario>
+    internal class RepositorioUsuario : Repository<Usuario>
     {
+        public async Task<Usuario> GetUserById(UUID id)
+        {
+            var a = SingletonConexion.GetInstance();
+            var response = await a.cliente
+                .From<Usuario>()
+                .Where(x => x.Id.Equals(id))
+                .Single();
+
+            return response;
+        }
     }
 }
