@@ -30,11 +30,11 @@ namespace preguntaods.Services
             conexion.usuario = session.User;
         }
 
-        public Usuario GetUsario()
-        {
-            var respuesta = servicio.GetUser(conexion.usuario.Id); //echar un vistazo al tipo del Id en Supabase
-            return respuesta.Result;
-        }
+        //public Usuario GetUsario()
+        //{
+        //    var respuesta = servicio.GetUser(conexion.usuario.Id); //echar un vistazo al tipo del Id en Supabase
+        //    return respuesta.Result;
+        //}
 
         #endregion
 

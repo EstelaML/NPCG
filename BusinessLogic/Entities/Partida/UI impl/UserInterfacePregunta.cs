@@ -4,7 +4,6 @@ using Android.Content;
 using Android.Content.Res;
 using Android.OS;
 using Android.Widget;
-using AndroidX.AppCompat.App;
 using Postgrest.Models;
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
@@ -66,7 +65,6 @@ namespace preguntaods.Entities
             imagenOds           = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1      = _activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2      = _activity.FindViewById<ImageView>(Resource.Id.heart2);
-            
 
             if (_fallos == 1) {
                 imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
@@ -105,8 +103,6 @@ namespace preguntaods.Entities
                 fachada.PararSonido(reloj);
             };
             animation.AnimationCancel += (sender, e) => { fachada.PararSonido(reloj); };
-
-
         }
 
         public override void SetDatosReto(Reto reto)
@@ -148,7 +144,6 @@ namespace preguntaods.Entities
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
 
                 _puntuacionTotal += puntuacion;
-
                 MostrarAlerta(true, numRetos == 0);
             }
             else
@@ -160,13 +155,11 @@ namespace preguntaods.Entities
                 if(_puntuacionTotal < 0) _puntuacionTotal = 0;
 
                 _fallos++;
-
                 MostrarAlerta(false, _fallos == 2);
             }
 
             FinReto();
             (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
-
         }
 
         public override void FinReto()
@@ -198,7 +191,8 @@ namespace preguntaods.Entities
                 alertBuilder.SetNegativeButton("Salir", (sender, args) =>
                 {
                     // volver al menú
-                    // quitar musica ambiente
+                    // quitar musica ambiente(_activity as VistaPartidaViewModel)
+                    (_activity as VistaPartidaViewModel).Abandonar();
                 });
 
                 alertBuilder.SetCancelable(false);
@@ -215,7 +209,7 @@ namespace preguntaods.Entities
                 {
                     // volver al menú
                     // quitar musica ambiente
-
+                    (_activity as VistaPartidaViewModel).Abandonar();
                 });
 
                 alertBuilder.SetCancelable(false);
@@ -243,6 +237,7 @@ namespace preguntaods.Entities
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
                     // vuelves a menu principal
+                    (_activity as VistaPartidaViewModel).Abandonar();
                 });
                 if (!consolidado)
                 {
@@ -272,9 +267,13 @@ namespace preguntaods.Entities
                 mensaje = $"Tienes {_puntuacionTotal} puntos.";
                 alertBuilder.SetMessage(mensaje);
                 alertBuilder.SetTitle(titulo);
-                alertBuilder.SetNegativeButton("Seguir", (sender, args) =>
+                alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                 {
                     // se genera nueva pregunta
+                });
+                alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                {
+                    (_activity as VistaPartidaViewModel).Abandonar();
                 });
                 alertBuilder.SetCancelable(false);
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
@@ -289,7 +288,6 @@ namespace preguntaods.Entities
                     }
                 }, 10000);
             }
-
         }
     }
 }
