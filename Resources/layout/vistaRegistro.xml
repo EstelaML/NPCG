@@ -111,7 +111,7 @@
         android:paddingBottom="20dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
-        android:textColor="?android:attr/colorError"
+        android:textColor="@color/colorError"
         android:layout_height="wrap_content"
         android:id="@+id/error" />
 
