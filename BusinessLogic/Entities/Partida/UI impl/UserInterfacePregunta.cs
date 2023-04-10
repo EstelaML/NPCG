@@ -9,6 +9,8 @@ using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
 using System;
 using System.Runtime.InteropServices.ComTypes;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace preguntaods.Entities
 {
@@ -82,10 +84,10 @@ namespace preguntaods.Entities
             animation.SetDuration(30000); //30 secs
 
             // Listeners
-            botonPregunta1.Click += ButtonClick;
-            botonPregunta2.Click += ButtonClick;
-            botonPregunta3.Click += ButtonClick;
-            botonPregunta4.Click += ButtonClick;
+            botonPregunta1.Click += ButtonClickAsync;
+            botonPregunta2.Click += ButtonClickAsync;
+            botonPregunta3.Click += ButtonClickAsync;
+            botonPregunta4.Click += ButtonClickAsync;
 
             animation.Update += (sender, e) =>
             {
@@ -133,9 +135,10 @@ namespace preguntaods.Entities
             animation.Start();
         }
 
-        private void ButtonClick(object sender, EventArgs e)
+        private async void ButtonClickAsync(object sender, EventArgs e)
         {
             numRetos--;
+            animation.Cancel();
             Button boton = sender as Button;
             
             if(boton.Text.Equals(correcta))
@@ -144,7 +147,7 @@ namespace preguntaods.Entities
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
 
                 _puntuacionTotal += puntuacion;
-                MostrarAlerta(true, numRetos == 0);
+                await MostrarAlerta(true, numRetos == 0);
             }
             else
             {
@@ -155,7 +158,7 @@ namespace preguntaods.Entities
                 if(_puntuacionTotal < 0) _puntuacionTotal = 0;
 
                 _fallos++;
-                MostrarAlerta(false, _fallos == 2);
+                await MostrarAlerta(false, _fallos == 2);
             }
 
             FinReto();
@@ -175,13 +178,14 @@ namespace preguntaods.Entities
 
         }
 
-        private void MostrarAlerta(bool acertado, bool fin)
+        private async Task<bool> MostrarAlerta(bool acertado, bool fin)
         {
+            var tcs = new TaskCompletionSource<bool>();
             bool consolidado = false;
             Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
             string titulo = "";
             string mensaje = "";
-
+            bool result = false;
             if (fin && acertado)
             {
                 titulo = "Felicitaciones";
@@ -198,6 +202,8 @@ namespace preguntaods.Entities
                 alertBuilder.SetCancelable(false);
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
                 alertDialog.Show();
+                result = await tcs.Task;
+
             }
             else if (fin && !acertado)
             {
@@ -215,6 +221,7 @@ namespace preguntaods.Entities
                 alertBuilder.SetCancelable(false);
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
                 alertDialog.Show();
+                result = await tcs.Task;
             }
             else if (acertado && !fin)
             {
@@ -232,6 +239,8 @@ namespace preguntaods.Entities
                 alertBuilder.SetTitle(titulo);
                 alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                 {
+                    tcs.TrySetResult(true);
+
                     // sigue generando pregunta
                 });
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
@@ -259,6 +268,7 @@ namespace preguntaods.Entities
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 10000);
+                 result = await tcs.Task;
             }
             else if (!acertado && !fin)
             {
@@ -269,6 +279,8 @@ namespace preguntaods.Entities
                 alertBuilder.SetTitle(titulo);
                 alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                 {
+                    tcs.TrySetResult(true);
+
                     // se genera nueva pregunta
                 });
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
@@ -287,7 +299,10 @@ namespace preguntaods.Entities
                         alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
                     }
                 }, 10000);
+                result = await tcs.Task;
+                return result;
             }
+            return result;
         }
     }
 }
