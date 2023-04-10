@@ -4,10 +4,11 @@
     {
         public Partida ConstructPartida(IPartidaBuilder builder)
         {
+            builder.BuildFacade();
             builder.BuildPlayer();
             builder.BuildRetos();
             builder.BuildUserInterface();
-            builder.BuildFacade();
+            
 
             return builder.GetPartida();
         }

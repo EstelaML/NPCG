@@ -1,4 +1,7 @@
-﻿using preguntaods.Persistencia;
+﻿using preguntaods.Entities;
+using preguntaods.Persistencia;
+using preguntaods.Persistencia.Repository;
+using Supabase.Gotrue;
 using System.Threading.Tasks;
 
 namespace preguntaods.Services
@@ -6,6 +9,7 @@ namespace preguntaods.Services
     public class Facade
     {
         private readonly SingletonConexion conexion;
+        private readonly RepositorioUsuario repositorioUser;
         public Facade()
         {
             conexion = SingletonConexion.GetInstance();
@@ -30,11 +34,11 @@ namespace preguntaods.Services
             conexion.usuario = session.User;
         }
 
-        //public Usuario GetUsario()
-        //{
-        //    var respuesta = servicio.GetUser(conexion.usuario.Id); //echar un vistazo al tipo del Id en Supabase
-        //    return respuesta.Result;
-        //}
+        public Usuario GetUsarioLogged()
+        {
+            var respuesta = repositorioUser.GetUserById(conexion.usuario.Id);
+            return respuesta.Result;
+        }
 
         #endregion
 

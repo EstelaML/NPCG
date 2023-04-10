@@ -4,9 +4,15 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
 {
-    internal class RepositorioUsuario : Repository<Usuario>
+    public class RepositorioUsuario : Repository<Usuario>
     {
-        public async Task<Usuario> GetUserById(UUID id)
+        SingletonConexion conexion;
+
+        public RepositorioUsuario()
+        {
+            conexion = SingletonConexion.GetInstance();
+        }
+        public async Task<Usuario> GetUserById(string id)
         {
             var a = SingletonConexion.GetInstance();
             var response = await a.cliente

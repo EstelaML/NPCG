@@ -1,4 +1,6 @@
-﻿using preguntaods.Services;
+﻿using Android.SE.Omapi;
+using preguntaods.Persistencia.Repository;
+using preguntaods.Services;
 using System;
 
 namespace preguntaods.Entities
@@ -6,11 +8,11 @@ namespace preguntaods.Entities
     public class PartidaBuilder : IPartidaBuilder
     {
         private Partida partida = new Partida();
-
+       
         public void BuildPlayer()
         {
-            partida.user = new Usuario();
-            //partida._fachada.GetUser();
+            partida.user = partida._fachada.GetUsarioLogged();
+            
         }
 
         public void BuildRetos()

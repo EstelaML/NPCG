@@ -16,7 +16,7 @@ namespace preguntaods.Entities
         private List<Reto> listaRetos;
         private Reto retoActual;
         private UserInterface userInterface;
-        private Facade _fachada;
+        public Facade _fachada;
 
         private Android.App.Activity _activity;
         private Button botonAbandonar;
