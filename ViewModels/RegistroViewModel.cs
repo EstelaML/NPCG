@@ -82,7 +82,7 @@ namespace preguntaods
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
                         var userAux = await fachada.SignUpAsync(email.Text, password.Text);
-                //var user1 = await fachada.GetUsarioLogged();
+                        //var user1 = await fachada.GetUsarioLogged();
                         UUID id = UUID.FromString(userAux.Id);
                         Usuario user = new Usuario(id,username.Text,true,0,100,null);
                         await fachada.newUsuario(user);
