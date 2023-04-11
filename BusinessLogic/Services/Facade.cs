@@ -28,33 +28,30 @@ namespace preguntaods.Services
         {
             await conexion.cliente.Auth.SignOut();
         }
-        public async Task SignUpAsync(string correo, string password)
+        public async Task<User> SignUpAsync(string correo, string password)
         {
             var session = await conexion.cliente.Auth.SignUp(correo, password);
-            
-
             conexion.usuario = session.User;
+            return session.User;
         }
 
-        public Usuario GetUsarioLogged()
+        public async Task<Usuario> GetUsarioLogged()
         {
-            var respuesta = repositorioUser.GetUserById(conexion.usuario.Id);
-            return respuesta.Result;
+            var a = conexion.usuario.Id;
+            var respuesta = await repositorioUser.GetUserById(a);
+            return respuesta;
         }
 
        
 
         public async Task newUsuario(Usuario user)
         {
-
             await conexion.cliente
                 .From<Usuario>()
                 .Insert(user);
-  
         }
 
 
-        
         #endregion
 
         #region Sonido

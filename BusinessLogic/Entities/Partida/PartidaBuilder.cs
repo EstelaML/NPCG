@@ -11,7 +11,7 @@ namespace preguntaods.Entities
        
         public void BuildPlayer()
         {
-            partida.user = partida._fachada.GetUsarioLogged();
+            partida.user = partida._fachada.GetUsarioLogged().Result;
             
         }
 

@@ -1,14 +1,18 @@
-﻿using Postgrest.Attributes;
+﻿using Java.Util;
+using Postgrest.Attributes;
 using Postgrest.Models;
 using System.Collections.Generic;
 
 namespace preguntaods.Entities
 {
-    [Table("Configuracion")]
+    [Table("Usuario")]
     public partial class Usuario : BaseModel, IEntity
     {
         [PrimaryKey("Id")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
+
+        [Column("UUID")]
+        public UUID Uuid { get; set; }
 
         [Column("Nombre")]
         public string Nombre{ get; set; }
@@ -16,7 +20,7 @@ namespace preguntaods.Entities
         [Column("Puntos")]
         public int Puntos { get; set; }
 
-        [Column("Sonnidos")]
+        [Column("Sonidos")]
         public bool Sonidos { get; set; }
 
         [Column("Musica")]

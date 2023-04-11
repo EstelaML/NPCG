@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using Java.Util;
 using preguntaods.Entities;
 using preguntaods.Services;
 using System;
@@ -80,9 +81,10 @@ namespace preguntaods
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
-                    
-                        await fachada.SignUpAsync(email.Text, password.Text);
-                        Usuario user = new Usuario(fachada.GetUsarioLogged().Id,username.Text,true,0,100,null);
+                        var userAux = await fachada.SignUpAsync(email.Text, password.Text);
+                //var user1 = await fachada.GetUsarioLogged();
+                        UUID id = UUID.FromString(userAux.Id);
+                        Usuario user = new Usuario(id,username.Text,true,0,100,null);
                         await fachada.newUsuario(user);
                         // se registra
                         Intent i = new Intent(this, typeof(MenuViewModel));
