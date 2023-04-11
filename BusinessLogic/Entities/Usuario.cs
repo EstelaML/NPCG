@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace preguntaods.Entities
 {
-    public partial class Usuario : BaseModel
+    public partial class Usuario : BaseModel, IEntity
     {
         public Usuario() { }
         public Usuario(string uid, string nombre, bool sonidos, int puntos, int musica, int[] PreguntasRealizadas)

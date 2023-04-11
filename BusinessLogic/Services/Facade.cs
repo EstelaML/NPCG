@@ -50,7 +50,14 @@ namespace preguntaods.Services
             }
         }
 
-       
+        public async Task UpdatePuntos(int puntos) {
+            if (conexion.usuario != null)
+            {
+                var a = conexion.usuario.Id;
+                var usuario = await repositorioUser.GetUserByUUid(a);
+                await repositorioUser.UpdatePuntosUsuario(a, usuario.Puntos, puntos);
+            }
+        }
 
         public async Task newUsuario(Usuario user)
         {
