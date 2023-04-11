@@ -14,8 +14,7 @@ namespace preguntaods.Persistencia.Repository
         }
         public async Task<Usuario> GetUserById(string id)
         {
-            var a = SingletonConexion.GetInstance();
-            var response = await a.cliente
+            var response = await conexion.cliente
                 .From<Usuario>()
                 .Where(x => x.Id.Equals(id))
                 .Single();
