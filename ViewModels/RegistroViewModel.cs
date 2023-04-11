@@ -84,8 +84,9 @@ namespace preguntaods
                         var userAux = await fachada.SignUpAsync(email.Text, password.Text);
                         //var user1 = await fachada.GetUsarioLogged();
                         UUID id = UUID.FromString(userAux.Id);
-                        Usuario user = new Usuario(id,username.Text,true,0,100,null);
+                        Usuario user = new Usuario(userAux.Id,username.Text,true,0,100,null);
                         await fachada.newUsuario(user);
+                        
                         // se registra
                         Intent i = new Intent(this, typeof(MenuViewModel));
                         StartActivity(i);

@@ -1,4 +1,5 @@
 ﻿using Java.Util;
+using Newtonsoft.Json;
 using Postgrest.Attributes;
 using Postgrest.Models;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace preguntaods.Entities
         public int? Id { get; set; }
 
         [Column("UUID")]
-        public UUID Uuid { get; set; }
+        public string Uuid { get; set; }
 
         [Column("Nombre")]
         public string Nombre{ get; set; }
@@ -27,6 +28,6 @@ namespace preguntaods.Entities
         public int Musica { get; set; }
 
         [Column("PreguntasRealizadas")]
-        public IEnumerable<int> PreguntasRealizadas { get; set; }
+        public int[] PreguntasRealizadas { get; set; }
     }
 }
