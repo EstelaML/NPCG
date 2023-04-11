@@ -1,4 +1,5 @@
-﻿using preguntaods.Entities;
+﻿using Java.Util;
+using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository;
 using Supabase.Gotrue;
@@ -30,6 +31,7 @@ namespace preguntaods.Services
         public async Task SignUpAsync(string correo, string password)
         {
             var session = await conexion.cliente.Auth.SignUp(correo, password);
+            
 
             conexion.usuario = session.User;
         }
@@ -40,6 +42,19 @@ namespace preguntaods.Services
             return respuesta.Result;
         }
 
+       
+
+        public async Task newUsuario(Usuario user)
+        {
+
+            await conexion.cliente
+                .From<Usuario>()
+                .Insert(user);
+  
+        }
+
+
+        
         #endregion
 
         #region Sonido
