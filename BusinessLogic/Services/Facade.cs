@@ -38,9 +38,16 @@ namespace preguntaods.Services
 
         public async Task<Usuario> GetUsuarioLogged()
         {
-            var a = conexion.usuario.Id;
-            var respuesta = await repositorioUser.GetUserByUUid(a);
-            return respuesta;
+            if (conexion.usuario != null)
+            {
+                var a = conexion.usuario.Id;
+                var respuesta = await repositorioUser.GetUserByUUid(a);
+                return respuesta;
+            }
+            else
+            {
+                return null;
+            }
         }
 
        

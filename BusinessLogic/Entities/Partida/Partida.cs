@@ -107,6 +107,11 @@ namespace preguntaods.Entities
             _fachada = fachada;
         }
 
+        public Facade GetFacade()
+        {
+            return _fachada;
+        }
+
         public void SetActivity(Android.App.Activity activity)
         {
             _activity = activity;

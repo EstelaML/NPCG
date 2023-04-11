@@ -16,7 +16,7 @@ namespace preguntaods.Persistencia.Repository
         {
             var response = await conexion.cliente
                 .From<Usuario>()
-                .Where(x => x.Uuid.Equals(uuid))
+                .Where(x => x.Uuid == uuid)
                 .Single();
 
             return response;

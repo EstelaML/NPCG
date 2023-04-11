@@ -11,8 +11,8 @@ namespace preguntaods.Entities
        
         public async void BuildPlayer()
         {
-            partida.user = await partida._fachada.GetUsuarioLogged();
-            
+            var fachada = partida.GetFacade();
+            partida.user = await fachada.GetUsuarioLogged();
         }
 
         public void BuildRetos()
