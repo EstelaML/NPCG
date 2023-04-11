@@ -14,8 +14,7 @@ namespace preguntaods.Persistencia.Repository
         }
         public async Task<IEnumerable<Pregunta>> GetByDificultad(int dificultad)
         {
-            var a = SingletonConexion.GetInstance();
-            var response = await a.cliente
+            var response = await conexion.cliente
                 .From<Pregunta>()
                 .Where(x => x.Dificultad == dificultad).Get();
 
