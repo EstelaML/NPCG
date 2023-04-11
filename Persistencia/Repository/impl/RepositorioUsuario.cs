@@ -12,11 +12,11 @@ namespace preguntaods.Persistencia.Repository
         {
             conexion = SingletonConexion.GetInstance();
         }
-        public async Task<Usuario> GetUserById(string id)
+        public async Task<Usuario> GetUserByUUid(string uuid)
         {
             var response = await conexion.cliente
                 .From<Usuario>()
-                .Where(x => x.Id.Equals(id))
+                .Where(x => x.Uuid.Equals(uuid))
                 .Single();
 
             return response;

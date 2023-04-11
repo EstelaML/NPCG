@@ -86,6 +86,7 @@ namespace preguntaods
                         UUID id = UUID.FromString(userAux.Id);
                         Usuario user = new Usuario(id,username.Text,true,0,100,null);
                         await fachada.newUsuario(user);
+
                         // se registra
                         Intent i = new Intent(this, typeof(MenuViewModel));
                         StartActivity(i);

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Services
 {
-    public class Facade
+    public class Facade : IFacade
     {
         private readonly SingletonConexion conexion;
         private readonly RepositorioUsuario repositorioUser;
         public Facade()
         {
             conexion = SingletonConexion.GetInstance();
+            repositorioUser = new RepositorioUsuario();
         }
 
         #region Usuario
@@ -35,10 +36,10 @@ namespace preguntaods.Services
             return session.User;
         }
 
-        public async Task<Usuario> GetUsarioLogged()
+        public async Task<Usuario> GetUsuarioLogged()
         {
             var a = conexion.usuario.Id;
-            var respuesta = await repositorioUser.GetUserById(a);
+            var respuesta = await repositorioUser.GetUserByUUid(a);
             return respuesta;
         }
 
@@ -46,9 +47,7 @@ namespace preguntaods.Services
 
         public async Task newUsuario(Usuario user)
         {
-            await conexion.cliente
-                .From<Usuario>()
-                .Insert(user);
+            await repositorioUser.Add(user);
         }
 
 

@@ -1,4 +1,5 @@
-﻿using Supabase.Gotrue;
+﻿using preguntaods.Entities;
+using Supabase.Gotrue;
 using System.Threading.Tasks;
 
 namespace preguntaods.Services
@@ -6,9 +7,10 @@ namespace preguntaods.Services
     public interface IFacade
     {
         #region Usuario
-        Task<Session> LoginAsync(string correo, string password);
+        Task LoginAsync(string correo, string password);
         Task LogoutAsync();
-        Task<Session> SignUpAsync(string correo, string password);
+        Task<User> SignUpAsync(string correo, string password);
+        Task<Usuario> GetUsuarioLogged();
 
         #endregion
 

@@ -9,9 +9,9 @@ namespace preguntaods.Entities
     {
         private Partida partida = new Partida();
        
-        public void BuildPlayer()
+        public async void BuildPlayer()
         {
-            partida.user = partida._fachada.GetUsarioLogged().Result;
+            partida.user = await partida._fachada.GetUsuarioLogged();
             
         }
 
