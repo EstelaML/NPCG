@@ -28,7 +28,7 @@ namespace preguntaods
             // Inicio de la vista
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPartida);
-
+            
             // Cargar partida
             var director = new PartidaDirector();
             var builder = new PartidaBuilder();

@@ -7,6 +7,7 @@ using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace preguntaods.Entities
 {
@@ -61,7 +62,7 @@ namespace preguntaods.Entities
             } 
             else
             {
-                EventoAbandonar(new object(), new EventArgs(), fallos < 2);
+                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales);
             }
         }
 
@@ -162,7 +163,7 @@ namespace preguntaods.Entities
         alertDialog.Show();
     }
 
-    public void EventoAbandonar(object sender, EventArgs e, bool acertado)
+    public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntos)
     {
         string titulo = "";
         string mensaje = "";
@@ -170,6 +171,7 @@ namespace preguntaods.Entities
         {
             titulo = "¡Enhorabuena!";
             mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
+            await _fachada.UpdatePuntos(puntos);
         }
         else
         {

@@ -21,9 +21,12 @@ namespace preguntaods.Entities
         private Facade fachada;
         private int _fallos;
         private int _puntuacionTotal;
+        private int _puntosConsolidados;
         private int puntuacion;
         private string correcta;
         private EstrategiaSonidoReloj reloj;
+        private int numRetos = 10;
+        private bool consolidado = false;
 
         // UI Elements
         private TextView enunciado;
@@ -36,8 +39,7 @@ namespace preguntaods.Entities
         private TextView textoPuntos;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
-        private int numRetos = 10;
-
+       
         // Interactive Elements
         private ObjectAnimator animation;
 
@@ -67,6 +69,7 @@ namespace preguntaods.Entities
             imagenOds           = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1      = _activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2      = _activity.FindViewById<ImageView>(Resource.Id.heart2);
+            _puntosConsolidados = 0;
 
             if (_fallos == 1) {
                 imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
@@ -97,11 +100,11 @@ namespace preguntaods.Entities
                     fachada.EjecutarSonido(_activity, reloj);
                 }
             };
-            animation.AnimationEnd += (sender, e) =>
+            animation.AnimationEnd += async (sender, e) =>
             {
                 if (_fallos == 1)        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2)   imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
-
+                
                 fachada.PararSonido(reloj);
             };
             animation.AnimationCancel += (sender, e) => { fachada.PararSonido(reloj); };
@@ -147,7 +150,7 @@ namespace preguntaods.Entities
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
 
                 _puntuacionTotal += puntuacion;
-                await MostrarAlerta(true, numRetos == 0);
+                await MostrarAlerta(true, numRetos == 1);
             }
             else
             {
@@ -161,6 +164,7 @@ namespace preguntaods.Entities
                 await MostrarAlerta(false, _fallos == 2);
             }
 
+
             FinReto();
             (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
         }
@@ -170,42 +174,27 @@ namespace preguntaods.Entities
             botonPregunta1.Click += null;
             botonPregunta2.Click += null;
             botonPregunta3.Click += null;
-            botonPregunta4.Click += null;
+            botonPregunta4.Click += null;   
 
             animation.Cancel();
+           
 
             //actualizar datos usuario
+        }
 
+        public async Task GuardarPuntosUsuarioAsync() {
+            await fachada.UpdatePuntos(_puntuacionTotal);
         }
 
         private async Task<bool> MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            bool consolidado = false;
             Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
             string titulo = "";
             string mensaje = "";
             bool result = false;
-            if (fin && acertado)
-            {
-                titulo = "Felicitaciones";
-                mensaje = $"Sumas {_puntuacionTotal} a tu puntuación total.";
-                alertBuilder.SetMessage(mensaje);
-                alertBuilder.SetTitle(titulo);
-                alertBuilder.SetNegativeButton("Salir", (sender, args) =>
-                {
-                    // volver al menú
-                    // quitar musica ambiente(_activity as VistaPartidaViewModel)
-                    (_activity as VistaPartidaViewModel).Abandonar();
-                });
-
-                alertBuilder.SetCancelable(false);
-                Android.App.AlertDialog alertDialog = alertBuilder.Create();
-                alertDialog.Show();
-                result = await tcs.Task;
-
-            }
-            else if (fin && !acertado)
+           
+            if (fin && !acertado)
             {
                 titulo = "Game Over";
                 mensaje = "No sumas ningún punto.";
@@ -232,7 +221,7 @@ namespace preguntaods.Entities
                 }
                 else
                 {
-                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas consolidarlos (solo una vez por partida), botonAbandonar o seguir?";
+                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
                 }
 
                 alertBuilder.SetMessage(mensaje);
@@ -252,7 +241,8 @@ namespace preguntaods.Entities
                 {
                     alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
-                        // añadir puntos a su usuario en la base de datos
+                        consolidado = true;
+                        _puntosConsolidados = _puntuacionTotal;
                         animation.Cancel();
                     });
                 }

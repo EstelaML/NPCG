@@ -21,10 +21,7 @@
 
         public static SingletonConexion GetInstance()
         {
-            if (instance == null)
-            {
-                instance = new SingletonConexion();
-            }
+            instance ??= new SingletonConexion();
 
             return instance;
         }
