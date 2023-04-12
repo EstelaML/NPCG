@@ -154,6 +154,7 @@ namespace preguntaods.Entities
         {
             userInterface.FinReto();
             _fachada.PararSonido(musica);
+
             Intent i = new Intent(_activity, typeof(MenuViewModel));
             _activity.StartActivity(i);
             
