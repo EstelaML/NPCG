@@ -68,29 +68,18 @@ namespace preguntaods.Services
             var pregunta = (reto as RetoPre).GetPregunta();
             var a = conexion.usuario.Id;
 
-            var preguntasRealizadas = await conexion.cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
-           if (preguntasRealizadas.PreguntasRealizadas != null)
+            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a);
+           if (preguntas != null)
             {
-                int[] preguntas = preguntasRealizadas.PreguntasRealizadas;
                 int l = preguntas.Length;
                 Array.Resize(ref preguntas, preguntas.Length + 1);  // redimensiona el arreglo
                 preguntas[l - 1] = (int)pregunta.Id;
-                var update = await conexion.cliente
-                     .From<Usuario>()
-                     .Where(x => x.Uuid == a)
-                     .Set(x => x.PreguntasRealizadas, preguntas)
-                     .Update();
+                await repositorioUser.UpdatePreguntaAcertada(a, preguntas);
             }
             else {
-                int[] preguntas = { (int) pregunta.Id };
-                var update = await conexion.cliente
-                     .From<Usuario>()
-                     .Where(x => x.Uuid == a)
-                     .Set(x => x.PreguntasRealizadas, preguntas)
-                     .Update();
+                int[] preguntass = { (int) pregunta.Id };
+                await repositorioUser.UpdatePreguntaAcertada(a, preguntass);
             }
-
-           
         }
 
         #endregion

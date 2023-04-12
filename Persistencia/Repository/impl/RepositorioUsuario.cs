@@ -32,5 +32,20 @@ namespace preguntaods.Persistencia.Repository
                         .Set(x => x.Puntos, p)
                         .Update(); 
         }
+
+        public async Task UpdatePreguntaAcertada(string a, int[] preguntas) {
+            var update = await conexion.cliente
+                     .From<Usuario>()
+                     .Where(x => x.Uuid == a)
+                     .Set(x => x.PreguntasRealizadas, preguntas)
+                     .Update();
+        }
+
+        public async Task<int[]> GetPreguntasAcertadasAsync(string a)
+        {
+            var res = await conexion.cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
+            if (res != null) return res.PreguntasRealizadas;
+            else return null;
+        }
     }
 }
