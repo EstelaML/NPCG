@@ -25,7 +25,7 @@ namespace preguntaods.Entities
                 {
                     case 1:
                         {
-                            partida.AddReto(new RetoPre());
+                            partida.AddReto(new RetoPre(partida.GetRetos()));
                             break;
                         }
                     case 2:

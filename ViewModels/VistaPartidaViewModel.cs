@@ -76,6 +76,10 @@ namespace preguntaods
             }
         }
 
+        public async void GuardarPreguntaAcertada() {
+            await partida.GuardarPreguntaUsuario(partida.GetRetoActual());
+        }
+
         public void RetoSiguiente(int fallos, int ptsTotales)
         {
             partida.NextReto(fallos, ptsTotales);
@@ -91,6 +95,10 @@ namespace preguntaods
         public void Abandonar()
         {
             partida.EventoAbandonarBoton(new object(), new System.EventArgs());
+        }
+
+        public void AbandonarFallido(int puntos) {
+            partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos);
         }
     }
 }

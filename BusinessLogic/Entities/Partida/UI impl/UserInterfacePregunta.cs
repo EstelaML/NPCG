@@ -1,15 +1,10 @@
 ﻿using Android.Animation;
 using Android.App;
 using Android.Content;
-using Android.Content.Res;
 using Android.OS;
 using Android.Widget;
-using Postgrest.Models;
-using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
 using System;
-using System.Runtime.InteropServices.ComTypes;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace preguntaods.Entities
@@ -124,7 +119,7 @@ namespace preguntaods.Entities
             {
                 case Pregunta.difBaja:  puntuacion = 100; break;
                 case Pregunta.difMedia: puntuacion = 200; break;
-                case Pregunta.difAlta:  puntuacion = 200; break;
+                case Pregunta.difAlta:  puntuacion = 300; break;
             }
 
             textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
@@ -148,7 +143,7 @@ namespace preguntaods.Entities
             {
                 fachada.EjecutarSonido(_activity, new EstrategiaSonidoAcierto());
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
-
+                (_activity as VistaPartidaViewModel).GuardarPreguntaAcertada();
                 _puntuacionTotal += puntuacion;
                 await MostrarAlerta(true, numRetos == 1);
             }
@@ -166,6 +161,7 @@ namespace preguntaods.Entities
 
 
             FinReto();
+            
             (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
         }
 
@@ -193,26 +189,9 @@ namespace preguntaods.Entities
             string titulo = "";
             string mensaje = "";
             bool result = false;
-           
-            if (fin && !acertado)
-            {
-                titulo = "Game Over";
-                mensaje = "No sumas ningún punto.";
-                alertBuilder.SetMessage(mensaje);
-                alertBuilder.SetTitle(titulo);
-                alertBuilder.SetNegativeButton("Salir", (sender, args) =>
-                {
-                    // volver al menú
-                    // quitar musica ambiente
-                    (_activity as VistaPartidaViewModel).Abandonar();
-                });
 
-                alertBuilder.SetCancelable(false);
-                Android.App.AlertDialog alertDialog = alertBuilder.Create();
-                alertDialog.Show();
-                result = await tcs.Task;
-            }
-            else if (acertado && !fin)
+
+            if (acertado && !fin)
             {
                 titulo = "Has acertado";
                 if (consolidado)
@@ -250,7 +229,8 @@ namespace preguntaods.Entities
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
-                new Handler().PostDelayed(() => {
+                new Handler().PostDelayed(() =>
+                {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
@@ -258,7 +238,7 @@ namespace preguntaods.Entities
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 10000);
-                 result = await tcs.Task;
+                result = await tcs.Task;
             }
             else if (!acertado && !fin)
             {
@@ -281,7 +261,8 @@ namespace preguntaods.Entities
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
-                new Handler().PostDelayed(() => {
+                new Handler().PostDelayed(() =>
+                {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
@@ -291,6 +272,9 @@ namespace preguntaods.Entities
                 }, 10000);
                 result = await tcs.Task;
                 return result;
+            }
+            else {
+                if (!consolidado) { (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal); }
             }
             return result;
         }

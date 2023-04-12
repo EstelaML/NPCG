@@ -1,5 +1,6 @@
 ﻿using Java.Util;
 using preguntaods.Services;
+using System.Collections.Generic;
 
 namespace preguntaods.Entities
 {
@@ -8,10 +9,13 @@ namespace preguntaods.Entities
         private Pregunta pregunta;
         private PreguntadosService servicio;
         private readonly int type;
-        public RetoPre()
+        private List<Reto> retos;
+        private List<Pregunta> preguntas;
+        public RetoPre(List<Reto> listRetos)
         {
             servicio = new PreguntadosService();
             SetPregunta();
+            retos = listRetos;
             type = typePregunta;
         }
 
@@ -33,17 +37,17 @@ namespace preguntaods.Entities
             {
                 case 1:
                     {
-                        pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
+                        pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
                         break;
                     }
                 case 2:
                     {
-                        pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia);
+                        pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
                         break;
                     }
                 case 3:
                     {
-                        pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta);
+                        pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta, retos);
                         break;
                     }
             }

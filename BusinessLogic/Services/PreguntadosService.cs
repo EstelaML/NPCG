@@ -1,5 +1,6 @@
 ﻿using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,11 +23,13 @@ namespace preguntaods.Services
         #endregion
 
         #region RetoPregunta
-        public async Task<Pregunta> SolicitarPregunta(int dificultad)
+        public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
         {
-            var respuesta = await repositorioPre.GetByDificultad(dificultad);
-                
-            return respuesta.FirstOrDefault();
+            // coge los retos de esa dificultad pero ya solo los que no haya hecho
+            List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad);
+
+            Random random = new Random();
+            return  respuesta[random.Next(respuesta.Count)];
         }
         #endregion
     }

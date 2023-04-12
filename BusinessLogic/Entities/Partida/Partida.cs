@@ -44,6 +44,7 @@ namespace preguntaods.Entities
             return listaRetos;
         }
 
+       
         public void AddReto(Reto reto)
         {
             if (listaRetos == null) listaRetos = new List<Reto>();
@@ -103,6 +104,10 @@ namespace preguntaods.Entities
             }
         }
 
+        public async Task GuardarPreguntaUsuario(Reto reto) {
+            await _fachada.GuardarPregunta(reto);
+        }
+
         public void SetFacade(Facade fachada)
         {
             _fachada = fachada;
@@ -151,6 +156,7 @@ namespace preguntaods.Entities
             _fachada.PararSonido(musica);
             Intent i = new Intent(_activity, typeof(MenuViewModel));
             _activity.StartActivity(i);
+            
         });
         builder.SetNegativeButton("Cancelar", (sender, args) =>
         {
