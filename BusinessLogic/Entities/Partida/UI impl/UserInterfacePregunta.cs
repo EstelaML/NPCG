@@ -21,7 +21,6 @@ namespace preguntaods.Entities
         private string correcta;
         private EstrategiaSonidoReloj reloj;
         private int numRetos = 10;
-        private bool consolidado = false;
 
         // UI Elements
         private TextView enunciado;
@@ -194,7 +193,7 @@ namespace preguntaods.Entities
             if (acertado && !fin)
             {
                 titulo = "Has acertado";
-                if (consolidado)
+                if ((_activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas botonAbandonar o seguir?";
                 }
@@ -216,11 +215,10 @@ namespace preguntaods.Entities
                     // vuelves a menu principal
                     (_activity as VistaPartidaViewModel).Abandonar();
                 });
-                if (!consolidado)
+                if (!(_activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
-                        consolidado = true;
                         _puntosConsolidados = _puntuacionTotal;
                         animation.Cancel();
                         (_activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
@@ -276,7 +274,7 @@ namespace preguntaods.Entities
                 return result;
             }
             else {
-                if (!consolidado) { (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal); }
+                if (!(_activity as VistaPartidaViewModel).GetConsolidado()) { (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal); }
             }
             return result;
         }
