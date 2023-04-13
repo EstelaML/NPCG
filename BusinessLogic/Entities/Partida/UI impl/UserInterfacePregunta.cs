@@ -223,6 +223,7 @@ namespace preguntaods.Entities
                         consolidado = true;
                         _puntosConsolidados = _puntuacionTotal;
                         animation.Cancel();
+                        (_activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
                     });
                 }
                 alertBuilder.SetCancelable(false);

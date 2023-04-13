@@ -100,5 +100,10 @@ namespace preguntaods
         public void AbandonarFallido(int puntos) {
             partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos);
         }
+
+        public void Consolidar(int puntosConsolidados)
+        {
+            partida.EventoConsolidarBoton(new object(), new System.EventArgs(), puntosConsolidados);
+        }
     }
 }

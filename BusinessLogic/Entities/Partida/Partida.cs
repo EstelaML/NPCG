@@ -223,5 +223,9 @@ namespace preguntaods.Entities
         alertDialog.Window.SetDimAmount(0.8f);
         alertDialog.Show();
     }
+        public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
+        {
+            await _fachada.UpdatePuntos(puntosConsolidados);
+        }
 }
 }
