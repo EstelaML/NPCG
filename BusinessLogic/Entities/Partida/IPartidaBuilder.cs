@@ -6,6 +6,7 @@
         void BuildRetos();
         void BuildUserInterface();
         void BuildFacade();
+        void BuildSonido();
         Partida GetPartida();
     }
 }

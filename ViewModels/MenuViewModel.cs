@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.Entities;
 using preguntaods.Services;
 using System;
 
@@ -13,10 +14,14 @@ namespace preguntaods
     public class MenuViewModel : AppCompatActivity
     {
         private Facade fachada;
+        private Sonido sonido;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaMenu);
+            sonido = new Sonido();
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+
             fachada = new Facade();
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);
@@ -59,7 +64,7 @@ namespace preguntaods
 
         private void Partida_Click(object sender, EventArgs e)
         {
-            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+            sonido.EjecutarSonido();
 
             Intent i = new Intent(this, typeof(VistaPartidaViewModel));
             StartActivity(i);

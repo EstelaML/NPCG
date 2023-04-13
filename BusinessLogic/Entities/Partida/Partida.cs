@@ -25,7 +25,7 @@ namespace preguntaods.Entities
 
         private int contadorRetoSiguiente;
         private int fallos;
-        private EstrategiaSonidoMusica musica;
+        private Sonido _sonido;
         private int ptsTotales;
 
         public Partida()
@@ -119,10 +119,24 @@ namespace preguntaods.Entities
             return _fachada;
         }
 
+        public void SetSonido(Sonido sonido)
+        {
+            _sonido = sonido;
+        }
+
+        public Sonido GetSonido()
+        {
+            return _sonido;
+        }
+
         public void SetActivity(Android.App.Activity activity)
         {
             _activity = activity;
             userInterface.SetActivity(activity);
+
+            _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
+
+            _sonido.EjecutarSonido();
         }
 
         public void InitValues()
@@ -134,10 +148,6 @@ namespace preguntaods.Entities
             textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
             textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
-            if (musica == null)
-            {
-                musica = new EstrategiaSonidoMusica(); _fachada.EjecutarSonido(_activity, musica);
-            }
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
         }
@@ -156,7 +166,7 @@ namespace preguntaods.Entities
             alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
             {
                 userInterface.FinReto();
-                _fachada.PararSonido(musica);
+                _sonido.PararSonido();
 
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
@@ -198,7 +208,7 @@ namespace preguntaods.Entities
             builder.SetPositiveButton("Salir", (sender, args) =>
             {
                 userInterface.FinReto();
-                _fachada.PararSonido(musica);
+                _sonido.PararSonido();
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
             });

@@ -57,6 +57,11 @@ namespace preguntaods.Entities
             partida.SetFacade(new Facade());
         }
 
+        public void BuildSonido()
+        {
+            partida.SetSonido(new Sonido());
+        }
+
         public Partida GetPartida() {
             return partida;
         }
