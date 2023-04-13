@@ -16,7 +16,7 @@ namespace preguntaods.Entities
         private Facade fachada;
         private int _fallos;
         private int _puntuacionTotal;
-        private int _puntosConsolidados;
+        private static int _puntosConsolidados;
         private int puntuacion;
         private string correcta;
         private EstrategiaSonidoReloj reloj;
@@ -68,7 +68,6 @@ namespace preguntaods.Entities
             if (_fallos == 1) {
                 imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
-                
 
             // Initialization of Services
             fachada = new Facade();
@@ -181,6 +180,10 @@ namespace preguntaods.Entities
             await fachada.UpdatePuntos(_puntuacionTotal);
         }
 
+        public static int getPuntosConsolidados() { 
+            return _puntosConsolidados;
+        }
+
         private async Task<bool> MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
@@ -274,7 +277,7 @@ namespace preguntaods.Entities
                 return result;
             }
             else {
-                if (!(_activity as VistaPartidaViewModel).GetConsolidado()) { (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal); }
+                (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal); 
             }
             return result;
         }

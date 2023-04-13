@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Hardware.Usb;
+using Android.Text;
 using Android.Widget;
 using Org.Apache.Http.Conn;
 using preguntaods.Services;
@@ -27,6 +28,7 @@ namespace preguntaods.Entities
         private int fallos;
         private EstrategiaSonidoMusica musica;
         private int ptsTotales;
+        private int ptsConsolidados;
         private bool falloFacil = false;
         private int numRetos;
 
@@ -85,7 +87,7 @@ namespace preguntaods.Entities
             } 
             else
             {
-                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales);
+                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
             }
         }
 
@@ -161,71 +163,85 @@ namespace preguntaods.Entities
             }
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
-    }
+        }
 
-    public void EventoAbandonarBoton(object sender, EventArgs e)
-    {
-        // preguntar si está seguro antes de abandonar
-        Android.App.AlertDialog alertDialog = null;
-        string titulo = "¿Estás seguro?";
-        string mensaje = "Una vez aceptes perderás tu progreso por completo.";
-        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-        builder.SetMessage(mensaje);
-        builder.SetTitle(titulo);
-        builder.SetPositiveButton("Aceptar", (sender, args) =>
+        public void EventoAbandonarBoton(object sender, EventArgs e)
         {
-            userInterface.FinReto();
-            _fachada.PararSonido(musica);
-
-            Intent i = new Intent(_activity, typeof(MenuViewModel));
-            _activity.StartActivity(i);
+            string titulo = "";
+            string mensaje = "";
+            if ((_activity as VistaPartidaViewModel).GetConsolidado())
+            {
+                titulo = "¿Estás seguro?";
+                mensaje = "Si aceptar se te fuardarán los puntos consolidados, pero el resto no.";
+            }
+            else {
+                titulo = "¿Estás seguro?";
+                mensaje = "Una vez aceptes perderás tu progreso por completo.";
+            }
+            // preguntar si está seguro antes de abandonar
+            Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            builder.SetMessage(mensaje);
+            builder.SetTitle(titulo);
+            builder.SetPositiveButton("Aceptar", (sender, args) =>
+            {
+                userInterface.FinReto();
+                _fachada.PararSonido(musica);
+                if ((_activity as VistaPartidaViewModel).GetConsolidado()) 
+                { 
+                    (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados()); 
+                }
+                    Intent i = new Intent(_activity, typeof(MenuViewModel));
+                _activity.StartActivity(i);
             
-        });
-        builder.SetNegativeButton("Cancelar", (sender, args) =>
-        {
+            });
+            builder.SetNegativeButton("Cancelar", (sender, args) =>
+            {
 
-        });
-        builder.SetCancelable(false);
-        alertDialog = builder.Create();
-        alertDialog.Window.SetDimAmount(0.8f);
-        alertDialog.Show();
+            });
+            builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Window.SetDimAmount(0.8f);
+                alertDialog.Show();
+        }
+
+            public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntosFinales, int puntosConsolidados)
+            {
+                string titulo = "";
+                string mensaje = "";
+                if (acertado)
+                {
+                    titulo = "¡Enhorabuena!";
+                    mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
+               
+                await _fachada.UpdatePuntos(puntosFinales-puntosConsolidados);
+            }
+                else
+                {
+                    titulo = "Has perdido";
+                    mensaje = "Siempre puedes volver a intentarlo...";
+                }
+                Android.App.AlertDialog alertDialog = null;
+
+                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+                builder.SetMessage(mensaje);
+                builder.SetTitle(titulo);
+                builder.SetPositiveButton("Salir", (sender, args) =>
+                {
+                    userInterface.FinReto();
+                    _fachada.PararSonido(musica);
+                    Intent i = new Intent(_activity, typeof(MenuViewModel));
+                    _activity.StartActivity(i);
+                });
+                builder.SetCancelable(false);
+                alertDialog = builder.Create();
+                alertDialog.Window.SetDimAmount(0.8f);
+                alertDialog.Show();
+            }
+
+            public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
+            {
+                await _fachada.UpdatePuntos(puntosConsolidados);
+            }
     }
-
-    public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntos)
-    {
-        string titulo = "";
-        string mensaje = "";
-        if (acertado)
-        {
-            titulo = "¡Enhorabuena!";
-            mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
-            await _fachada.UpdatePuntos(puntos);
-        }
-        else
-        {
-            titulo = "Has perdido";
-            mensaje = "Siempre puedes volver a intentarlo...";
-        }
-        Android.App.AlertDialog alertDialog = null;
-
-        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-        builder.SetMessage(mensaje);
-        builder.SetTitle(titulo);
-        builder.SetPositiveButton("Salir", (sender, args) =>
-        {
-            userInterface.FinReto();
-            _fachada.PararSonido(musica);
-            Intent i = new Intent(_activity, typeof(MenuViewModel));
-            _activity.StartActivity(i);
-        });
-        builder.SetCancelable(false);
-        alertDialog = builder.Create();
-        alertDialog.Window.SetDimAmount(0.8f);
-        alertDialog.Show();
-    }
-        public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
-        {
-            await _fachada.UpdatePuntos(puntosConsolidados);
-        }
-}
 }
