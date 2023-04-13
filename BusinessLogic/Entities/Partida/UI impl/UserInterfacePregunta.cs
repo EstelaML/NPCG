@@ -224,6 +224,7 @@ namespace preguntaods.Entities
                         _puntosConsolidados = _puntuacionTotal;
                         animation.Cancel();
                         (_activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
+                        tcs.TrySetResult(true);
                     });
                 }
                 alertBuilder.SetCancelable(false);
