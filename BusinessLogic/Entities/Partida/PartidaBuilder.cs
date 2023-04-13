@@ -17,7 +17,7 @@ namespace preguntaods.Entities
 
         public void BuildRetos()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 12; i++)
             {
                 Random random = new Random();
 
@@ -25,7 +25,7 @@ namespace preguntaods.Entities
                 {
                     case 1:
                         {
-                            partida.AddReto(new RetoPre(partida.GetRetos()));
+                            partida.AddReto(new RetoPre(partida.GetRetos(),i));
                             break;
                         }
                     case 2:

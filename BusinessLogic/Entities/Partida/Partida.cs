@@ -27,10 +27,13 @@ namespace preguntaods.Entities
         private int fallos;
         private EstrategiaSonidoMusica musica;
         private int ptsTotales;
+        private bool falloFacil = false;
+        private int numRetos;
 
         public Partida()
         {
             contadorRetoSiguiente = 0;
+
             
         }
 
@@ -49,6 +52,7 @@ namespace preguntaods.Entities
         {
             if (listaRetos == null) listaRetos = new List<Reto>();
             listaRetos.Add(reto);
+           
         }
 
         public void NextReto(int fallos, int ptsTotales)
@@ -56,10 +60,28 @@ namespace preguntaods.Entities
             this.fallos = fallos;
             this.ptsTotales = ptsTotales;
 
-            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count)
+            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
-                retoActual = listaRetos[contadorRetoSiguiente];
-                contadorRetoSiguiente++;
+                if (fallos == 1 && contadorRetoSiguiente == 4)
+                {
+                    retoActual = listaRetos[10];
+                    contadorRetoSiguiente++;
+                    falloFacil = true;
+
+                }
+                else if (fallos == 1 && !falloFacil && contadorRetoSiguiente == 7)
+                {
+
+                    retoActual = listaRetos[11];
+                    contadorRetoSiguiente++;
+
+                }
+                else
+                {
+                    retoActual = listaRetos[contadorRetoSiguiente];
+                    contadorRetoSiguiente++;
+                }
+
             } 
             else
             {
