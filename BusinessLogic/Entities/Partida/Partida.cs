@@ -31,7 +31,7 @@ namespace preguntaods.Entities
         public Partida()
         {
             contadorRetoSiguiente = 0;
-            
+
         }
 
         public Reto GetRetoActual()
@@ -44,7 +44,7 @@ namespace preguntaods.Entities
             return listaRetos;
         }
 
-       
+
         public void AddReto(Reto reto)
         {
             if (listaRetos == null) listaRetos = new List<Reto>();
@@ -60,7 +60,7 @@ namespace preguntaods.Entities
             {
                 retoActual = listaRetos[contadorRetoSiguiente];
                 contadorRetoSiguiente++;
-            } 
+            }
             else
             {
                 EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales);
@@ -104,7 +104,8 @@ namespace preguntaods.Entities
             }
         }
 
-        public async Task GuardarPreguntaUsuario(Reto reto) {
+        public async Task GuardarPreguntaUsuario(Reto reto)
+        {
             await _fachada.GuardarPregunta(reto);
         }
 
@@ -139,67 +140,73 @@ namespace preguntaods.Entities
             }
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
-    }
-
-    public void EventoAbandonarBoton(object sender, EventArgs e)
-    {
-        // preguntar si está seguro antes de abandonar
-        Android.App.AlertDialog alertDialog = null;
-        string titulo = "¿Estás seguro?";
-        string mensaje = "Una vez aceptes perderás tu progreso por completo.";
-        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-        builder.SetMessage(mensaje);
-        builder.SetTitle(titulo);
-        builder.SetPositiveButton("Aceptar", (sender, args) =>
-        {
-            userInterface.FinReto();
-            _fachada.PararSonido(musica);
-
-            Intent i = new Intent(_activity, typeof(MenuViewModel));
-            _activity.StartActivity(i);
-            
-        });
-        builder.SetNegativeButton("Cancelar", (sender, args) =>
-        {
-
-        });
-        builder.SetCancelable(false);
-        alertDialog = builder.Create();
-        alertDialog.Window.SetDimAmount(0.8f);
-        alertDialog.Show();
-    }
-
-    public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntos)
-    {
-        string titulo = "";
-        string mensaje = "";
-        if (acertado)
-        {
-            titulo = "¡Enhorabuena!";
-            mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
-            await _fachada.UpdatePuntos(puntos);
         }
-        else
-        {
-            titulo = "Has perdido";
-            mensaje = "Siempre puedes volver a intentarlo...";
-        }
-        Android.App.AlertDialog alertDialog = null;
 
-        Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-        builder.SetMessage(mensaje);
-        builder.SetTitle(titulo);
-        builder.SetPositiveButton("Salir", (sender, args) =>
+        public void EventoAbandonarBoton(object sender, EventArgs e)
         {
-            userInterface.FinReto();
-            _fachada.PararSonido(musica);
-            Intent i = new Intent(_activity, typeof(MenuViewModel));
-            _activity.StartActivity(i);
-        });
-        builder.SetCancelable(false);
-        alertDialog = builder.Create();
-        alertDialog.Window.SetDimAmount(0.8f);
-        alertDialog.Show();
+            // preguntar si está seguro antes de abandonar
+            string titulo = "¿Estás seguro?";
+            string mensaje = "Una vez aceptes perderás tu progreso por completo.";
+
+            Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+
+            alertBuilder.SetMessage(mensaje);
+            alertBuilder.SetTitle(titulo);
+            alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
+            {
+                userInterface.FinReto();
+                _fachada.PararSonido(musica);
+
+                Intent i = new Intent(_activity, typeof(MenuViewModel));
+                _activity.StartActivity(i);
+
+            });
+            alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
+            {
+
+            });
+            alertBuilder.SetCancelable(false);
+
+            alertDialog = alertBuilder.Create();
+            alertDialog.Window.SetDimAmount(0.8f);
+            alertDialog.Show();
+        }
+
+        public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntos)
+        {
+            string titulo = "";
+            string mensaje = "";
+
+            if (acertado)
+            {
+                titulo = "¡Enhorabuena!";
+                mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
+                await _fachada.UpdatePuntos(puntos);
+            }
+            else
+            {
+                titulo = "Has perdido";
+                mensaje = "Siempre puedes volver a intentarlo...";
+            }
+
+            Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+
+            builder.SetMessage(mensaje);
+            builder.SetTitle(titulo);
+            builder.SetPositiveButton("Salir", (sender, args) =>
+            {
+                userInterface.FinReto();
+                _fachada.PararSonido(musica);
+                Intent i = new Intent(_activity, typeof(MenuViewModel));
+                _activity.StartActivity(i);
+            });
+            builder.SetCancelable(false);
+
+            alertDialog = builder.Create();
+            alertDialog.Window.SetDimAmount(0.8f);
+            alertDialog.Show();
+        }
     }
-}
 }

@@ -54,16 +54,16 @@ namespace preguntaods.Entities
         public override void Init()
         {
             // Initialization of UI Elements
-            enunciado           = _activity.FindViewById<TextView>(Resource.Id.pregunta);
-            botonPregunta1      = _activity.FindViewById<Button>(Resource.Id.button1);
-            botonPregunta2      = _activity.FindViewById<Button>(Resource.Id.button2);
-            botonPregunta3      = _activity.FindViewById<Button>(Resource.Id.button3);
-            botonPregunta4      = _activity.FindViewById<Button>(Resource.Id.button4);
-            barTime             = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            textoPuntos         = _activity.FindViewById<TextView>(Resource.Id.textView1);
-            imagenOds           = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
-            imagenCorazon1      = _activity.FindViewById<ImageView>(Resource.Id.heart1);
-            imagenCorazon2      = _activity.FindViewById<ImageView>(Resource.Id.heart2);
+            enunciado = _activity.FindViewById<TextView>(Resource.Id.pregunta);
+            botonPregunta1 = _activity.FindViewById<Button>(Resource.Id.button1);
+            botonPregunta2 = _activity.FindViewById<Button>(Resource.Id.button2);
+            botonPregunta3 = _activity.FindViewById<Button>(Resource.Id.button3);
+            botonPregunta4 = _activity.FindViewById<Button>(Resource.Id.button4);
+            barTime = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            textoPuntos = _activity.FindViewById<TextView>(Resource.Id.textView1);
+            imagenOds = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
+            imagenCorazon1 = _activity.FindViewById<ImageView>(Resource.Id.heart1);
+            imagenCorazon2 = _activity.FindViewById<ImageView>(Resource.Id.heart2);
             _puntosConsolidados = 0;
 
             if (_fallos == 1) {
@@ -117,9 +117,9 @@ namespace preguntaods.Entities
 
             switch(pregunta.Dificultad)
             {
-                case Pregunta.difBaja:  puntuacion = 100; break;
+                case Pregunta.difBaja: puntuacion = 100; break;
                 case Pregunta.difMedia: puntuacion = 200; break;
-                case Pregunta.difAlta:  puntuacion = 300; break;
+                case Pregunta.difAlta: puntuacion = 300; break;
             }
 
             textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
