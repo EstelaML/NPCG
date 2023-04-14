@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Hardware.Usb;
+using Android.Text;
 using Android.Widget;
 using Org.Apache.Http.Conn;
 using preguntaods.Services;
@@ -27,6 +28,9 @@ namespace preguntaods.Entities
         private int fallos;
         private Sonido _sonido;
         private int ptsTotales;
+        private int ptsConsolidados;
+        private bool falloFacil = false;
+        private int numRetos;
 
         public Partida()
         {
@@ -49,6 +53,7 @@ namespace preguntaods.Entities
         {
             if (listaRetos == null) listaRetos = new List<Reto>();
             listaRetos.Add(reto);
+           
         }
 
         public void NextReto(int fallos, int ptsTotales)
@@ -56,14 +61,32 @@ namespace preguntaods.Entities
             this.fallos = fallos;
             this.ptsTotales = ptsTotales;
 
-            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count)
+            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
-                retoActual = listaRetos[contadorRetoSiguiente];
-                contadorRetoSiguiente++;
-            }
+                if (fallos == 1 && contadorRetoSiguiente == 4)
+                {
+                    retoActual = listaRetos[10];
+                    contadorRetoSiguiente++;
+                    falloFacil = true;
+
+                }
+                else if (fallos == 1 && !falloFacil && contadorRetoSiguiente == 7)
+                {
+
+                    retoActual = listaRetos[11];
+                    contadorRetoSiguiente++;
+
+                }
+                else
+                {
+                    retoActual = listaRetos[contadorRetoSiguiente];
+                    contadorRetoSiguiente++;
+                }
+
+            } 
             else
             {
-                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales);
+                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
             }
         }
 
@@ -150,7 +173,7 @@ namespace preguntaods.Entities
 
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
-        }
+    }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
@@ -173,6 +196,38 @@ namespace preguntaods.Entities
 
             });
             alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
+            {
+        public void EventoAbandonarBoton(object sender, EventArgs e)
+        {
+            string titulo = "";
+            string mensaje = "";
+            if ((_activity as VistaPartidaViewModel).GetConsolidado())
+            {
+                titulo = "¿Estás seguro?";
+                mensaje = "Si aceptar se te fuardarán los puntos consolidados, pero el resto no.";
+            }
+            else {
+                titulo = "¿Estás seguro?";
+                mensaje = "Una vez aceptes perderás tu progreso por completo.";
+            }
+            // preguntar si está seguro antes de abandonar
+            Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            builder.SetMessage(mensaje);
+            builder.SetTitle(titulo);
+            builder.SetPositiveButton("Aceptar", (sender, args) =>
+            {
+                userInterface.FinReto();
+                _fachada.PararSonido(musica);
+                if ((_activity as VistaPartidaViewModel).GetConsolidado()) 
+                { 
+                    (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados()); 
+                }
+                    Intent i = new Intent(_activity, typeof(MenuViewModel));
+                _activity.StartActivity(i);
+            
+            });
+            builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
 
             });
