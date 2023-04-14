@@ -19,7 +19,7 @@ namespace preguntaods
         // Vars
         private Reto reto;
         private Partida partida;
-
+        private bool consolidado;
         private Animator animation;
         private ProgressBar progressBar;
 
@@ -28,7 +28,8 @@ namespace preguntaods
             // Inicio de la vista
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPartida);
-            
+            consolidado = false;
+
             // Cargar partida
             var director = new PartidaDirector();
             var builder = new PartidaBuilder();
@@ -98,7 +99,17 @@ namespace preguntaods
         }
 
         public void AbandonarFallido(int puntos) {
-            partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos);
+            partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos, UserInterfacePregunta.getPuntosConsolidados());
+        }
+
+        public void Consolidar(int puntosConsolidados)
+        {
+            consolidado = true;
+            partida.EventoConsolidarBoton(new object(), new System.EventArgs(), puntosConsolidados);
+        }
+
+        public bool GetConsolidado() { 
+            return consolidado;
         }
     }
 }

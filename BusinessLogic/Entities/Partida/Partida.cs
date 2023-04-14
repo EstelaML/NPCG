@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Hardware.Usb;
+using Android.Text;
 using Android.Widget;
 using Org.Apache.Http.Conn;
 using preguntaods.Services;
@@ -27,11 +28,14 @@ namespace preguntaods.Entities
         private int fallos;
         private Sonido _sonido;
         private int ptsTotales;
+        private int ptsConsolidados;
+        private bool falloFacil = false;
+        private int numRetos;
 
         public Partida()
         {
             contadorRetoSiguiente = 0;
-
+            listaRetos = new List<Reto>();
         }
 
         public Reto GetRetoActual()
@@ -47,8 +51,7 @@ namespace preguntaods.Entities
 
         public void AddReto(Reto reto)
         {
-            if (listaRetos == null) listaRetos = new List<Reto>();
-            listaRetos.Add(reto);
+            listaRetos.Add(reto);           
         }
 
         public void NextReto(int fallos, int ptsTotales)
@@ -56,14 +59,32 @@ namespace preguntaods.Entities
             this.fallos = fallos;
             this.ptsTotales = ptsTotales;
 
-            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count)
+            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
-                retoActual = listaRetos[contadorRetoSiguiente];
-                contadorRetoSiguiente++;
-            }
+                if (fallos == 1 && contadorRetoSiguiente == 4)
+                {
+                    retoActual = listaRetos[10];
+                    contadorRetoSiguiente++;
+                    falloFacil = true;
+
+                }
+                else if (fallos == 1 && !falloFacil && contadorRetoSiguiente == 7)
+                {
+
+                    retoActual = listaRetos[11];
+                    contadorRetoSiguiente++;
+
+                }
+                else
+                {
+                    retoActual = listaRetos[contadorRetoSiguiente];
+                    contadorRetoSiguiente++;
+                }
+
+            } 
             else
             {
-                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales);
+                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
             }
         }
 
@@ -135,7 +156,6 @@ namespace preguntaods.Entities
             userInterface.SetActivity(activity);
 
             _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
-
             _sonido.EjecutarSonido();
         }
 
@@ -150,13 +170,23 @@ namespace preguntaods.Entities
 
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
-        }
+    }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
+            string titulo = "";
+            string mensaje = "";
+            if ((_activity as VistaPartidaViewModel).GetConsolidado())
+            {
+                titulo = "¿Estás seguro?";
+                mensaje = "Si aceptar se te fuardarán los puntos consolidados, pero el resto no.";
+            }
+            else
+            {
+                titulo = "¿Estás seguro?";
+                mensaje = "Una vez aceptes perderás tu progreso por completo.";
+            }
             // preguntar si está seguro antes de abandonar
-            string titulo = "¿Estás seguro?";
-            string mensaje = "Una vez aceptes perderás tu progreso por completo.";
 
             Android.App.AlertDialog alertDialog = null;
             Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
@@ -168,6 +198,11 @@ namespace preguntaods.Entities
                 userInterface.FinReto();
                 _sonido.PararSonido();
 
+                if ((_activity as VistaPartidaViewModel).GetConsolidado())
+                {
+                    (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
+                }
+
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
 
@@ -177,13 +212,12 @@ namespace preguntaods.Entities
 
             });
             alertBuilder.SetCancelable(false);
-
             alertDialog = alertBuilder.Create();
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
         }
 
-        public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntos)
+        public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntosFinales, int puntosConsolidados)
         {
             string titulo = "";
             string mensaje = "";
@@ -192,7 +226,7 @@ namespace preguntaods.Entities
             {
                 titulo = "¡Enhorabuena!";
                 mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
-                await _fachada.UpdatePuntos(puntos);
+                await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
             }
             else
             {
@@ -201,22 +235,27 @@ namespace preguntaods.Entities
             }
 
             Android.App.AlertDialog alertDialog = null;
-            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
 
-            builder.SetMessage(mensaje);
-            builder.SetTitle(titulo);
-            builder.SetPositiveButton("Salir", (sender, args) =>
+            alertBuilder.SetMessage(mensaje);
+            alertBuilder.SetTitle(titulo);
+            alertBuilder.SetPositiveButton("Salir", (sender, args) =>
             {
                 userInterface.FinReto();
                 _sonido.PararSonido();
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
             });
-            builder.SetCancelable(false);
+            alertBuilder.SetCancelable(false);
 
-            alertDialog = builder.Create();
+            alertDialog = alertBuilder.Create();
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
+        }
+
+        public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
+        {
+            await _fachada.UpdatePuntos(puntosConsolidados);
         }
     }
 }

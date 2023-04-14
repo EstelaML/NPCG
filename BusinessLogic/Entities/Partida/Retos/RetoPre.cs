@@ -1,4 +1,5 @@
-﻿using Java.Util;
+﻿using Android.Media;
+using Java.Util;
 using preguntaods.Services;
 using System.Collections.Generic;
 
@@ -11,10 +12,12 @@ namespace preguntaods.Entities
         private readonly int type;
         private List<Reto> retos;
         private List<Pregunta> preguntas;
-        public RetoPre(List<Reto> listRetos)
+        private int orden;
+        public RetoPre(List<Reto> listRetos, int orden)
         {
             servicio = new PreguntadosService();
-            SetPregunta();
+            this .orden = orden;
+            setDif();
             retos = listRetos;
             type = typePregunta;
         }
@@ -29,11 +32,28 @@ namespace preguntaods.Entities
             return pregunta;
         }
 
-        private async void SetPregunta()
+        private void setDif()
         {
-            Random random = new Random();
 
-            switch (random.NextInt(3) + 1)
+            if (orden < 4 || orden == 10)
+            {
+
+                SetPregunta(1);
+
+            } else if (orden < 7 || orden == 11) 
+            {
+
+                SetPregunta(2);            
+
+            } else { SetPregunta(3); }
+
+        }
+
+        private async void SetPregunta(int dif)
+        {
+            
+
+            switch (dif)
             {
                 case 1:
                     {
