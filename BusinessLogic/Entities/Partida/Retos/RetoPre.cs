@@ -2,6 +2,7 @@
 using Java.Util;
 using preguntaods.Services;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace preguntaods.Entities
 {
@@ -13,14 +14,23 @@ namespace preguntaods.Entities
         private List<Reto> retos;
         private List<Pregunta> preguntas;
         private int orden;
-        public RetoPre(List<Reto> listRetos, int orden)
+
+        private RetoPre(PreguntadosService servicio, Pregunta pregunta, int type, List<Reto> retos, int orden)
         {
-            servicio = new PreguntadosService();
-            this .orden = orden;
-            retos = listRetos;
-            setDif();
-            type = typePregunta;
+            this.servicio = servicio;
+            this.pregunta = pregunta;
+            this.type = type;
+            this.retos = retos;
+            this.orden = orden;
         }
+
+        public static async Task<RetoPre> RetoPreAsync(List<Reto> retos, int i)
+        {
+            var servicio = new PreguntadosService();
+            var p = await servicio.SetDif(i, retos);
+            return new RetoPre(servicio, p, typePregunta, retos, i);
+        }
+
 
         public override int GetType()
         {
@@ -32,46 +42,7 @@ namespace preguntaods.Entities
             return pregunta;
         }
 
-        private void setDif()
-        {
 
-            if (orden < 4 || orden == 10)
-            {
 
-                SetPregunta(1);
-
-            } else if (orden < 7 || orden == 11) 
-            {
-
-                SetPregunta(2);            
-
-            } else { SetPregunta(3); }
-
-        }
-
-        private async void SetPregunta(int dif)
-        {
-            
-
-            switch (dif)
-            {
-                case 1:
-                    {
-                        pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
-                        break;
-                    }
-                case 2:
-                    {
-                        pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
-                        break;
-                    }
-                case 3:
-                    {
-                        pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta, retos);
-                        break;
-                    }
-            }
-            
-        }
     }
 }

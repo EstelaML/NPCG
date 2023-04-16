@@ -1,7 +1,9 @@
-﻿using Java.Util;
+﻿using Android.OS;
+using Java.Util;
 using preguntaods.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
@@ -13,7 +15,7 @@ namespace preguntaods.Persistencia.Repository
         {
             conexion = SingletonConexion.GetInstance();
         }
-        public async Task<List<Pregunta>> GetByDificultad(int dificultad)
+        public async Task<List<Pregunta>> GetByDificultad(int dificultad, List<Reto> retos)
         {
             var a = conexion.usuario.Id;
             // cojo todas las Preguntas y las paso a una lista
@@ -26,16 +28,20 @@ namespace preguntaods.Persistencia.Repository
             // cojo del usuario Loggeado las preguntas que haya acertado y estén en la BD
             var retosRealizados = await conexion.cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
             int[] retosID = retosRealizados.PreguntasRealizadas;
+            List<Pregunta> preguntasPosibles = preguntasTodasLista;
             if (retosID != null)
             {
                 List<int> preguntasRealizadas = retosID.ToList();
-
-                // elimino de la lista de preguntas
-                preguntasTodasLista.RemoveAll(elemento => preguntasRealizadas.Contains((int)elemento.Id));
+                // elimino de la lista de preguntas ya realizadas
+                preguntasPosibles = preguntasTodasLista.Where(x => x.Id.HasValue && !preguntasRealizadas.Contains((int)x.Id)).Select(x => x).ToList();
             }
-            
+            if (retos != null) {
+                // !retos
+                List<int> preguntasRetoRealizada = retos.Cast<RetoPre>().Where(x => x.GetPregunta()?.Id.HasValue == true).Select(x => x.GetPregunta().Id.Value).ToList();
+                preguntasPosibles = preguntasPosibles.Where(x => !preguntasRetoRealizada.Contains((int)x.Id)).ToList();
+            }  
             //return response.Models.AsEnumerable();
-            return preguntasTodasLista;
+            return preguntasPosibles;
         }
     }       
 }

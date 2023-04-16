@@ -2,6 +2,8 @@
 using preguntaods.Persistencia.Repository;
 using preguntaods.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace preguntaods.Entities
 {
@@ -25,7 +27,8 @@ namespace preguntaods.Entities
                 {
                     case 1:
                         {
-                            partida.AddReto(new RetoPre(partida.GetRetos(),i));
+                            RetoPre retoPre = RetoPre.RetoPreAsync(partida.GetRetos(), i).Result;
+                            partida.AddReto(retoPre);
                             break;
                         }
                     case 2:
@@ -45,6 +48,9 @@ namespace preguntaods.Entities
                         }
                 }
             }
+            var a = partida.GetRetos();
+            var pregunta = (a.First() as RetoPre).GetPregunta();
+            var p = pregunta.Enunciado;
         }
 
         public void BuildUserInterface()

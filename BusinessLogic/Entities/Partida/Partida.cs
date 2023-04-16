@@ -54,7 +54,6 @@ namespace preguntaods.Entities
         {
             if (listaRetos == null) listaRetos = new List<Reto>();
             listaRetos.Add(reto);
-           
         }
 
         public void NextReto(int fallos, int ptsTotales)

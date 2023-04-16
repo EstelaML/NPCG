@@ -106,12 +106,15 @@ namespace preguntaods.Entities
         public override void SetDatosReto(Reto reto)
         {
             var pregunta = (reto as RetoPre).GetPregunta();
-
-            enunciado.Text = pregunta.Enunciado;
-            botonPregunta1.Text = pregunta.Respuesta1;
-            botonPregunta2.Text = pregunta.Respuesta2;
-            botonPregunta3.Text = pregunta.Respuesta3;
-            botonPregunta4.Text = pregunta.Respuesta4;
+            if (pregunta != null) 
+            { 
+                 enunciado.Text = pregunta.Enunciado;
+                botonPregunta1.Text = pregunta.Respuesta1;
+                botonPregunta2.Text = pregunta.Respuesta2;
+                botonPregunta3.Text = pregunta.Respuesta3;
+                botonPregunta4.Text = pregunta.Respuesta4;
+            }
+           
 
             switch(pregunta.Dificultad)
             {

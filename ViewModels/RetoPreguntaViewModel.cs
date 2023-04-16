@@ -74,23 +74,23 @@ namespace preguntaods
             imagenCorazon2 = FindViewById<ImageView>(Resource.Id.heart2);
 
             // Conseguir preguntas 
-            var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
-            var preguntasMedias = await repositorio.GetByDificultad(Pregunta.difMedia);
-            var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta);
+            /*  var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
+              var preguntasMedias = await repositorio.GetByDificultad(Pregunta.difMedia);
+              var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta); 
 
-            faciles = preguntasFaciles.ToList();
-            medias = preguntasMedias.ToList();
-            altas = preguntasAltas.ToList();
+              faciles = preguntasFaciles.ToList();
+              medias = preguntasMedias.ToList();
+              altas = preguntasAltas.ToList();
 
-            Shuffle(faciles);
-            Shuffle(medias);
-            Shuffle(altas);
+              Shuffle(faciles);
+              Shuffle(medias);
+              Shuffle(altas);
 
-            // Initialization vars
-            turno = 0;
-            ptsTotales = 0;
-            consolidado = false;
-            errores = 0;
+              // Initialization vars
+              turno = 0;
+              ptsTotales = 0;
+              consolidado = false;
+              errores = 0;*/
 
             // botones soluciones
             botonPregunta1.Click += ButtonClick;
