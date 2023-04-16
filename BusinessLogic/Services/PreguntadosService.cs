@@ -27,7 +27,7 @@ namespace preguntaods.Services
         {
             // coge los retos de esa dificultad pero ya solo los que no haya hecho
             List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad);
-
+            
             Random random = new Random();
             return  respuesta[random.Next(respuesta.Count)];
         }
