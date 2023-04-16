@@ -1,5 +1,7 @@
-﻿using preguntaods.Entities;
+﻿using Java.Util;
+using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
+using Supabase.Gotrue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +28,20 @@ namespace preguntaods.Services
         public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
         {
             // coge los retos de esa dificultad pero ya solo los que no haya hecho
-            List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad);
-            
-            Random random = new Random();
-            return  respuesta[random.Next(respuesta.Count)];
+            List<Pregunta> preguntasTodas = await repositorioPre.GetByDificultad(dificultad);
+
+            List<RetoPre> retosPartida = retos.Cast<RetoPre>().ToList();
+            Pregunta a= retosPartida.First().GetPregunta();
+            if (retos != null)
+            {
+                var preguntasFiltradas = preguntasTodas.Where(p => !retosPartida.Any(rp => rp.GetPregunta().Enunciado == p.Enunciado));
+                var preguntaAleatoria = preguntasFiltradas.OrderBy(p => Guid.NewGuid()).FirstOrDefault();
+
+                return preguntaAleatoria;
+            }
+            else {
+                return preguntasTodas.First();
+            }
         }
         #endregion
     }
