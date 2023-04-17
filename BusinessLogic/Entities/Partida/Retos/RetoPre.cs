@@ -19,9 +19,12 @@ namespace preguntaods.Entities
             servicio = new PreguntadosService();
             this.orden = orden;
             retos = listRetos;
-            pregunta = SetDif(orden, listRetos).Result;
             type = typePregunta;
         }
+
+        public async Task AsignarPregunta(int orden, List<Reto> listRetos) {
+            pregunta = await SetDif(orden, listRetos);
+        } 
 
 
         public override int GetType()

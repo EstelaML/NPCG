@@ -18,6 +18,7 @@ namespace preguntaods.Persistencia.Repository
         public async Task<List<Pregunta>> GetByDificultad(int dificultad, List<Reto> retos)
         {
             var a = conexion.usuario.Id;
+
             // cojo todas las Preguntas y las paso a una lista
             var preguntasTodos = await conexion.cliente
                 .From<Pregunta>()

@@ -4,6 +4,7 @@ using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace preguntaods.Entities
 {
@@ -17,7 +18,7 @@ namespace preguntaods.Entities
             partida.user = await fachada.GetUsuarioLogged();
         }
 
-        public void BuildRetos()
+        public async Task BuildRetos()
         {
             for (int i = 0; i < 12; i++)
             {
@@ -28,6 +29,7 @@ namespace preguntaods.Entities
                     case 1:
                         {
                             RetoPre retoPre = new RetoPre(partida.GetRetos(), i);
+                            await retoPre.AsignarPregunta(i, partida.GetRetos());
                             partida.AddReto(retoPre);
                             break;
                         }
