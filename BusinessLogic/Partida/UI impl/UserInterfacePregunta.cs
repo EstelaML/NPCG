@@ -148,6 +148,8 @@ namespace preguntaods.Entities
             numRetos--;
             animation.Cancel();
             Button boton = sender as Button;
+            Boolean acierto;
+            Boolean condicion;
 
             if (boton.Text.Equals(correcta))
             {
@@ -155,7 +157,7 @@ namespace preguntaods.Entities
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
                 (_activity as VistaPartidaViewModel).GuardarPreguntaAcertada();
                 _puntuacionTotal += puntuacion;
-                await MostrarAlerta(true, numRetos == 1);
+                acierto = true; condicion = numRetos == 1;
             }
             else
             {
@@ -166,10 +168,11 @@ namespace preguntaods.Entities
                 if (_puntuacionTotal < 0) _puntuacionTotal = 0;
 
                 _fallos++;
-                await MostrarAlerta(false, _fallos == 2);
+                acierto = false; condicion = _fallos == 2;
             }
 
             sonido.EjecutarSonido();
+            await MostrarAlerta(acierto, condicion);
 
             FinReto();
 
