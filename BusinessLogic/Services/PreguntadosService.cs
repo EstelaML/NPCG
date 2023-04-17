@@ -20,7 +20,7 @@ namespace preguntaods.Services
 
         #region RetoPregunta
 
-        public async Task InitList()
+        public async Task InitPreguntaList()
         {
             if (preguntasBajas == null) preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.difBaja);
             if (preguntasMedias == null) preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.difMedia);

@@ -33,6 +33,17 @@ namespace preguntaods.Entities
             listaRetos = new List<Reto>();
         }
 
+        #region Setters/Getters
+
+        public void SetActivity(Android.App.Activity activity)
+        {
+            _activity = activity;
+            userInterface.SetActivity(activity);
+
+            _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
+            _sonido.EjecutarSonido();
+        }
+
         public Reto GetRetoActual()
         {
             return retoActual;
@@ -46,6 +57,50 @@ namespace preguntaods.Entities
         public void AddReto(Reto reto)
         {
             listaRetos.Add(reto);
+        }
+
+        public void SetFacade(Facade fachada)
+        {
+            _fachada = fachada;
+        }
+
+        public Facade GetFacade()
+        {
+            return _fachada;
+        }
+
+        private void SetUI(UserInterface userInterface)
+        {
+            this.userInterface = userInterface;
+        }
+        public UserInterface GetUI()
+        {
+            return userInterface;
+        }
+
+        public void SetSonido(Sonido sonido)
+        {
+            _sonido = sonido;
+        }
+
+        public Sonido GetSonido()
+        {
+            return _sonido;
+        }
+
+        #endregion
+
+        public void InitValues()
+        {
+            userInterface.SetValues(fallos, ptsTotales);
+            userInterface.Init();
+            userInterface.SetDatosReto(retoActual);
+
+            textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
+            textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
+
+            botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
+            botonAbandonar.Click += EventoAbandonarBoton;
         }
 
         public void NextReto(int fallos, int ptsTotales)
@@ -76,16 +131,6 @@ namespace preguntaods.Entities
             {
                 _ = EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
             }
-        }
-
-        public UserInterface GetUI()
-        {
-            return userInterface;
-        }
-
-        private void SetUI(UserInterface userInterface)
-        {
-            this.userInterface = userInterface;
         }
 
         public void UpdateUI()
@@ -120,47 +165,7 @@ namespace preguntaods.Entities
             await _fachada.GuardarPregunta(reto);
         }
 
-        public void SetFacade(Facade fachada)
-        {
-            _fachada = fachada;
-        }
 
-        public Facade GetFacade()
-        {
-            return _fachada;
-        }
-
-        public void SetSonido(Sonido sonido)
-        {
-            _sonido = sonido;
-        }
-
-        public Sonido GetSonido()
-        {
-            return _sonido;
-        }
-
-        public void SetActivity(Android.App.Activity activity)
-        {
-            _activity = activity;
-            userInterface.SetActivity(activity);
-
-            _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
-            _sonido.EjecutarSonido();
-        }
-
-        public void InitValues()
-        {
-            userInterface.SetValues(fallos, ptsTotales);
-            userInterface.Init();
-            userInterface.SetDatosReto(retoActual);
-
-            textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
-            textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
-
-            botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
-            botonAbandonar.Click += EventoAbandonarBoton;
-        }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
