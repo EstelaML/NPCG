@@ -21,8 +21,8 @@ namespace preguntaods.Services
 
         public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
         {
-            List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
-            return respuesta.FirstOrDefault();
+            IEnumerable<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
+            return respuesta.FirstOrDefault(); 
         }
 
         public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos)

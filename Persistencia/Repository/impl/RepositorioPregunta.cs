@@ -14,6 +14,18 @@ namespace preguntaods.Persistencia.Repository
             conexion = SingletonConexion.GetInstance();
         }
 
+
+        public async Task<IEnumerable<Pregunta>> GetByDificultad(int dificultad, List<Reto> retos)
+        {
+            var response = await conexion.cliente
+                .From<Pregunta>()
+                .Where(x => x.Dificultad == dificultad)
+                .Get();
+
+            return response.Models.AsEnumerable();
+        }
+
+        /*
         public async Task<List<Pregunta>> GetByDificultad(int dificultad, List<Reto> retos)
         {
             var a = conexion.usuario.Id;
@@ -44,5 +56,6 @@ namespace preguntaods.Persistencia.Repository
             //return response.Models.AsEnumerable();
             return preguntasPosibles;
         }
+        */
     }
 }

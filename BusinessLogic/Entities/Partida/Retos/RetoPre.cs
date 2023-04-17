@@ -18,7 +18,7 @@ namespace preguntaods.Entities
             servicio = new PreguntadosService();
             this.orden = orden;
             retos = listRetos;
-            pregunta = SetDif(orden, listRetos).Result;
+            SetDif(orden, listRetos);
             type = typePregunta;
         }
 
@@ -32,17 +32,17 @@ namespace preguntaods.Entities
             return pregunta;
         }
 
-        public async Task<Pregunta> SetDif(int orden, List<Reto> retos)
+        public async Task SetDif(int orden, List<Reto> retos)
         {
             if (orden < 4 || orden == 10)
             {
-                return await SetPregunta(1, retos);
+                pregunta = await SetPregunta(1, retos);
             }
             else if (orden < 7 || orden == 11)
             {
-                return await SetPregunta(2, retos);
+                pregunta = await SetPregunta(2, retos);
             }
-            else { return await SetPregunta(3, retos); }
+            else { pregunta = await SetPregunta(3, retos); }
         }
 
         private async Task<Pregunta> SetPregunta(int dif, List<Reto> retos)
