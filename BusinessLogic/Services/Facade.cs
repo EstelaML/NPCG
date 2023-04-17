@@ -1,5 +1,4 @@
-﻿using Java.Util;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository;
 using Supabase.Gotrue;
@@ -12,6 +11,7 @@ namespace preguntaods.Services
     {
         private readonly SingletonConexion conexion;
         private readonly RepositorioUsuario repositorioUser;
+
         public Facade()
         {
             conexion = SingletonConexion.GetInstance();
@@ -19,16 +19,18 @@ namespace preguntaods.Services
         }
 
         #region Usuario
+
         public async Task LoginAsync(string correo, string password)
         {
             var session = await conexion.cliente.Auth.SignIn(correo, password);
-            conexion.usuario =  session.User;
+            conexion.usuario = session.User;
         }
 
         public async Task LogoutAsync()
         {
             await conexion.cliente.Auth.SignOut();
         }
+
         public async Task<User> SignUpAsync(string correo, string password)
         {
             var session = await conexion.cliente.Auth.SignUp(correo, password);
@@ -50,7 +52,8 @@ namespace preguntaods.Services
             }
         }
 
-        public async Task UpdatePuntos(int puntos) {
+        public async Task UpdatePuntos(int puntos)
+        {
             if (conexion.usuario != null)
             {
                 var a = conexion.usuario.Id;
@@ -64,25 +67,27 @@ namespace preguntaods.Services
             await repositorioUser.Add(user);
         }
 
-        public async Task GuardarPregunta(Reto reto) {
+        public async Task GuardarPregunta(Reto reto)
+        {
             var pregunta = (reto as RetoPre).GetPregunta();
             var a = conexion.usuario.Id;
 
             var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a);
-           if (preguntas != null)
+            if (preguntas != null)
             {
                 int l = preguntas.Length;
                 Array.Resize(ref preguntas, preguntas.Length + 1);  // redimensiona el arreglo
                 preguntas[l - 1] = (int)pregunta.Id;
                 await repositorioUser.UpdatePreguntaAcertada(a, preguntas);
             }
-            else {
-                int[] preguntass = { (int) pregunta.Id };
+            else
+            {
+                int[] preguntass = { (int)pregunta.Id };
                 await repositorioUser.UpdatePreguntaAcertada(a, preguntass);
             }
         }
 
-        #endregion
+        #endregion Usuario
 
         #region Sonido
 
@@ -96,6 +101,6 @@ namespace preguntaods.Services
             estrategia.Stop();
         }
 
-        #endregion
+        #endregion Sonido
     }
 }

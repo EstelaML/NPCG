@@ -13,6 +13,7 @@ namespace preguntaods.Entities
     {
         // Class Elements
         private Activity _activity;
+
         private Facade fachada;
         private int _fallos;
         private int _puntuacionTotal;
@@ -24,6 +25,7 @@ namespace preguntaods.Entities
 
         // UI Elements
         private TextView enunciado;
+
         private Button botonPregunta1;
         private Button botonPregunta2;
         private Button botonPregunta3;
@@ -37,7 +39,8 @@ namespace preguntaods.Entities
         // Interactive Elements
         private ObjectAnimator animation;
 
-        public UserInterfacePregunta() { }
+        public UserInterfacePregunta()
+        { }
 
         public override void SetActivity(Activity activity)
         {
@@ -53,19 +56,20 @@ namespace preguntaods.Entities
         public override void Init()
         {
             // Initialization of UI Elements
-            enunciado           = _activity.FindViewById<TextView>(Resource.Id.pregunta);
-            botonPregunta1      = _activity.FindViewById<Button>(Resource.Id.button1);
-            botonPregunta2      = _activity.FindViewById<Button>(Resource.Id.button2);
-            botonPregunta3      = _activity.FindViewById<Button>(Resource.Id.button3);
-            botonPregunta4      = _activity.FindViewById<Button>(Resource.Id.button4);
-            barTime             = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            textoPuntos         = _activity.FindViewById<TextView>(Resource.Id.textView1);
-            imagenOds           = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
-            imagenCorazon1      = _activity.FindViewById<ImageView>(Resource.Id.heart1);
-            imagenCorazon2      = _activity.FindViewById<ImageView>(Resource.Id.heart2);
+            enunciado = _activity.FindViewById<TextView>(Resource.Id.pregunta);
+            botonPregunta1 = _activity.FindViewById<Button>(Resource.Id.button1);
+            botonPregunta2 = _activity.FindViewById<Button>(Resource.Id.button2);
+            botonPregunta3 = _activity.FindViewById<Button>(Resource.Id.button3);
+            botonPregunta4 = _activity.FindViewById<Button>(Resource.Id.button4);
+            barTime = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            textoPuntos = _activity.FindViewById<TextView>(Resource.Id.textView1);
+            imagenOds = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
+            imagenCorazon1 = _activity.FindViewById<ImageView>(Resource.Id.heart1);
+            imagenCorazon2 = _activity.FindViewById<ImageView>(Resource.Id.heart2);
             _puntosConsolidados = 0;
 
-            if (_fallos == 1) {
+            if (_fallos == 1)
+            {
                 imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
 
@@ -95,8 +99,8 @@ namespace preguntaods.Entities
             };
             animation.AnimationEnd += async (sender, e) =>
             {
-                if (_fallos == 1)        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
-                else if (_fallos == 2)   imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                if (_fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                else if (_fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
 
                 fachada.PararSonido(reloj);
             };
@@ -113,11 +117,11 @@ namespace preguntaods.Entities
             botonPregunta3.Text = pregunta.Respuesta3;
             botonPregunta4.Text = pregunta.Respuesta4;
 
-            switch(pregunta.Dificultad)
+            switch (pregunta.Dificultad)
             {
-                case Pregunta.difBaja:  puntuacion = 100; break;
+                case Pregunta.difBaja: puntuacion = 100; break;
                 case Pregunta.difMedia: puntuacion = 200; break;
-                case Pregunta.difAlta:  puntuacion = 300; break;
+                case Pregunta.difAlta: puntuacion = 300; break;
             }
 
             textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
@@ -137,7 +141,7 @@ namespace preguntaods.Entities
             animation.Cancel();
             Button boton = sender as Button;
 
-            if(boton.Text.Equals(correcta))
+            if (boton.Text.Equals(correcta))
             {
                 fachada.EjecutarSonido(_activity, new EstrategiaSonidoAcierto());
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
@@ -151,12 +155,11 @@ namespace preguntaods.Entities
                 boton.SetBackgroundResource(Resource.Drawable.style_preFallo);
 
                 _puntuacionTotal -= puntuacion * 2;
-                if(_puntuacionTotal < 0) _puntuacionTotal = 0;
+                if (_puntuacionTotal < 0) _puntuacionTotal = 0;
 
                 _fallos++;
                 await MostrarAlerta(false, _fallos == 2);
             }
-
 
             FinReto();
 
@@ -172,15 +175,16 @@ namespace preguntaods.Entities
 
             animation.Cancel();
 
-
             //actualizar datos usuario
         }
 
-        public async Task GuardarPuntosUsuarioAsync() {
+        public async Task GuardarPuntosUsuarioAsync()
+        {
             await fachada.UpdatePuntos(_puntuacionTotal);
         }
 
-        public static int getPuntosConsolidados() {
+        public static int getPuntosConsolidados()
+        {
             return _puntosConsolidados;
         }
 
@@ -191,7 +195,6 @@ namespace preguntaods.Entities
             string titulo = "";
             string mensaje = "";
             bool result = false;
-
 
             if (acertado && !fin)
             {
@@ -276,7 +279,8 @@ namespace preguntaods.Entities
                 result = await tcs.Task;
                 return result;
             }
-            else {
+            else
+            {
                 (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal);
             }
             return result;

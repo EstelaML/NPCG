@@ -7,18 +7,21 @@ namespace preguntaods.Persistencia.Repository
 {
     public class RepositorioPregunta : Repository<Pregunta>
     {
-        SingletonConexion conexion;
+        private SingletonConexion conexion;
+
         public RepositorioPregunta()
         {
             conexion = SingletonConexion.GetInstance();
         }
+
         public async Task<List<Pregunta>> GetByDificultad(int dificultad, List<Reto> retos)
         {
             var a = conexion.usuario.Id;
             // cojo todas las Preguntas y las paso a una lista
             var preguntasTodos = await conexion.cliente
                 .From<Pregunta>()
-                .Where(x => x.Dificultad == dificultad).Get();
+                .Where(x => x.Dificultad == dificultad)
+                .Get();
 
             List<Pregunta> preguntasTodasLista = preguntasTodos.Models.AsEnumerable().ToList();
 
@@ -32,7 +35,8 @@ namespace preguntaods.Persistencia.Repository
                 // elimino de la lista de preguntas ya realizadas
                 preguntasPosibles = preguntasTodasLista.Where(x => x.Id.HasValue && !preguntasRealizadas.Contains((int)x.Id)).Select(x => x).ToList();
             }
-            if (retos != null) {
+            if (retos != null)
+            {
                 // !retos
                 List<int> preguntasRetoRealizada = retos.Cast<RetoPre>().Where(x => x.GetPregunta()?.Id.HasValue == true).Select(x => x.GetPregunta().Id.Value).ToList();
                 preguntasPosibles = preguntasPosibles.Where(x => !preguntasRetoRealizada.Contains((int)x.Id)).ToList();

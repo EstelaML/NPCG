@@ -5,10 +5,12 @@ namespace preguntaods
     internal class EstrategiaSonidoReloj : IEstrategiaSonido
     {
         private MediaPlayer mp;
+
         public EstrategiaSonidoReloj()
         {
             mp = new MediaPlayer();
         }
+
         public void Play(Android.Content.Context t)
         {
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_reloj);
@@ -17,7 +19,8 @@ namespace preguntaods
             mp.Start();
         }
 
-        public void Stop() {
+        public void Stop()
+        {
             mp.Stop();
             mp.Reset();
         }

@@ -1,6 +1,5 @@
 ﻿using preguntaods.Services;
 using System;
-using System.Linq;
 
 namespace preguntaods.Entities
 {
@@ -56,7 +55,8 @@ namespace preguntaods.Entities
             partida.SetFacade(new Facade());
         }
 
-        public Partida GetPartida() {
+        public Partida GetPartida()
+        {
             return partida;
         }
     }

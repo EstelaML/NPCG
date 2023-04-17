@@ -1,12 +1,12 @@
-﻿using Java.Util;
-using Postgrest.Models;
-using System.Collections.Generic;
+﻿using Postgrest.Models;
 
 namespace preguntaods.Entities
 {
     public partial class Usuario : BaseModel, IEntity
     {
-        public Usuario() { }
+        public Usuario()
+        { }
+
         public Usuario(string uid, string nombre, bool sonidos, int puntos, int musica, int[] PreguntasRealizadas)
         {
             this.Uuid = uid;

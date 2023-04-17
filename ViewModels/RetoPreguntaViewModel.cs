@@ -47,6 +47,7 @@ namespace preguntaods
         private bool contesta;
         private Android.App.AlertDialog alertDialog;
         private EstrategiaSonidoMusica musica;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             musica = new EstrategiaSonidoMusica();
@@ -73,10 +74,10 @@ namespace preguntaods
             imagenCorazon1 = FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = FindViewById<ImageView>(Resource.Id.heart2);
 
-            // Conseguir preguntas 
+            // Conseguir preguntas
             /*  var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
               var preguntasMedias = await repositorio.GetByDificultad(Pregunta.difMedia);
-              var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta); 
+              var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta);
 
               faciles = preguntasFaciles.ToList();
               medias = preguntasMedias.ToList();
@@ -119,7 +120,6 @@ namespace preguntaods
             {
                 fachada.PararSonido(new EstrategiaSonidoReloj());
                 contesta = true;
-
             };
             animation.Update += (sender, e) =>
             {
@@ -168,7 +168,6 @@ namespace preguntaods
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
-                
             });
             builder.SetCancelable(false);
             alertDialog = builder.Create();
@@ -181,17 +180,18 @@ namespace preguntaods
             switch (decision)
             {
                 case añadir:
-                {
-                    return AnyadirPts(turno, puntos);
-                }
+                    {
+                        return AnyadirPts(turno, puntos);
+                    }
                 case restar:
-                {
-                    return QuitarPts(turno, puntos);
-                }
+                    {
+                        return QuitarPts(turno, puntos);
+                    }
             }
 
             return 0;
         }
+
         private int AnyadirPts(int turno, int puntos)
         {
             if (turno <= 3) { puntos += ptsBaja; }
@@ -200,6 +200,7 @@ namespace preguntaods
 
             return puntos;
         }
+
         private int QuitarPts(int turno, int puntos)
         {
             if (turno <= 3) { puntos += -ptsBaja * 2; }
@@ -230,7 +231,8 @@ namespace preguntaods
                 ptsTotales = ActualizarPts(turno, ptsTotales, añadir);
                 b.SetBackgroundResource(Resource.Drawable.style_preAcierto);
             }
-            else {
+            else
+            {
                 fachada.EjecutarSonido(this, new EstrategiaSonidoError());
 
                 if (errores < 1)
@@ -249,14 +251,15 @@ namespace preguntaods
             return true;
         }
 
-        private void Generarpregunta() {
+        private void Generarpregunta()
+        {
             botonPregunta1.SetBackgroundResource(Resource.Drawable.style_pregunta);
             botonPregunta2.SetBackgroundResource(Resource.Drawable.style_pregunta);
             botonPregunta3.SetBackgroundResource(Resource.Drawable.style_pregunta);
             botonPregunta4.SetBackgroundResource(Resource.Drawable.style_pregunta);
 
             if (turno < 4) { preguntaActual = faciles.First(); faciles.Remove(preguntaActual); textoPuntos.Text = "Puntuación de la pregunta: 100"; }
-            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual);  textoPuntos.Text = "Puntuación de la pregunta: 200"; }
+            else if (turno < 8) { preguntaActual = medias.First(); medias.Remove(preguntaActual); textoPuntos.Text = "Puntuación de la pregunta: 200"; }
             else { preguntaActual = altas.First(); altas.Remove(preguntaActual); textoPuntos.Text = "Puntuación de la pregunta: 300"; }
 
             string nombreDeImagen = "icon_ods" + preguntaActual.OdsRelacionada; // construir el nombre del recurso dinámicamente
@@ -268,9 +271,10 @@ namespace preguntaods
             botonPregunta2.Text = preguntaActual.Respuesta2;
             botonPregunta3.Text = preguntaActual.Respuesta3;
             botonPregunta4.Text = preguntaActual.Respuesta4;
-           
+
             animation.Start();
         }
+
         public void MostrarAlerta(bool acertado, bool fin)
         {
             string titulo = "";
@@ -353,7 +357,8 @@ namespace preguntaods
                 alertDialog = builder.Create();
                 alertDialog.Show();
 
-                new Handler().PostDelayed(() => {
+                new Handler().PostDelayed(() =>
+                {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
@@ -378,7 +383,8 @@ namespace preguntaods
                 alertDialog = builder.Create();
                 alertDialog.Show();
 
-                new Handler().PostDelayed(() => {
+                new Handler().PostDelayed(() =>
+                {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {

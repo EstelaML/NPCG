@@ -1,5 +1,4 @@
 ﻿using Android.App;
-using Postgrest.Models;
 
 namespace preguntaods.Entities
 {

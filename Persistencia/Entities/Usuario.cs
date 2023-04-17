@@ -1,8 +1,5 @@
-﻿using Java.Util;
-using Newtonsoft.Json;
-using Postgrest.Attributes;
+﻿using Postgrest.Attributes;
 using Postgrest.Models;
-using System.Collections.Generic;
 
 namespace preguntaods.Entities
 {
@@ -16,7 +13,7 @@ namespace preguntaods.Entities
         public string Uuid { get; set; }
 
         [Column("Nombre")]
-        public string Nombre{ get; set; }
+        public string Nombre { get; set; }
 
         [Column("Puntos")]
         public int Puntos { get; set; }

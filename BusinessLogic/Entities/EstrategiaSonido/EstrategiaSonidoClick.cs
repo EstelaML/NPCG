@@ -5,9 +5,12 @@ namespace preguntaods
     internal class EstrategiaSonidoClick : IEstrategiaSonido
     {
         private MediaPlayer mp;
-        public EstrategiaSonidoClick() {
+
+        public EstrategiaSonidoClick()
+        {
             mp = new MediaPlayer();
         }
+
         public void Play(Android.Content.Context t)
         {
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_click);
@@ -16,7 +19,8 @@ namespace preguntaods
             mp.Start();
         }
 
-        public void Stop() {
+        public void Stop()
+        {
             mp.Stop();
         }
     }

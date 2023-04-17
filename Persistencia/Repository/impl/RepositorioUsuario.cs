@@ -5,12 +5,13 @@ namespace preguntaods.Persistencia.Repository
 {
     public class RepositorioUsuario : Repository<Usuario>
     {
-        SingletonConexion conexion;
+        private SingletonConexion conexion;
 
         public RepositorioUsuario()
         {
             conexion = SingletonConexion.GetInstance();
         }
+
         public async Task<Usuario> GetUserByUUid(string u)
         {
             var response = await conexion.cliente
@@ -20,7 +21,7 @@ namespace preguntaods.Persistencia.Repository
             return response;
         }
 
-        public async Task UpdatePuntosUsuario(string uuid, int puntosA,int puntosS)
+        public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS)
         {
             int p = puntosA + puntosS;
             var response2 = await conexion.cliente
@@ -30,7 +31,8 @@ namespace preguntaods.Persistencia.Repository
                         .Update();
         }
 
-        public async Task UpdatePreguntaAcertada(string a, int[] preguntas) {
+        public async Task UpdatePreguntaAcertada(string a, int[] preguntas)
+        {
             var update = await conexion.cliente
                      .From<Usuario>()
                      .Where(x => x.Uuid == a)

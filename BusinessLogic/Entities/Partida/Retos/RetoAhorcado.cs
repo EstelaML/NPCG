@@ -3,6 +3,7 @@
     public class RetoAhorcado : Reto
     {
         private readonly int type;
+
         public RetoAhorcado()
         {
             type = typeAhorcado;

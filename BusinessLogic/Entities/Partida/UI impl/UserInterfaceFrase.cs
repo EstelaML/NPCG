@@ -6,7 +6,8 @@ namespace preguntaods.Entities
     {
         private Activity _activity;
 
-        public UserInterfaceFrase() { }
+        public UserInterfaceFrase()
+        { }
 
         public override void SetActivity(Activity activity)
         {

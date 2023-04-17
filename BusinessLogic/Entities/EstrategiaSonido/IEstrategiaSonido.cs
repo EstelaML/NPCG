@@ -1,10 +1,9 @@
-﻿using Android.Media;
-
-namespace preguntaods
+﻿namespace preguntaods
 {
     public interface IEstrategiaSonido
     {
         public void Play(Android.Content.Context t) { }
+
         public void Stop() { }
     }
 }

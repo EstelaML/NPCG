@@ -13,6 +13,7 @@ namespace preguntaods
     public class MenuViewModel : AppCompatActivity
     {
         private Facade fachada;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

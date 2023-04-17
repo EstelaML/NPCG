@@ -1,15 +1,10 @@
 ﻿using Android.Animation;
 using Android.App;
-using Android.Content;
-using Android.Hardware.Usb;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.Entities;
-using preguntaods.Services;
 using System.Diagnostics;
-using static Android.Provider.CallLog;
 
 namespace preguntaods
 {
@@ -18,6 +13,7 @@ namespace preguntaods
     {
         // Vars
         private Reto reto;
+
         private Partida partida;
         private bool consolidado;
         private Animator animation;
@@ -77,7 +73,8 @@ namespace preguntaods
             }
         }
 
-        public async void GuardarPreguntaAcertada() {
+        public async void GuardarPreguntaAcertada()
+        {
             await partida.GuardarPreguntaUsuario(partida.GetRetoActual());
         }
 
@@ -98,7 +95,8 @@ namespace preguntaods
             partida.EventoAbandonarBoton(new object(), new System.EventArgs());
         }
 
-        public void AbandonarFallido(int puntos) {
+        public void AbandonarFallido(int puntos)
+        {
             partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos, UserInterfacePregunta.getPuntosConsolidados());
         }
 
@@ -108,7 +106,8 @@ namespace preguntaods
             partida.EventoConsolidarBoton(new object(), new System.EventArgs(), puntosConsolidados);
         }
 
-        public bool GetConsolidado() {
+        public bool GetConsolidado()
+        {
             return consolidado;
         }
     }

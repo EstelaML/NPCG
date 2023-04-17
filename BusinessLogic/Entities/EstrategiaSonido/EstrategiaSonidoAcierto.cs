@@ -5,9 +5,12 @@ namespace preguntaods
     internal class EstrategiaSonidoAcierto : IEstrategiaSonido
     {
         private MediaPlayer mp;
-        public EstrategiaSonidoAcierto() {
+
+        public EstrategiaSonidoAcierto()
+        {
             mp = new MediaPlayer();
         }
+
         public void Play(Android.Content.Context t)
         {
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_acierto);
@@ -16,7 +19,8 @@ namespace preguntaods
             mp.Start();
         }
 
-        public void Stop() {
+        public void Stop()
+        {
             mp.Stop();
         }
     }

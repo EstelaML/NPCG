@@ -5,7 +5,9 @@ namespace preguntaods.Entities
     public class UserInterfaceAhorcado : UserInterface
     {
         private Activity _activity;
-        public UserInterfaceAhorcado() { }
+
+        public UserInterfaceAhorcado()
+        { }
 
         public override void SetActivity(Activity activity)
         {

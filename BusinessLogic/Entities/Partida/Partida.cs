@@ -1,13 +1,8 @@
-﻿using Android.App;
-using Android.Content;
-using Android.Hardware.Usb;
-using Android.Text;
+﻿using Android.Content;
 using Android.Widget;
-using Org.Apache.Http.Conn;
 using preguntaods.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace preguntaods.Entities
@@ -35,8 +30,6 @@ namespace preguntaods.Entities
         public Partida()
         {
             contadorRetoSiguiente = 0;
-
-
         }
 
         public Reto GetRetoActual()
@@ -67,21 +60,17 @@ namespace preguntaods.Entities
                     retoActual = listaRetos[10];
                     contadorRetoSiguiente++;
                     falloFacil = true;
-
                 }
                 else if (fallos == 1 && !falloFacil && contadorRetoSiguiente == 7)
                 {
-
                     retoActual = listaRetos[11];
                     contadorRetoSiguiente++;
-
                 }
                 else
                 {
                     retoActual = listaRetos[contadorRetoSiguiente];
                     contadorRetoSiguiente++;
                 }
-
             }
             else
             {
@@ -126,7 +115,8 @@ namespace preguntaods.Entities
             }
         }
 
-        public async Task GuardarPreguntaUsuario(Reto reto) {
+        public async Task GuardarPreguntaUsuario(Reto reto)
+        {
             await _fachada.GuardarPregunta(reto);
         }
 
@@ -172,7 +162,8 @@ namespace preguntaods.Entities
                 titulo = "¿Estás seguro?";
                 mensaje = "Si aceptar se te fuardarán los puntos consolidados, pero el resto no.";
             }
-            else {
+            else
+            {
                 titulo = "¿Estás seguro?";
                 mensaje = "Una vez aceptes perderás tu progreso por completo.";
             }
@@ -189,57 +180,55 @@ namespace preguntaods.Entities
                 {
                     (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                 }
-                    Intent i = new Intent(_activity, typeof(MenuViewModel));
+                Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
-
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
-
             });
             builder.SetCancelable(false);
-                alertDialog = builder.Create();
-                alertDialog.Window.SetDimAmount(0.8f);
-                alertDialog.Show();
+            alertDialog = builder.Create();
+            alertDialog.Window.SetDimAmount(0.8f);
+            alertDialog.Show();
         }
 
-            public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntosFinales, int puntosConsolidados)
+        public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntosFinales, int puntosConsolidados)
+        {
+            string titulo = "";
+            string mensaje = "";
+            if (acertado)
             {
-                string titulo = "";
-                string mensaje = "";
-                if (acertado)
-                {
-                    titulo = "¡Enhorabuena!";
-                    mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
+                titulo = "¡Enhorabuena!";
+                mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
 
-                await _fachada.UpdatePuntos(puntosFinales-puntosConsolidados);
+                await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
             }
-                else
-                {
-                    titulo = "Has perdido";
-                    mensaje = "Siempre puedes volver a intentarlo...";
-                }
-                Android.App.AlertDialog alertDialog = null;
-
-                Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-                builder.SetMessage(mensaje);
-                builder.SetTitle(titulo);
-                builder.SetPositiveButton("Salir", (sender, args) =>
-                {
-                    userInterface.FinReto();
-                    _fachada.PararSonido(musica);
-                    Intent i = new Intent(_activity, typeof(MenuViewModel));
-                    _activity.StartActivity(i);
-                });
-                builder.SetCancelable(false);
-                alertDialog = builder.Create();
-                alertDialog.Window.SetDimAmount(0.8f);
-                alertDialog.Show();
-            }
-
-            public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
+            else
             {
-                await _fachada.UpdatePuntos(puntosConsolidados);
+                titulo = "Has perdido";
+                mensaje = "Siempre puedes volver a intentarlo...";
             }
+            Android.App.AlertDialog alertDialog = null;
+
+            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            builder.SetMessage(mensaje);
+            builder.SetTitle(titulo);
+            builder.SetPositiveButton("Salir", (sender, args) =>
+            {
+                userInterface.FinReto();
+                _fachada.PararSonido(musica);
+                Intent i = new Intent(_activity, typeof(MenuViewModel));
+                _activity.StartActivity(i);
+            });
+            builder.SetCancelable(false);
+            alertDialog = builder.Create();
+            alertDialog.Window.SetDimAmount(0.8f);
+            alertDialog.Show();
+        }
+
+        public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
+        {
+            await _fachada.UpdatePuntos(puntosConsolidados);
+        }
     }
 }

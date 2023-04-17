@@ -5,9 +5,12 @@ namespace preguntaods
     internal class EstrategiaSonidoError : IEstrategiaSonido
     {
         private MediaPlayer mp;
-        public EstrategiaSonidoError() {
+
+        public EstrategiaSonidoError()
+        {
             mp = new MediaPlayer();
         }
+
         public void Play(Android.Content.Context t)
         {
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_error);
@@ -16,7 +19,8 @@ namespace preguntaods
             mp.Start();
         }
 
-        public void Stop() {
+        public void Stop()
+        {
             mp.Stop();
         }
     }

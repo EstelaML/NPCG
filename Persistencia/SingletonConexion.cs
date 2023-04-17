@@ -8,6 +8,7 @@
 
         public Supabase.Client cliente;
         public Supabase.Gotrue.User usuario;
+
         private SingletonConexion()
         {
             var options = new Supabase.SupabaseOptions

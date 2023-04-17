@@ -15,7 +15,7 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:gravity">center</item>
   </style>
-  
+
   <style name="UserNotLogged" parent="MyActionButtonOverflow">
     <item name="android:src">@drawable/icon_usernotlog</item>
   </style>
@@ -23,13 +23,13 @@
   <style name="UserLogged" parent="MyActionButtonOverflow">
     <item name="android:src">@drawable/icon_usernotlog</item>
   </style>
-  
+
   <style name="HiddenTitleTheme" parent="AppTheme">
     <item name="windowNoTitle">true</item>
     <item name="android:windowFullscreen">true</item>
     <item name="android:actionBarStyle">@style/invisible_action_bar_style</item>
 	</style>
-	
+
 	<style name="invisible_action_bar_style" parent="android:Widget.Holo.ActionBar">
 		<item name="android:height">0dp</item>
 	</style>
@@ -37,5 +37,4 @@
 	<style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
 		<item name="android:windowBackground">@drawable/style_rounded_dialog_bg</item>
 	</style>
-
 </resources>
