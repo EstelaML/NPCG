@@ -3,7 +3,6 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.Entities;
 using preguntaods.Services;
 using System;
 
@@ -16,7 +15,6 @@ namespace preguntaods
         private EditText correo;
         private EditText password;
         private TextView error;
-        private Sonido sonido;
         private Facade fachada;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -24,9 +22,7 @@ namespace preguntaods
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.vistaInicioSesion);
-            sonido = new Sonido();
-
-            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            fachada = new Facade();
 
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);
@@ -37,24 +33,13 @@ namespace preguntaods
 
             error = FindViewById<TextView>(Resource.Id.error);
 
-            ImageButton atras = FindViewById<ImageButton>(Resource.Id.atras);
-            atras.Click += SaltarMenu;
-
             TextView registrar = FindViewById<TextView>(Resource.Id.registrar);
             registrar.Click += NavigateRegistro;
         }
 
-        private void SaltarMenu(object sender, EventArgs e)
-        {
-            sonido.EjecutarSonido();
-
-            Intent i = new Intent(this, typeof(MenuViewModel));
-            StartActivity(i);
-        }
-
         private void NavigateRegistro(object sender, EventArgs e)
         {
-            sonido.EjecutarSonido();
+            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
             Intent i = new Intent(this, typeof(RegistroViewModel));
             StartActivity(i);
@@ -64,7 +49,7 @@ namespace preguntaods
         {
             try
             {
-                sonido.EjecutarSonido();
+                fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
 
                 await fachada.LoginAsync(correo.Text, password.Text);
 
