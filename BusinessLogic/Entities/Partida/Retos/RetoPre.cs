@@ -14,21 +14,13 @@ namespace preguntaods.Entities
         private List<Reto> retos;
         private List<Pregunta> preguntas;
         private int orden;
-
-        private RetoPre(PreguntadosService servicio, Pregunta pregunta, int type, List<Reto> retos, int orden)
+        public RetoPre(List<Reto> listRetos, int orden)
         {
-            this.servicio = servicio;
-            this.pregunta = pregunta;
-            this.type = type;
-            this.retos = retos;
+            servicio = new PreguntadosService();
             this.orden = orden;
-        }
-
-        public static async Task<RetoPre> RetoPreAsync(List<Reto> retos, int i)
-        {
-            var servicio = new PreguntadosService();
-            var p = await servicio.SetDif(i, retos);
-            return new RetoPre(servicio, p, typePregunta, retos, i);
+            retos = listRetos;
+            pregunta = SetDif(orden, listRetos).Result;
+            type = typePregunta;
         }
 
 
@@ -42,6 +34,49 @@ namespace preguntaods.Entities
             return pregunta;
         }
 
+        public async Task<Pregunta> SetDif(int orden, List<Reto> retos)
+        {
+
+            if (orden < 4 || orden == 10)
+            {
+
+                return await SetPregunta(1, retos);
+
+            }
+            else if (orden < 7 || orden == 11)
+            {
+
+                return await SetPregunta(2, retos);
+
+            }
+            else { return await SetPregunta(3, retos); }
+
+        }
+
+        private async Task<Pregunta> SetPregunta(int dif, List<Reto> retos)
+        {
+            switch (dif)
+            {
+                case 1:
+                    {
+
+                        return await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
+
+                        break;
+                    }
+                case 2:
+                    {
+                        return await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
+                        break;
+                    }
+                case 3:
+                    {
+                        return await servicio.SolicitarPregunta(Pregunta.difAlta, retos);
+                        break;
+                    }
+            }
+            return null;
+        }
 
 
     }

@@ -24,49 +24,7 @@ namespace preguntaods.Services
         #endregion
 
         #region Reto
-        public async Task<Pregunta> SetDif(int orden, List<Reto> retos)
-        {
-
-            if (orden < 4 || orden == 10)
-            {
-
-                return await SetPregunta(1, retos);
-
-            }
-            else if (orden < 7 || orden == 11)
-            {
-
-                return await SetPregunta(2, retos);
-
-            }
-            else { return await SetPregunta(3, retos); }
-
-        }
-
-        private async Task<Pregunta> SetPregunta(int dif, List<Reto> retos)
-        {
-            switch (dif)
-            {
-                case 1:
-                    {
-
-                        return await SolicitarPregunta(Pregunta.difBaja, retos);
-
-                        break;
-                    }
-                case 2:
-                    {
-                        return await SolicitarPregunta(Pregunta.difMedia, retos);
-                        break;
-                    }
-                case 3:
-                    {
-                        return await SolicitarPregunta(Pregunta.difAlta, retos);
-                        break;
-                    }
-            }
-            return null;
-        }
+        
 
         #endregion
 

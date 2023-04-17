@@ -27,7 +27,7 @@ namespace preguntaods.Entities
                 {
                     case 1:
                         {
-                            RetoPre retoPre = RetoPre.RetoPreAsync(partida.GetRetos(), i).Result;
+                            RetoPre retoPre = new RetoPre(partida.GetRetos(), i);
                             partida.AddReto(retoPre);
                             break;
                         }
