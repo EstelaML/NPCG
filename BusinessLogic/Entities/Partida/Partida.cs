@@ -199,8 +199,8 @@ namespace preguntaods.Entities
             alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
             {
             });
-            builder.SetCancelable(false);
-            alertDialog = builder.Create();
+            alertBuilder.SetCancelable(false);
+            alertDialog = alertBuilder.Create();
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
         }
@@ -222,6 +222,7 @@ namespace preguntaods.Entities
                 mensaje = "Siempre puedes volver a intentarlo...";
             }
             Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
