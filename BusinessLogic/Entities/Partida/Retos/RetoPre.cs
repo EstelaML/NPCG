@@ -17,8 +17,8 @@ namespace preguntaods.Entities
         {
             servicio = new PreguntadosService();
             this .orden = orden;
-            setDif();
             retos = listRetos;
+            setDif(); 
             type = typePregunta;
         }
 
