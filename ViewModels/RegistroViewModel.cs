@@ -75,7 +75,6 @@ namespace preguntaods
         {
             if (username.Text != null) { usernameCorrect = true; }
             error.Text = "";
-            
         }
 
         private async void Registrar(object sender, EventArgs e)
@@ -90,11 +89,10 @@ namespace preguntaods
                         UUID id = UUID.FromString(userAux.Id);
                         Usuario user = new Usuario(userAux.Id,username.Text,true,0,100,null);
                         await fachada.newUsuario(user);
-                        
+
                         // se registra
                         Intent i = new Intent(this, typeof(MenuViewModel));
                         StartActivity(i);
-                   
             }
         }
 

@@ -8,7 +8,7 @@ namespace preguntaods.Entities
     public class PartidaBuilder : IPartidaBuilder
     {
         private Partida partida = new Partida();
-       
+
         public async void BuildPlayer()
         {
             var fachada = partida.GetFacade();

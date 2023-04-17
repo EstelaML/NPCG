@@ -73,7 +73,7 @@ namespace preguntaods
             imagenCorazon1 = FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = FindViewById<ImageView>(Resource.Id.heart2);
 
-            // Conseguir preguntas 
+            // Conseguir preguntas
             var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
             var preguntasMedias = await repositorio.GetByDificultad(Pregunta.difMedia);
             var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta);
@@ -168,7 +168,7 @@ namespace preguntaods
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
-                
+
             });
             builder.SetCancelable(false);
             alertDialog = builder.Create();
@@ -268,7 +268,7 @@ namespace preguntaods
             botonPregunta2.Text = preguntaActual.Respuesta2;
             botonPregunta3.Text = preguntaActual.Respuesta3;
             botonPregunta4.Text = preguntaActual.Respuesta4;
-           
+
             animation.Start();
         }
         public void MostrarAlerta(bool acertado, bool fin)

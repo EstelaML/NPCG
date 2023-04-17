@@ -40,10 +40,10 @@ namespace preguntaods.Entities
 
                 SetPregunta(1);
 
-            } else if (orden < 7 || orden == 11) 
+            } else if (orden < 7 || orden == 11)
             {
 
-                SetPregunta(2);            
+                SetPregunta(2);
 
             } else { SetPregunta(3); }
 
@@ -51,8 +51,6 @@ namespace preguntaods.Entities
 
         private async void SetPregunta(int dif)
         {
-            
-
             switch (dif)
             {
                 case 1:
@@ -71,7 +69,6 @@ namespace preguntaods.Entities
                         break;
                     }
             }
-            
         }
     }
 }

@@ -51,7 +51,7 @@ namespace preguntaods.Entities
 
         public void AddReto(Reto reto)
         {
-            listaRetos.Add(reto);           
+            listaRetos.Add(reto);
         }
 
         public void NextReto(int fallos, int ptsTotales)
@@ -81,7 +81,7 @@ namespace preguntaods.Entities
                     contadorRetoSiguiente++;
                 }
 
-            } 
+            }
             else
             {
                 EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());

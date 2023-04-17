@@ -1,5 +1,4 @@
-﻿using Java.Util;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,9 +32,9 @@ namespace preguntaods.Persistencia.Repository
                 // elimino de la lista de preguntas
                 preguntasTodasLista.RemoveAll(elemento => preguntasRealizadas.Contains((int)elemento.Id));
             }
-            
+
             //return response.Models.AsEnumerable();
             return preguntasTodasLista;
         }
-    }       
+    }
 }

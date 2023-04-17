@@ -1,7 +1,4 @@
-﻿using Android.Webkit;
-using Java.Util;
-using preguntaods.Entities;
-using System;
+﻿using preguntaods.Entities;
 using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
@@ -30,7 +27,7 @@ namespace preguntaods.Persistencia.Repository
                         .From<Usuario>()
                         .Where(x => x.Uuid == uuid)
                         .Set(x => x.Puntos, p)
-                        .Update(); 
+                        .Update();
         }
 
         public async Task UpdatePreguntaAcertada(string a, int[] preguntas) {

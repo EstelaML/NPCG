@@ -108,7 +108,7 @@ namespace preguntaods
             partida.EventoConsolidarBoton(new object(), new System.EventArgs(), puntosConsolidados);
         }
 
-        public bool GetConsolidado() { 
+        public bool GetConsolidado() {
             return consolidado;
         }
     }

@@ -13,16 +13,5 @@ namespace preguntaods.Services
         Task<Usuario> GetUsuarioLogged();
 
         #endregion
-
-        #region ODS
-
-        #endregion
-
-        #region Reto
-        #endregion
-
-        #region RetoPregunta
-        #endregion
-
     }
 }
