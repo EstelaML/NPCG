@@ -1,8 +1,5 @@
-﻿using Android.SE.Omapi;
-using preguntaods.Persistencia.Repository;
-using preguntaods.Services;
+﻿using preguntaods.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace preguntaods.Entities
@@ -10,7 +7,7 @@ namespace preguntaods.Entities
     public class PartidaBuilder : IPartidaBuilder
     {
         private Partida partida = new Partida();
-       
+
         public async void BuildPlayer()
         {
             var fachada = partida.GetFacade();
@@ -27,8 +24,7 @@ namespace preguntaods.Entities
                 {
                     case 1:
                         {
-                            RetoPre retoPre = new RetoPre(partida.GetRetos(), i);
-                            partida.AddReto(retoPre);
+                            partida.AddReto(new RetoPre(partida.GetRetos(), i));
                             break;
                         }
                     case 2:
@@ -48,9 +44,6 @@ namespace preguntaods.Entities
                         }
                 }
             }
-            var a = partida.GetRetos();
-            var pregunta = (a.First() as RetoPre).GetPregunta();
-            var p = pregunta.Enunciado;
         }
 
         public void BuildUserInterface()

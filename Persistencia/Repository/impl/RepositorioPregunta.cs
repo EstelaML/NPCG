@@ -1,9 +1,6 @@
-﻿using Android.OS;
-using Java.Util;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
@@ -39,9 +36,9 @@ namespace preguntaods.Persistencia.Repository
                 // !retos
                 List<int> preguntasRetoRealizada = retos.Cast<RetoPre>().Where(x => x.GetPregunta()?.Id.HasValue == true).Select(x => x.GetPregunta().Id.Value).ToList();
                 preguntasPosibles = preguntasPosibles.Where(x => !preguntasRetoRealizada.Contains((int)x.Id)).ToList();
-            }  
+            }
             //return response.Models.AsEnumerable();
             return preguntasPosibles;
         }
-    }       
+    }
 }

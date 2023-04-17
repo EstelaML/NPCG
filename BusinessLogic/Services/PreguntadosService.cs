@@ -19,21 +19,9 @@ namespace preguntaods.Services
             repositorioPre = new RepositorioPregunta();
         }
 
-        #region ODS
-
-        #endregion
-
-        #region Reto
-        
-
-        #endregion
-
-
-
-
         #region RetoPregunta
         public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
-        { 
+        {
             List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
             return respuesta.FirstOrDefault();
         }

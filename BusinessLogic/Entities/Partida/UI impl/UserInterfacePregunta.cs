@@ -33,7 +33,7 @@ namespace preguntaods.Entities
         private TextView textoPuntos;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
-       
+
         // Interactive Elements
         private ObjectAnimator animation;
 
@@ -97,7 +97,7 @@ namespace preguntaods.Entities
             {
                 if (_fallos == 1)        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2)   imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
-                
+
                 fachada.PararSonido(reloj);
             };
             animation.AnimationCancel += (sender, e) => { fachada.PararSonido(reloj); };
@@ -106,14 +106,12 @@ namespace preguntaods.Entities
         public override void SetDatosReto(Reto reto)
         {
             var pregunta = (reto as RetoPre).GetPregunta();
-         
-                 enunciado.Text = pregunta.Enunciado;
-                botonPregunta1.Text = pregunta.Respuesta1;
-                botonPregunta2.Text = pregunta.Respuesta2;
-                botonPregunta3.Text = pregunta.Respuesta3;
-                botonPregunta4.Text = pregunta.Respuesta4;
-            
-           
+
+            enunciado.Text = pregunta.Enunciado;
+            botonPregunta1.Text = pregunta.Respuesta1;
+            botonPregunta2.Text = pregunta.Respuesta2;
+            botonPregunta3.Text = pregunta.Respuesta3;
+            botonPregunta4.Text = pregunta.Respuesta4;
 
             switch(pregunta.Dificultad)
             {
@@ -138,7 +136,7 @@ namespace preguntaods.Entities
             numRetos--;
             animation.Cancel();
             Button boton = sender as Button;
-            
+
             if(boton.Text.Equals(correcta))
             {
                 fachada.EjecutarSonido(_activity, new EstrategiaSonidoAcierto());
@@ -161,7 +159,7 @@ namespace preguntaods.Entities
 
 
             FinReto();
-            
+
             (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
         }
 
@@ -170,10 +168,10 @@ namespace preguntaods.Entities
             botonPregunta1.Click += null;
             botonPregunta2.Click += null;
             botonPregunta3.Click += null;
-            botonPregunta4.Click += null;   
+            botonPregunta4.Click += null;
 
             animation.Cancel();
-           
+
 
             //actualizar datos usuario
         }
@@ -182,7 +180,7 @@ namespace preguntaods.Entities
             await fachada.UpdatePuntos(_puntuacionTotal);
         }
 
-        public static int getPuntosConsolidados() { 
+        public static int getPuntosConsolidados() {
             return _puntosConsolidados;
         }
 
@@ -279,7 +277,7 @@ namespace preguntaods.Entities
                 return result;
             }
             else {
-                (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal); 
+                (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal);
             }
             return result;
         }

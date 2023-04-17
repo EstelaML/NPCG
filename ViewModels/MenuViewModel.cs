@@ -35,12 +35,12 @@ namespace preguntaods
             {
                 case Resource.Id.menuItem1:
                     {
-                        // add your code  
+                        // add your code
                         break;
                     }
                 case Resource.Id.menuItem2:
                     {
-                        // add your code  
+                        // add your code
                         break;
                     }
                 case Resource.Id.menuItem3:
@@ -49,7 +49,7 @@ namespace preguntaods
 
                         Intent i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
-                        
+
                         break;
                     }
             }

@@ -36,7 +36,7 @@ namespace preguntaods.Entities
         {
             contadorRetoSiguiente = 0;
 
-            
+
         }
 
         public Reto GetRetoActual()
@@ -49,7 +49,6 @@ namespace preguntaods.Entities
             return listaRetos;
         }
 
-       
         public void AddReto(Reto reto)
         {
             if (listaRetos == null) listaRetos = new List<Reto>();
@@ -83,7 +82,7 @@ namespace preguntaods.Entities
                     contadorRetoSiguiente++;
                 }
 
-            } 
+            }
             else
             {
                 EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
@@ -186,13 +185,13 @@ namespace preguntaods.Entities
             {
                 userInterface.FinReto();
                 _fachada.PararSonido(musica);
-                if ((_activity as VistaPartidaViewModel).GetConsolidado()) 
-                { 
-                    (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados()); 
+                if ((_activity as VistaPartidaViewModel).GetConsolidado())
+                {
+                    (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                 }
                     Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
-            
+
             });
             builder.SetNegativeButton("Cancelar", (sender, args) =>
             {
@@ -212,7 +211,7 @@ namespace preguntaods.Entities
                 {
                     titulo = "¡Enhorabuena!";
                     mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
-               
+
                 await _fachada.UpdatePuntos(puntosFinales-puntosConsolidados);
             }
                 else

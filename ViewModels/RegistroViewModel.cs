@@ -71,7 +71,6 @@ namespace preguntaods
         {
             if (username.Text != null) { usernameCorrect = true; }
             error.Text = "";
-            
         }
 
         private async void Registrar(object sender, EventArgs e)
@@ -81,16 +80,15 @@ namespace preguntaods
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
-                        var userAux = await fachada.SignUpAsync(email.Text, password.Text);
-                        //var user1 = await fachada.GetUsarioLogged();
-                        UUID id = UUID.FromString(userAux.Id);
-                        Usuario user = new Usuario(userAux.Id,username.Text,true,0,100,null);
-                        await fachada.newUsuario(user);
-                        
-                        // se registra
-                        Intent i = new Intent(this, typeof(MenuViewModel));
-                        StartActivity(i);
-                   
+                var userAux = await fachada.SignUpAsync(email.Text, password.Text);
+                //var user1 = await fachada.GetUsarioLogged();
+                UUID id = UUID.FromString(userAux.Id);
+                Usuario user = new Usuario(userAux.Id,username.Text,true,0,100,null);
+                await fachada.newUsuario(user);
+
+                // se registra
+                Intent i = new Intent(this, typeof(MenuViewModel));
+                StartActivity(i);
             }
         }
 
