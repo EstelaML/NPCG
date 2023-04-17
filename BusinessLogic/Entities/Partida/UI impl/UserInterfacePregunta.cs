@@ -100,7 +100,7 @@ namespace preguntaods.Entities
                     sonido.EjecutarSonido();
                 }
             };
-            animation.AnimationEnd += async (sender, e) =>
+            animation.AnimationEnd += (sender, e) =>
             {
                 if (_fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
@@ -245,6 +245,7 @@ namespace preguntaods.Entities
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
                 new Handler().PostDelayed(() =>
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
@@ -255,6 +256,7 @@ namespace preguntaods.Entities
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 10000);
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
                 result = await tcs.Task;
             }
             else if (!acertado && !fin)
@@ -278,6 +280,7 @@ namespace preguntaods.Entities
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
                 new Handler().PostDelayed(() =>
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
@@ -288,6 +291,7 @@ namespace preguntaods.Entities
                         alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
                     }
                 }, 10000);
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
                 result = await tcs.Task;
                 return result;
             }

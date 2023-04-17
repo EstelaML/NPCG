@@ -97,7 +97,7 @@ namespace preguntaods
 
         public void AbandonarFallido(int puntos)
         {
-            partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos, UserInterfacePregunta.getPuntosConsolidados());
+            _ = partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos, UserInterfacePregunta.getPuntosConsolidados());
         }
 
         public void Consolidar(int puntosConsolidados)

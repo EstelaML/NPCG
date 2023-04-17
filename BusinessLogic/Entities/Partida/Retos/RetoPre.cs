@@ -16,7 +16,7 @@ namespace preguntaods.Entities
             servicio = new PreguntadosService();
             retos = listaRetos;
             type = typePregunta;
-            servicio.InitList().ContinueWith(t => { SetDif(orden, listaRetos); });
+            servicio.InitList().ContinueWith(t => { _ = SetDif(orden, listaRetos); });
         }
 
         public override int GetType()

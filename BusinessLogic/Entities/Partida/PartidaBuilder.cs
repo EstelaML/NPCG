@@ -28,17 +28,23 @@ namespace preguntaods.Entities
                         }
                     case 2:
                         {
+#pragma warning disable CS0162 // Se detectó código inaccesible
                             partida.AddReto(new RetoAhorcado());
+#pragma warning restore CS0162 // Se detectó código inaccesible
                             break;
                         }
                     case 3:
                         {
+#pragma warning disable CS0162 // Se detectó código inaccesible
                             partida.AddReto(new RetoFrase());
+#pragma warning restore CS0162 // Se detectó código inaccesible
                             break;
                         }
                     case 4:
                         {
+#pragma warning disable CS0162 // Se detectó código inaccesible
                             partida.AddReto(new RetoSopa());
+#pragma warning restore CS0162 // Se detectó código inaccesible
                             break;
                         }
                 }

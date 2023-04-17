@@ -74,7 +74,7 @@ namespace preguntaods.Entities
             }
             else
             {
-                EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
+                _ = EventoAbandonarAsync(new object(), new EventArgs(), fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
             }
         }
 

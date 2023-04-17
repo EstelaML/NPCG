@@ -27,7 +27,7 @@ namespace preguntaods.Services
             if (preguntasAltas == null) preguntasAltas = await repositorioPre.GetByDificultad(Pregunta.difAlta);
         }
 
-        public async Task<Pregunta> SolicitarPregunta(int dificultad)
+        public Task<Pregunta> SolicitarPregunta(int dificultad)
         {
             Pregunta respuesta = null;
 
@@ -56,7 +56,7 @@ namespace preguntaods.Services
                     }
             }
 
-            return respuesta;
+            return Task.FromResult(respuesta);
         }
 
         public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos)
