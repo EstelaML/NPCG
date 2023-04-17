@@ -160,7 +160,7 @@ namespace preguntaods.Entities
 
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
-    }
+        }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {

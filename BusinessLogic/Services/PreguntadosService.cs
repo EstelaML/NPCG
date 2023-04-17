@@ -2,7 +2,6 @@
 using preguntaods.Persistencia.Repository;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 
 namespace preguntaods.Services
@@ -43,7 +42,6 @@ namespace preguntaods.Services
                     }
                 case Pregunta.difMedia:
                     {
-
                         respuesta = preguntasMedias.FirstOrDefault();
                         preguntasMedias.Remove(respuesta);
 

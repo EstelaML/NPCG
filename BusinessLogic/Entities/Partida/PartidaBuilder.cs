@@ -60,7 +60,8 @@ namespace preguntaods.Entities
             partida.SetSonido(new Sonido());
         }
 
-        public Partida GetPartida() {
+        public Partida GetPartida()
+        {
             return partida;
         }
     }

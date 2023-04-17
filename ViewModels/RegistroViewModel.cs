@@ -80,7 +80,8 @@ namespace preguntaods
         private async void Registrar(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-            if (usernameCorrect && passwordCorrect && emailCorrect) {
+            if (usernameCorrect && passwordCorrect && emailCorrect)
+            {
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 

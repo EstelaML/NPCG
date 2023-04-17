@@ -9,7 +9,9 @@
         void BuildUserInterface();
 
         void BuildFacade();
+
         void BuildSonido();
+
         Partida GetPartida();
     }
 }

@@ -108,7 +108,8 @@ namespace preguntaods.Entities
                 sonido.SetEstrategia(reloj, _activity);
                 sonido.PararSonido();
             };
-            animation.AnimationCancel += (sender, e) => {
+            animation.AnimationCancel += (sender, e) =>
+            {
                 sonido.SetEstrategia(reloj, _activity);
                 sonido.PararSonido();
             };

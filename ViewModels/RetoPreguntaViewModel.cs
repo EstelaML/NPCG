@@ -233,7 +233,7 @@ namespace preguntaods
             }
             else
             {
-                fachada.EjecutarSonido(this, new EstrategiaSonidoError());
+                 //fachada.EjecutarSonido(this, new EstrategiaSonidoError());
 
                 if (errores < 1)
                     imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);

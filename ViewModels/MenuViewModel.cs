@@ -15,6 +15,7 @@ namespace preguntaods
     {
         private Facade fachada;
         private Sonido sonido;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

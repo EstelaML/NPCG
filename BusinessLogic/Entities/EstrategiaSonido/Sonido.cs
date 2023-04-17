@@ -4,7 +4,9 @@
     {
         private IEstrategiaSonido _estrategia;
         private Android.Content.Context _context;
-        public Sonido() { }
+
+        public Sonido()
+        { }
 
         public void SetEstrategia(IEstrategiaSonido estrategia, Android.Content.Context context)
         {

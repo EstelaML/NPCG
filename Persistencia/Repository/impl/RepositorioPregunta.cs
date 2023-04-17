@@ -1,6 +1,5 @@
 ﻿using preguntaods.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository
@@ -13,7 +12,6 @@ namespace preguntaods.Persistencia.Repository
         {
             conexion = SingletonConexion.GetInstance();
         }
-
 
         public async Task<List<Pregunta>> GetByDificultad(int dificultad)
         {
