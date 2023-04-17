@@ -22,7 +22,7 @@
 
         public static SingletonConexion GetInstance()
         {
-            instance ??= new SingletonConexion();
+            if (instance == null) instance = new SingletonConexion();
 
             return instance;
         }
