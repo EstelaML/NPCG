@@ -13,7 +13,7 @@ namespace preguntaods.Entities
             partida.user = await fachada.GetUsuarioLogged();
         }
 
-        public async Task BuildRetos()
+        public void BuildRetos()
         {
             for (int i = 0; i < 12; i++)
             {
