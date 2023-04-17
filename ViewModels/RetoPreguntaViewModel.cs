@@ -73,8 +73,8 @@ namespace preguntaods
             imagenCorazon1 = FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = FindViewById<ImageView>(Resource.Id.heart2);
 
-            // Conseguir preguntas
-            var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
+            // Conseguir preguntas 
+           /* var preguntasFaciles = await repositorio.GetByDificultad(Pregunta.difBaja);
             var preguntasMedias = await repositorio.GetByDificultad(Pregunta.difMedia);
             var preguntasAltas = await repositorio.GetByDificultad(Pregunta.difAlta);
 
@@ -90,7 +90,7 @@ namespace preguntaods
             turno = 0;
             ptsTotales = 0;
             consolidado = false;
-            errores = 0;
+            errores = 0; */
 
             // botones soluciones
             botonPregunta1.Click += ButtonClick;

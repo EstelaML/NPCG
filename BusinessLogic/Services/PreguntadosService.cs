@@ -19,11 +19,17 @@ namespace preguntaods.Services
         public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
         {
             // coge los retos de esa dificultad pero ya solo los que no haya hecho
-            List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad);
-
-            Random random = new Random();
-            return  respuesta[random.Next(respuesta.Count)];
+            List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
+            if (respuesta != null)
+            {
+                return respuesta.First();
+            }
+            else 
+            {
+                return null;
+            }
         }
+           
         #endregion
     }
 }
