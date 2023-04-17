@@ -36,37 +36,18 @@ namespace preguntaods.Entities
         {
             if (orden < 4 || orden == 10)
             {
-                pregunta = await SetPregunta(1, retos);
+                pregunta = await SetPregunta(Pregunta.difBaja, retos);
             }
             else if (orden < 7 || orden == 11)
             {
-                pregunta = await SetPregunta(2, retos);
+                pregunta = await SetPregunta(Pregunta.difMedia, retos);
             }
-            else { pregunta = await SetPregunta(3, retos); }
+            else { pregunta = await SetPregunta(Pregunta.difAlta, retos); }
         }
 
         private async Task<Pregunta> SetPregunta(int dif, List<Reto> retos)
         {
-            switch (dif)
-            {
-                case 1:
-                    {
-                        return await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
-
-                        break;
-                    }
-                case 2:
-                    {
-                        return await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
-                        break;
-                    }
-                case 3:
-                    {
-                        return await servicio.SolicitarPregunta(Pregunta.difAlta, retos);
-                        break;
-                    }
-            }
-            return null;
+            return await servicio.SolicitarPregunta(dif, retos);
         }
     }
 }
