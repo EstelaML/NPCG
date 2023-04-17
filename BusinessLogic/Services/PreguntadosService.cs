@@ -2,6 +2,7 @@
 using preguntaods.Persistencia.Repository;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 
 namespace preguntaods.Services
@@ -9,8 +10,9 @@ namespace preguntaods.Services
     public class PreguntadosService : IPreguntadosService
     {
         private readonly RepositorioPregunta repositorioPre;
-        private List<Pregunta> preguntas;
-        private List<Pregunta> preguntasMedias;
+        private static List<Pregunta> preguntasBajas;
+        private static List<Pregunta> preguntasMedias;
+        private static List<Pregunta> preguntasAltas;
 
         public PreguntadosService()
         {
@@ -19,10 +21,44 @@ namespace preguntaods.Services
 
         #region RetoPregunta
 
-        public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
+        public async Task InitList()
         {
-            IEnumerable<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
-            return respuesta.FirstOrDefault(); 
+            if (preguntasBajas == null) preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.difBaja);
+            if (preguntasMedias == null) preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.difMedia);
+            if (preguntasAltas == null) preguntasAltas = await repositorioPre.GetByDificultad(Pregunta.difAlta);
+        }
+
+        public async Task<Pregunta> SolicitarPregunta(int dificultad)
+        {
+            Pregunta respuesta = null;
+
+            switch (dificultad)
+            {
+                case Pregunta.difBaja:
+                    {
+                        respuesta = preguntasBajas.FirstOrDefault();
+                        preguntasBajas.Remove(respuesta);
+
+                        break;
+                    }
+                case Pregunta.difMedia:
+                    {
+
+                        respuesta = preguntasMedias.FirstOrDefault();
+                        preguntasMedias.Remove(respuesta);
+
+                        break;
+                    }
+                case Pregunta.difAlta:
+                    {
+                        respuesta = preguntasAltas.FirstOrDefault();
+                        preguntasAltas.Remove(respuesta);
+
+                        break;
+                    }
+            }
+
+            return respuesta;
         }
 
         public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos)

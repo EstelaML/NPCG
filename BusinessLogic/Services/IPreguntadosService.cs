@@ -8,7 +8,7 @@ namespace preguntaods.Services
     {
         #region RetoPregunta
 
-        Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos);
+        Task<Pregunta> SolicitarPregunta(int dificultad);
 
         #endregion RetoPregunta
     }
