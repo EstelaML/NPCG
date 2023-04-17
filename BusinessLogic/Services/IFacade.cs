@@ -16,14 +16,6 @@ namespace preguntaods.Services
 
         Task<Usuario> GetUsuarioLogged();
 
-        #endregion Usuario
-
-        #region Sonido
-
-        void EjecutarSonido(Android.Content.Context t, IEstrategiaSonido estrategia);
-
-        void PararSonido(IEstrategiaSonido estrategia);
-
-        #endregion Sonido
+        #endregion
     }
 }

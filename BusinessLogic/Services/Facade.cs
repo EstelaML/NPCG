@@ -87,20 +87,6 @@ namespace preguntaods.Services
             }
         }
 
-        #endregion Usuario
-
-        #region Sonido
-
-        public void EjecutarSonido(Android.Content.Context t, IEstrategiaSonido estrategia)
-        {
-            estrategia.Play(t);
-        }
-
-        public void PararSonido(IEstrategiaSonido estrategia)
-        {
-            estrategia.Stop();
-        }
-
-        #endregion Sonido
+        #endregion
     }
 }

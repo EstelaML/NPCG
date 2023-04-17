@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.Entities;
 using preguntaods.Services;
 using System;
 
@@ -16,6 +17,7 @@ namespace preguntaods
         private EditText password;
         private TextView error;
         private Facade fachada;
+        private Sonido sonido;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -23,6 +25,9 @@ namespace preguntaods
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.vistaInicioSesion);
             fachada = new Facade();
+
+            sonido = new Sonido();
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);
@@ -39,7 +44,7 @@ namespace preguntaods
 
         private void NavigateRegistro(object sender, EventArgs e)
         {
-            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+            sonido.EjecutarSonido();
 
             Intent i = new Intent(this, typeof(RegistroViewModel));
             StartActivity(i);
@@ -49,7 +54,7 @@ namespace preguntaods
         {
             try
             {
-                fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+                sonido.EjecutarSonido();
 
                 await fachada.LoginAsync(correo.Text, password.Text);
 
