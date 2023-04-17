@@ -24,13 +24,16 @@ namespace preguntaods.Entities
         private Sonido _sonido;
         private int ptsTotales;
         private int ptsConsolidados;
-        private bool falloFacil = false;
+        private bool falloFacil;
         private int numRetos;
+        private bool primeraVez;
 
         public Partida()
         {
             contadorRetoSiguiente = 0;
             listaRetos = new List<Reto>();
+            falloFacil = false;
+            primeraVez = true;
         }
 
         #region Setters/Getters
@@ -40,8 +43,12 @@ namespace preguntaods.Entities
             _activity = activity;
             userInterface.SetActivity(activity);
 
-            _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
-            _sonido.EjecutarSonido();
+            if (primeraVez)
+            {
+                _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
+                _sonido.EjecutarSonido();
+                primeraVez = false;
+            }
         }
 
         public Reto GetRetoActual()
@@ -135,7 +142,7 @@ namespace preguntaods.Entities
 
         public void UpdateUI()
         {
-            switch (listaRetos[0].GetType())
+            switch (listaRetos[contadorRetoSiguiente].GetType())
             {
                 case Reto.typePregunta:
                     {
@@ -205,6 +212,7 @@ namespace preguntaods.Entities
             {
             });
             alertBuilder.SetCancelable(false);
+
             alertDialog = alertBuilder.Create();
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
@@ -226,6 +234,7 @@ namespace preguntaods.Entities
                 titulo = "Has perdido";
                 mensaje = "Siempre puedes volver a intentarlo...";
             }
+
             Android.App.AlertDialog alertDialog = null;
             Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
 
@@ -235,6 +244,7 @@ namespace preguntaods.Entities
             {
                 userInterface.FinReto();
                 _sonido.PararSonido();
+
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
             });

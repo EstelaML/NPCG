@@ -41,7 +41,7 @@ namespace preguntaods
             // Cuando termine el tiempo de carga
             animation.AnimationEnd += (sender, e) =>
             {
-                // Poner la vista del tipo de reto concreto
+                // Iniciar el reto
                 RetoSiguiente(0, 0);
             };
         }
