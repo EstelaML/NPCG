@@ -21,7 +21,7 @@ namespace preguntaods.Entities
 
         private int contadorRetoSiguiente;
         private int fallos;
-        private EstrategiaSonidoMusica musica;
+        private Sonido _sonido;
         private int ptsTotales;
         private int ptsConsolidados;
         private bool falloFacil = false;
@@ -130,10 +130,23 @@ namespace preguntaods.Entities
             return _fachada;
         }
 
+        public void SetSonido(Sonido sonido)
+        {
+            _sonido = sonido;
+        }
+
+        public Sonido GetSonido()
+        {
+            return _sonido;
+        }
+
         public void SetActivity(Android.App.Activity activity)
         {
             _activity = activity;
             userInterface.SetActivity(activity);
+
+            _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
+            _sonido.EjecutarSonido();
         }
 
         public void InitValues()
@@ -145,13 +158,9 @@ namespace preguntaods.Entities
             textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
             textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
-            if (musica == null)
-            {
-                musica = new EstrategiaSonidoMusica(); _fachada.EjecutarSonido(_activity, musica);
-            }
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
-        }
+    }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
@@ -168,22 +177,26 @@ namespace preguntaods.Entities
                 mensaje = "Una vez aceptes perderás tu progreso por completo.";
             }
             // preguntar si está seguro antes de abandonar
+
             Android.App.AlertDialog alertDialog = null;
-            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-            builder.SetMessage(mensaje);
-            builder.SetTitle(titulo);
-            builder.SetPositiveButton("Aceptar", (sender, args) =>
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+
+            alertBuilder.SetMessage(mensaje);
+            alertBuilder.SetTitle(titulo);
+            alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
             {
                 userInterface.FinReto();
-                _fachada.PararSonido(musica);
+                _sonido.PararSonido();
+
                 if ((_activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                 }
+
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
             });
-            builder.SetNegativeButton("Cancelar", (sender, args) =>
+            alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
             {
             });
             builder.SetCancelable(false);
@@ -210,18 +223,18 @@ namespace preguntaods.Entities
             }
             Android.App.AlertDialog alertDialog = null;
 
-            Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
-            builder.SetMessage(mensaje);
-            builder.SetTitle(titulo);
-            builder.SetPositiveButton("Salir", (sender, args) =>
+            alertBuilder.SetMessage(mensaje);
+            alertBuilder.SetTitle(titulo);
+            alertBuilder.SetPositiveButton("Salir", (sender, args) =>
             {
                 userInterface.FinReto();
-                _fachada.PararSonido(musica);
+                _sonido.PararSonido();
                 Intent i = new Intent(_activity, typeof(MenuViewModel));
                 _activity.StartActivity(i);
             });
-            builder.SetCancelable(false);
-            alertDialog = builder.Create();
+            alertBuilder.SetCancelable(false);
+
+            alertDialog = alertBuilder.Create();
             alertDialog.Window.SetDimAmount(0.8f);
             alertDialog.Show();
         }

@@ -5,6 +5,7 @@
         public Partida ConstructPartida(IPartidaBuilder builder)
         {
             builder.BuildFacade();
+            builder.BuildSonido();
             builder.BuildPlayer();
             builder.BuildRetos();
             builder.BuildUserInterface();

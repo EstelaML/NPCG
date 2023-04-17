@@ -104,7 +104,7 @@ namespace preguntaods
             animation.SetDuration(30000); //30 secs
             animation.AnimationEnd += (sender, e) =>
             {
-                fachada.PararSonido(new EstrategiaSonidoReloj());
+                //fachada.PararSonido(new EstrategiaSonidoReloj());
                 if (!contesta)
                 {
                     turno++;
@@ -118,19 +118,19 @@ namespace preguntaods
             };
             animation.AnimationCancel += (sender, e) =>
             {
-                fachada.PararSonido(new EstrategiaSonidoReloj());
+                //fachada.PararSonido(new EstrategiaSonidoReloj());
                 contesta = true;
             };
             animation.Update += (sender, e) =>
             {
                 if (animation.CurrentPlayTime == animation.Duration * 0.9f)
                 {
-                    fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
+                    //fachada.EjecutarSonido(this, new EstrategiaSonidoReloj());
                 }
             };
 
             //Empezar música
-            fachada.EjecutarSonido(this, musica);
+            //fachada.EjecutarSonido(this, musica);
 
             //botonAbandonar
             botonAbandonar.Click += EventoAbandonar;
@@ -162,7 +162,7 @@ namespace preguntaods
             builder.SetTitle(titulo);
             builder.SetPositiveButton("Aceptar", (sender, args) =>
             {
-                fachada.PararSonido(musica);
+                //fachada.PararSonido(musica);
                 Intent i = new Intent(this, typeof(MenuViewModel));
                 StartActivity(i);
             });
@@ -226,7 +226,7 @@ namespace preguntaods
             if (text.Equals(preguntaActual.Correcta))
             {
                 acertado = true;
-                fachada.EjecutarSonido(this, new EstrategiaSonidoAcierto());
+                //fachada.EjecutarSonido(this, new EstrategiaSonidoAcierto());
 
                 ptsTotales = ActualizarPts(turno, ptsTotales, añadir);
                 b.SetBackgroundResource(Resource.Drawable.style_preAcierto);
@@ -291,7 +291,7 @@ namespace preguntaods
                 {
                     Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
-                    fachada.PararSonido(musica);
+                    //fachada.PararSonido(musica);
                 });
 
                 builder.SetCancelable(false);
@@ -310,7 +310,7 @@ namespace preguntaods
                 {
                     Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
-                    fachada.PararSonido(musica);
+                    //fachada.PararSonido(musica);
                 });
 
                 builder.SetCancelable(false);
@@ -338,7 +338,7 @@ namespace preguntaods
                 });
                 builder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
-                    fachada.PararSonido(musica);
+                    //fachada.PararSonido(musica);
 
                     Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
@@ -362,7 +362,7 @@ namespace preguntaods
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
-                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        //fachada.PararSonido(new EstrategiaSonidoReloj());
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 10000);
@@ -388,7 +388,7 @@ namespace preguntaods
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
-                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        //fachada.PararSonido(new EstrategiaSonidoReloj());
                         alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
                     }
                 }, 10000);

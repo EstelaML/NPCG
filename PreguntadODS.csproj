@@ -68,6 +68,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\Entities\EstrategiaSonido\Sonido.cs" />
     <Compile Include="BusinessLogic\Entities\Partida\Retos\RetoFrase.cs" />
     <Compile Include="BusinessLogic\Entities\Partida\Retos\RetoSopa.cs" />
     <Compile Include="BusinessLogic\Entities\Partida\Retos\RetoAhorcado.cs" />

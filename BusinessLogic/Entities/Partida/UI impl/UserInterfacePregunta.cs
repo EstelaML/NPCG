@@ -15,6 +15,7 @@ namespace preguntaods.Entities
         private Activity _activity;
 
         private Facade fachada;
+        private Sonido sonido;
         private int _fallos;
         private int _puntuacionTotal;
         private static int _puntosConsolidados;
@@ -75,6 +76,7 @@ namespace preguntaods.Entities
 
             // Initialization of Services
             fachada = new Facade();
+            sonido = new Sonido();
 
             // Initialization of Vars
             reloj = new EstrategiaSonidoReloj();
@@ -94,7 +96,8 @@ namespace preguntaods.Entities
                 var playtime = animation.CurrentPlayTime;
                 if (playtime >= 20000 && playtime < 20020)
                 {
-                    fachada.EjecutarSonido(_activity, reloj);
+                    sonido.SetEstrategia(reloj, _activity);
+                    sonido.EjecutarSonido();
                 }
             };
             animation.AnimationEnd += async (sender, e) =>
@@ -102,9 +105,13 @@ namespace preguntaods.Entities
                 if (_fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
 
-                fachada.PararSonido(reloj);
+                sonido.SetEstrategia(reloj, _activity);
+                sonido.PararSonido();
             };
-            animation.AnimationCancel += (sender, e) => { fachada.PararSonido(reloj); };
+            animation.AnimationCancel += (sender, e) => {
+                sonido.SetEstrategia(reloj, _activity);
+                sonido.PararSonido();
+            };
         }
 
         public override void SetDatosReto(Reto reto)
@@ -143,7 +150,7 @@ namespace preguntaods.Entities
 
             if (boton.Text.Equals(correcta))
             {
-                fachada.EjecutarSonido(_activity, new EstrategiaSonidoAcierto());
+                sonido.SetEstrategia(new EstrategiaSonidoAcierto(), _activity);
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
                 (_activity as VistaPartidaViewModel).GuardarPreguntaAcertada();
                 _puntuacionTotal += puntuacion;
@@ -151,7 +158,7 @@ namespace preguntaods.Entities
             }
             else
             {
-                fachada.EjecutarSonido(_activity, new EstrategiaSonidoError());
+                sonido.SetEstrategia(new EstrategiaSonidoError(), _activity);
                 boton.SetBackgroundResource(Resource.Drawable.style_preFallo);
 
                 _puntuacionTotal -= puntuacion * 2;
@@ -160,6 +167,8 @@ namespace preguntaods.Entities
                 _fallos++;
                 await MostrarAlerta(false, _fallos == 2);
             }
+
+            sonido.EjecutarSonido();
 
             FinReto();
 
@@ -240,7 +249,8 @@ namespace preguntaods.Entities
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
-                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        sonido.SetEstrategia(reloj, _activity);
+                        sonido.PararSonido();
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 10000);
@@ -272,7 +282,8 @@ namespace preguntaods.Entities
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
                     {
-                        fachada.PararSonido(new EstrategiaSonidoReloj());
+                        sonido.SetEstrategia(reloj, _activity);
+                        sonido.PararSonido();
                         alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
                     }
                 }, 10000);

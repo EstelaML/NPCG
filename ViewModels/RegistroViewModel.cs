@@ -24,11 +24,15 @@ namespace preguntaods
         private TextView error;
 
         private Facade fachada;
+        private Sonido sonido;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRegistro);
+            sonido = new Sonido();
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+
             fachada = new Facade();
 
             usernameCorrect = false;
@@ -75,9 +79,8 @@ namespace preguntaods
 
         private async void Registrar(object sender, EventArgs e)
         {
-            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
-            if (usernameCorrect && passwordCorrect && emailCorrect)
-            {
+            sonido.EjecutarSonido();
+            if (usernameCorrect && passwordCorrect && emailCorrect) {
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
@@ -95,7 +98,7 @@ namespace preguntaods
 
         private void Atras(object sender, EventArgs e)
         {
-            fachada.EjecutarSonido(this, new EstrategiaSonidoClick());
+            sonido.EjecutarSonido();
 
             Intent i = new Intent(this, typeof(InicioSesionViewModel));
             StartActivity(i);
