@@ -7,6 +7,6 @@
         public const int typeFrase = 102;
         public const int typeSopa = 103;
 
-        public new abstract int GetType();
+        public abstract new int GetType();
     }
 }

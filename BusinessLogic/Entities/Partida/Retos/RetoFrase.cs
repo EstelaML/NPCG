@@ -3,6 +3,7 @@
     public class RetoFrase : Reto
     {
         private readonly int type;
+
         public RetoFrase()
         {
             type = typeFrase;

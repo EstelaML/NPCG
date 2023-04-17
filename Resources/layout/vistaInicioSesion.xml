@@ -31,7 +31,6 @@
             android:src="@drawable/icon_logo"
             android:contentDescription="" />
 
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"/>
@@ -126,11 +125,7 @@
                 android:textColor="@color/colorPrimary"
                 tools:ignore="UnresolvedResource,HardcodedSize,NegativeMargin" />
 
-
-
-        
         </LinearLayout>
-
 
     </LinearLayout>
 

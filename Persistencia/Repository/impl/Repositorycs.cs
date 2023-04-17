@@ -52,7 +52,7 @@ namespace preguntaods.Persistencia.Repository
         {
             await conexion.cliente
                 .From<T>()
-                .Where (x => x.Id == id)
+                .Where(x => x.Id == id)
                 .Delete();
         }
     }

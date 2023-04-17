@@ -1,6 +1,4 @@
-﻿using Android.Media;
-using Java.Util;
-using preguntaods.Services;
+﻿using preguntaods.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,18 +12,15 @@ namespace preguntaods.Entities
         private List<Reto> retos;
         private List<Pregunta> preguntas;
         private int orden;
+
         public RetoPre(List<Reto> listRetos, int orden)
         {
             servicio = new PreguntadosService();
             this.orden = orden;
             retos = listRetos;
+            SetDif(orden, listRetos);
             type = typePregunta;
         }
-
-        public async Task AsignarPregunta(int orden, List<Reto> listRetos) {
-            pregunta = await SetDif(orden, listRetos);
-        } 
-
 
         public override int GetType()
         {
@@ -37,50 +32,17 @@ namespace preguntaods.Entities
             return pregunta;
         }
 
-        public async Task<Pregunta> SetDif(int orden, List<Reto> retos)
+        public async Task SetDif(int orden, List<Reto> retos)
         {
-
             if (orden < 4 || orden == 10)
             {
-
-                return await SetPregunta(1, retos);
-
+                pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
             }
             else if (orden < 7 || orden == 11)
             {
-
-                return await SetPregunta(2, retos);
-
+                pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
             }
-            else { return await SetPregunta(3, retos); }
-
+            else { pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta, retos); }
         }
-
-        private async Task<Pregunta> SetPregunta(int dif, List<Reto> retos)
-        {
-            switch (dif)
-            {
-                case 1:
-                    {
-
-                        return await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
-
-                        break;
-                    }
-                case 2:
-                    {
-                        return await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
-                        break;
-                    }
-                case 3:
-                    {
-                        return await servicio.SolicitarPregunta(Pregunta.difAlta, retos);
-                        break;
-                    }
-            }
-            return null;
-        }
-
-
     }
 }

@@ -1,8 +1,5 @@
-﻿using Java.Util;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
-using Supabase.Gotrue;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,31 +11,22 @@ namespace preguntaods.Services
         private readonly RepositorioPregunta repositorioPre;
         private List<Pregunta> preguntas;
         private List<Pregunta> preguntasMedias;
+
         public PreguntadosService()
         {
             repositorioPre = new RepositorioPregunta();
         }
 
-        #region ODS
-
-        #endregion
-
-        #region Reto
-        
-
-        #endregion
-
-
-
-
         #region RetoPregunta
+
         public async Task<Pregunta> SolicitarPregunta(int dificultad, List<Reto> retos)
-        { 
-            List<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
-            return respuesta.FirstOrDefault();
+        {
+            IEnumerable<Pregunta> respuesta = await repositorioPre.GetByDificultad(dificultad, retos);
+            return respuesta.FirstOrDefault(); 
         }
 
-        public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos) {
+        public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos)
+        {
             System.Random random = new System.Random();
 
             // Obtener un índice aleatorio dentro del rango de la lista de preguntas
@@ -59,6 +47,6 @@ namespace preguntaods.Services
             return respuesta[random.Next(respuesta.Count)];
         }
 
-        #endregion
+        #endregion RetoPregunta
     }
 }

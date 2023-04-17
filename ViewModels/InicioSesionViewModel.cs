@@ -6,7 +6,6 @@ using AndroidX.AppCompat.App;
 using preguntaods.Services;
 using System;
 
-
 namespace preguntaods
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]

@@ -53,7 +53,7 @@
         android:background="@drawable/style_camposinf"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/nombreUsuario" 
+        android:id="@+id/nombreUsuario"
         />
     <TextView
         android:text="Correo electrónico"
@@ -123,7 +123,7 @@
         android:id="@+id/registroB"
         android:textColor="@android:color/black"
         android:backgroundTint="@color/colorPrimary"
-        tools:ignore="HardcodedText" 
+        tools:ignore="HardcodedText"
         />
 
 </LinearLayout>

@@ -43,6 +43,6 @@
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
             android:contentDescription="" />
-            
+
     </LinearLayout>
 </LinearLayout>

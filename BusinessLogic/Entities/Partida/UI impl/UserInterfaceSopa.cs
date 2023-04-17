@@ -5,7 +5,9 @@ namespace preguntaods.Entities
     public class UserInterfaceSopa : UserInterface
     {
         private Activity _activity;
-        public UserInterfaceSopa() { }
+
+        public UserInterfaceSopa()
+        { }
 
         public override void SetActivity(Activity activity)
         {

@@ -4,7 +4,8 @@ namespace preguntaods.Entities
 {
     public partial class ODS : BaseModel, IEntity
     {
-        public ODS() { }
+        public ODS()
+        { }
 
         public ODS(string nombre, string descripcion, string imagen)
         {

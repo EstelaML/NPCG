@@ -3,6 +3,7 @@
     public class RetoSopa : Reto
     {
         private readonly int type;
+
         public RetoSopa()
         {
             type = typeSopa;
