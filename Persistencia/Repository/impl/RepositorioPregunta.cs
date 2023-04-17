@@ -15,14 +15,14 @@ namespace preguntaods.Persistencia.Repository
         }
 
 
-        public async Task<IEnumerable<Pregunta>> GetByDificultad(int dificultad, List<Reto> retos)
+        public async Task<List<Pregunta>> GetByDificultad(int dificultad)
         {
             var response = await conexion.cliente
                 .From<Pregunta>()
                 .Where(x => x.Dificultad == dificultad)
                 .Get();
 
-            return response.Models.AsEnumerable();
+            return response.Models;
         }
 
         /*

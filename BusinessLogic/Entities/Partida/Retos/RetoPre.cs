@@ -7,19 +7,16 @@ namespace preguntaods.Entities
     public class RetoPre : Reto
     {
         private Pregunta pregunta;
-        private PreguntadosService servicio;
+        private static PreguntadosService servicio;
         private readonly int type;
         private List<Reto> retos;
-        private List<Pregunta> preguntas;
-        private int orden;
 
-        public RetoPre(List<Reto> listRetos, int orden)
+        public RetoPre(List<Reto> listaRetos, int orden)
         {
             servicio = new PreguntadosService();
-            this.orden = orden;
-            retos = listRetos;
-            SetDif(orden, listRetos);
+            retos = listaRetos;
             type = typePregunta;
+            servicio.InitList().ContinueWith(t => { SetDif(orden, listaRetos); });
         }
 
         public override int GetType()
@@ -36,13 +33,13 @@ namespace preguntaods.Entities
         {
             if (orden < 4 || orden == 10)
             {
-                pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja, retos);
+                pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
             }
             else if (orden < 7 || orden == 11)
             {
-                pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia, retos);
+                pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia);
             }
-            else { pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta, retos); }
+            else { pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta); }
         }
     }
 }

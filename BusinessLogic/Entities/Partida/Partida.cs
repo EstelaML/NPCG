@@ -30,6 +30,7 @@ namespace preguntaods.Entities
         public Partida()
         {
             contadorRetoSiguiente = 0;
+            listaRetos = new List<Reto>();
         }
 
         public Reto GetRetoActual()
@@ -44,7 +45,6 @@ namespace preguntaods.Entities
 
         public void AddReto(Reto reto)
         {
-            if (listaRetos == null) listaRetos = new List<Reto>();
             listaRetos.Add(reto);
         }
 
