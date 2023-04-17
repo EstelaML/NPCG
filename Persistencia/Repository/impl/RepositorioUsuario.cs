@@ -40,11 +40,10 @@ namespace preguntaods.Persistencia.Repository
                      .Update();
         }
 
-        public async Task<int[]> GetPreguntasAcertadasAsync(string a)
+        public async Task<int[]> GetPreguntasAcertadasAsync()
         {
-            var res = await conexion.cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
-            if (res != null) return res.PreguntasRealizadas;
-            else return null;
+            var res = await conexion.cliente.From<Usuario>().Where(x => x.Uuid == conexion.usuario.Id).Single();
+            return res.PreguntasRealizadas;
         }
     }
 }

@@ -70,9 +70,8 @@ namespace preguntaods.Services
         public async Task GuardarPregunta(Reto reto)
         {
             var pregunta = (reto as RetoPre).GetPregunta();
-            var a = conexion.usuario.Id;
 
-            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a);
+            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync();
             if (preguntas != null)
             {
                 int l = preguntas.Length;
