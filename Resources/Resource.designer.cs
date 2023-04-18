@@ -11092,13 +11092,19 @@ namespace preguntaods
 			public const int sonido_click = 2131755009;
 			
 			// aapt resource value: 0x7F100002
-			public const int sonido_error = 2131755010;
+			public const int sonido_derrota = 2131755010;
 			
 			// aapt resource value: 0x7F100003
-			public const int sonido_musica = 2131755011;
+			public const int sonido_error = 2131755011;
 			
 			// aapt resource value: 0x7F100004
-			public const int sonido_reloj = 2131755012;
+			public const int sonido_musica = 2131755012;
+			
+			// aapt resource value: 0x7F100005
+			public const int sonido_reloj = 2131755013;
+			
+			// aapt resource value: 0x7F100006
+			public const int sonido_victoria = 2131755014;
 			
 			static Raw()
 			{

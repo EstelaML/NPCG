@@ -68,6 +68,8 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
+    <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoVictoria.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\Sonido.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoFrase.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoSopa.cs" />
@@ -309,6 +311,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_ods9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\sonido_derrota.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\sonido_victoria.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
