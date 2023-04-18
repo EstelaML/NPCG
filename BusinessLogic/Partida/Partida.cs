@@ -227,20 +227,16 @@ namespace preguntaods.Entities
                 titulo = "¡Enhorabuena!";
                 mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
 
-               
                 _sonido.SetEstrategia(new EstrategiaSonidoVictoria(), _activity);
-                
-                await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
 
+                await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
             }
             else
             {
-                
                 titulo = "Has perdido";
                 mensaje = "Siempre puedes volver a intentarlo...";
 
                 _sonido.SetEstrategia(new EstrategiaSonidoDerrota(), _activity);
-
             }
 
             _sonido.EjecutarSonido();
