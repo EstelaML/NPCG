@@ -91,27 +91,29 @@ namespace preguntaods.Entities
             botonPregunta3.Click += ButtonClickAsync;
             botonPregunta4.Click += ButtonClickAsync;
 
-            animation.Update += (sender, e) =>
+            animation.Update += async (sender, e) =>
             {
                 var playtime = animation.CurrentPlayTime;
                 if (playtime >= 20000 && playtime < 20020)
                 {
                     sonido.SetEstrategia(reloj, _activity);
                     sonido.EjecutarSonido();
+                    
                 }
             };
-            animation.AnimationEnd += (sender, e) =>
+            animation.AnimationEnd += async (sender, e) =>
             {
                 if (_fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
-
+                await MostrarAlerta(false, _fallos == 2);
                 sonido.SetEstrategia(reloj, _activity);
                 sonido.PararSonido();
             };
             animation.AnimationCancel += (sender, e) =>
             {
                 sonido.SetEstrategia(reloj, _activity);
-                sonido.PararSonido();
+                sonido.PararSonido(); 
+                
             };
         }
 
