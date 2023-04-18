@@ -264,7 +264,7 @@ namespace preguntaods.Entities
                         sonido.PararSonido();
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
-                }, 10000);
+                }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
                 result = await tcs.Task;
             }
@@ -299,7 +299,7 @@ namespace preguntaods.Entities
                         sonido.PararSonido();
                         alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
                     }
-                }, 10000);
+                }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
                 result = await tcs.Task;
                 return result;
