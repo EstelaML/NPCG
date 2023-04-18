@@ -80,20 +80,27 @@ namespace preguntaods
         private async void Registrar(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-            if (usernameCorrect && passwordCorrect && emailCorrect)
+            try
             {
-                if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
-                if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
+                if (usernameCorrect && passwordCorrect && emailCorrect)
+                {
+                    if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
+                    if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
-                var userAux = await fachada.SignUpAsync(email.Text, password.Text);
-                //var user1 = await fachada.GetUsarioLogged();
-                UUID id = UUID.FromString(userAux.Id);
-                Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
-                await fachada.newUsuario(user);
+                    var userAux = await fachada.SignUpAsync(email.Text, password.Text);
+                    //var user1 = await fachada.GetUsarioLogged();
+                    UUID id = UUID.FromString(userAux.Id);
+                    Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
+                    await fachada.newUsuario(user);
 
-                // se registra
-                Intent i = new Intent(this, typeof(MenuViewModel));
-                StartActivity(i);
+                    // se registra
+                    Intent i = new Intent(this, typeof(MenuViewModel));
+                    StartActivity(i);
+                }
+            }
+            catch (Exception ex)
+            {
+                error.Text = "Ese usuario ya existe.";
             }
         }
 
