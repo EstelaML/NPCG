@@ -105,11 +105,14 @@ namespace preguntaods.Entities
             {
                 if (_fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
-                await MostrarAlerta(false, _fallos == 2);
                 sonido.SetEstrategia(reloj, _activity);
                 sonido.PararSonido();
+                await MostrarAlerta(false, _fallos == 2);
+                FinReto();
+                (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
+                
             };
-            animation.AnimationCancel += (sender, e) =>
+            animation.AnimationPause += (sender, e) =>
             {
                 sonido.SetEstrategia(reloj, _activity);
                 sonido.PararSonido(); 
@@ -148,7 +151,7 @@ namespace preguntaods.Entities
         private async void ButtonClickAsync(object sender, EventArgs e)
         {
             numRetos--;
-            animation.Cancel();
+            animation.Pause();
             Button boton = sender as Button;
             Boolean acierto;
             Boolean condicion;
@@ -188,7 +191,7 @@ namespace preguntaods.Entities
             botonPregunta3.Click += null;
             botonPregunta4.Click += null;
 
-            animation.Cancel();
+            animation.Pause();
 
             //actualizar datos usuario
         }
@@ -241,7 +244,7 @@ namespace preguntaods.Entities
                     alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
                         _puntosConsolidados = _puntuacionTotal;
-                        animation.Cancel();
+                        animation.Pause();
                         (_activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
                         tcs.TrySetResult(true);
                     });
