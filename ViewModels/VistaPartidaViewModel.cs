@@ -42,7 +42,7 @@ namespace preguntaods
             animation.AnimationEnd += (sender, e) =>
             {
                 // Iniciar el reto
-                RetoSiguiente(0, 0);
+                RetoSiguiente(0, 0, 0);
             };
         }
 
@@ -78,9 +78,9 @@ namespace preguntaods
             await partida.GuardarPreguntaUsuario(partida.GetRetoActual());
         }
 
-        public void RetoSiguiente(int fallos, int ptsTotales)
+        public void RetoSiguiente(int fallos, int ptsTotales, int ptsConsolidados)
         {
-            partida.NextReto(fallos, ptsTotales);
+            partida.NextReto(fallos, ptsTotales, ptsConsolidados);
 
             reto = partida.GetRetoActual();
 
