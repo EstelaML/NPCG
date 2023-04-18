@@ -98,7 +98,6 @@ namespace preguntaods.Entities
                 {
                     sonido.SetEstrategia(reloj, _activity);
                     sonido.EjecutarSonido();
-                    
                 }
             };
             animation.AnimationEnd += async (sender, e) =>
@@ -110,13 +109,11 @@ namespace preguntaods.Entities
                 await MostrarAlerta(false, _fallos == 2);
                 FinReto();
                 (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
-                
             };
             animation.AnimationPause += (sender, e) =>
             {
                 sonido.SetEstrategia(reloj, _activity);
-                sonido.PararSonido(); 
-                
+                sonido.PararSonido();
             };
         }
 

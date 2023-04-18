@@ -1,5 +1,4 @@
 ﻿using preguntaods.Entities;
-using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository;
 using System.Collections.Generic;
 using System.Linq;
