@@ -105,9 +105,12 @@ namespace preguntaods.Entities
                 _fallos++;
                 if (_fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                 else if (_fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+
                 sonido.SetEstrategia(reloj, _activity);
                 sonido.PararSonido();
+
                 await MostrarAlerta(false, _fallos == 2);
+
                 FinReto();
                 (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
             };
