@@ -68,7 +68,6 @@ namespace preguntaods.Entities
             imagenOds = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1 = _activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = _activity.FindViewById<ImageView>(Resource.Id.heart2);
-            
 
             if (_fallos == 1)
             {

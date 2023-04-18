@@ -102,9 +102,8 @@ namespace preguntaods
                 catch (Exception)
                 {
                     error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
-
                 }
-            }   
+            }
         }
 
         private void Atras(object sender, EventArgs e)
