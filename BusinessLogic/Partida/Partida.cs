@@ -221,19 +221,29 @@ namespace preguntaods.Entities
         {
             string titulo = "";
             string mensaje = "";
+            _sonido.PararSonido();
             if (acertado)
             {
                 titulo = "¡Enhorabuena!";
                 mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
 
+               
+                _sonido.SetEstrategia(new EstrategiaSonidoVictoria(), _activity);
+                
                 await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
+
             }
             else
             {
+                
                 titulo = "Has perdido";
                 mensaje = "Siempre puedes volver a intentarlo...";
+
+                _sonido.SetEstrategia(new EstrategiaSonidoDerrota(), _activity);
+
             }
 
+            _sonido.EjecutarSonido();
             Android.App.AlertDialog alertDialog = null;
             Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
 
