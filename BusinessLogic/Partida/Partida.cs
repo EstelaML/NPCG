@@ -120,7 +120,7 @@ namespace preguntaods.Entities
             this.fallos = fallos;
             this.ptsTotales = ptsTotales;
             this.ptsConsolidados = ptsConsolidados;
-
+      
             if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
                 if (fallos == 1 && contadorRetoSiguiente == 4)

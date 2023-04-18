@@ -35,7 +35,7 @@ namespace preguntaods
             // Animar Circulo Loading
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             animation = ObjectAnimator.OfInt(progressBar, "ProgressBar", 100, 0);
-            animation.SetDuration(3000); //volver a 5 segundos en caso de que de error al cargar la partida
+            animation.SetDuration(4500); //volver a 5 segundos en caso de que de error al cargar la partida
             animation.Start();
 
             // Cuando termine el tiempo de carga

@@ -60,7 +60,6 @@ namespace preguntaods.Services
                     {
                         respuesta = preguntasAltas.FirstOrDefault();
                         preguntasAltas.Remove(respuesta);
-
                         break;
                     }
             }

@@ -35,7 +35,7 @@ namespace preguntaods.Entities
             {
                 pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
             }
-            else if (orden < 7 || orden == 11)
+            else if (4 <= orden && orden < 7 || orden == 11)
             {
                 pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia);
             }
