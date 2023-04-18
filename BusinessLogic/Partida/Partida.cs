@@ -18,6 +18,7 @@ namespace preguntaods.Entities
         private Android.App.Activity _activity;
         private Button botonAbandonar;
         private TextView textoPuntosTotales;
+        private TextView textoPuntosConsolidados;
 
         private int contadorRetoSiguiente;
         private int fallos;
@@ -34,6 +35,7 @@ namespace preguntaods.Entities
             listaRetos = new List<Reto>();
             falloFacil = false;
             primeraVez = true;
+            
         }
 
         #region Setters/Getters
@@ -100,21 +102,25 @@ namespace preguntaods.Entities
 
         public void InitValues()
         {
-            userInterface.SetValues(fallos, ptsTotales);
+            userInterface.SetValues(fallos, ptsTotales, ptsConsolidados);
             userInterface.Init();
             userInterface.SetDatosReto(retoActual);
 
             textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
             textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
+            textoPuntosConsolidados = _activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
+            textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
+
             botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
         }
 
-        public void NextReto(int fallos, int ptsTotales)
+        public void NextReto(int fallos, int ptsTotales, int ptsConsolidados)
         {
             this.fallos = fallos;
             this.ptsTotales = ptsTotales;
+            this.ptsConsolidados= ptsConsolidados;
 
             if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
