@@ -87,8 +87,8 @@ namespace preguntaods
                         await fachada.newUsuario(user);
 
                         // se registra
-
-                        Intent i = new Intent(this, typeof(MenuViewModel));
+                        // que inicie sesión
+                        Intent i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
                     }
                     else {
@@ -101,7 +101,7 @@ namespace preguntaods
                 }
                 catch (Exception)
                 {
-                    await fachada.LogoutAsync();
+                    //await fachada.LogoutAsync();
                     error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
                 }
             }
