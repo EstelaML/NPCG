@@ -10,7 +10,6 @@ namespace preguntaods.Services
     public class PreguntadosService : IPreguntadosService
     {
         private readonly RepositorioPregunta repositorioPre;
-        private readonly RepositorioUsuario repositorioUser;
         private static List<Pregunta> preguntasBajas;
         private static List<Pregunta> preguntasMedias;
         private static List<Pregunta> preguntasAltas;
