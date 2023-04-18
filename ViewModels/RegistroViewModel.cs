@@ -35,7 +35,6 @@ namespace preguntaods
 
             fachada = new Facade();
 
-            usernameCorrect = false;
             passwordCorrect = false;
             emailCorrect = false;
 
@@ -43,7 +42,6 @@ namespace preguntaods
             atras.Click += Atras;
 
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
-            username.TextChanged += Username_TextChanged;
 
             email = FindViewById<EditText>(Resource.Id.correo);
             email.TextChanged += Email_TextChanged;
@@ -71,17 +69,11 @@ namespace preguntaods
             error.Text = "";
         }
 
-        private void Username_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
-        {
-            if (username.Text != null) { usernameCorrect = true; }
-            error.Text = "";
-        }
-
         private async void Registrar(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
 
-            if (usernameCorrect && passwordCorrect && emailCorrect)
+            if (passwordCorrect && emailCorrect)
             {
                 if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
@@ -91,7 +83,9 @@ namespace preguntaods
                     UUID id = UUID.FromString(userAux.Id);
                     Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                     await fachada.newUsuario(user);
+
                     // se registra
+
                     Intent i = new Intent(this, typeof(MenuViewModel));
                     StartActivity(i);
                 }
