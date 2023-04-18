@@ -297,7 +297,7 @@ namespace preguntaods.Entities
                     {
                         sonido.SetEstrategia(reloj, _activity);
                         sonido.PararSonido();
-                        alertDialog.GetButton((int)DialogButtonType.Negative).PerformClick();
+                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
