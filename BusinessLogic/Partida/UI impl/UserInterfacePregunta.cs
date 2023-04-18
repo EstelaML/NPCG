@@ -217,14 +217,14 @@ namespace preguntaods.Entities
 
             if (acertado && !fin)
             {
-                titulo = "Has acertado";
+                titulo = "Felicitaciones";
                 if ((_activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas botonAbandonar o seguir?";
                 }
                 else
                 {
-                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    mensaje = $"Sumas {puntuacion} a tus {_puntuacionTotal-puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
                 }
 
                 alertBuilder.SetMessage(mensaje);

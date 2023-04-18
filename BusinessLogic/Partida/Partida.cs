@@ -185,7 +185,7 @@ namespace preguntaods.Entities
             if ((_activity as VistaPartidaViewModel).GetConsolidado())
             {
                 titulo = "¿Estás seguro?";
-                mensaje = "Si aceptar se te fuardarán los puntos consolidados, pero el resto no.";
+                mensaje = "Si aceptas se te guardaarán los puntos consolidados: " + UserInterfacePregunta.getPuntosConsolidados();
             }
             else
             {
@@ -201,16 +201,28 @@ namespace preguntaods.Entities
             alertBuilder.SetTitle(titulo);
             alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
             {
-                userInterface.FinReto();
-                _sonido.PararSonido();
+            userInterface.FinReto();
+            _sonido.PararSonido();
 
                 if ((_activity as VistaPartidaViewModel).GetConsolidado())
                 {
+                    // guardamos puntos consolidados
                     (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
+                    Android.App.AlertDialog.Builder dialogoMal = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+                    dialogoMal.SetTitle("No está mal");
+                    dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.getPuntosConsolidados()} puntos");
+                    dialogoMal.SetPositiveButton("Salir", (sender, args) =>
+                    {
+                        Intent i = new Intent(_activity, typeof(MenuViewModel));
+                        _activity.StartActivity(i);
+                    });
+                    dialogoMal.Create().Show();
+                }
+                else {
+                    Intent i = new Intent(_activity, typeof(MenuViewModel));
+                    _activity.StartActivity(i);
                 }
 
-                Intent i = new Intent(_activity, typeof(MenuViewModel));
-                _activity.StartActivity(i);
             });
             alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
             {
@@ -230,7 +242,7 @@ namespace preguntaods.Entities
             if (acertado)
             {
                 titulo = "¡Enhorabuena!";
-                mensaje = "Has llegado hasta el final y se te suman los puntos a tu puntuación total.";
+                mensaje = $"Has llegado hasta el final y se te suman {puntosFinales} puntos";
 
                 _sonido.SetEstrategia(new EstrategiaSonidoVictoria(), _activity);
 
