@@ -185,7 +185,7 @@ namespace preguntaods.Entities
             if ((_activity as VistaPartidaViewModel).GetConsolidado())
             {
                 titulo = "¿Estás seguro?";
-                mensaje = "Si aceptas se te guardaarán los puntos consolidados: " + UserInterfacePregunta.getPuntosConsolidados();
+                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + UserInterfacePregunta.getPuntosConsolidados();
             }
             else
             {
@@ -207,7 +207,7 @@ namespace preguntaods.Entities
                 if ((_activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     // guardamos puntos consolidados
-                    (_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
+                    //(_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                     Android.App.AlertDialog.Builder dialogoMal = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
                     dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.getPuntosConsolidados()} puntos");
