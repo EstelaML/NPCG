@@ -80,6 +80,7 @@ namespace preguntaods.Entities
         {
             this.userInterface = userInterface;
         }
+
         public UserInterface GetUI()
         {
             return userInterface;
@@ -95,7 +96,7 @@ namespace preguntaods.Entities
             return _sonido;
         }
 
-        #endregion
+        #endregion Setters/Getters
 
         public void InitValues()
         {
@@ -171,8 +172,6 @@ namespace preguntaods.Entities
         {
             await _fachada.GuardarPregunta(reto);
         }
-
-
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
