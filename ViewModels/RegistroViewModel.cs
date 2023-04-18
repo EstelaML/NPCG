@@ -71,7 +71,7 @@ namespace preguntaods
 
         private async void Registrar(object sender, EventArgs e)
         {
-            sonido.EjecutarSonido();
+            //sonido.EjecutarSonido();
 
             if (passwordCorrect && emailCorrect)
             {
@@ -80,14 +80,20 @@ namespace preguntaods
                 try
                 {
                     var userAux = await fachada.SignUpAsync(email.Text, password.Text);
-                    UUID id = UUID.FromString(userAux.Id);
-                    Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
-                    await fachada.newUsuario(user);
+                    if (userAux != null)
+                    {
+                        UUID id = UUID.FromString(userAux.Id);
+                        Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
+                        await fachada.newUsuario(user);
 
-                    // se registra
+                        // se registra
 
-                    Intent i = new Intent(this, typeof(MenuViewModel));
-                    StartActivity(i);
+                        Intent i = new Intent(this, typeof(MenuViewModel));
+                        StartActivity(i);
+                    }
+                    else {
+                        error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
+                    }
                 }
                 catch (Supabase.Gotrue.RequestException)
                 {
@@ -95,6 +101,7 @@ namespace preguntaods
                 }
                 catch (Exception)
                 {
+                    await fachada.LogoutAsync();
                     error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
                 }
             }

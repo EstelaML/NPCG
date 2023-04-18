@@ -33,7 +33,7 @@ namespace preguntaods.Services
 
         public async Task<User> SignUpAsync(string correo, string password)
         {
-            var session = await conexion.cliente.Auth.SignUp(correo, password);
+            var session = await conexion.cliente.Auth.SignUp(correo, password); 
             conexion.usuario = session.User;
             return session.User;
         }
