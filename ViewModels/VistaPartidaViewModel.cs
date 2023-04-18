@@ -1,5 +1,6 @@
 ﻿using Android.Animation;
 using Android.App;
+using Android.Hardware;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -105,6 +106,11 @@ namespace preguntaods
             consolidado = true;
             partida.EventoConsolidarBoton(new object(), new System.EventArgs(), puntosConsolidados);
         }
+
+        public void ConsolidarUltimaPregunta() {
+            consolidado = true;
+        }
+
 
         public bool GetConsolidado()
         {
