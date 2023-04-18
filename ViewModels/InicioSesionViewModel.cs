@@ -54,6 +54,7 @@ namespace preguntaods
         {
             try
             {
+                sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
                 sonido.EjecutarSonido();
 
                 await fachada.LoginAsync(correo.Text, password.Text);
@@ -64,6 +65,7 @@ namespace preguntaods
             }
             catch (Exception)
             {
+                await fachada.LogoutAsync();
                 error.Text = "Correo electrónico o contraseña incorrecta";
             }
         }
