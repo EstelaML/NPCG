@@ -71,7 +71,8 @@ namespace preguntaods
 
         private async void Registrar(object sender, EventArgs e)
         {
-            //sonido.EjecutarSonido();
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            sonido.EjecutarSonido();
 
             if (passwordCorrect && emailCorrect)
             {
