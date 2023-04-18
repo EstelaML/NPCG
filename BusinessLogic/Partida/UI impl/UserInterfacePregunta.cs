@@ -48,10 +48,11 @@ namespace preguntaods.Entities
             _activity = activity;
         }
 
-        public override void SetValues(int fallos, int puntuacion)
+        public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
         {
             _fallos = fallos;
             _puntuacionTotal = puntuacion;
+            _puntosConsolidados = ptsConsolidados;
         }
 
         public override void Init()
@@ -67,7 +68,7 @@ namespace preguntaods.Entities
             imagenOds = _activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1 = _activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = _activity.FindViewById<ImageView>(Resource.Id.heart2);
-            _puntosConsolidados = 0;
+            
 
             if (_fallos == 1)
             {
@@ -112,7 +113,7 @@ namespace preguntaods.Entities
                 await MostrarAlerta(false, _fallos == 2);
 
                 FinReto();
-                (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
+                (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal, _puntosConsolidados);
             };
             animation.AnimationPause += (sender, e) =>
             {
@@ -182,7 +183,7 @@ namespace preguntaods.Entities
 
             FinReto();
 
-            (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal);
+            (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal, _puntosConsolidados);
         }
 
         public override void FinReto()

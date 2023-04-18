@@ -10,7 +10,7 @@ namespace preguntaods.Entities
 
         public abstract void SetActivity(Activity activity);
 
-        public abstract void SetValues(int fallos, int puntuacion);
+        public abstract void SetValues(int fallos, int puntuacion, int ptsConsolidados);
 
         public abstract void FinReto();
     }
