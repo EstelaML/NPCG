@@ -142,10 +142,17 @@ namespace preguntaods.Entities
 
             correcta = pregunta.Correcta;
 
-            var nombreDeImagen = "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
-            var idDeImagen = _activity.Resources.GetIdentifier(nombreDeImagen, "drawable", _activity.PackageName); // obtener el identificador de recurso correspondiente
-            imagenOds.SetImageResource(idDeImagen);
-
+            if (pregunta.OdsRelacionada == null)
+            {
+                var idDeImagen = _activity.Resources.GetIdentifier("icon_logo", "drawable", _activity.PackageName); 
+                imagenOds.SetImageResource(idDeImagen);
+            }
+            else
+            {
+                var nombreDeImagen = "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
+                var idDeImagen = _activity.Resources.GetIdentifier(nombreDeImagen, "drawable", _activity.PackageName); // obtener el identificador de recurso correspondiente
+                imagenOds.SetImageResource(idDeImagen);
+            }
             animation.Start();
         }
 

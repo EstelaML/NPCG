@@ -67,10 +67,6 @@
             android:adjustViewBounds="true"
             android:contentDescription=""
             android:id="@+id/ahorcadoImg"/>
-
-
-
-       
     </LinearLayout>
 
     <ProgressBar
