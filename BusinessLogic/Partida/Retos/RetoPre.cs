@@ -39,7 +39,9 @@ namespace preguntaods.Entities
             {
                 pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia);
             }
-            else { pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta); }
+            else { 
+                pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta); 
+            }
         }
     }
 }

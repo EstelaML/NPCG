@@ -74,9 +74,10 @@ namespace preguntaods.Services
             var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a);
             if (preguntas != null)
             {
-                int l = preguntas.Length;
-                Array.Resize(ref preguntas, preguntas.Length + 1);  // redimensiona el arreglo
-                preguntas[l - 1] = (int)pregunta.Id;
+                // redimensionas el array
+                Array.Resize(ref preguntas, preguntas.Length + 1);
+                // agregar el nuevo valor al final del arreglo
+                preguntas[preguntas.Length - 1] = (int)pregunta.Id;
                 await repositorioUser.UpdatePreguntaAcertada(a, preguntas);
             }
             else

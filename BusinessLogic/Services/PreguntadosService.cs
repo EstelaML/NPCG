@@ -2,16 +2,19 @@
 using preguntaods.Persistencia.Repository;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace preguntaods.Services
 {
     public class PreguntadosService : IPreguntadosService
     {
+        object sync = new object();
         private readonly RepositorioPregunta repositorioPre;
         private static List<Pregunta> preguntasBajas;
         private static List<Pregunta> preguntasMedias;
         private static List<Pregunta> preguntasAltas;
+        private static SemaphoreSlim semaforo = new SemaphoreSlim(1);
 
         public PreguntadosService()
         {
@@ -30,10 +33,12 @@ namespace preguntaods.Services
             {
                 preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.difMedia);
             }
-            if (preguntasAltas == null)
+            var p = await repositorioPre.GetByDificultad(Pregunta.difAlta);
+            lock (sync)
             {
-                preguntasAltas = await repositorioPre.GetByDificultad(Pregunta.difAlta);
+                preguntasAltas ??= p;
             }
+
         }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)
@@ -44,21 +49,21 @@ namespace preguntaods.Services
             {
                 case Pregunta.difBaja:
                     {
-                        respuesta = preguntasBajas.FirstOrDefault();
+                        respuesta = preguntasBajas.First();
                         preguntasBajas.Remove(respuesta);
 
                         break;
                     }
                 case Pregunta.difMedia:
                     {
-                        respuesta = preguntasMedias.FirstOrDefault();
+                        respuesta = preguntasMedias.First();
                         preguntasMedias.Remove(respuesta);
 
                         break;
                     }
                 case Pregunta.difAlta:
                     {
-                        respuesta = preguntasAltas.FirstOrDefault();
+                        respuesta = preguntasAltas.First();
                         preguntasAltas.Remove(respuesta);
                         break;
                     }
