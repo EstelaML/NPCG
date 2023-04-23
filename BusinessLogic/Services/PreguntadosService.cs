@@ -1,4 +1,5 @@
-﻿using preguntaods.Entities;
+﻿using Android.Hardware.Camera2;
+using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,6 @@ namespace preguntaods.Services
         private static List<Pregunta> preguntasBajas;
         private static List<Pregunta> preguntasMedias;
         private static List<Pregunta> preguntasAltas;
-        private static SemaphoreSlim semaforo = new SemaphoreSlim(1);
 
         public PreguntadosService()
         {
@@ -38,7 +38,6 @@ namespace preguntaods.Services
             {
                 preguntasAltas ??= p;
             }
-
         }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)
@@ -49,21 +48,20 @@ namespace preguntaods.Services
             {
                 case Pregunta.difBaja:
                     {
-                        respuesta = preguntasBajas.First();
+                        respuesta = preguntasBajas.Last();
                         preguntasBajas.Remove(respuesta);
-
                         break;
                     }
                 case Pregunta.difMedia:
                     {
-                        respuesta = preguntasMedias.First();
+                        respuesta = preguntasMedias.Last();
                         preguntasMedias.Remove(respuesta);
 
                         break;
                     }
                 case Pregunta.difAlta:
                     {
-                        respuesta = preguntasAltas.First();
+                        respuesta = preguntasAltas.Last();
                         preguntasAltas.Remove(respuesta);
                         break;
                     }
