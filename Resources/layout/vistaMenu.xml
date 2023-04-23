@@ -65,7 +65,6 @@
             android:id="@+id/linearLayout1">
 
             <Button
-                android:enabled="false"
                 android:text="Sopa"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -80,7 +79,6 @@
                 android:layout_height="match_parent"/>
 
             <Button
-                android:enabled="false"
                 android:text="Frase"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -97,7 +95,6 @@
                 android:layout_height="30sp"/>
 
          <Button
-                android:enabled="false"
                 android:text="Fiesta"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
