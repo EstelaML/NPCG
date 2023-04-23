@@ -13,18 +13,99 @@
         android:layout_weight="1"
         android:paddingLeft="75px"
         android:paddingRight="75px"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:orientation="vertical">
 
-        <Button
-            android:text="Nueva Partida"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="40sp"
+            android:minHeight="140sp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout1">
+
+            <Button
+                android:text="Pregunta"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_width="140sp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:id="@+id/partidaB" 
+                tools:ignore="HardcodedText"/>
+
+             <Space
+                android:layout_width="30sp"
+                android:layout_height="match_parent"/>
+
+            <Button
+                android:text="Ahorcado"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:background="@color/colorPrimary"
+                android:layout_width="140sp"
+                android:layout_height="match_parent"
+                android:id="@+id/ahorcadoB" 
+                tools:ignore="HardcodedText"/>
+
+        </LinearLayout>
+
+        <Space
+        android:layout_width="match_parent"
+        android:layout_height="30sp"/>
+        
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:minWidth="80sp"
+            android:minHeight="140sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:id="@+id/partidaB"
-            tools:ignore="HardcodedText" />
+            android:id="@+id/linearLayout1">
+
+            <Button
+                android:enabled="false"
+                android:text="Sopa"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_width="140sp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDisabled"
+                android:id="@+id/sopaB" 
+                tools:ignore="HardcodedText"/>
+
+             <Space
+                android:layout_width="30sp"
+                android:layout_height="match_parent"/>
+
+            <Button
+                android:enabled="false"
+                android:text="Frase"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:background="@color/colorPrimaryDisabled"
+                android:layout_width="140sp"
+                android:layout_height="match_parent"
+                android:id="@+id/fraseB" 
+                tools:ignore="HardcodedText"/>
+
+        </LinearLayout>
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="30sp"/>
+
+         <Button
+                android:enabled="false"
+                android:text="Fiesta"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:background="@color/colorPrimaryDisabled"
+                android:layout_width="140sp"
+                android:layout_height="140sp"
+                android:id="@+id/fiestaB" 
+                tools:ignore="HardcodedText"/>
 
     </LinearLayout>
 
