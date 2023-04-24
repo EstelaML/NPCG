@@ -1,6 +1,8 @@
 ﻿using Android.Hardware.Camera2;
+using Java.Util;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -53,7 +55,10 @@ namespace preguntaods.Services
 
         public Task<Ahorcado> SolicitarAhorcado() 
         {
-            return Task.FromResult(ahorcadoList.First());
+            Random rmd = new Random();
+            int indiceAleatorio = rmd.NextInt(ahorcadoList.Count);
+            var valorAleatorio = ahorcadoList[indiceAleatorio];
+            return Task.FromResult(valorAleatorio);
         }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)

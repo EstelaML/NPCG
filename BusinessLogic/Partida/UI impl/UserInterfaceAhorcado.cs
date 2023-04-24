@@ -21,7 +21,6 @@ namespace preguntaods.Entities
         private static int _puntosConsolidados;
         private string palabraAdivinar;
         private char[] guionesPalabra;
-        private ImageView imagen;
         private int ronda;
         private int letrasAcertadas; 
 
@@ -78,7 +77,7 @@ namespace preguntaods.Entities
             enunciado = _activity.FindViewById<TextView>(Resource.Id.enunciado);
             palabra = _activity.FindViewById<TextView>(Resource.Id.palabra);
             barTime = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            imagen = _activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
+            ahorcadoImg = _activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
             letrasAcertadas = 0;
             ronda = 1;
 
@@ -182,8 +181,12 @@ namespace preguntaods.Entities
             {
                 boton.Enabled = false;
                 string path = "ahorcado_" + ++ronda;
-                var idDeImagen = _activity.Resources.GetIdentifier(path, "drawable", _activity.PackageName); 
-                imagen.SetImageResource(idDeImagen);    
+                var idDeImagen = _activity.Resources.GetIdentifier(path, "drawable", _activity.PackageName);
+                ahorcadoImg.SetImageResource(idDeImagen);
+
+                if (ronda == 10)
+                { // perdido}
+                }
             }
         }
 
