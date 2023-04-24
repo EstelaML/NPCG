@@ -51,11 +51,13 @@
         android:layout_height="20sp"/>
     <TextView
         android:text=""
+        android:paddingLeft="30sp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2" />
     <TextView
+        android:paddingLeft="30sp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:layout_width="match_parent"

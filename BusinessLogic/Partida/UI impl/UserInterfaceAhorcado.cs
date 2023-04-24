@@ -110,9 +110,9 @@ namespace preguntaods.Entities
             animation.Start();
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta.GetAhorcado();
-            var enun = a.Enunciado;
-            //enunciado.Text = enun.ToString();
-            /*palabra.Text = a.Palabra.Replace('A', '_').Replace('B', '_').Replace('C', '_')
+            enunciado.Text = a.Enunciado;
+            char[] chars = a.Palabra.ToCharArray();
+            palabra.Text = string.Join("_ ", chars).Replace("A", "").Replace('B', '_').Replace('C', '_')
                                                  .Replace('D', '_').Replace('E', '_').Replace('F', '_')
                                                  .Replace('G', '_').Replace('H', '_').Replace('I', '_')
                                                  .Replace('J', '_').Replace('K', '_').Replace('L', '_')
@@ -120,8 +120,7 @@ namespace preguntaods.Entities
                                                  .Replace('O', '_').Replace('P', '_').Replace('Q', '_')
                                                  .Replace('R', '_').Replace('S', '_').Replace('T', '_')
                                                  .Replace('U', '_').Replace('V', '_').Replace('W', '_')
-                                                 .Replace('X', '_').Replace('Y', '_').Replace('Z', '_');*/
-
+                                                 .Replace('X', '_').Replace('Y', '_').Replace('Z', '_');
         }
 
         public override void FinReto()
