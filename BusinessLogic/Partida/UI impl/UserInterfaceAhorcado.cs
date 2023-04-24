@@ -2,6 +2,10 @@
 using Android.Widget;
 using Android.Animation;
 using preguntaods.Services;
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using Android.Database.Sqlite;
 
 namespace preguntaods.Entities
 {
@@ -15,6 +19,11 @@ namespace preguntaods.Entities
         private int _fallos;
         private int _puntuacionTotal;
         private static int _puntosConsolidados;
+        private string palabraAdivinar;
+        private char[] guionesPalabra;
+        private ImageView imagen;
+        private int ronda;
+        private int letrasAcertadas; 
 
         // UI
         private ImageView ahorcadoImg;
@@ -69,8 +78,11 @@ namespace preguntaods.Entities
             enunciado = _activity.FindViewById<TextView>(Resource.Id.enunciado);
             palabra = _activity.FindViewById<TextView>(Resource.Id.palabra);
             barTime = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            imagen = _activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
+            letrasAcertadas = 0;
+            ronda = 1;
 
-            #region buttonletters
+            #region buttonletters FindByID
             buttonA = _activity.FindViewById<Button>(Resource.Id.buttonA);
             buttonB = _activity.FindViewById<Button>(Resource.Id.buttonB);
             buttonC = _activity.FindViewById<Button>(Resource.Id.buttonC);
@@ -100,9 +112,79 @@ namespace preguntaods.Entities
             buttonZ = _activity.FindViewById<Button>(Resource.Id.buttonZ);
 
             #endregion
-            animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(30000); //30*4 = 2mins secs
+            #region buttonLetters Handler
+            buttonA.Click += Letter_Click;
+            buttonB.Click += Letter_Click;
+            buttonC.Click += Letter_Click;
+            buttonD.Click += Letter_Click;
+            buttonE.Click += Letter_Click;
+            buttonF.Click += Letter_Click;
+            buttonG.Click += Letter_Click;
+            buttonH.Click += Letter_Click;
+            buttonI.Click += Letter_Click;
+            buttonJ.Click += Letter_Click;  
+            buttonK.Click += Letter_Click;
+            buttonL.Click += Letter_Click;
+            buttonM.Click += Letter_Click;
+            buttonN.Click += Letter_Click;
+            buttonÑ.Click += Letter_Click;
+            buttonO.Click += Letter_Click;
+            buttonP.Click += Letter_Click;
+            buttonQ.Click += Letter_Click;
+            buttonR.Click += Letter_Click;
+            buttonS.Click += Letter_Click;
+            buttonT.Click += Letter_Click;
+            buttonU.Click += Letter_Click;
+            buttonV.Click += Letter_Click;
+            buttonW.Click += Letter_Click;
+            buttonX.Click += Letter_Click;
+            buttonY.Click += Letter_Click;
+            buttonZ.Click += Letter_Click;
+            #endregion
 
+            animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
+            animation.SetDuration(30000*4); //30*4 = 2mins
+
+        }
+
+        private void Letter_Click(object sender, EventArgs e)
+        {
+            Button boton = sender as Button;
+            char letra = char.Parse(boton.Text);
+
+            if (palabraAdivinar.Contains(letra))
+            {
+                List<int> indexes = new List<int>();
+                char[] aux = palabraAdivinar.ToCharArray();
+
+                // compruebo a ver si está dos veces y añado el indice a una lista
+                for (int i = 0; i < palabraAdivinar.Length; i++)
+                {
+                    if (aux[i] == letra)
+                    {
+                        indexes.Add(i);
+                        letrasAcertadas++;
+                    }
+                }
+                for (int i = 0; i < indexes.Count; i++) 
+                {
+                    guionesPalabra[indexes[i]*3] = aux[indexes[i]];
+                }
+                palabra.Text = new string(guionesPalabra);
+                boton.Enabled = false;
+                if (letrasAcertadas == palabraAdivinar.Length) 
+                {
+                    FinReto(); 
+                    (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal, _puntosConsolidados);
+                }
+            }
+            else 
+            {
+                boton.Enabled = false;
+                string path = "ahorcado_" + ++ronda;
+                var idDeImagen = _activity.Resources.GetIdentifier(path, "drawable", _activity.PackageName); 
+                imagen.SetImageResource(idDeImagen);    
+            }
         }
 
         public override void SetDatosReto(Reto reto)
@@ -111,16 +193,11 @@ namespace preguntaods.Entities
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta.GetAhorcado();
             enunciado.Text = a.Enunciado;
+            palabraAdivinar = a.Palabra;
             char[] chars = a.Palabra.ToCharArray();
-            palabra.Text = string.Join("_ ", chars).Replace("A", "").Replace('B', '_').Replace('C', '_')
-                                                 .Replace('D', '_').Replace('E', '_').Replace('F', '_')
-                                                 .Replace('G', '_').Replace('H', '_').Replace('I', '_')
-                                                 .Replace('J', '_').Replace('K', '_').Replace('L', '_')
-                                                 .Replace('M', '_').Replace('N', '_').Replace('Ñ', '_')
-                                                 .Replace('O', '_').Replace('P', '_').Replace('Q', '_')
-                                                 .Replace('R', '_').Replace('S', '_').Replace('T', '_')
-                                                 .Replace('U', '_').Replace('V', '_').Replace('W', '_')
-                                                 .Replace('X', '_').Replace('Y', '_').Replace('Z', '_');
+            var guiones = string.Join(" ", Enumerable.Repeat("_ ", palabraAdivinar.Length));
+            palabra.Text = guiones;
+            guionesPalabra = guiones.ToCharArray();
         }
 
         public override void FinReto()
