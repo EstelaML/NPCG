@@ -101,7 +101,7 @@ namespace preguntaods.Entities
 
             #endregion
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(30000*4); //30*4 = 2mins secs
+            animation.SetDuration(30000); //30*4 = 2mins secs
 
         }
 
@@ -109,8 +109,10 @@ namespace preguntaods.Entities
         {
             animation.Start();
             var pregunta = (reto as RetoAhorcado);
-            enunciado.Text = pregunta.GetEnunciado();
-            palabra.Text = pregunta.GetPalabra().Replace('A', '_').Replace('B', '_').Replace('C', '_')
+            Ahorcado a = pregunta.GetAhorcado();
+            var enun = a.Enunciado;
+            //enunciado.Text = enun.ToString();
+            /*palabra.Text = a.Palabra.Replace('A', '_').Replace('B', '_').Replace('C', '_')
                                                  .Replace('D', '_').Replace('E', '_').Replace('F', '_')
                                                  .Replace('G', '_').Replace('H', '_').Replace('I', '_')
                                                  .Replace('J', '_').Replace('K', '_').Replace('L', '_')
@@ -118,12 +120,13 @@ namespace preguntaods.Entities
                                                  .Replace('O', '_').Replace('P', '_').Replace('Q', '_')
                                                  .Replace('R', '_').Replace('S', '_').Replace('T', '_')
                                                  .Replace('U', '_').Replace('V', '_').Replace('W', '_')
-                                                 .Replace('X', '_').Replace('Y', '_').Replace('Z', '_');
+                                                 .Replace('X', '_').Replace('Y', '_').Replace('Z', '_');*/
+
         }
 
         public override void FinReto()
         {
-            throw new System.NotImplementedException();
+            animation.Pause();
         }
 
         public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)

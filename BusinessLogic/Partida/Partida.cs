@@ -35,6 +35,8 @@ namespace preguntaods.Entities
             listaRetos = new List<Reto>();
             falloFacil = false;
             primeraVez = true;
+            ptsTotales = 0;
+            ptsConsolidados = 0;
         }
 
         #region Setters/Getters

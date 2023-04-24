@@ -60,6 +60,7 @@ namespace preguntaods
                     }
                 case Reto.typeAhorcado:
                     {
+                        SetContentView(Resource.Layout.vistaRetoAhorcado);
                         //SetContentView(Resource.Layout.vistaRetoAhorcado);
                         break;
                     }

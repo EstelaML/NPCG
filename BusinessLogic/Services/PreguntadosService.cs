@@ -12,16 +12,27 @@ namespace preguntaods.Services
     {
         object sync = new object();
         private readonly RepositorioPregunta repositorioPre;
+        private readonly Repository<Ahorcado> repositorioAhorcado;
         private static List<Pregunta> preguntasBajas;
         private static List<Pregunta> preguntasMedias;
         private static List<Pregunta> preguntasAltas;
+        private static List<Ahorcado> ahorcadoList;
 
         public PreguntadosService()
         {
             repositorioPre = new RepositorioPregunta();
+            repositorioAhorcado = new Repository<Ahorcado>();
         }
 
         #region RetoPregunta
+
+        public async Task InitAhorcadoList()
+        {
+            if (ahorcadoList == null)
+            {
+                ahorcadoList = (List<Ahorcado>) await repositorioAhorcado.GetAll();
+            }
+        }
 
         public async Task InitPreguntaList()
         {
@@ -38,6 +49,11 @@ namespace preguntaods.Services
             {
                 preguntasAltas ??= p;
             }
+        }
+
+        public Task<Ahorcado> SolicitarAhorcado() 
+        {
+            return Task.FromResult(ahorcadoList.First());
         }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)

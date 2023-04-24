@@ -1,18 +1,20 @@
 ﻿using preguntaods.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace preguntaods.Entities
 {
     public class RetoAhorcado : Reto
     {
         private readonly int type;
-        private string palabra;
-        private string enunciado;
+        private Ahorcado ahorcado;
         private static PreguntadosService servicio;
 
         public RetoAhorcado()
         {
             type = typeAhorcado;
-
+            servicio = new PreguntadosService();
+            servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(); });
         }
 
         public override int GetType()
@@ -20,14 +22,11 @@ namespace preguntaods.Entities
             return type;
         }
 
-        public string GetPalabra()
-        {
-            return palabra;
-        }
+        public Ahorcado GetAhorcado() { return ahorcado;  }
 
-        public string GetEnunciado() 
+        public async Task SetDiff()
         {
-            return enunciado;
+            ahorcado = await servicio.SolicitarAhorcado();
         }
     }
 }

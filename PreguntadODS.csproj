@@ -68,6 +68,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\Entities\Ahorcado.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoVictoria.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\Sonido.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoClick.cs" />
     <Compile Include="BusinessLogic\Services\IPreguntadosService.cs" />
     <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
+    <Compile Include="Persistencia\Entities\Ahorcado.cs" />
     <Compile Include="Persistencia\Entities\Usuario.cs" />
     <Compile Include="Persistencia\Entities\IEntity.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
