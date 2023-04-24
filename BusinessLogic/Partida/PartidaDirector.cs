@@ -2,12 +2,12 @@
 {
     public class PartidaDirector
     {
-        public Partida ConstructPartida(IPartidaBuilder builder)
+        public Partida ConstructPartida(IPartidaBuilder builder, int j)
         {
             builder.BuildFacade();
             builder.BuildSonido();
             builder.BuildPlayer();
-            builder.BuildRetos();
+            builder.BuildRetos(j);
             builder.BuildUserInterface();
 
             return builder.GetPartida();

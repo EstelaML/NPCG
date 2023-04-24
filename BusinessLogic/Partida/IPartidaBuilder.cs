@@ -4,7 +4,7 @@
     {
         void BuildPlayer();
 
-        void BuildRetos();
+        void BuildRetos(int j);
 
         void BuildUserInterface();
 

@@ -27,10 +27,12 @@ namespace preguntaods
             SetContentView(Resource.Layout.vistaPartida);
             consolidado = false;
 
+            int botonPulsado = int.Parse(Intent.GetStringExtra("BOTON_PULSADO"));
+
             // Cargar partida
             var director = new PartidaDirector();
             var builder = new PartidaBuilder();
-            director.ConstructPartida(builder);
+            director.ConstructPartida(builder, botonPulsado);
             partida = builder.GetPartida();
 
             // Animar Circulo Loading

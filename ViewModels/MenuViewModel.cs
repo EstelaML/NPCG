@@ -7,6 +7,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.Entities;
 using preguntaods.Services;
 using System;
+using static Xamarin.Essentials.Platform;
 
 namespace preguntaods
 {
@@ -27,6 +28,16 @@ namespace preguntaods
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);
             partida.Click += Partida_Click;
+            Button ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
+            ahorcado.Click += Ahorcado_Click;
+        }
+
+        private void Ahorcado_Click(object sender, EventArgs e)
+        {
+            sonido.EjecutarSonido();
+            Android.Content.Intent i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "2");
+            StartActivity(i);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -53,7 +64,7 @@ namespace preguntaods
                     {
                         _ = fachada.LogoutAsync();
 
-                        Intent i = new Intent(this, typeof(InicioSesionViewModel));
+                        Android.Content.Intent i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
 
                         break;
@@ -66,8 +77,8 @@ namespace preguntaods
         private void Partida_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-
-            Intent i = new Intent(this, typeof(VistaPartidaViewModel));
+            Android.Content.Intent i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "1");
             StartActivity(i);
         }
     }

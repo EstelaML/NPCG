@@ -13,13 +13,13 @@ namespace preguntaods.Entities
             partida.user = await fachada.GetUsuarioLogged();
         }
 
-        public void BuildRetos()
+        public void BuildRetos(int j)
         {
             for (int i = 0; i < 12; i++)
             {
                 Random random = new Random();
 
-                switch (1) //ampliar conforme se añadan nuevos >> random.Next(1,5)
+                switch (j) //ampliar conforme se añadan nuevos >> random.Next(1,5)
                 {
                     case 1:
                         {
@@ -28,9 +28,7 @@ namespace preguntaods.Entities
                         }
                     case 2:
                         {
-#pragma warning disable CS0162 // Se detectó código inaccesible
                             partida.AddReto(new RetoAhorcado());
-#pragma warning restore CS0162 // Se detectó código inaccesible
                             break;
                         }
                     case 3:
