@@ -1,4 +1,4 @@
-﻿namespace preguntaods
+﻿namespace preguntaods.BusinessLogic.EstrategiaSonido
 {
     public interface IEstrategiaSonido
     {

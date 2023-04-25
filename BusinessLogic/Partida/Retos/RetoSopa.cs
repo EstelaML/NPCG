@@ -6,7 +6,7 @@
 
         public RetoSopa()
         {
-            type = typeSopa;
+            type = TypeSopa;
         }
 
         public override int GetType()

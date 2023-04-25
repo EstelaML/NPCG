@@ -6,6 +6,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Android.Database.Sqlite;
+using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.ViewModels;
 using System.Threading.Tasks;
 using Android.OS;
 using Android.Content;

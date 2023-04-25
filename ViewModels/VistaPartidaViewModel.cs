@@ -1,13 +1,11 @@
 ﻿using Android.Animation;
 using Android.App;
-using Android.Hardware;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.Entities;
-using System.Diagnostics;
 
-namespace preguntaods
+namespace preguntaods.ViewModels
 {
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class VistaPartidaViewModel : AppCompatActivity
@@ -53,23 +51,23 @@ namespace preguntaods
         {
             switch (reto.GetType())
             {
-                case Reto.typePregunta:
+                case Reto.TypePregunta:
                     {
                         SetContentView(Resource.Layout.vistaRetoPregunta);
                         break;
                     }
-                case Reto.typeAhorcado:
+                case Reto.TypeAhorcado:
                     {
                         SetContentView(Resource.Layout.vistaRetoAhorcado);
                         //SetContentView(Resource.Layout.vistaRetoAhorcado);
                         break;
                     }
-                case Reto.typeFrase:
+                case Reto.TypeFrase:
                     {
                         //SetContentView(Resource.Layout.vistaRetoFrase);
                         break;
                     }
-                case Reto.typeSopa:
+                case Reto.TypeSopa:
                     {
                         //SetContentView(Resource.Layout.vistaRetoSopa);
                         break;

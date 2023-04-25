@@ -1,14 +1,15 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Java.Util;
+using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.Entities;
 using preguntaods.Services;
-using System;
 
-namespace preguntaods
+namespace preguntaods.ViewModels
 {
     [Activity(Label = "Activity2")]
     public class RegistroViewModel : AppCompatActivity

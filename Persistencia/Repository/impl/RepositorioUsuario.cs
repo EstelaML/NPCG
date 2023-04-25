@@ -1,7 +1,7 @@
-﻿using preguntaods.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using preguntaods.Entities;
 
-namespace preguntaods.Persistencia.Repository
+namespace preguntaods.Persistencia.Repository.impl
 {
     public class RepositorioUsuario : Repository<Usuario>
     {

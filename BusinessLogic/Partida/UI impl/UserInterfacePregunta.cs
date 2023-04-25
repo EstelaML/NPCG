@@ -6,6 +6,8 @@ using Android.Widget;
 using preguntaods.Services;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.ViewModels;
 
 namespace preguntaods.Entities
 {
@@ -133,9 +135,9 @@ namespace preguntaods.Entities
 
             switch (pregunta.Dificultad)
             {
-                case Pregunta.difBaja: puntuacion = 100; break;
-                case Pregunta.difMedia: puntuacion = 200; break;
-                case Pregunta.difAlta: puntuacion = 300; break;
+                case Pregunta.DifBaja: puntuacion = 100; break;
+                case Pregunta.DifMedia: puntuacion = 200; break;
+                case Pregunta.DifAlta: puntuacion = 300; break;
             }
 
             textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;

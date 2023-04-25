@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using preguntaods.Persistencia.Repository.impl;
 
 namespace preguntaods.Services
 {
@@ -51,13 +52,13 @@ namespace preguntaods.Services
         {
             if (preguntasBajas == null)
             {
-                preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.difBaja);
+                preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.DifBaja);
             }
             if (preguntasMedias == null)
             {
-                preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.difMedia);
+                preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.DifMedia);
             }
-            var p = await repositorioPre.GetByDificultad(Pregunta.difAlta);
+            var p = await repositorioPre.GetByDificultad(Pregunta.DifAlta);
             lock (sync)
             {
                 preguntasAltas ??= p;
@@ -100,20 +101,20 @@ namespace preguntaods.Services
 
             switch (dificultad)
             {
-                case Pregunta.difBaja:
+                case Pregunta.DifBaja:
                     {
                         respuesta = preguntasBajas.Last();
                         preguntasBajas.Remove(respuesta);
                         break;
                     }
-                case Pregunta.difMedia:
+                case Pregunta.DifMedia:
                     {
                         respuesta = preguntasMedias.Last();
                         preguntasMedias.Remove(respuesta);
 
                         break;
                     }
-                case Pregunta.difAlta:
+                case Pregunta.DifAlta:
                     {
                         respuesta = preguntasAltas.Last();
                         preguntasAltas.Remove(respuesta);
