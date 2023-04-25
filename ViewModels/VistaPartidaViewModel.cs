@@ -51,23 +51,23 @@ namespace preguntaods.ViewModels
         {
             switch (reto.GetType())
             {
-                case Reto.typePregunta:
+                case Reto.TypePregunta:
                     {
                         SetContentView(Resource.Layout.vistaRetoPregunta);
                         break;
                     }
-                case Reto.typeAhorcado:
+                case Reto.TypeAhorcado:
                     {
                         SetContentView(Resource.Layout.vistaRetoAhorcado);
                         //SetContentView(Resource.Layout.vistaRetoAhorcado);
                         break;
                     }
-                case Reto.typeFrase:
+                case Reto.TypeFrase:
                     {
                         //SetContentView(Resource.Layout.vistaRetoFrase);
                         break;
                     }
-                case Reto.typeSopa:
+                case Reto.TypeSopa:
                     {
                         //SetContentView(Resource.Layout.vistaRetoSopa);
                         break;

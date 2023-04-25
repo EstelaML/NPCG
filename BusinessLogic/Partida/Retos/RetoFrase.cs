@@ -6,7 +6,7 @@
 
         public RetoFrase()
         {
-            type = typeFrase;
+            type = TypeFrase;
         }
 
         public override int GetType()

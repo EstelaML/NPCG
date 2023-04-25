@@ -15,7 +15,7 @@ namespace preguntaods.Entities
         {
             servicio = new PreguntadosService();
             retos = listaRetos;
-            type = typePregunta;
+            type = TypePregunta;
             servicio.InitPreguntaList().ContinueWith(t => { _ = SetDif(orden, listaRetos); });
         }
 
@@ -33,14 +33,14 @@ namespace preguntaods.Entities
         {
             if (orden < 4 || orden == 10)
             {
-                pregunta = await servicio.SolicitarPregunta(Pregunta.difBaja);
+                pregunta = await servicio.SolicitarPregunta(Pregunta.DifBaja);
             }
             else if (4 <= orden && orden < 7 || orden == 11)
             {
-                pregunta = await servicio.SolicitarPregunta(Pregunta.difMedia);
+                pregunta = await servicio.SolicitarPregunta(Pregunta.DifMedia);
             }
             else { 
-                pregunta = await servicio.SolicitarPregunta(Pregunta.difAlta); 
+                pregunta = await servicio.SolicitarPregunta(Pregunta.DifAlta); 
             }
         }
     }

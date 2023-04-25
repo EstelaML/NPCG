@@ -158,22 +158,22 @@ namespace preguntaods.Entities
         {
             switch (listaRetos[contadorRetoSiguiente].GetType())
             {
-                case Reto.typePregunta:
+                case Reto.TypePregunta:
                     {
                         SetUI(new UserInterfacePregunta());
                         break;
                     }
-                case Reto.typeAhorcado:
+                case Reto.TypeAhorcado:
                     {
                         SetUI(new UserInterfaceAhorcado());
                         break;
                     }
-                case Reto.typeFrase:
+                case Reto.TypeFrase:
                     {
                         SetUI(new UserInterfaceFrase());
                         break;
                     }
-                case Reto.typeSopa:
+                case Reto.TypeSopa:
                     {
                         SetUI(new UserInterfaceSopa());
                         break;

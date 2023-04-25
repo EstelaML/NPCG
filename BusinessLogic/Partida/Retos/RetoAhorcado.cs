@@ -12,7 +12,7 @@ namespace preguntaods.Entities
 
         public RetoAhorcado()
         {
-            type = typeAhorcado;
+            type = TypeAhorcado;
             servicio = new PreguntadosService();
             servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(); });
         }
