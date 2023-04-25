@@ -6,6 +6,10 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Android.Database.Sqlite;
+using System.Threading.Tasks;
+using Android.OS;
+using Android.Content;
+using static Android.Graphics.Path;
 
 namespace preguntaods.Entities
 {
@@ -18,6 +22,7 @@ namespace preguntaods.Entities
         private Sonido sonido;
         private int _fallos;
         private int _puntuacionTotal;
+        private int puntuacion;
         private static int _puntosConsolidados;
         private string palabraAdivinar;
         private char[] guionesPalabra;
@@ -146,7 +151,7 @@ namespace preguntaods.Entities
 
         }
 
-        private void Letter_Click(object sender, EventArgs e)
+        private async void Letter_Click(object sender, EventArgs e)
         {
             Button boton = sender as Button;
             char letra = char.Parse(boton.Text);
@@ -155,7 +160,7 @@ namespace preguntaods.Entities
             {
                 List<int> indexes = new List<int>();
                 char[] aux = palabraAdivinar.ToCharArray();
-
+                
                 // compruebo a ver si está dos veces y añado el indice a una lista
                 for (int i = 0; i < palabraAdivinar.Length; i++)
                 {
@@ -167,15 +172,19 @@ namespace preguntaods.Entities
                 }
                 for (int i = 0; i < indexes.Count; i++) 
                 {
-                    guionesPalabra[indexes[i]*3] = aux[indexes[i]];
+                    
+                    guionesPalabra[indexes[i]*2] = aux[indexes[i]];
                 }
                 palabra.Text = new string(guionesPalabra);
                 boton.Enabled = false;
-                if (letrasAcertadas == palabraAdivinar.Length) 
+                
+                if (!guionesPalabra.Contains('_')) 
                 {
+                    _puntuacionTotal += puntuacion;
+                    await MostrarAlerta(true, false);
                     FinReto(); 
-                    (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal, _puntosConsolidados);
                 }
+               
             }
             else 
             {
@@ -185,27 +194,80 @@ namespace preguntaods.Entities
                 ahorcadoImg.SetImageResource(idDeImagen);
 
                 if (ronda == 10)
-                { // perdido}
+                {
+                    _puntuacionTotal -= puntuacion * 2;
+                    _fallos++;
+                    await MostrarAlerta(false, _fallos == 2);
                 }
             }
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(Reto reto) 
         {
+            // comienza cuentra atrás
             animation.Start();
+
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta.GetAhorcado();
+
+            switch (a.Dificultad)
+            {
+                case Ahorcado.difBaja: puntuacion = 100; break;
+                case Ahorcado.difMedia: puntuacion = 200; break;
+                case Ahorcado.difAlta: puntuacion = 300; break;
+            }
+
             enunciado.Text = a.Enunciado;
             palabraAdivinar = a.Palabra;
-            char[] chars = a.Palabra.ToCharArray();
-            var guiones = string.Join(" ", Enumerable.Repeat("_ ", palabraAdivinar.Length));
+
+            var guiones = palabraAdivinar.Replace(" ", "  ").Replace("A", "_ ").Replace("B", "_ ").Replace("C", "_ ")
+                                                 .Replace("D", "_ ").Replace("E", "_ ").Replace("F", "_ ")
+                                                 .Replace("A", "_ ").Replace("B", "_ ").Replace("C", "_ ")
+                                                 .Replace("G", "_ ").Replace("H", "_ ").Replace("I", "_ ")
+                                                 .Replace("J", "_ ").Replace("K", "_ ").Replace("L", "_ ")
+                                                 .Replace("M", "_ ").Replace("N", "_ ").Replace("Ñ", "_ ")
+                                                 .Replace("O", "_ ").Replace("P", "_ ").Replace("Q", "_ ")
+                                                 .Replace("R", "_ ").Replace("S", "_ ").Replace("T", "_ ")
+                                                 .Replace("U", "_ ").Replace("V", "_ ").Replace("W", "_ ")
+                                                 .Replace("X", "_ ").Replace("Y", "_ ").Replace("Z", "_ ");
             palabra.Text = guiones;
             guionesPalabra = guiones.ToCharArray();
         }
 
         public override void FinReto()
         {
+            letrasAcertadas = 0;
+
+            /*buttonA.Enabled = true; 
+            buttonB.Enabled = true;
+            buttonC.Enabled= true;
+            buttonD.Enabled = true;
+            buttonE.Enabled = true;
+            buttonF.Enabled = true;
+            buttonG.Enabled = true;
+            buttonH.Enabled = true;
+            buttonI.Enabled = true;
+            buttonJ.Enabled = true;
+            buttonK.Enabled = true;
+            buttonL.Enabled = true;
+            buttonM.Enabled = true;
+            buttonN.Enabled = true;
+            buttonO.Enabled = true;
+            buttonP.Enabled = true;
+            buttonQ.Enabled = true;
+            buttonR.Enabled = true;
+            buttonS.Enabled = true;
+            buttonT.Enabled = true;
+            buttonU.Enabled = true;
+            buttonV.Enabled = true;
+            buttonW.Enabled = true;
+            buttonX.Enabled = true;
+            buttonY.Enabled = true;
+            buttonZ.Enabled = true;*/
+
+
             animation.Pause();
+            (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal, _puntosConsolidados);
         }
 
         public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
@@ -213,6 +275,111 @@ namespace preguntaods.Entities
             _fallos = fallos;
             _puntuacionTotal = puntuacion;
             _puntosConsolidados = ptsConsolidados;
+            
+        }
+
+        private async Task<bool> MostrarAlerta(bool acertado, bool fin)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            string titulo = "";
+            string mensaje = "";
+            bool result = false;
+
+            if (acertado && !fin)
+            {
+                titulo = "Felicitaciones";
+                if ((_activity as VistaPartidaViewModel).GetConsolidado())
+                {
+                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas abandonar o seguir?";
+                }
+                else
+                {
+                    mensaje = $"Sumas {puntuacion} a tus {_puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                }
+
+                alertBuilder.SetMessage(mensaje);
+                alertBuilder.SetTitle(titulo);
+                alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
+                {
+                    tcs.TrySetResult(true);
+
+                    // sigue generando pregunta
+                });
+                alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                {
+                    // vuelves a menu principal
+                    (_activity as VistaPartidaViewModel).Abandonar();
+                });
+                if (!(_activity as VistaPartidaViewModel).GetConsolidado())
+                {
+                    alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                    {
+                        _puntosConsolidados = _puntuacionTotal;
+                        animation.Pause();
+                        (_activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
+                        tcs.TrySetResult(true);
+                    });
+                }
+                alertBuilder.SetCancelable(false);
+                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                alertDialog.Show();
+
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
+                new Handler().PostDelayed(() =>
+                {
+                    // Acciones a realizar cuando quedan 10 segundos o menos
+                    if (alertDialog.IsShowing)
+                    {
+                        //sonido.SetEstrategia(reloj, _activity);
+                        //sonido.PararSonido();
+                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                    }
+                }, 15000);
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
+                result = await tcs.Task;
+            }
+            else if (!acertado && !fin)
+            {
+                // sumar los consolidados
+                titulo = "Vuelve a intentarlo";
+                mensaje = $"Tienes {_puntuacionTotal} puntos.";
+                alertBuilder.SetMessage(mensaje);
+                alertBuilder.SetTitle(titulo);
+                alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
+                {
+                    tcs.TrySetResult(true);
+                    FinReto();
+                    // se genera nueva pregunta
+                });
+                alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                {
+                    (_activity as VistaPartidaViewModel).Abandonar();
+                });
+                alertBuilder.SetCancelable(false);
+                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                alertDialog.Show();
+
+#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
+                new Handler().PostDelayed(() =>
+                {
+                    // Acciones a realizar cuando quedan 10 segundos o menos
+                    if (alertDialog.IsShowing)
+                    {
+                        //sonido.SetEstrategia(reloj, _activity);
+                        //sonido.PararSonido();
+                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                    }
+                }, 15000);
+#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
+                result = await tcs.Task;
+                return result;
+            }
+            else
+            {
+                (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal);
+            }
+            return result;
         }
     }
 }

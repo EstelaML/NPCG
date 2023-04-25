@@ -37,6 +37,7 @@ namespace preguntaods.Entities
             primeraVez = true;
             ptsTotales = 0;
             ptsConsolidados = 0;
+            fallos = 0;
         }
 
         #region Setters/Getters

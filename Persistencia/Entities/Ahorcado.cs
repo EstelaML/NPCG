@@ -15,5 +15,7 @@ namespace preguntaods.Entities
         [Column("Palabra")]
         public string Palabra { get; set; }
 
+        [Column("Dificultad")]
+        public int Dificultad { get; set; }
     }
 }

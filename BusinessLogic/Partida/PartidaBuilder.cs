@@ -28,7 +28,7 @@ namespace preguntaods.Entities
                         }
                     case 2:
                         {
-                            partida.AddReto(new RetoAhorcado());
+                            partida.AddReto(new RetoAhorcado(i));
                             break;
                         }
                     case 3:

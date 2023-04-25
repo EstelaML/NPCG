@@ -10,11 +10,11 @@ namespace preguntaods.Entities
         private Ahorcado ahorcado;
         private static PreguntadosService servicio;
 
-        public RetoAhorcado()
+        public RetoAhorcado(int dificultad)
         {
             type = typeAhorcado;
             servicio = new PreguntadosService();
-            servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(); });
+            servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(dificultad); });
         }
 
         public override int GetType()
@@ -24,9 +24,20 @@ namespace preguntaods.Entities
 
         public Ahorcado GetAhorcado() { return ahorcado;  }
 
-        public async Task SetDiff()
+        public async Task SetDiff(int orden)
         {
-            ahorcado = await servicio.SolicitarAhorcado();
+            if (orden < 4 || orden == 10)
+            {
+                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.difBaja);
+            }
+            else if (4 <= orden && orden < 7 || orden == 11)
+            {
+                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.difMedia);
+            }
+            else
+            {
+                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.difAlta);
+            }
         }
     }
 }

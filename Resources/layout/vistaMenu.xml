@@ -62,7 +62,7 @@
             android:minHeight="140sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1">
+            android:id="@+id/linearLayou">
 
             <Button
                 android:text="Sopa"

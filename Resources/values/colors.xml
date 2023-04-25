@@ -2,6 +2,7 @@
 <resources>
 	<color name="colorPrimary">#96DCF0</color>
 	<color name="colorPrimaryDisabled">#79A2AF</color>
+	<color name="colorTeclado">#E5FCFC</color>
 	<color name="colorPrimaryDark">#1B3147</color>
 	<color name="colorSecundary">#000000</color>
 	<color name="colorAccent">#FFB347</color>

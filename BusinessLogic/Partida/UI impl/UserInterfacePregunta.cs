@@ -227,7 +227,7 @@ namespace preguntaods.Entities
                 titulo = "Felicitaciones";
                 if ((_activity as VistaPartidaViewModel).GetConsolidado())
                 {
-                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas botonAbandonar o seguir?";
+                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas abandonar o seguir?";
                 }
                 else
                 {

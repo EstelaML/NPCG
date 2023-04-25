@@ -14,25 +14,36 @@ namespace preguntaods.Services
     {
         object sync = new object();
         private readonly RepositorioPregunta repositorioPre;
-        private readonly Repository<Ahorcado> repositorioAhorcado;
+        private readonly RepositorioAhorcado repositorioAhorcado;
         private static List<Pregunta> preguntasBajas;
         private static List<Pregunta> preguntasMedias;
         private static List<Pregunta> preguntasAltas;
-        private static List<Ahorcado> ahorcadoList;
+        private static List<Ahorcado> ahorcadoBajo;
+        private static List<Ahorcado> ahorcadoMedio;
+        private static List<Ahorcado> ahorcadoAlto;
 
         public PreguntadosService()
         {
             repositorioPre = new RepositorioPregunta();
-            repositorioAhorcado = new Repository<Ahorcado>();
+            repositorioAhorcado = new RepositorioAhorcado();
         }
 
         #region RetoPregunta
 
         public async Task InitAhorcadoList()
         {
-            if (ahorcadoList == null)
+            if (ahorcadoBajo == null)
             {
-                ahorcadoList = (List<Ahorcado>) await repositorioAhorcado.GetAll();
+                ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.difBaja);
+            }
+            if (ahorcadoMedio == null)
+            {
+                ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.difMedia);
+            }
+            var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.difAlta);
+            lock (sync)
+            {
+                ahorcadoAlto ??= p;
             }
         }
 
@@ -53,12 +64,34 @@ namespace preguntaods.Services
             }
         }
 
-        public Task<Ahorcado> SolicitarAhorcado() 
+        public Task<Ahorcado> SolicitarAhorcado(int dif) 
         {
-            Random rmd = new Random();
-            int indiceAleatorio = rmd.NextInt(ahorcadoList.Count);
-            var valorAleatorio = ahorcadoList[indiceAleatorio];
-            return Task.FromResult(valorAleatorio);
+            Ahorcado ahor = null;
+
+            switch (dif)
+            {
+                case Ahorcado.difBaja:
+                    {
+                        ahor = ahorcadoBajo.Last();
+                        ahorcadoBajo.Remove(ahor);
+                        break;
+                    }
+                case Ahorcado.difMedia:
+                    {
+                        ahor = ahorcadoMedio.Last();
+                        ahorcadoMedio.Remove(ahor);
+
+                        break;
+                    }
+                case Ahorcado.difAlta:
+                    {
+                        ahor = ahorcadoAlto.Last();
+                        ahorcadoAlto.Remove(ahor);
+                        break;
+                    }
+            }
+
+            return Task.FromResult(ahor);
         }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)

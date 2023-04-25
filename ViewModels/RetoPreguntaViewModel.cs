@@ -322,11 +322,11 @@ namespace preguntaods
                 titulo = "Has acertado";
                 if (consolidado)
                 {
-                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas botonAbandonar o seguir?";
+                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas abandonar o seguir?";
                 }
                 else
                 {
-                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), botonAbandonar o seguir?";
+                    mensaje = $"Tienes {ptsTotales} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandondar o seguir?";
                 }
 
                 Android.App.AlertDialog.Builder builder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
