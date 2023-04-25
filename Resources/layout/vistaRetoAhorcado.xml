@@ -83,7 +83,7 @@
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="40sp"/>
+        android:layout_height="30sp"/>
 
         <TextView
             android:gravity="center"
@@ -95,11 +95,12 @@
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="20sp"/>
+        android:layout_height="30sp"/>
 
         <TextView
             android:text="P _ B _ _ _ A"
             android:gravity="center"
+            android:padding="20sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

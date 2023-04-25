@@ -12,6 +12,8 @@ using Android.OS;
 using Android.Content;
 using static Android.Graphics.Path;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using System.Reflection.Emit;
+
 namespace preguntaods.Entities
 {
     public class UserInterfaceAhorcado : UserInterface
@@ -195,7 +197,7 @@ namespace preguntaods.Entities
 
                 if (ronda == 10)
                 {
-                    _puntuacionTotal -= puntuacion * 2;
+                    //_puntuacionTotal -= puntuacion * 2;
                     _fallos++;
                     await MostrarAlerta(false, _fallos == 2);
                 }
@@ -210,7 +212,7 @@ namespace preguntaods.Entities
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta.GetAhorcado();
 
-            switch (a.Dificultad)
+            switch (a?.Dificultad)
             {
                 case Ahorcado.DifBaja: puntuacion = 100; ronda = 0; break;
                 case Ahorcado.DifMedia: puntuacion = 200; ronda = 3;  break;
@@ -235,6 +237,7 @@ namespace preguntaods.Entities
                                                  .Replace("U", "_ ").Replace("V", "_ ").Replace("W", "_ ")
                                                  .Replace("X", "_ ").Replace("Y", "_ ").Replace("Z", "_ ");
             palabra.Text = guiones;
+            
             guionesPalabra = guiones.ToCharArray();
         }
 
