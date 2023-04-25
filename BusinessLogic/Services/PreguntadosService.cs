@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 
 namespace preguntaods.Services
@@ -35,13 +36,13 @@ namespace preguntaods.Services
         {
             if (ahorcadoBajo == null)
             {
-                ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.difBaja);
+                ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
             }
             if (ahorcadoMedio == null)
             {
-                ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.difMedia);
+                ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
             }
-            var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.difAlta);
+            var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
             lock (sync)
             {
                 ahorcadoAlto ??= p;
@@ -71,20 +72,20 @@ namespace preguntaods.Services
 
             switch (dif)
             {
-                case Ahorcado.difBaja:
+                case Ahorcado.DifBaja:
                     {
                         ahor = ahorcadoBajo.Last();
                         ahorcadoBajo.Remove(ahor);
                         break;
                     }
-                case Ahorcado.difMedia:
+                case Ahorcado.DifMedia:
                     {
                         ahor = ahorcadoMedio.Last();
                         ahorcadoMedio.Remove(ahor);
 
                         break;
                     }
-                case Ahorcado.difAlta:
+                case Ahorcado.DifAlta:
                     {
                         ahor = ahorcadoAlto.Last();
                         ahorcadoAlto.Remove(ahor);

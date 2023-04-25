@@ -6,13 +6,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Android.Database.Sqlite;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.ViewModels;
 using System.Threading.Tasks;
 using Android.OS;
 using Android.Content;
 using static Android.Graphics.Path;
-
+using preguntaods.BusinessLogic.EstrategiaSonido;
 namespace preguntaods.Entities
 {
     public class UserInterfaceAhorcado : UserInterface
@@ -84,7 +83,6 @@ namespace preguntaods.Entities
             enunciado = _activity.FindViewById<TextView>(Resource.Id.enunciado);
             palabra = _activity.FindViewById<TextView>(Resource.Id.palabra);
             barTime = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            ahorcadoImg = _activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
             letrasAcertadas = 0;
             ronda = 1;
 
@@ -208,16 +206,20 @@ namespace preguntaods.Entities
         {
             // comienza cuentra atrás
             animation.Start();
-
+           
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta.GetAhorcado();
 
             switch (a.Dificultad)
             {
-                case Ahorcado.difBaja: puntuacion = 100; break;
-                case Ahorcado.difMedia: puntuacion = 200; break;
-                case Ahorcado.difAlta: puntuacion = 300; break;
+                case Ahorcado.DifBaja: puntuacion = 100; ronda = 0; break;
+                case Ahorcado.DifMedia: puntuacion = 200; ronda = 3;  break;
+                case Ahorcado.DifAlta: puntuacion = 300; ronda = 5; break;
             }
+
+            string path = "ahorcado_" + ronda;
+            var idDeImagen = _activity.Resources.GetIdentifier(path, "drawable", _activity.PackageName);
+            ahorcadoImg.SetImageResource(idDeImagen);
 
             enunciado.Text = a.Enunciado;
             palabraAdivinar = a.Palabra;

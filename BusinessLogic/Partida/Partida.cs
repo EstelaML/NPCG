@@ -4,9 +4,8 @@ using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.ViewModels;
-
+using preguntaods.BusinessLogic.EstrategiaSonido;
 namespace preguntaods.Entities
 {
     public class Partida

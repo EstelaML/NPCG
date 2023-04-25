@@ -28,15 +28,15 @@ namespace preguntaods.Entities
         {
             if (orden < 4 || orden == 10)
             {
-                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.difBaja);
+                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.DifBaja);
             }
             else if (4 <= orden && orden < 7 || orden == 11)
             {
-                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.difMedia);
+                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.DifMedia);
             }
             else
             {
-                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.difAlta);
+                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.DifAlta);
             }
         }
     }
