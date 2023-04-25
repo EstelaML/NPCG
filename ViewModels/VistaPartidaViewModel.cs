@@ -1,13 +1,11 @@
 ﻿using Android.Animation;
 using Android.App;
-using Android.Hardware;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.Entities;
-using System.Diagnostics;
 
-namespace preguntaods
+namespace preguntaods.ViewModels
 {
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class VistaPartidaViewModel : AppCompatActivity

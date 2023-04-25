@@ -1,13 +1,14 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.Entities;
 using preguntaods.Services;
-using System;
 
-namespace preguntaods
+namespace preguntaods.ViewModels
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class InicioSesionViewModel : AppCompatActivity

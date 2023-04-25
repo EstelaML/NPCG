@@ -1,4 +1,4 @@
-﻿namespace preguntaods.Entities
+﻿namespace preguntaods.BusinessLogic.EstrategiaSonido
 {
     public class Sonido
     {

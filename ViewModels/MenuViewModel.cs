@@ -1,15 +1,14 @@
-﻿using Android.App;
-using Android.Content;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.Entities;
 using preguntaods.Services;
-using System;
-using static Xamarin.Essentials.Platform;
 
-namespace preguntaods
+namespace preguntaods.ViewModels
 {
     [Activity(Label = "", Theme = "@style/AppTheme")]
     public class MenuViewModel : AppCompatActivity

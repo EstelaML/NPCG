@@ -1,17 +1,19 @@
-﻿using Android.Animation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
+using preguntaods.Persistencia.Repository.impl;
 using preguntaods.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace preguntaods
+namespace preguntaods.ViewModels
 {
     [Activity(Label = "Activity1", Theme = "@style/HiddenTitleTheme")]
     public class RetoPreguntaViewModel : AppCompatActivity

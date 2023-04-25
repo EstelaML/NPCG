@@ -1,6 +1,6 @@
 ﻿using Android.Media;
 
-namespace preguntaods
+namespace preguntaods.BusinessLogic.EstrategiaSonido
 {
     internal class EstrategiaSonidoClick : IEstrategiaSonido
     {

@@ -4,6 +4,8 @@ using preguntaods.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.ViewModels;
 
 namespace preguntaods.Entities
 {

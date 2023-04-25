@@ -6,6 +6,8 @@ using Android.Widget;
 using preguntaods.Services;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.ViewModels;
 
 namespace preguntaods.Entities
 {
