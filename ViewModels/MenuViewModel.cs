@@ -33,8 +33,8 @@ namespace preguntaods.ViewModels
         private void Ahorcado_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-            Android.Content.Intent i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTON_PULSADO", "2");
+            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTÓN_PULSADO", "2");
             StartActivity(i);
         }
 
@@ -66,7 +66,7 @@ namespace preguntaods.ViewModels
                     {
                         _ = fachada.LogoutAsync();
 
-                        Android.Content.Intent i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
+                        var i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
 
                         break;
@@ -79,8 +79,8 @@ namespace preguntaods.ViewModels
         private void Partida_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-            Android.Content.Intent i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTON_PULSADO", "1");
+            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTÓN_PULSADO", "1");
             StartActivity(i);
         }
     }
