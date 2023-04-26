@@ -17,7 +17,7 @@
     <item android:id="@+id/menuItem3"
 		  android:title="Ranking general"
 		  android:showAsAction="always" />
-	
+
   <!-- Add menu Item 4 -->
   <item android:id="@+id/menuItem4"
         android:title="Cerrar sesión"

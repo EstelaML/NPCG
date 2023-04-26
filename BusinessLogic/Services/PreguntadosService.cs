@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using preguntaods.Entities;
+using preguntaods.Persistencia.Repository.impl;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using preguntaods.Entities;
-using preguntaods.Persistencia.Repository.impl;
 
 namespace preguntaods.BusinessLogic.Services
 {
@@ -30,7 +30,7 @@ namespace preguntaods.BusinessLogic.Services
         {
             _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
             _ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
-            var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
+            var p = await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
             lock (sync)
             {
                 _ahorcadoAlto ??= p;
@@ -48,7 +48,7 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public Task<Ahorcado> SolicitarAhorcado(int dif) 
+        public Task<Ahorcado> SolicitarAhorcado(int dif)
         {
             Ahorcado ahorca = null;
 
@@ -107,6 +107,7 @@ namespace preguntaods.BusinessLogic.Services
 
             return Task.FromResult(respuesta);
         }
+
         #endregion RetoPregunta
     }
 }

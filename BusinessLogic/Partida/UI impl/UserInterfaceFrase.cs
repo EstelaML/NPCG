@@ -7,9 +7,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
     {
         private Activity activity;
 
-        public override void SetActivity(Activity activity)
+        public override void SetActivity(Activity newActivity)
         {
-            this.activity = activity;
+            this.activity = newActivity;
         }
 
         public override void Init()

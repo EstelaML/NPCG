@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,6 +8,8 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.ViewModels;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
@@ -44,16 +44,16 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         // Interactive Elements
         private ObjectAnimator animation;
 
-        public override void SetActivity(Activity activity)
+        public override void SetActivity(Activity newActivity)
         {
-            this.activity = activity;
+            this.activity = newActivity;
         }
 
-        public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
+        public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this.fallos = fallos;
-            puntuacionTotal = puntuacion;
-            _puntosConsolidados = ptsConsolidados;
+            this.fallos = newFallos;
+            puntuacionTotal = newPuntuacion;
+            _puntosConsolidados = newPtsConsolidados;
         }
 
         public override void Init()
@@ -72,7 +72,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             if (fallos == 1)
             {
-                imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                imagenCorazon1?.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
 
             // Initialization of Services
@@ -84,14 +84,15 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             // Animation
             animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(30000); //30 secs
+            animation?.SetDuration(30000); //30 secs
 
             // Listeners
-            botonPregunta1.Click += ButtonClickAsync;
-            botonPregunta2.Click += ButtonClickAsync;
-            botonPregunta3.Click += ButtonClickAsync;
-            botonPregunta4.Click += ButtonClickAsync;
+            if (botonPregunta1 != null) botonPregunta1.Click += ButtonClickAsync;
+            if (botonPregunta2 != null) botonPregunta2.Click += ButtonClickAsync;
+            if (botonPregunta3 != null) botonPregunta3.Click += ButtonClickAsync;
+            if (botonPregunta4 != null) botonPregunta4.Click += ButtonClickAsync;
 
+            if (animation == null) return;
             animation.Update += (sender, e) =>
             {
                 var playtime = animation.CurrentPlayTime;
@@ -104,8 +105,16 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             animation.AnimationEnd += async (sender, e) =>
             {
                 fallos++;
-                if (fallos == 1) imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
-                else if (fallos == 2) imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                switch (fallos)
+                {
+                    case 1:
+                        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                        break;
+
+                    case 2:
+                        imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                        break;
+                }
 
                 sonido.SetEstrategia(reloj, activity);
                 sonido.PararSonido();
@@ -113,7 +122,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 await MostrarAlerta(false, fallos == 2);
 
                 FinReto();
-                (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             };
             animation.AnimationPause += (sender, e) =>
             {
@@ -124,7 +133,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
         public override void SetDatosReto(Reto reto)
         {
-            var pregunta = (reto as RetoPre).GetPregunta();
+            var pregunta = ((RetoPre)reto).GetPregunta();
 
             enunciado.Text = pregunta.Enunciado;
             botonPregunta1.Text = pregunta.Respuesta1;
@@ -132,12 +141,13 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             botonPregunta3.Text = pregunta.Respuesta3;
             botonPregunta4.Text = pregunta.Respuesta4;
 
-            switch (pregunta.Dificultad)
+            puntuacion = pregunta.Dificultad switch
             {
-                case Pregunta.DifBaja: puntuacion = 100; break;
-                case Pregunta.DifMedia: puntuacion = 200; break;
-                case Pregunta.DifAlta: puntuacion = 300; break;
-            }
+                Pregunta.DifBaja => 100,
+                Pregunta.DifMedia => 200,
+                Pregunta.DifAlta => 300,
+                _ => puntuacion
+            };
 
             textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
 
@@ -145,7 +155,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             if (pregunta.OdsRelacionada == null)
             {
-                var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName); 
+                var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
                 imagenOds.SetImageResource(idDeImagen);
             }
             else
@@ -161,15 +171,15 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         {
             numRetos--;
             animation.Pause();
-            Button boton = sender as Button;
-            Boolean acierto;
-            Boolean condicion;
+            var boton = sender as Button;
+            bool acierto;
+            bool condicion;
 
             if (boton.Text.Equals(correcta))
             {
                 sonido.SetEstrategia(new EstrategiaSonidoAcierto(), activity);
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
-                (activity as VistaPartidaViewModel).GuardarPreguntaAcertada();
+                ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
                 puntuacionTotal += puntuacion;
                 acierto = true; condicion = numRetos == 1;
             }
@@ -190,7 +200,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             FinReto();
 
-            (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+            ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
         }
 
         public override void FinReto()
@@ -216,12 +226,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             var alertBuilder = new AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
             string titulo;
             string mensaje;
-            var result = false;
 
             if (acertado && !fin)
             {
                 titulo = "Felicitaciones";
-                mensaje = (activity as VistaPartidaViewModel).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal-puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
                 alertBuilder.SetMessage(mensaje);
                 alertBuilder.SetTitle(titulo);
@@ -234,32 +243,30 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
                     // vuelves a menu principal
-                    (activity as VistaPartidaViewModel).Abandonar();
+                    ((VistaPartidaViewModel)activity).Abandonar();
                 });
-                if (!(activity as VistaPartidaViewModel).GetConsolidado())
+                if (!((VistaPartidaViewModel)activity).GetConsolidado())
                 {
                     alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
                         _puntosConsolidados = puntuacionTotal;
                         animation.Pause();
-                        (activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
+                        ((VistaPartidaViewModel)activity).Consolidar(_puntosConsolidados);
                         tcs.TrySetResult(true);
                     });
                 }
                 alertBuilder.SetCancelable(false);
                 var alertDialog = alertBuilder.Create();
-                alertDialog.Show();
+                alertDialog?.Show();
 
 #pragma warning disable CS0618 // El tipo o el miembro están obsoletos
                 new Handler().PostDelayed(() =>
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (alertDialog.IsShowing)
-                    {
-                        sonido.SetEstrategia(reloj, activity);
-                        sonido.PararSonido();
-                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
-                    }
+                    if (!alertDialog.IsShowing) return;
+                    sonido.SetEstrategia(reloj, activity);
+                    sonido.PararSonido();
+                    alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                 }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
                 await tcs.Task;
@@ -279,27 +286,27 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 });
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
-                    (activity as VistaPartidaViewModel).Abandonar();
+                    ((VistaPartidaViewModel)activity).Abandonar();
                 });
                 alertBuilder.SetCancelable(false);
                 var alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
+#pragma warning disable CS0618
                 new Handler().PostDelayed(() =>
+#pragma warning restore CS0618
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (alertDialog.IsShowing)
-                    {
-                        sonido.SetEstrategia(reloj, activity);
-                        sonido.PararSonido();
-                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
-                    }
+                    if (!alertDialog.IsShowing) return;
+                    sonido.SetEstrategia(reloj, activity);
+                    sonido.PararSonido();
+                    alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                 }, 15000);
                 await tcs.Task;
             }
             else
             {
-               (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
+                ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
             }
         }
     }

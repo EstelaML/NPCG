@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Android.Content;
+﻿using Android.Content;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
@@ -9,6 +6,9 @@ using preguntaods.BusinessLogic.Partida.UI_impl;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -31,7 +31,6 @@ namespace preguntaods.BusinessLogic.Partida
         private int ptsTotales;
         private int ptsConsolidados;
         private bool falloFacil;
-        private int numRetos;
         private bool primeraVez;
 
         public Partida()
@@ -93,9 +92,9 @@ namespace preguntaods.BusinessLogic.Partida
             return userInterface;
         }
 
-        public void SetSonido(Sonido sonido)
+        public void SetSonido(Sonido newSonido)
         {
-            this.sonido = sonido;
+            this.sonido = newSonido;
         }
 
         public Sonido GetSonido()
@@ -121,29 +120,32 @@ namespace preguntaods.BusinessLogic.Partida
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
-        public void NextReto(int fallos, int ptsTotales, int ptsConsolidados)
+        public void NextReto(int newFallos, int newPtsTotales, int newPtsConsolidados)
         {
-            this.fallos = fallos;
-            this.ptsTotales = ptsTotales;
-            this.ptsConsolidados = ptsConsolidados;
+            this.fallos = newFallos;
+            this.ptsTotales = newPtsTotales;
+            this.ptsConsolidados = newPtsConsolidados;
 
-            if (contadorRetoSiguiente == 9) { 
-                ((VistaPartidaViewModel)activity).ConsolidarUltimaPregunta(); 
+            if (contadorRetoSiguiente == 9)
+            {
+                ((VistaPartidaViewModel)activity).ConsolidarUltimaPregunta();
             }
 
-            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
+            if (newFallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
-                switch (fallos)
+                switch (newFallos)
                 {
                     case 1 when contadorRetoSiguiente == 4:
                         retoActual = listaRetos[10];
                         contadorRetoSiguiente++;
                         falloFacil = true;
                         break;
+
                     case 1 when !falloFacil && contadorRetoSiguiente == 7:
                         retoActual = listaRetos[11];
                         contadorRetoSiguiente++;
                         break;
+
                     default:
                         retoActual = listaRetos[contadorRetoSiguiente];
                         contadorRetoSiguiente++;
@@ -153,7 +155,7 @@ namespace preguntaods.BusinessLogic.Partida
             else if (contadorRetoSiguiente == listaRetos.Count - 2)
             {
                 contadorRetoSiguiente++;
-                _ = EventoAbandonarAsync(new object(), EventArgs.Empty, fallos < 2, ptsTotales, UserInterfacePregunta.GetPuntosConsolidados());
+                _ = EventoAbandonarAsync(new object(), EventArgs.Empty, newFallos < 2, newPtsTotales, UserInterfacePregunta.GetPuntosConsolidados());
             }
         }
 
@@ -205,15 +207,14 @@ namespace preguntaods.BusinessLogic.Partida
             }
             // preguntar si está seguro antes de abandonar
 
-            Android.App.AlertDialog alertDialog = null;
             var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
-            alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
+            alertBuilder.SetPositiveButton("Aceptar", (o, args) =>
             {
-            userInterface.FinReto();
-            sonido.PararSonido();
+                userInterface.FinReto();
+                sonido.PararSonido();
 
                 if (((VistaPartidaViewModel)activity).GetConsolidado())
                 {
@@ -222,34 +223,34 @@ namespace preguntaods.BusinessLogic.Partida
                     var dialogoMal = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
                     dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.GetPuntosConsolidados()} puntos");
-                    dialogoMal.SetPositiveButton("Salir", (sender, args) =>
+                    dialogoMal.SetPositiveButton("Salir", (o1, eventArgs) =>
                     {
                         var i = new Intent(activity, typeof(MenuViewModel));
                         activity.StartActivity(i);
                     });
                     dialogoMal.Create()?.Show();
                 }
-                else {
+                else
+                {
                     var i = new Intent(activity, typeof(MenuViewModel));
                     activity.StartActivity(i);
                 }
-
             });
-            alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
+            alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
             {
             });
             alertBuilder.SetCancelable(false);
 
-            alertDialog = alertBuilder.Create();
+            var alertDialog = alertBuilder.Create();
             if (alertDialog == null) return;
-            alertDialog.Window.SetDimAmount(0.8f);
+            alertDialog.Window?.SetDimAmount(0.8f);
             alertDialog.Show();
         }
 
         public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntosFinales, int puntosConsolidados)
         {
-            var titulo = "";
-            var mensaje = "";
+            string titulo;
+            string mensaje;
             sonido.PararSonido();
             if (acertado)
             {
@@ -269,12 +270,11 @@ namespace preguntaods.BusinessLogic.Partida
             }
 
             sonido.EjecutarSonido();
-            Android.App.AlertDialog alertDialog = null;
             var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
-            alertBuilder.SetPositiveButton("Salir", (sender, args) =>
+            alertBuilder.SetPositiveButton("Salir", (o, args) =>
             {
                 userInterface.FinReto();
                 sonido.PararSonido();
@@ -284,9 +284,9 @@ namespace preguntaods.BusinessLogic.Partida
             });
             alertBuilder.SetCancelable(false);
 
-            alertDialog = alertBuilder.Create();
-            alertDialog.Window.SetDimAmount(0.8f);
-            alertDialog.Show();
+            var alertDialog = alertBuilder.Create();
+            alertDialog?.Window?.SetDimAmount(0.8f);
+            alertDialog?.Show();
         }
 
         public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)

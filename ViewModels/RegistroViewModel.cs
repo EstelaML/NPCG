@@ -1,5 +1,4 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
@@ -7,6 +6,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
+using System;
 
 namespace preguntaods.ViewModels
 {
@@ -90,7 +90,8 @@ namespace preguntaods.ViewModels
                         var i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
                     }
-                    else {
+                    else
+                    {
                         error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
                     }
                 }

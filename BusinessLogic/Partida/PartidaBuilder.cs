@@ -1,7 +1,7 @@
-﻿using System;
-using preguntaods.BusinessLogic.EstrategiaSonido;
+﻿using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
+using System;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -25,7 +25,7 @@ namespace preguntaods.BusinessLogic.Partida
                 {
                     case 1:
                         {
-                            partida.AddReto(new RetoPre(partida.GetRetos(), i));
+                            partida.AddReto(new RetoPre(i));
                             break;
                         }
                     case 2:

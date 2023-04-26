@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Java.Util;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
+using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -28,7 +29,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS)
         {
             int p = puntosA + puntosS;
-            var response2 = await conexion.Cliente
+            await conexion.Cliente
                         .From<Usuario>()
                         .Where(x => x.Uuid == uuid)
                         .Set(x => x.Puntos, p)
