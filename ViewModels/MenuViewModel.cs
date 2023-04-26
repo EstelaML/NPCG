@@ -34,7 +34,7 @@ namespace preguntaods.ViewModels
         {
             sonido.EjecutarSonido();
             var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTÓN_PULSADO", "2");
+            i.PutExtra("BOTON_PULSADO", "2");
             StartActivity(i);
         }
 
@@ -80,7 +80,7 @@ namespace preguntaods.ViewModels
         {
             sonido.EjecutarSonido();
             var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTÓN_PULSADO", "1");
+            i.PutExtra("BOTON_PULSADO", "1");
             StartActivity(i);
         }
     }

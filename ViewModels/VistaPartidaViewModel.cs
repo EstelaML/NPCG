@@ -61,7 +61,6 @@ namespace preguntaods.ViewModels
                 case Reto.TypeAhorcado:
                     {
                         SetContentView(Resource.Layout.vistaRetoAhorcado);
-                        //SetContentView(Resource.Layout.vistaRetoAhorcado);
                         break;
                     }
                 case Reto.TypeFrase:
