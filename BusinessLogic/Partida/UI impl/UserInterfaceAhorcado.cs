@@ -149,7 +149,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             #endregion
 
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(30000*4); //30*4 = 2mins
+            animation.SetDuration(30000*4); //30*4 = 2min
 
         }
 
@@ -210,7 +210,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             animation.Start();
            
             var pregunta = (reto as RetoAhorcado);
-            Ahorcado a = pregunta.GetAhorcado();
+            Ahorcado a = pregunta?.GetAhorcado();
 
             switch (a?.Dificultad)
             {

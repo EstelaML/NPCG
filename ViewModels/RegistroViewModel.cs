@@ -18,7 +18,6 @@ namespace preguntaods.ViewModels
         private EditText password;
         private EditText email;
         private EditText password2;
-        private bool usernameCorrect;
         private bool passwordCorrect;
         private bool emailCorrect;
         private Button registroB;
@@ -40,17 +39,17 @@ namespace preguntaods.ViewModels
             emailCorrect = false;
 
             ImageButton atras = FindViewById<ImageButton>(Resource.Id.button1);
-            atras.Click += Atras;
+            if (atras != null) atras.Click += Atras;
 
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
 
             email = FindViewById<EditText>(Resource.Id.correo);
-            email.TextChanged += Email_TextChanged;
+            if (email != null) email.TextChanged += Email_TextChanged;
 
             password = FindViewById<EditText>(Resource.Id.contraseña);
 
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
-            password2.TextChanged += Password_Click;
+            if (password2 != null) password2.TextChanged += Password_Click;
 
             error = FindViewById<TextView>(Resource.Id.error);
 
