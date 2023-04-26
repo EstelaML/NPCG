@@ -17,6 +17,7 @@ namespace preguntaods.ViewModels
         private EditText correo;
         private EditText password;
         private TextView error;
+        private TextView registrar;
         private Facade fachada;
         private Sonido sonido;
 
@@ -35,12 +36,12 @@ namespace preguntaods.ViewModels
             password = FindViewById<EditText>(Resource.Id.contraseña);
 
             iniciarSesion = FindViewById<Button>(Resource.Id.inicioSesion);
-            iniciarSesion.Click += IniciarSesion_Click;
+            if (iniciarSesion != null) iniciarSesion.Click += IniciarSesion_Click;
 
             error = FindViewById<TextView>(Resource.Id.error);
 
-            TextView registrar = FindViewById<TextView>(Resource.Id.registrar);
-            registrar.Click += NavigateRegistro;
+            registrar = FindViewById<TextView>(Resource.Id.registrar);
+            if (registrar != null) registrar.Click += NavigateRegistro;
         }
 
         private void NavigateRegistro(object sender, EventArgs e)

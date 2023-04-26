@@ -8,16 +8,16 @@ namespace preguntaods.BusinessLogic.Partida.Retos
     public class RetoPre : Reto
     {
         private Pregunta pregunta;
-        private static PreguntadosService servicio;
+        private static PreguntadosService _servicio;
         private readonly int type;
         private List<Reto> retos;
 
         public RetoPre(List<Reto> listaRetos, int orden)
         {
-            servicio = new PreguntadosService();
+            _servicio = new PreguntadosService();
             retos = listaRetos;
             type = TypePregunta;
-            servicio.InitPreguntaList().ContinueWith(t => { _ = SetDif(orden, listaRetos); });
+            _servicio.InitPreguntaList().ContinueWith(t => { _ = SetDif(orden, listaRetos); });
         }
 
         public override int GetType()
@@ -34,14 +34,14 @@ namespace preguntaods.BusinessLogic.Partida.Retos
         {
             if (orden < 4 || orden == 10)
             {
-                pregunta = await servicio.SolicitarPregunta(Pregunta.DifBaja);
+                pregunta = await _servicio.SolicitarPregunta(Pregunta.DifBaja);
             }
             else if (4 <= orden && orden < 7 || orden == 11)
             {
-                pregunta = await servicio.SolicitarPregunta(Pregunta.DifMedia);
+                pregunta = await _servicio.SolicitarPregunta(Pregunta.DifMedia);
             }
             else { 
-                pregunta = await servicio.SolicitarPregunta(Pregunta.DifAlta); 
+                pregunta = await _servicio.SolicitarPregunta(Pregunta.DifAlta); 
             }
         }
     }

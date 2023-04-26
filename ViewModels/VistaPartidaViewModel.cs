@@ -1,4 +1,5 @@
-﻿using Android.Animation;
+﻿using System;
+using Android.Animation;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -27,7 +28,7 @@ namespace preguntaods.ViewModels
             SetContentView(Resource.Layout.vistaPartida);
             consolidado = false;
 
-            int botonPulsado = int.Parse(Intent.GetStringExtra("BOTON_PULSADO"));
+            var botonPulsado = int.Parse(Intent?.GetStringExtra("BOTON_PULSADO") ?? throw new InvalidOperationException());
 
             // Cargar partida
             var director = new PartidaDirector();
@@ -38,6 +39,7 @@ namespace preguntaods.ViewModels
             // Animar Circulo Loading
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             animation = ObjectAnimator.OfInt(progressBar, "ProgressBar", 100, 0);
+            if (animation == null) return;
             animation.SetDuration(4500); //volver a 5 segundos en caso de que de error al cargar la partida
             animation.Start();
 
@@ -95,18 +97,18 @@ namespace preguntaods.ViewModels
 
         public void Abandonar()
         {
-            partida.EventoAbandonarBoton(new object(), new System.EventArgs());
+            partida.EventoAbandonarBoton(new object(), EventArgs.Empty);
         }
 
         public void AbandonarFallido(int puntos)
         {
-            _ = partida.EventoAbandonarAsync(new object(), new System.EventArgs(), false, puntos, UserInterfacePregunta.getPuntosConsolidados());
+            _ = partida.EventoAbandonarAsync(new object(), EventArgs.Empty, false, puntos, UserInterfacePregunta.GetPuntosConsolidados());
         }
 
         public void Consolidar(int puntosConsolidados)
         {
             consolidado = true;
-            partida.EventoConsolidarBoton(new object(), new System.EventArgs(), puntosConsolidados);
+            partida.EventoConsolidarBoton(new object(), EventArgs.Empty, puntosConsolidados);
         }
 
         public void ConsolidarUltimaPregunta() {

@@ -8,9 +8,9 @@
         public Sonido()
         { }
 
-        public void SetEstrategia(IEstrategiaSonido estrategia, Android.Content.Context context)
+        public void SetEstrategia(IEstrategiaSonido newEstrategia, Android.Content.Context context)
         {
-            this.estrategia = estrategia;
+            this.estrategia = newEstrategia;
             this.context = context;
         }
 

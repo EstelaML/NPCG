@@ -38,7 +38,7 @@ namespace preguntaods.ViewModels
             passwordCorrect = false;
             emailCorrect = false;
 
-            ImageButton atras = FindViewById<ImageButton>(Resource.Id.button1);
+            var atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
 
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
@@ -54,7 +54,7 @@ namespace preguntaods.ViewModels
             error = FindViewById<TextView>(Resource.Id.error);
 
             registroB = FindViewById<Button>(Resource.Id.registroB);
-            registroB.Click += Registrar;
+            if (registroB != null) registroB.Click += Registrar;
         }
 
         private void Email_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -76,7 +76,7 @@ namespace preguntaods.ViewModels
 
             if (passwordCorrect && emailCorrect)
             {
-                if (!email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
+                if (email.Text != null && !email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
                 if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
                 try
                 {
@@ -85,7 +85,7 @@ namespace preguntaods.ViewModels
                     {
                         UUID id = UUID.FromString(userAux.Id);
                         Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
-                        await fachada.newUsuario(user);
+                        await fachada.NewUsuario(user);
 
                         // se registra
                         // que inicie sesión

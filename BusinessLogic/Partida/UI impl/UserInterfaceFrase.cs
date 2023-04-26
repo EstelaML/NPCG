@@ -5,14 +5,14 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
     public class UserInterfaceFrase : UserInterface
     {
-        private Activity _activity;
+        private Activity activity;
 
         public UserInterfaceFrase()
         { }
 
         public override void SetActivity(Activity activity)
         {
-            _activity = activity;
+            this.activity = activity;
         }
 
         public override void Init()

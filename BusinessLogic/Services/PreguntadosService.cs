@@ -9,7 +9,7 @@ namespace preguntaods.BusinessLogic.Services
 {
     public class PreguntadosService : IPreguntadosService
     {
-        private object sync = new object();
+        private readonly object sync = new object();
         private readonly RepositorioPregunta repositorioPre;
         private readonly RepositorioAhorcado repositorioAhorcado;
         private static List<Pregunta> _preguntasBajas;

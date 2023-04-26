@@ -153,7 +153,7 @@ namespace preguntaods.BusinessLogic.Partida
             else if (contadorRetoSiguiente == listaRetos.Count - 2)
             {
                 contadorRetoSiguiente++;
-                _ = EventoAbandonarAsync(new object(), EventArgs.Empty, fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
+                _ = EventoAbandonarAsync(new object(), EventArgs.Empty, fallos < 2, ptsTotales, UserInterfacePregunta.GetPuntosConsolidados());
             }
         }
 
@@ -196,7 +196,7 @@ namespace preguntaods.BusinessLogic.Partida
             if (((VistaPartidaViewModel)activity).GetConsolidado())
             {
                 titulo = "¿Estás seguro?";
-                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + UserInterfacePregunta.getPuntosConsolidados();
+                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + UserInterfacePregunta.GetPuntosConsolidados();
             }
             else
             {
@@ -221,7 +221,7 @@ namespace preguntaods.BusinessLogic.Partida
                     //(_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                     var dialogoMal = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
-                    dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.getPuntosConsolidados()} puntos");
+                    dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.GetPuntosConsolidados()} puntos");
                     dialogoMal.SetPositiveButton("Salir", (sender, args) =>
                     {
                         var i = new Intent(activity, typeof(MenuViewModel));

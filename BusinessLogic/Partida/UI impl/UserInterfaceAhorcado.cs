@@ -172,21 +172,18 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                         letrasAcertadas++;
                     }
                 }
-                for (int i = 0; i < indexes.Count; i++) 
+                foreach (var t in indexes)
                 {
-                    
-                    guionesPalabra[indexes[i]*2] = aux[indexes[i]];
+                    guionesPalabra[t*2] = aux[t];
                 }
                 palabra.Text = new string(guionesPalabra);
                 boton.Enabled = false;
-                
-                if (!guionesPalabra.Contains('_')) 
-                {
-                    puntuacionTotal += puntuacion;
-                    await MostrarAlerta(true, false);
-                    FinReto();
-                    (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
-                }
+
+                if (guionesPalabra.Contains('_')) return;
+                puntuacionTotal += puntuacion;
+                await MostrarAlerta(true, false);
+                FinReto();
+                (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
             else 
             {
@@ -298,14 +295,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             if (acertado && !fin)
             {
                 titulo = "Felicitaciones";
-                if ((activity as VistaPartidaViewModel).GetConsolidado())
-                {
-                    mensaje = $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?";
-                }
-                else
-                {
-                    mensaje = $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
-                }
+                mensaje = (activity as VistaPartidaViewModel).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
                 alertBuilder.SetMessage(mensaje);
                 alertBuilder.SetTitle(titulo);

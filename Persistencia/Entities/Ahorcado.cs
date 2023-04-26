@@ -1,6 +1,7 @@
 ﻿using Postgrest.Attributes;
 using Postgrest.Models;
 
+// ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
     [Table("Ahorcado")]

@@ -14,7 +14,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<Usuario> GetUserByUUid(string u)
         {
-            var response = await conexion.cliente
+            var response = await conexion.Cliente
                 .From<Usuario>()
                 .Where(x => x.Uuid == u)
                 .Single();
@@ -24,7 +24,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS)
         {
             int p = puntosA + puntosS;
-            var response2 = await conexion.cliente
+            var response2 = await conexion.Cliente
                         .From<Usuario>()
                         .Where(x => x.Uuid == uuid)
                         .Set(x => x.Puntos, p)
@@ -33,7 +33,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdatePreguntaAcertada(string a, int[] preguntas)
         {
-            var update = await conexion.cliente
+            var update = await conexion.Cliente
                      .From<Usuario>()
                      .Where(x => x.Uuid == a)
                      .Set(x => x.PreguntasRealizadas, preguntas)
@@ -42,7 +42,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<int[]> GetPreguntasAcertadasAsync(string a)
         {
-            var res = await conexion.cliente
+            var res = await conexion.Cliente
                 .From<Usuario>()
                 .Where(x => x.Uuid == a).Single();
             return res.PreguntasRealizadas;

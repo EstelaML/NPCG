@@ -16,7 +16,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task<List<Ahorcado>> GetAhorcadoDificultad(int dificultad)
         {
             
-            var ahorcados = await (conexion.cliente.From<Ahorcado>().Where(x => x.Dificultad == dificultad).Get());
+            var ahorcados = await (conexion.Cliente.From<Ahorcado>().Where(x => x.Dificultad == dificultad).Get());
             return ahorcados.Models;
         }
     }
