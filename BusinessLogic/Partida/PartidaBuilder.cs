@@ -53,7 +53,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void BuildUserInterface()
         {
-            partida.UpdateUI();
+            partida.UpdateUi();
         }
 
         public void BuildFacade()

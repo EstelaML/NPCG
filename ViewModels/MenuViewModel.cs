@@ -6,7 +6,6 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
-using preguntaods.Entities;
 
 namespace preguntaods.ViewModels
 {
@@ -26,9 +25,9 @@ namespace preguntaods.ViewModels
             fachada = new Facade();
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);
-            partida.Click += Partida_Click;
+            if (partida != null) partida.Click += Partida_Click;
             Button ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
-            ahorcado.Click += Ahorcado_Click;
+            if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
         }
 
         private void Ahorcado_Click(object sender, EventArgs e)
