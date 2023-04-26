@@ -150,8 +150,9 @@ namespace preguntaods.BusinessLogic.Partida
                         break;
                 }
             }
-            else
+            else if (contadorRetoSiguiente == listaRetos.Count - 2)
             {
+                contadorRetoSiguiente++;
                 _ = EventoAbandonarAsync(new object(), EventArgs.Empty, fallos < 2, ptsTotales, UserInterfacePregunta.getPuntosConsolidados());
             }
         }

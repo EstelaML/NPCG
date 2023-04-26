@@ -208,11 +208,6 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             //actualizar datos usuario
         }
 
-        public async Task GuardarPuntosUsuarioAsync()
-        {
-            await fachada.UpdatePuntos(_puntuacionTotal);
-        }
-
         public static int getPuntosConsolidados()
         {
             return _puntosConsolidados;
@@ -317,7 +312,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             }
             else
             {
-                (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal);
+               (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal);
             }
             return result;
         }

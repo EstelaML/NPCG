@@ -184,9 +184,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 {
                     puntuacionTotal += puntuacion;
                     await MostrarAlerta(true, false);
-                    FinReto(); 
+                    FinReto();
+                    (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
                 }
-               
             }
             else 
             {
@@ -200,7 +200,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     //_puntuacionTotal -= puntuacion * 2;
                     fallos++;
                     await MostrarAlerta(false, fallos == 2);
+                    (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
                 }
+
             }
         }
 
@@ -274,7 +276,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
 
             animation.Pause();
-            (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+           
         }
 
         public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
