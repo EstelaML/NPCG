@@ -10,20 +10,14 @@ namespace preguntaods.Entities
         [PrimaryKey("id")]
         public int? Id { get; set; }
 
-        [Column("Ahorcado")]
-        public int? Ahorcado { get; set; }
-
-        [Column("Pregunta")]
-        public int? Pregunta { get; set; }
-
         [Column("Usuario")]
         public int Usuario { get; set; }
 
-        [Column("Pregunta2")]
+        [Column("PreguntasRealizadas")]
 
-        public int[] Pregunta2 { get; set; }
+        public int[] PreguntasRealizadas { get; set; }
 
-        [Column("Ahorcado2")]
-        public int[] Ahorcado2 { get; set; }
+        [Column("AhorcadosRealizados")]
+        public int[] AhorcadosRealizados { get; set; }
     }
 }

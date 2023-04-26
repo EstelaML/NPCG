@@ -8,13 +8,11 @@ namespace preguntaods.Entities
         public RetosRealizados()
         { }
 
-        public RetosRealizados(int pregunta, int ahorcado, int user, int[] preguntas, int[] ahorcados)
+        public RetosRealizados(int user, int[] preguntas, int[] ahorcados)
         {
             this.Usuario = user;
-            this.Pregunta = pregunta;
-            this.Ahorcado = ahorcado;
-            this.Pregunta2 = preguntas;
-            this.Ahorcado2 = ahorcados;
+            this.PreguntasRealizadas = preguntas;
+            this.AhorcadosRealizados = ahorcados;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var update = await conexion.Cliente
                      .From<RetosRealizados>()
                      .Where(x => x.Usuario == id)
-                     .Set(x => x.Pregunta2, preguntas)
+                     .Set(x => x.PreguntasRealizadas, preguntas)
                      .Update();
         }
 
@@ -52,7 +52,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var update = await conexion.Cliente
                      .From<RetosRealizados>()
                      .Where(x => x.Usuario == id)
-                     .Set(x => x.Ahorcado2, preguntas)
+                     .Set(x => x.AhorcadosRealizados, preguntas)
                      .Update();
         }
 
@@ -62,30 +62,32 @@ namespace preguntaods.Persistencia.Repository.impl
             var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
             if (respuesta == null) 
             {
-                RetosRealizados inser = new RetosRealizados(1, 1, (int)usuario.Id, null, null);
+                RetosRealizados inser = new RetosRealizados((int)usuario.Id, null, null);
                 await conexion.Cliente.From<RetosRealizados>().Insert(inser);
                 return null;
             } 
             if (reto is RetoPre)
             {
-                return respuesta.Pregunta2;
+                return respuesta.PreguntasRealizadas;
             }
             else if (reto is RetoAhorcado) 
             {
-                return respuesta.Ahorcado2;
+                return respuesta.AhorcadosRealizados;
             }
             return null;
         }
 
+        
         public async Task<int[]> GetRetoAcertado(string a, Reto reto) {
-            var usuario = await conexion.Cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
+            return null;
+            /*var usuario = await conexion.Cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
             int id = (int)usuario.Id;
             if (reto is RetoPre) {
                 // solicitas los RetosRealizados pero solo la columna de preguntas donde preguntas != null
                 var retosPreguntas = await conexion.Cliente
                     .From<RetosRealizados>()
                     .Where(x => x.Usuario == id)
-                    .Where(c => c.Pregunta != null).Get();
+                    .Where(c => c.PreguntasRealizadas != null).Get();
                 var listaPreguntasRealizadas = retosPreguntas.Models;
                 var respuesta = new int[listaPreguntasRealizadas.Count];
                 for (int i = 0; i < listaPreguntasRealizadas.Count; i++)
@@ -107,7 +109,7 @@ namespace preguntaods.Persistencia.Repository.impl
                 }
                 return respuesta;
             } //... diferentes retos
-            return null;
+            return null;*/
         }
     }
 }

@@ -288,9 +288,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
         public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this._fallos = fallos;
-            puntuacionTotal = puntuacion;
-            _puntosConsolidados = ptsConsolidados;
+            this._fallos = newFallos;
+            puntuacionTotal = newPuntuacion;
+            _puntosConsolidados = newPtsConsolidados;
             
         }
 

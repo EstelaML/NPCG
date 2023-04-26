@@ -52,7 +52,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var retos = task1.Result;
             var response = task2.Result;
             var preguntas = response.Models.ToList();
-            var preguntasHechas = retos?.Ahorcado2?.ToList();
+            var preguntasHechas = retos?.AhorcadosRealizados?.ToList();
             preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
             return preguntas;
