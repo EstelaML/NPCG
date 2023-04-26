@@ -35,6 +35,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private ImageView ahorcadoImg;
         private TextView enunciado;
         private TextView palabra;
+
         #region Button letters
         private Button buttonA;
         private Button buttonB;
@@ -115,8 +116,8 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             buttonX = activity.FindViewById<Button>(Resource.Id.buttonX);
             buttonY = activity.FindViewById<Button>(Resource.Id.buttonY);
             buttonZ = activity.FindViewById<Button>(Resource.Id.buttonZ);
-
             #endregion
+
             #region buttonLetters Handler
             buttonA.Click += Letter_Click;
             buttonB.Click += Letter_Click;
@@ -162,7 +163,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 List<int> indexes = new List<int>();
                 char[] aux = palabraAdivinar.ToCharArray();
                 
-                // compruebo a ver si está dos veces y añado el indice a una lista
+                //Compruebo a ver si está dos veces y añado el indice a una lista
                 for (int i = 0; i < palabraAdivinar.Length; i++)
                 {
                     if (aux[i] == letra)

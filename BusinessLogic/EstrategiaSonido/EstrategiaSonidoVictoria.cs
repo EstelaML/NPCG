@@ -5,7 +5,7 @@ namespace preguntaods.BusinessLogic.EstrategiaSonido
 {
     internal class EstrategiaSonidoVictoria : IEstrategiaSonido
     {
-        private MediaPlayer mp;
+        private readonly MediaPlayer mp;
 
         public EstrategiaSonidoVictoria()
         {
