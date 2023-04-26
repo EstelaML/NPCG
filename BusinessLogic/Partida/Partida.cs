@@ -204,7 +204,6 @@ namespace preguntaods.BusinessLogic.Partida
             }
             // preguntar si está seguro antes de abandonar
 
-            Android.App.AlertDialog alertDialog;
             var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
@@ -239,7 +238,7 @@ namespace preguntaods.BusinessLogic.Partida
             });
             alertBuilder.SetCancelable(false);
 
-            alertDialog = alertBuilder.Create();
+            var alertDialog = alertBuilder.Create();
             if (alertDialog == null) return;
             alertDialog.Window?.SetDimAmount(0.8f);
             alertDialog.Show();
@@ -268,7 +267,6 @@ namespace preguntaods.BusinessLogic.Partida
             }
 
             sonido.EjecutarSonido();
-            Android.App.AlertDialog alertDialog;
             var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
@@ -283,7 +281,7 @@ namespace preguntaods.BusinessLogic.Partida
             });
             alertBuilder.SetCancelable(false);
 
-            alertDialog = alertBuilder.Create();
+            var alertDialog = alertBuilder.Create();
             alertDialog?.Window?.SetDimAmount(0.8f);
             alertDialog?.Show();
         }

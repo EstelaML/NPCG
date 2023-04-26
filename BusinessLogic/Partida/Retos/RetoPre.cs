@@ -11,7 +11,7 @@ namespace preguntaods.BusinessLogic.Partida.Retos
         private static PreguntadosService _servicio;
         private readonly int type;
 
-        public RetoPre(List<Reto> listaRetos, int orden)
+        public RetoPre(int orden)
         {
             _servicio = new PreguntadosService();
             type = TypePregunta;
