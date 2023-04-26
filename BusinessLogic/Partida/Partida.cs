@@ -31,7 +31,6 @@ namespace preguntaods.BusinessLogic.Partida
         private int ptsTotales;
         private int ptsConsolidados;
         private bool falloFacil;
-        private int numRetos;
         private bool primeraVez;
 
         public Partida()
@@ -93,9 +92,9 @@ namespace preguntaods.BusinessLogic.Partida
             return userInterface;
         }
 
-        public void SetSonido(Sonido sonido)
+        public void SetSonido(Sonido newSonido)
         {
-            this.sonido = sonido;
+            this.sonido = newSonido;
         }
 
         public Sonido GetSonido()
@@ -121,19 +120,19 @@ namespace preguntaods.BusinessLogic.Partida
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
-        public void NextReto(int fallos, int ptsTotales, int ptsConsolidados)
+        public void NextReto(int newFallos, int newPtsTotales, int newPtsConsolidados)
         {
-            this.fallos = fallos;
-            this.ptsTotales = ptsTotales;
-            this.ptsConsolidados = ptsConsolidados;
+            this.fallos = newFallos;
+            this.ptsTotales = newPtsTotales;
+            this.ptsConsolidados = newPtsConsolidados;
 
             if (contadorRetoSiguiente == 9) { 
                 ((VistaPartidaViewModel)activity).ConsolidarUltimaPregunta(); 
             }
 
-            if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
+            if (newFallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
             {
-                switch (fallos)
+                switch (newFallos)
                 {
                     case 1 when contadorRetoSiguiente == 4:
                         retoActual = listaRetos[10];
@@ -153,7 +152,7 @@ namespace preguntaods.BusinessLogic.Partida
             else if (contadorRetoSiguiente == listaRetos.Count - 2)
             {
                 contadorRetoSiguiente++;
-                _ = EventoAbandonarAsync(new object(), EventArgs.Empty, fallos < 2, ptsTotales, UserInterfacePregunta.GetPuntosConsolidados());
+                _ = EventoAbandonarAsync(new object(), EventArgs.Empty, newFallos < 2, newPtsTotales, UserInterfacePregunta.GetPuntosConsolidados());
             }
         }
 
@@ -205,7 +204,7 @@ namespace preguntaods.BusinessLogic.Partida
             }
             // preguntar si está seguro antes de abandonar
 
-            Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog alertDialog;
             var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
@@ -248,8 +247,8 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async Task EventoAbandonarAsync(object sender, EventArgs e, bool acertado, int puntosFinales, int puntosConsolidados)
         {
-            var titulo = "";
-            var mensaje = "";
+            string titulo;
+            string mensaje;
             sonido.PararSonido();
             if (acertado)
             {
@@ -269,7 +268,7 @@ namespace preguntaods.BusinessLogic.Partida
             }
 
             sonido.EjecutarSonido();
-            Android.App.AlertDialog alertDialog = null;
+            Android.App.AlertDialog alertDialog;
             var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);

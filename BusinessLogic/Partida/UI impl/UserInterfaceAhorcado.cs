@@ -284,10 +284,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private async Task MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
+            var alertBuilder = new AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
             string titulo;
             string mensaje;
-            var result = false;
 
             switch (acertado)
             {
@@ -320,10 +319,12 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                         });
                     }
                     alertBuilder.SetCancelable(false);
-                    Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                    var alertDialog = alertBuilder.Create();
                     alertDialog.Show();
 
+#pragma warning disable CS0618
                     new Handler().PostDelayed(() =>
+#pragma warning restore CS0618
                     {
                         // Acciones a realizar cuando quedan 10 segundos o menos
                         if (alertDialog.IsShowing)
@@ -357,7 +358,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     var alertDialog = alertBuilder.Create();
                     alertDialog.Show();
 
+#pragma warning disable CS0618
                     new Handler().PostDelayed(() =>
+#pragma warning restore CS0618
                     {
                         // Acciones a realizar cuando quedan 10 segundos o menos
                         if (alertDialog.IsShowing)

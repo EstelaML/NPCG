@@ -216,7 +216,6 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             var alertBuilder = new AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
             string titulo;
             string mensaje;
-            var result = false;
 
             if (acertado && !fin)
             {
@@ -285,7 +284,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 var alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
+#pragma warning disable CS0618
                 new Handler().PostDelayed(() =>
+#pragma warning restore CS0618
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog.IsShowing)
@@ -299,7 +300,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             }
             else
             {
-               (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
+               ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
             }
         }
     }

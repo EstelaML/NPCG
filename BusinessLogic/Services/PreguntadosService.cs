@@ -30,7 +30,7 @@ namespace preguntaods.BusinessLogic.Services
         {
             _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
             _ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
-            var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
+            var p = await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
             lock (sync)
             {
                 _ahorcadoAlto ??= p;
