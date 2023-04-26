@@ -20,7 +20,7 @@ namespace preguntaods.BusinessLogic.Partida
         private UserInterface userInterface;
         public Facade _fachada;
 
-        private Android.App.Activity _activity;
+        private Android.App.Activity activity;
         private Button botonAbandonar;
         private TextView textoPuntosTotales;
         private TextView textoPuntosConsolidados;
@@ -49,12 +49,12 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetActivity(Android.App.Activity activity)
         {
-            _activity = activity;
+            this.activity = activity;
             userInterface.SetActivity(activity);
 
             if (primeraVez)
             {
-                _sonido.SetEstrategia(new EstrategiaSonidoMusica(), _activity);
+                _sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
                 _sonido.EjecutarSonido();
                 primeraVez = false;
             }
@@ -113,13 +113,13 @@ namespace preguntaods.BusinessLogic.Partida
             userInterface.Init();
             userInterface.SetDatosReto(retoActual);
 
-            textoPuntosTotales = _activity.FindViewById<TextView>(Resource.Id.textView2);
+            textoPuntosTotales = activity.FindViewById<TextView>(Resource.Id.textView2);
             textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
-            textoPuntosConsolidados = _activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
+            textoPuntosConsolidados = activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
             textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
 
-            botonAbandonar = _activity.FindViewById<Button>(Resource.Id.volver);
+            botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
             botonAbandonar.Click += EventoAbandonarBoton;
         }
 
@@ -130,7 +130,7 @@ namespace preguntaods.BusinessLogic.Partida
             this.ptsConsolidados = ptsConsolidados;
 
             if (contadorRetoSiguiente == 9) { 
-                (_activity as VistaPartidaViewModel).ConsolidarUltimaPregunta(); 
+                (activity as VistaPartidaViewModel).ConsolidarUltimaPregunta(); 
             }
 
             if (fallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
@@ -194,7 +194,7 @@ namespace preguntaods.BusinessLogic.Partida
         {
             string titulo = "";
             string mensaje = "";
-            if ((_activity as VistaPartidaViewModel).GetConsolidado())
+            if ((activity as VistaPartidaViewModel).GetConsolidado())
             {
                 titulo = "¿Estás seguro?";
                 mensaje = "Si aceptas se te guardarán los puntos consolidados: " + UserInterfacePregunta.getPuntosConsolidados();
@@ -207,7 +207,7 @@ namespace preguntaods.BusinessLogic.Partida
             // preguntar si está seguro antes de abandonar
 
             Android.App.AlertDialog alertDialog = null;
-            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
@@ -216,23 +216,23 @@ namespace preguntaods.BusinessLogic.Partida
             userInterface.FinReto();
             _sonido.PararSonido();
 
-                if ((_activity as VistaPartidaViewModel).GetConsolidado())
+                if ((activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     // guardamos puntos consolidados
                     //(_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
-                    Android.App.AlertDialog.Builder dialogoMal = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+                    Android.App.AlertDialog.Builder dialogoMal = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
                     dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.getPuntosConsolidados()} puntos");
                     dialogoMal.SetPositiveButton("Salir", (sender, args) =>
                     {
-                        Intent i = new Intent(_activity, typeof(MenuViewModel));
-                        _activity.StartActivity(i);
+                        Intent i = new Intent(activity, typeof(MenuViewModel));
+                        activity.StartActivity(i);
                     });
                     dialogoMal.Create().Show();
                 }
                 else {
-                    Intent i = new Intent(_activity, typeof(MenuViewModel));
-                    _activity.StartActivity(i);
+                    Intent i = new Intent(activity, typeof(MenuViewModel));
+                    activity.StartActivity(i);
                 }
 
             });
@@ -256,7 +256,7 @@ namespace preguntaods.BusinessLogic.Partida
                 titulo = "¡Enhorabuena!";
                 mensaje = $"Has llegado hasta el final y se te suman {puntosFinales} puntos";
 
-                _sonido.SetEstrategia(new EstrategiaSonidoVictoria(), _activity);
+                _sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
                 await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
             }
@@ -265,12 +265,12 @@ namespace preguntaods.BusinessLogic.Partida
                 titulo = "Has perdido";
                 mensaje = "Siempre puedes volver a intentarlo...";
 
-                _sonido.SetEstrategia(new EstrategiaSonidoDerrota(), _activity);
+                _sonido.SetEstrategia(new EstrategiaSonidoDerrota(), activity);
             }
 
             _sonido.EjecutarSonido();
             Android.App.AlertDialog alertDialog = null;
-            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
@@ -279,8 +279,8 @@ namespace preguntaods.BusinessLogic.Partida
                 userInterface.FinReto();
                 _sonido.PararSonido();
 
-                Intent i = new Intent(_activity, typeof(MenuViewModel));
-                _activity.StartActivity(i);
+                Intent i = new Intent(activity, typeof(MenuViewModel));
+                activity.StartActivity(i);
             });
             alertBuilder.SetCancelable(false);
 

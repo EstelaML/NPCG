@@ -1,4 +1,5 @@
-﻿using Android.Media;
+﻿using System;
+using Android.Media;
 
 namespace preguntaods.BusinessLogic.EstrategiaSonido
 {
@@ -14,7 +15,7 @@ namespace preguntaods.BusinessLogic.EstrategiaSonido
         public void Play(Android.Content.Context t)
         {
             Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_musica);
-            mp.SetDataSource(t, uri);
+            mp.SetDataSource(t, uri ?? throw new InvalidOperationException());
             mp.Prepare();
             mp.Start();
         }

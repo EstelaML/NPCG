@@ -18,12 +18,12 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
     public class UserInterfaceAhorcado : UserInterface
     {
         // Class Elements
-        private Activity _activity;
+        private Activity activity;
 
         private Facade fachada;
         private Sonido sonido;
-        private int _fallos;
-        private int _puntuacionTotal;
+        private int fallos;
+        private int puntuacionTotal;
         private int puntuacion;
         private static int _puntosConsolidados;
         private string palabraAdivinar;
@@ -75,46 +75,46 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
         public override void SetActivity(Activity activity)
         {
-            _activity = activity;
+            this.activity = activity;
         }
 
         public override void Init()
         {
-            ahorcadoImg = _activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
-            enunciado = _activity.FindViewById<TextView>(Resource.Id.enunciado);
-            palabra = _activity.FindViewById<TextView>(Resource.Id.palabra);
-            barTime = _activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            ahorcadoImg = activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
+            enunciado = activity.FindViewById<TextView>(Resource.Id.enunciado);
+            palabra = activity.FindViewById<TextView>(Resource.Id.palabra);
+            barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
             letrasAcertadas = 0;
             ronda = 1;
 
             #region buttonletters FindByID
-            buttonA = _activity.FindViewById<Button>(Resource.Id.buttonA);
-            buttonB = _activity.FindViewById<Button>(Resource.Id.buttonB);
-            buttonC = _activity.FindViewById<Button>(Resource.Id.buttonC);
-            buttonD = _activity.FindViewById<Button>(Resource.Id.buttonD);
-            buttonE = _activity.FindViewById<Button>(Resource.Id.buttonE);
-            buttonF = _activity.FindViewById<Button>(Resource.Id.buttonF);
-            buttonG = _activity.FindViewById<Button>(Resource.Id.buttonG);
-            buttonH = _activity.FindViewById<Button>(Resource.Id.buttonH);
-            buttonI = _activity.FindViewById<Button>(Resource.Id.buttonI);
-            buttonJ = _activity.FindViewById<Button>(Resource.Id.buttonJ);
-            buttonK = _activity.FindViewById<Button>(Resource.Id.buttonK);
-            buttonL = _activity.FindViewById<Button>(Resource.Id.buttonL);
-            buttonM = _activity.FindViewById<Button>(Resource.Id.buttonM);
-            buttonN = _activity.FindViewById<Button>(Resource.Id.buttonN);
-            buttonÑ = _activity.FindViewById<Button>(Resource.Id.buttonÑ);
-            buttonO = _activity.FindViewById<Button>(Resource.Id.buttonO);
-            buttonP = _activity.FindViewById<Button>(Resource.Id.buttonP);
-            buttonQ = _activity.FindViewById<Button>(Resource.Id.buttonQ);
-            buttonR = _activity.FindViewById<Button>(Resource.Id.buttonR);
-            buttonS = _activity.FindViewById<Button>(Resource.Id.buttonS);
-            buttonT = _activity.FindViewById<Button>(Resource.Id.buttonT);
-            buttonU = _activity.FindViewById<Button>(Resource.Id.buttonU);
-            buttonV = _activity.FindViewById<Button>(Resource.Id.buttonV);
-            buttonW = _activity.FindViewById<Button>(Resource.Id.buttonW);
-            buttonX = _activity.FindViewById<Button>(Resource.Id.buttonX);
-            buttonY = _activity.FindViewById<Button>(Resource.Id.buttonY);
-            buttonZ = _activity.FindViewById<Button>(Resource.Id.buttonZ);
+            buttonA = activity.FindViewById<Button>(Resource.Id.buttonA);
+            buttonB = activity.FindViewById<Button>(Resource.Id.buttonB);
+            buttonC = activity.FindViewById<Button>(Resource.Id.buttonC);
+            buttonD = activity.FindViewById<Button>(Resource.Id.buttonD);
+            buttonE = activity.FindViewById<Button>(Resource.Id.buttonE);
+            buttonF = activity.FindViewById<Button>(Resource.Id.buttonF);
+            buttonG = activity.FindViewById<Button>(Resource.Id.buttonG);
+            buttonH = activity.FindViewById<Button>(Resource.Id.buttonH);
+            buttonI = activity.FindViewById<Button>(Resource.Id.buttonI);
+            buttonJ = activity.FindViewById<Button>(Resource.Id.buttonJ);
+            buttonK = activity.FindViewById<Button>(Resource.Id.buttonK);
+            buttonL = activity.FindViewById<Button>(Resource.Id.buttonL);
+            buttonM = activity.FindViewById<Button>(Resource.Id.buttonM);
+            buttonN = activity.FindViewById<Button>(Resource.Id.buttonN);
+            buttonÑ = activity.FindViewById<Button>(Resource.Id.buttonÑ);
+            buttonO = activity.FindViewById<Button>(Resource.Id.buttonO);
+            buttonP = activity.FindViewById<Button>(Resource.Id.buttonP);
+            buttonQ = activity.FindViewById<Button>(Resource.Id.buttonQ);
+            buttonR = activity.FindViewById<Button>(Resource.Id.buttonR);
+            buttonS = activity.FindViewById<Button>(Resource.Id.buttonS);
+            buttonT = activity.FindViewById<Button>(Resource.Id.buttonT);
+            buttonU = activity.FindViewById<Button>(Resource.Id.buttonU);
+            buttonV = activity.FindViewById<Button>(Resource.Id.buttonV);
+            buttonW = activity.FindViewById<Button>(Resource.Id.buttonW);
+            buttonX = activity.FindViewById<Button>(Resource.Id.buttonX);
+            buttonY = activity.FindViewById<Button>(Resource.Id.buttonY);
+            buttonZ = activity.FindViewById<Button>(Resource.Id.buttonZ);
 
             #endregion
             #region buttonLetters Handler
@@ -181,7 +181,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 
                 if (!guionesPalabra.Contains('_')) 
                 {
-                    _puntuacionTotal += puntuacion;
+                    puntuacionTotal += puntuacion;
                     await MostrarAlerta(true, false);
                     FinReto(); 
                 }
@@ -191,14 +191,14 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             {
                 boton.Enabled = false;
                 string path = "ahorcado_" + ++ronda;
-                var idDeImagen = _activity.Resources.GetIdentifier(path, "drawable", _activity.PackageName);
+                var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
                 ahorcadoImg.SetImageResource(idDeImagen);
 
                 if (ronda == 10)
                 {
                     //_puntuacionTotal -= puntuacion * 2;
-                    _fallos++;
-                    await MostrarAlerta(false, _fallos == 2);
+                    fallos++;
+                    await MostrarAlerta(false, fallos == 2);
                 }
             }
         }
@@ -219,7 +219,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             }
 
             string path = "ahorcado_" + ronda;
-            var idDeImagen = _activity.Resources.GetIdentifier(path, "drawable", _activity.PackageName);
+            var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
             ahorcadoImg.SetImageResource(idDeImagen);
 
             enunciado.Text = a.Enunciado;
@@ -273,13 +273,13 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
 
             animation.Pause();
-            (_activity as VistaPartidaViewModel).RetoSiguiente(_fallos, _puntuacionTotal, _puntosConsolidados);
+            (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
         }
 
         public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
         {
-            _fallos = fallos;
-            _puntuacionTotal = puntuacion;
+            this.fallos = fallos;
+            puntuacionTotal = puntuacion;
             _puntosConsolidados = ptsConsolidados;
             
         }
@@ -287,7 +287,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private async Task<bool> MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(_activity, Resource.Style.AlertDialogCustom);
+            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
             string titulo = "";
             string mensaje = "";
             bool result = false;
@@ -295,13 +295,13 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             if (acertado && !fin)
             {
                 titulo = "Felicitaciones";
-                if ((_activity as VistaPartidaViewModel).GetConsolidado())
+                if ((activity as VistaPartidaViewModel).GetConsolidado())
                 {
-                    mensaje = $"Tienes {_puntuacionTotal} puntos. ¿Deseas abandonar o seguir?";
+                    mensaje = $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?";
                 }
                 else
                 {
-                    mensaje = $"Sumas {puntuacion} a tus {_puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    mensaje = $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
                 }
 
                 alertBuilder.SetMessage(mensaje);
@@ -315,15 +315,15 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
                     // vuelves a menu principal
-                    (_activity as VistaPartidaViewModel).Abandonar();
+                    (activity as VistaPartidaViewModel).Abandonar();
                 });
-                if (!(_activity as VistaPartidaViewModel).GetConsolidado())
+                if (!(activity as VistaPartidaViewModel).GetConsolidado())
                 {
                     alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
-                        _puntosConsolidados = _puntuacionTotal;
+                        _puntosConsolidados = puntuacionTotal;
                         animation.Pause();
-                        (_activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
+                        (activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
                         tcs.TrySetResult(true);
                     });
                 }
@@ -349,7 +349,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             {
                 // sumar los consolidados
                 titulo = "Vuelve a intentarlo";
-                mensaje = $"Tienes {_puntuacionTotal} puntos.";
+                mensaje = $"Tienes {puntuacionTotal} puntos.";
                 alertBuilder.SetMessage(mensaje);
                 alertBuilder.SetTitle(titulo);
                 alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
@@ -360,7 +360,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 });
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
-                    (_activity as VistaPartidaViewModel).Abandonar();
+                    (activity as VistaPartidaViewModel).Abandonar();
                 });
                 alertBuilder.SetCancelable(false);
                 Android.App.AlertDialog alertDialog = alertBuilder.Create();
@@ -383,7 +383,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             }
             else
             {
-                (_activity as VistaPartidaViewModel).AbandonarFallido(_puntuacionTotal);
+                (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
             }
             return result;
         }

@@ -1,10 +1,8 @@
-﻿using preguntaods.Entities;
-using preguntaods.Persistencia.Repository.impl;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using preguntaods.Entities;
 
-namespace preguntaods.Persistencia.Repository
+namespace preguntaods.Persistencia.Repository.impl
 {
     public class RepositorioAhorcado : Repository<Ahorcado>
     {
