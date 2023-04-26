@@ -187,8 +187,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 if (guionesPalabra.Contains('_')) return;
                 puntuacionTotal += puntuacion;
                 await MostrarAlerta(true, false);
+                (activity as VistaPartidaViewModel).GuardarPreguntaAcertada();
                 FinReto();
-                (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                (activity as VistaPartidaViewModel).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
             }
             else 
             {

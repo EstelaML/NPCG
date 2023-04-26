@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 
 namespace preguntaods.Persistencia.Repository.impl
@@ -26,6 +27,9 @@ namespace preguntaods.Persistencia.Repository.impl
             //
             //return preguntas ?? new List<Pregunta>();
 
+            // get lista de retos 
+
+
             var id = (conexion.Usuario.Id);
             var task1 = (conexion.Cliente.From<Usuario>().Where(x => x.Uuid == id).Single());
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
@@ -39,6 +43,17 @@ namespace preguntaods.Persistencia.Repository.impl
             preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
             return preguntas;
+        }
+
+        public async Task AñadirPreguntaRealizada(int id, Reto reto) 
+        {
+            var model = new RetosRealizados
+            {
+                Usuario = id,
+                Ahorcado = null,
+                Pregunta = (reto as RetoPre).GetPregunta().Id,
+            };
+            await conexion.Cliente.From<RetosRealizados>().Insert(model);
         }
     }
 }
