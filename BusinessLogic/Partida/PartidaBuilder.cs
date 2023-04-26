@@ -7,7 +7,7 @@ namespace preguntaods.BusinessLogic.Partida
 {
     public class PartidaBuilder : IPartidaBuilder
     {
-        private Partida partida = new Partida();
+        private readonly Partida partida = new Partida();
 
         public async void BuildPlayer()
         {
@@ -17,9 +17,9 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void BuildRetos(int j)
         {
-            for (int i = 0; i < 12; i++)
+            for (var i = 0; i < 12; i++)
             {
-                Random random = new Random();
+                var random = new Random();
 
                 switch (j) //ampliar conforme se añadan nuevos >> random.Next(1,5)
                 {
@@ -35,16 +35,12 @@ namespace preguntaods.BusinessLogic.Partida
                         }
                     case 3:
                         {
-#pragma warning disable CS0162 // Se detectó código inaccesible
                             partida.AddReto(new RetoFrase());
-#pragma warning restore CS0162 // Se detectó código inaccesible
                             break;
                         }
                     case 4:
                         {
-#pragma warning disable CS0162 // Se detectó código inaccesible
                             partida.AddReto(new RetoSopa());
-#pragma warning restore CS0162 // Se detectó código inaccesible
                             break;
                         }
                 }
@@ -53,7 +49,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void BuildUserInterface()
         {
-            partida.UpdateUI();
+            partida.UpdateUi();
         }
 
         public void BuildFacade()

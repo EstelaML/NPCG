@@ -1,12 +1,7 @@
-﻿using System;
-using Android.App;
-using Android.OS;
-using Android.Views;
-using Android.Widget;
+﻿using Android.OS;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
-using preguntaods.Entities;
 
 namespace preguntaods.ViewModels
 {

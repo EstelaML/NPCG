@@ -89,7 +89,7 @@ namespace preguntaods.ViewModels
             reto = partida.GetRetoActual();
 
             UpdateView();
-            partida.UpdateUI();
+            partida.UpdateUi();
             partida.SetActivity(this);
             partida.InitValues();
         }

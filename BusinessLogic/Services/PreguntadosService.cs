@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
-using preguntaods.Persistencia.Repository;
 using preguntaods.Persistencia.Repository.impl;
 
 namespace preguntaods.BusinessLogic.Services
@@ -30,14 +29,8 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task InitAhorcadoList()
         {
-            if (_ahorcadoBajo == null)
-            {
-                _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
-            }
-            if (_ahorcadoMedio == null)
-            {
-                _ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
-            }
+            _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
+            _ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
             var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
             lock (sync)
             {
@@ -47,14 +40,8 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task InitPreguntaList()
         {
-            if (_preguntasBajas == null)
-            {
-                _preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.DifBaja);
-            }
-            if (_preguntasMedias == null)
-            {
-                _preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.DifMedia);
-            }
+            _preguntasBajas ??= await repositorioPre.GetByDificultad(Pregunta.DifBaja);
+            _preguntasMedias ??= await repositorioPre.GetByDificultad(Pregunta.DifMedia);
             var p = await repositorioPre.GetByDificultad(Pregunta.DifAlta);
             lock (sync)
             {
@@ -64,32 +51,32 @@ namespace preguntaods.BusinessLogic.Services
 
         public Task<Ahorcado> SolicitarAhorcado(int dif) 
         {
-            Ahorcado ahor = null;
+            Ahorcado ahorca = null;
 
             switch (dif)
             {
                 case Ahorcado.DifBaja:
                     {
-                        ahor = _ahorcadoBajo.Last();
-                        _ahorcadoBajo.Remove(ahor);
+                        ahorca = _ahorcadoBajo.Last();
+                        _ahorcadoBajo.Remove(ahorca);
                         break;
                     }
                 case Ahorcado.DifMedia:
                     {
-                        ahor = _ahorcadoMedio.Last();
-                        _ahorcadoMedio.Remove(ahor);
+                        ahorca = _ahorcadoMedio.Last();
+                        _ahorcadoMedio.Remove(ahorca);
 
                         break;
                     }
                 case Ahorcado.DifAlta:
                     {
-                        ahor = _ahorcadoAlto.Last();
-                        _ahorcadoAlto.Remove(ahor);
+                        ahorca = _ahorcadoAlto.Last();
+                        _ahorcadoAlto.Remove(ahorca);
                         break;
                     }
             }
 
-            return Task.FromResult(ahor);
+            return Task.FromResult(ahorca);
         }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)
@@ -121,29 +108,6 @@ namespace preguntaods.BusinessLogic.Services
 
             return Task.FromResult(respuesta);
         }
-
-        public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos)
-        {
-            System.Random random = new System.Random();
-
-            // Obtener un índice aleatorio dentro del rango de la lista de preguntas
-            int indiceAleatorio = random.Next(respuesta.Count);
-            Pregunta preguntaAleatoria = respuesta[indiceAleatorio];
-
-            if (retos != null)
-            {
-                if (!retos.Any(reto => (reto as RetoPre).GetPregunta().Enunciado == preguntaAleatoria.Enunciado))
-                {
-                    return preguntaAleatoria;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            return respuesta[random.Next(respuesta.Count)];
-        }
-
         #endregion RetoPregunta
     }
 }

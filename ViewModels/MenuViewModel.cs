@@ -6,7 +6,6 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
-using preguntaods.Entities;
 
 namespace preguntaods.ViewModels
 {
@@ -26,16 +25,16 @@ namespace preguntaods.ViewModels
             fachada = new Facade();
 
             Button partida = FindViewById<Button>(Resource.Id.partidaB);
-            partida.Click += Partida_Click;
+            if (partida != null) partida.Click += Partida_Click;
             Button ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
-            ahorcado.Click += Ahorcado_Click;
+            if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
         }
 
         private void Ahorcado_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-            Android.Content.Intent i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTON_PULSADO", "2");
+            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTÓN_PULSADO", "2");
             StartActivity(i);
         }
 
@@ -69,7 +68,7 @@ namespace preguntaods.ViewModels
                     {
                         _ = fachada.LogoutAsync();
 
-                        Android.Content.Intent i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
+                        var i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
 
                         break;
@@ -82,8 +81,8 @@ namespace preguntaods.ViewModels
         private void Partida_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-            Android.Content.Intent i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTON_PULSADO", "1");
+            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTÓN_PULSADO", "1");
             StartActivity(i);
         }
     }
