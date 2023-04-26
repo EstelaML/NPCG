@@ -1,5 +1,6 @@
 ﻿using Postgrest.Models;
 
+// ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
     public partial class ODS : BaseModel, IEntity

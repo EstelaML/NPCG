@@ -14,11 +14,11 @@ namespace preguntaods.BusinessLogic.Partida
 {
     public class Partida
     {
-        public Usuario user;
-        private List<Reto> listaRetos;
+        public Usuario User;
+        private readonly List<Reto> listaRetos;
         private Reto retoActual;
         private UserInterface userInterface;
-        public Facade _fachada;
+        public Facade Fachada;
 
         private Android.App.Activity activity;
         private Button botonAbandonar;
@@ -27,7 +27,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         private int contadorRetoSiguiente;
         private int fallos;
-        private Sonido _sonido;
+        private Sonido sonido;
         private int ptsTotales;
         private int ptsConsolidados;
         private bool falloFacil;
@@ -54,8 +54,8 @@ namespace preguntaods.BusinessLogic.Partida
 
             if (primeraVez)
             {
-                _sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
-                _sonido.EjecutarSonido();
+                sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
+                sonido.EjecutarSonido();
                 primeraVez = false;
             }
         }
@@ -77,32 +77,32 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetFacade(Facade fachada)
         {
-            _fachada = fachada;
+            this.Fachada = fachada;
         }
 
         public Facade GetFacade()
         {
-            return _fachada;
+            return Fachada;
         }
 
-        private void SetUI(UserInterface userInterface)
+        private void SetUi(UserInterface userInterface)
         {
             this.userInterface = userInterface;
         }
 
-        public UserInterface GetUI()
+        public UserInterface GetUi()
         {
             return userInterface;
         }
 
         public void SetSonido(Sonido sonido)
         {
-            _sonido = sonido;
+            this.sonido = sonido;
         }
 
         public Sonido GetSonido()
         {
-            return _sonido;
+            return sonido;
         }
 
         #endregion Setters/Getters
@@ -164,22 +164,22 @@ namespace preguntaods.BusinessLogic.Partida
             {
                 case Reto.TypePregunta:
                     {
-                        SetUI(new UserInterfacePregunta());
+                        SetUi(new UserInterfacePregunta());
                         break;
                     }
                 case Reto.TypeAhorcado:
                     {
-                        SetUI(new UserInterfaceAhorcado());
+                        SetUi(new UserInterfaceAhorcado());
                         break;
                     }
                 case Reto.TypeFrase:
                     {
-                        SetUI(new UserInterfaceFrase());
+                        SetUi(new UserInterfaceFrase());
                         break;
                     }
                 case Reto.TypeSopa:
                     {
-                        SetUI(new UserInterfaceSopa());
+                        SetUi(new UserInterfaceSopa());
                         break;
                     }
             }
@@ -187,7 +187,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async Task GuardarPreguntaUsuario(Reto reto)
         {
-            await _fachada.GuardarPregunta(reto);
+            await Fachada.GuardarPregunta(reto);
         }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
@@ -214,7 +214,7 @@ namespace preguntaods.BusinessLogic.Partida
             alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
             {
             userInterface.FinReto();
-            _sonido.PararSonido();
+            sonido.PararSonido();
 
                 if ((activity as VistaPartidaViewModel).GetConsolidado())
                 {
@@ -250,25 +250,25 @@ namespace preguntaods.BusinessLogic.Partida
         {
             string titulo = "";
             string mensaje = "";
-            _sonido.PararSonido();
+            sonido.PararSonido();
             if (acertado)
             {
                 titulo = "¡Enhorabuena!";
                 mensaje = $"Has llegado hasta el final y se te suman {puntosFinales} puntos";
 
-                _sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
+                sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
-                await _fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
+                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
             }
             else
             {
                 titulo = "Has perdido";
                 mensaje = "Siempre puedes volver a intentarlo...";
 
-                _sonido.SetEstrategia(new EstrategiaSonidoDerrota(), activity);
+                sonido.SetEstrategia(new EstrategiaSonidoDerrota(), activity);
             }
 
-            _sonido.EjecutarSonido();
+            sonido.EjecutarSonido();
             Android.App.AlertDialog alertDialog = null;
             Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
 
@@ -277,7 +277,7 @@ namespace preguntaods.BusinessLogic.Partida
             alertBuilder.SetPositiveButton("Salir", (sender, args) =>
             {
                 userInterface.FinReto();
-                _sonido.PararSonido();
+                sonido.PararSonido();
 
                 Intent i = new Intent(activity, typeof(MenuViewModel));
                 activity.StartActivity(i);
@@ -291,7 +291,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
         {
-            await _fachada.UpdatePuntos(puntosConsolidados);
+            await Fachada.UpdatePuntos(puntosConsolidados);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace preguntaods.BusinessLogic.Partida
         public async void BuildPlayer()
         {
             var fachada = partida.GetFacade();
-            partida.user = await fachada.GetUsuarioLogged();
+            partida.User = await fachada.GetUsuarioLogged();
         }
 
         public void BuildRetos(int j)
