@@ -4,7 +4,7 @@ using Postgrest.Models;
 namespace preguntaods.Entities
 {
     [Table("ods")]
-    public partial class ODS : BaseModel, IEntity
+    public partial class Ods : BaseModel, IEntity
     {
         [PrimaryKey("id")]
         public int? Id { get; set; }

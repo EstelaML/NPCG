@@ -3,12 +3,12 @@
 // ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
-    public partial class ODS : BaseModel, IEntity
+    public partial class Ods : BaseModel, IEntity
     {
-        public ODS()
+        public Ods()
         { }
 
-        public ODS(string nombre, string descripcion, string imagen)
+        public Ods(string nombre, string descripcion, string imagen)
         {
             this.Nombre = nombre;
             this.Descripcion = descripcion;
