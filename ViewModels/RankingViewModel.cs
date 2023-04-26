@@ -1,14 +1,12 @@
-﻿using Android.OS;
+﻿using Android.App;
+using Android.OS;
 using AndroidX.AppCompat.App;
-using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Services;
 
 namespace preguntaods.ViewModels
 {
+    [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class RankingViewModel : AppCompatActivity
     {
-        private Facade fachada;
-        private Sonido sonido;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

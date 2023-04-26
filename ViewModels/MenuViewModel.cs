@@ -60,6 +60,8 @@ namespace preguntaods.ViewModels
                     }
                 case Resource.Id.menuItem3:
                     {
+                        Android.Content.Intent i = new Android.Content.Intent(this, typeof(RankingViewModel));
+                        StartActivity(i);
                         break;
                     }
                 case Resource.Id.menuItem4:
