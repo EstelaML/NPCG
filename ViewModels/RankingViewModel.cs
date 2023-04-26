@@ -12,6 +12,7 @@ namespace preguntaods.ViewModels
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
+
         }
     }
 }

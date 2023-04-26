@@ -52,12 +52,10 @@ namespace preguntaods.BusinessLogic.Partida
             this.activity = activity;
             userInterface.SetActivity(activity);
 
-            if (primeraVez)
-            {
-                sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
-                sonido.EjecutarSonido();
-                primeraVez = false;
-            }
+            if (!primeraVez) return;
+            sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
+            sonido.EjecutarSonido();
+            primeraVez = false;
         }
 
         public Reto GetRetoActual()
