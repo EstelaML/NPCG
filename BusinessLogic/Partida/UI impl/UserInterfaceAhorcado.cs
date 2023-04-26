@@ -22,7 +22,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
         private Facade fachada;
         private Sonido sonido;
-        private int fallos;
+        private int _fallos;
         private int puntuacionTotal;
         private int puntuacion;
         private static int _puntosConsolidados;
@@ -35,7 +35,8 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private ImageView ahorcadoImg;
         private TextView enunciado;
         private TextView palabra;
-
+        private ImageView imagenCorazon1;
+        private ImageView imagenCorazon2;
         #region Button letters
         private Button buttonA;
         private Button buttonB;
@@ -85,8 +86,16 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             enunciado = activity.FindViewById<TextView>(Resource.Id.enunciado);
             palabra = activity.FindViewById<TextView>(Resource.Id.palabra);
             barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
+            imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
+
             letrasAcertadas = 0;
             ronda = 1;
+
+            if (_fallos == 1)
+            {
+                imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+            }
 
             #region buttonletters FindByID
             buttonA = activity.FindViewById<Button>(Resource.Id.buttonA);
@@ -150,7 +159,6 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
             animation.SetDuration(30000*4); //30*4 = 2min
-
         }
 
         private async void Letter_Click(object sender, EventArgs e)
@@ -185,7 +193,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     puntuacionTotal += puntuacion;
                     await MostrarAlerta(true, false);
                     FinReto();
-                    (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                    (activity as VistaPartidaViewModel).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
                 }
             }
             else 
@@ -198,11 +206,10 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 if (ronda == 10)
                 {
                     //_puntuacionTotal -= puntuacion * 2;
-                    fallos++;
-                    await MostrarAlerta(false, fallos == 2);
-                    (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                    _fallos++;
+                    await MostrarAlerta(false, _fallos == 2);
+                    (activity as VistaPartidaViewModel).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
                 }
-
             }
         }
 
@@ -274,14 +281,13 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             buttonY.Enabled = true;
             buttonZ.Enabled = true;*/
 
-
             animation.Pause();
            
         }
 
         public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
         {
-            this.fallos = fallos;
+            this._fallos = fallos;
             puntuacionTotal = puntuacion;
             _puntosConsolidados = ptsConsolidados;
             

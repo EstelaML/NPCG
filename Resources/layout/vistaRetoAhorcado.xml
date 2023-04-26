@@ -49,20 +49,64 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="20sp"/>
-    <TextView
-        android:text=""
-        android:paddingLeft="30sp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
-    <TextView
-        android:paddingLeft="30sp"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textPtsConsolidados" />
+        android:layout_gravity="left"
+        android:paddingHorizontal="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:gravity="left"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+
+            <TextView
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:gravity="left"
+                android:layout_height="wrap_content"
+                android:id="@+id/textPtsConsolidados" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:src="@drawable/icon_heart"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="5dp"
+            android:contentDescription=""
+            android:id="@+id/heart1"/>
+
+        <ImageView
+            android:src="@drawable/icon_heart"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:contentDescription=""
+            android:id="@+id/heart2"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,40 +119,41 @@
             android:src="@drawable/ahorcado_1"
             android:scaleType="centerInside"
             android:layout_gravity="center"
-            android:layout_width="260dp"
-            android:layout_height="260dp"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
             android:adjustViewBounds="true"
             android:contentDescription=""
             android:id="@+id/ahorcadoImg"/>
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="30sp"/>
+        android:layout_height="6sp"/>
 
         <TextView
             android:gravity="center"
-            android:text="Relacionado con la ODS 1:"
+            android:text="Los derechos fundamentales que todas las personas tienen, como la libertad de expresión, la igualdad ante la ley y el derecho a un trabajo digno:"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="330sp"
+            android:layout_height="100sp"
             android:id="@+id/enunciado" />
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="30sp"/>
+        android:layout_height="6sp"/>
 
         <TextView
-            android:text="P _ B _ _ _ A"
+            android:text="ENERGIAS RENOVABLES"
             android:gravity="center"
             android:padding="20sp"
+            android:textSize="20sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="330sp"
+            android:layout_height="100sp"
             android:id="@+id/palabra" />
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="30sp"/>
+        android:layout_height="6sp"/>
 
         <LinearLayout
             android:orientation="vertical"
@@ -184,7 +229,7 @@
 
             <Space
             android:layout_width="match_parent"
-            android:layout_height="8sp"/>
+            android:layout_height="6sp"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -249,7 +294,7 @@
 
             <Space
             android:layout_width="match_parent"
-            android:layout_height="8sp"/>
+            android:layout_height="6sp"/>
 
             <LinearLayout
                 android:orientation="horizontal"
