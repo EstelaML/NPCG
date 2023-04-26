@@ -32,17 +32,18 @@ namespace preguntaods.Persistencia.Repository.impl
 
             // get lista de retos 
 
-
-            var id = (conexion.Usuario.Id);
-            var task1 = (conexion.Cliente.From<Usuario>().Where(x => x.Uuid == id).Single());
+            var uuid = (conexion.Usuario.Id);
+            var user = await repositorioUser.GetUserByUUid(uuid);
+            var id = (int) user?.Id;
+            var task1 = (conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single());
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
             List<Task> tareas = new List<Task> { task1, task2 };
             await Task.WhenAll(tareas);
 
-            var usuario = task1.Result;
+            var retos = task1.Result;
             var response = task2.Result;
             var preguntas = response.Models.ToList();
-            var preguntasHechas = usuario?.PreguntasRealizadas?.ToList();
+            var preguntasHechas = retos?.Pregunta2?.ToList();
             preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
             return preguntas;
