@@ -152,8 +152,8 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
         private async void Letter_Click(object sender, EventArgs e)
         {
-            Button boton = sender as Button;
-            char letra = char.Parse(boton.Text);
+            var boton = sender as Button;
+            var letra = char.Parse(boton?.Text ?? string.Empty);
 
             if (palabraAdivinar.Contains(letra))
             {
@@ -174,17 +174,17 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     guionesPalabra[t*2] = aux[t];
                 }
                 palabra.Text = new string(guionesPalabra);
-                boton.Enabled = false;
+                if (boton != null) boton.Enabled = false;
 
                 if (guionesPalabra.Contains('_')) return;
                 puntuacionTotal += puntuacion;
                 await MostrarAlerta(true, false);
                 FinReto();
-                (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
             else 
             {
-                boton.Enabled = false;
+                if (boton != null) boton.Enabled = false;
                 string path = "ahorcado_" + ++ronda;
                 var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
                 ahorcadoImg.SetImageResource(idDeImagen);
@@ -194,7 +194,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     //_puntuacionTotal -= puntuacion * 2;
                     fallos++;
                     await MostrarAlerta(false, fallos == 2);
-                    (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                    ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
                 }
 
             }
@@ -215,11 +215,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 case Ahorcado.DifAlta: puntuacion = 300; ronda = 5; break;
             }
 
-            string path = "ahorcado_" + ronda;
+            var path = "ahorcado_" + ronda;
             var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
             ahorcadoImg.SetImageResource(idDeImagen);
 
-            enunciado.Text = a.Enunciado;
+            enunciado.Text = a?.Enunciado;
             palabraAdivinar = a.Palabra;
 
             var guiones = palabraAdivinar.Replace(" ", "  ").Replace("A", "_ ").Replace("B", "_ ").Replace("C", "_ ")
@@ -273,11 +273,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
            
         }
 
-        public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
+        public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this.fallos = fallos;
-            puntuacionTotal = puntuacion;
-            _puntosConsolidados = ptsConsolidados;
+            this.fallos = newFallos;
+            puntuacionTotal = newPuntuacion;
+            _puntosConsolidados = newPtsConsolidados;
             
         }
 
@@ -293,7 +293,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 case true when !fin:
                 {
                     titulo = "Felicitaciones";
-                    mensaje = (activity as VistaPartidaViewModel).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
                     alertBuilder.SetMessage(mensaje);
                     alertBuilder.SetTitle(titulo);
@@ -306,21 +306,21 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                     {
                         // vuelves a menu principal
-                        (activity as VistaPartidaViewModel).Abandonar();
+                        ((VistaPartidaViewModel)activity).Abandonar();
                     });
-                    if (!(activity as VistaPartidaViewModel).GetConsolidado())
+                    if (!((VistaPartidaViewModel)activity).GetConsolidado())
                     {
                         alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                         {
                             _puntosConsolidados = puntuacionTotal;
                             animation.Pause();
-                            (activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
+                            ((VistaPartidaViewModel)activity).Consolidar(_puntosConsolidados);
                             tcs.TrySetResult(true);
                         });
                     }
                     alertBuilder.SetCancelable(false);
                     var alertDialog = alertBuilder.Create();
-                    alertDialog.Show();
+                    alertDialog?.Show();
 
 #pragma warning disable CS0618
                     new Handler().PostDelayed(() =>
@@ -331,7 +331,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                         {
                             //sonido.SetEstrategia(reloj, _activity);
                             //sonido.PararSonido();
-                            alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                            alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                         }
                     }, 15000);
                     await tcs.Task;
@@ -352,11 +352,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     });
                     alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                     {
-                        (activity as VistaPartidaViewModel).Abandonar();
+                        ((VistaPartidaViewModel)activity).Abandonar();
                     });
                     alertBuilder.SetCancelable(false);
                     var alertDialog = alertBuilder.Create();
-                    alertDialog.Show();
+                    alertDialog?.Show();
 
 #pragma warning disable CS0618
                     new Handler().PostDelayed(() =>
@@ -374,7 +374,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     break;
                 }
                 default:
-                    (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
+                    ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
                     break;
             }
         }
