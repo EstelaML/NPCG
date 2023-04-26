@@ -61,6 +61,10 @@ namespace preguntaods.ViewModels
                     }
                 case Resource.Id.menuItem3:
                     {
+                        break;
+                    }
+                case Resource.Id.menuItem4:
+                    {
                         _ = fachada.LogoutAsync();
 
                         Android.Content.Intent i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));

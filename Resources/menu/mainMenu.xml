@@ -13,8 +13,13 @@
         android:title="Configuración"
         android:showAsAction="always" />
 
-  <!-- Add menu Item 3 -->
-  <item android:id="@+id/menuItem3"
+	<!-- Add menu Item 3 -->
+    <item android:id="@+id/menuItem3"
+		  android:title="Ranking general"
+		  android:showAsAction="always" />
+	
+  <!-- Add menu Item 4 -->
+  <item android:id="@+id/menuItem4"
         android:title="Cerrar sesión"
         android:showAsAction="always" />
 </menu>
