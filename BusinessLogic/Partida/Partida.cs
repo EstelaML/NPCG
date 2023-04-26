@@ -14,11 +14,11 @@ namespace preguntaods.BusinessLogic.Partida
 {
     public class Partida
     {
-        public Usuario user;
-        private List<Reto> listaRetos;
+        public Usuario User;
+        private readonly List<Reto> listaRetos;
         private Reto retoActual;
         private UserInterface userInterface;
-        public Facade fachada;
+        public Facade Fachada;
 
         private Android.App.Activity activity;
         private Button botonAbandonar;
@@ -77,12 +77,12 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetFacade(Facade fachada)
         {
-            this.fachada = fachada;
+            this.Fachada = fachada;
         }
 
         public Facade GetFacade()
         {
-            return fachada;
+            return Fachada;
         }
 
         private void SetUi(UserInterface userInterface)
@@ -187,7 +187,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async Task GuardarPreguntaUsuario(Reto reto)
         {
-            await fachada.GuardarPregunta(reto);
+            await Fachada.GuardarPregunta(reto);
         }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
@@ -258,7 +258,7 @@ namespace preguntaods.BusinessLogic.Partida
 
                 sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
-                await fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
+                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
             }
             else
             {
@@ -291,7 +291,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
         {
-            await fachada.UpdatePuntos(puntosConsolidados);
+            await Fachada.UpdatePuntos(puntosConsolidados);
         }
     }
 }
