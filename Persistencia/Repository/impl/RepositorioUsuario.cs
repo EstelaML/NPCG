@@ -45,11 +45,20 @@ namespace preguntaods.Persistencia.Repository.impl
                      .Update();
         }
 
+        public async Task UpdateAhorcadoAcertado(string a, int[] preguntas, Usuario usuario)
+        {
+            var id = (int)usuario.Id;
+            var update = await conexion.Cliente
+                     .From<RetosRealizados>()
+                     .Where(x => x.Usuario == id)
+                     .Set(x => x.Ahorcado2, preguntas)
+                     .Update();
+        }
+
         public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
         {
             var id = (int)usuario.Id;
-            var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Get();
-            var b = respuesta.Models;
+            var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
             if (respuesta == null) 
             {
                 RetosRealizados inser = new RetosRealizados(1, 1, (int)usuario.Id, null, null);
@@ -58,11 +67,11 @@ namespace preguntaods.Persistencia.Repository.impl
             } 
             if (reto is RetoPre)
             {
-                return b?.First().Pregunta2;
+                return respuesta.Pregunta2;
             }
             else if (reto is RetoAhorcado) 
             {
-                return b?.First().Ahorcado2;
+                return respuesta.Ahorcado2;
             }
             return null;
         }
