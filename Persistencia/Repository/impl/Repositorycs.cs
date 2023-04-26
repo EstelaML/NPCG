@@ -17,7 +17,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<T> GetById(int id)
         {
-            var response = await conexion.cliente
+            var response = await conexion.Cliente
                 .From<T>()
                 .Where(x => x.Id == id)
                 .Single();
@@ -27,7 +27,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            var response = await conexion.cliente
+            var response = await conexion.Cliente
                 .From<T>()
                 .Get();
 
@@ -36,21 +36,21 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task Add(T entity)
         {
-            await conexion.cliente
+            await conexion.Cliente
                 .From<T>()
                 .Insert(entity);
         }
 
         public async Task Update(T entity)
         {
-            await conexion.cliente
+            await conexion.Cliente
                 .From<T>()
                 .Update(entity);
         }
 
         public async Task Delete(int id)
         {
-            await conexion.cliente
+            await conexion.Cliente
                 .From<T>()
                 .Where(x => x.Id == id)
                 .Delete();

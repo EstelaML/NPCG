@@ -2,12 +2,12 @@
 {
     internal class SingletonConexion
     {
-        private static SingletonConexion instance;
-        private const string supabaseURL = "https://ilsulfckdfhvgljvvmhb.supabase.co";
-        private const string supabaseKEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsc3VsZmNrZGZodmdsanZ2bWhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzY5ODI1MTksImV4cCI6MTk5MjU1ODUxOX0.9Uab8BACftEFrG90mMNJ_b6XTk9biLGn8IkyS3oIIoE";
+        private static SingletonConexion _instance;
+        private const string SupabaseUrl = "https://ilsulfckdfhvgljvvmhb.supabase.co";
+        private const string SupabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsc3VsZmNrZGZodmdsanZ2bWhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzY5ODI1MTksImV4cCI6MTk5MjU1ODUxOX0.9Uab8BACftEFrG90mMNJ_b6XTk9biLGn8IkyS3oIIoE";
 
-        public Supabase.Client cliente;
-        public Supabase.Gotrue.User usuario;
+        public Supabase.Client Cliente;
+        public Supabase.Gotrue.User Usuario;
 
         private SingletonConexion()
         {
@@ -16,15 +16,13 @@
                 AutoConnectRealtime = true
             };
 
-            cliente = new Supabase.Client(supabaseURL, supabaseKEY, options);
-            cliente.InitializeAsync();
+            Cliente = new Supabase.Client(SupabaseUrl, SupabaseKey, options);
+            Cliente.InitializeAsync();
         }
 
         public static SingletonConexion GetInstance()
         {
-            if (instance == null) instance = new SingletonConexion();
-
-            return instance;
+            return _instance ??= new SingletonConexion();
         }
     }
 }

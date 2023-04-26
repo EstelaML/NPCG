@@ -72,9 +72,6 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private ProgressBar barTime;
 
 
-        public UserInterfaceAhorcado()
-        { }
-
         public override void SetActivity(Activity activity)
         {
             this.activity = activity;
@@ -180,21 +177,18 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                         letrasAcertadas++;
                     }
                 }
-                for (int i = 0; i < indexes.Count; i++) 
+                foreach (var t in indexes)
                 {
-                    
-                    guionesPalabra[indexes[i]*2] = aux[indexes[i]];
+                    guionesPalabra[t*2] = aux[t];
                 }
                 palabra.Text = new string(guionesPalabra);
                 boton.Enabled = false;
-                
-                if (!guionesPalabra.Contains('_')) 
-                {
-                    puntuacionTotal += puntuacion;
-                    await MostrarAlerta(true, false);
-                    FinReto();
-                    (activity as VistaPartidaViewModel).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
-                }
+
+                if (guionesPalabra.Contains('_')) return;
+                puntuacionTotal += puntuacion;
+                await MostrarAlerta(true, false);
+                FinReto();
+                (activity as VistaPartidaViewModel).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
             else 
             {
@@ -293,108 +287,99 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             
         }
 
-        private async Task<bool> MostrarAlerta(bool acertado, bool fin)
+        private async Task MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
-            string titulo = "";
-            string mensaje = "";
-            bool result = false;
+            var alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
+            string titulo;
+            string mensaje;
+            var result = false;
 
-            if (acertado && !fin)
+            switch (acertado)
             {
-                titulo = "Felicitaciones";
-                if ((activity as VistaPartidaViewModel).GetConsolidado())
+                case true when !fin:
                 {
-                    mensaje = $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?";
-                }
-                else
-                {
-                    mensaje = $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
-                }
+                    titulo = "Felicitaciones";
+                    mensaje = (activity as VistaPartidaViewModel).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
-                alertBuilder.SetMessage(mensaje);
-                alertBuilder.SetTitle(titulo);
-                alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
-                {
-                    tcs.TrySetResult(true);
-
-                    // sigue generando pregunta
-                });
-                alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                {
-                    // vuelves a menu principal
-                    (activity as VistaPartidaViewModel).Abandonar();
-                });
-                if (!(activity as VistaPartidaViewModel).GetConsolidado())
-                {
-                    alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                    alertBuilder.SetMessage(mensaje);
+                    alertBuilder.SetTitle(titulo);
+                    alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                     {
-                        _puntosConsolidados = puntuacionTotal;
-                        animation.Pause();
-                        (activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
                         tcs.TrySetResult(true);
+
+                        // sigue generando pregunta
                     });
+                    alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                    {
+                        // vuelves a menu principal
+                        (activity as VistaPartidaViewModel).Abandonar();
+                    });
+                    if (!(activity as VistaPartidaViewModel).GetConsolidado())
+                    {
+                        alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                        {
+                            _puntosConsolidados = puntuacionTotal;
+                            animation.Pause();
+                            (activity as VistaPartidaViewModel).Consolidar(_puntosConsolidados);
+                            tcs.TrySetResult(true);
+                        });
+                    }
+                    alertBuilder.SetCancelable(false);
+                    Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                    alertDialog.Show();
+
+                    new Handler().PostDelayed(() =>
+                    {
+                        // Acciones a realizar cuando quedan 10 segundos o menos
+                        if (alertDialog.IsShowing)
+                        {
+                            //sonido.SetEstrategia(reloj, _activity);
+                            //sonido.PararSonido();
+                            alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                        }
+                    }, 15000);
+                    await tcs.Task;
+                    break;
                 }
-                alertBuilder.SetCancelable(false);
-                Android.App.AlertDialog alertDialog = alertBuilder.Create();
-                alertDialog.Show();
-
-#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
-                new Handler().PostDelayed(() =>
+                case false when !fin:
                 {
-                    // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (alertDialog.IsShowing)
+                    // sumar los consolidados
+                    titulo = "Vuelve a intentarlo";
+                    mensaje = $"Tienes {puntuacionTotal} puntos.";
+                    alertBuilder.SetMessage(mensaje);
+                    alertBuilder.SetTitle(titulo);
+                    alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                     {
-                        //sonido.SetEstrategia(reloj, _activity);
-                        //sonido.PararSonido();
-                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
-                    }
-                }, 15000);
-#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
-                result = await tcs.Task;
-            }
-            else if (!acertado && !fin)
-            {
-                // sumar los consolidados
-                titulo = "Vuelve a intentarlo";
-                mensaje = $"Tienes {puntuacionTotal} puntos.";
-                alertBuilder.SetMessage(mensaje);
-                alertBuilder.SetTitle(titulo);
-                alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
-                {
-                    tcs.TrySetResult(true);
-                    FinReto();
-                    // se genera nueva pregunta
-                });
-                alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                {
-                    (activity as VistaPartidaViewModel).Abandonar();
-                });
-                alertBuilder.SetCancelable(false);
-                Android.App.AlertDialog alertDialog = alertBuilder.Create();
-                alertDialog.Show();
-
-#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
-                new Handler().PostDelayed(() =>
-                {
-                    // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (alertDialog.IsShowing)
+                        tcs.TrySetResult(true);
+                        FinReto();
+                        // se genera nueva pregunta
+                    });
+                    alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                     {
-                        //sonido.SetEstrategia(reloj, _activity);
-                        //sonido.PararSonido();
-                        alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
-                    }
-                }, 15000);
-#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
-                result = await tcs.Task;
-                return result;
+                        (activity as VistaPartidaViewModel).Abandonar();
+                    });
+                    alertBuilder.SetCancelable(false);
+                    var alertDialog = alertBuilder.Create();
+                    alertDialog.Show();
+
+                    new Handler().PostDelayed(() =>
+                    {
+                        // Acciones a realizar cuando quedan 10 segundos o menos
+                        if (alertDialog.IsShowing)
+                        {
+                            //sonido.SetEstrategia(reloj, _activity);
+                            //sonido.PararSonido();
+                            alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                        }
+                    }, 15000);
+                    await tcs.Task;
+                    break;
+                }
+                default:
+                    (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
+                    break;
             }
-            else
-            {
-                (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
-            }
-            return result;
         }
     }
 }

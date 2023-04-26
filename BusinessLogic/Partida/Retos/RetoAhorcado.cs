@@ -8,13 +8,13 @@ namespace preguntaods.BusinessLogic.Partida.Retos
     {
         private readonly int type;
         private Ahorcado ahorcado;
-        private static PreguntadosService servicio;
+        private static PreguntadosService _servicio;
 
         public RetoAhorcado(int dificultad)
         {
             type = TypeAhorcado;
-            servicio = new PreguntadosService();
-            servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(dificultad); });
+            _servicio = new PreguntadosService();
+            _servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(dificultad); });
         }
 
         public override int GetType()
@@ -28,15 +28,15 @@ namespace preguntaods.BusinessLogic.Partida.Retos
         {
             if (orden < 4 || orden == 10)
             {
-                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.DifBaja);
+                ahorcado = await _servicio.SolicitarAhorcado(Ahorcado.DifBaja);
             }
-            else if (4 <= orden && orden < 7 || orden == 11)
+            else if (orden < 7 || orden == 11)
             {
-                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.DifMedia);
+                ahorcado = await _servicio.SolicitarAhorcado(Ahorcado.DifMedia);
             }
             else
             {
-                ahorcado = await servicio.SolicitarAhorcado(Ahorcado.DifAlta);
+                ahorcado = await _servicio.SolicitarAhorcado(Ahorcado.DifAlta);
             }
         }
     }

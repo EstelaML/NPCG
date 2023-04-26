@@ -1,4 +1,5 @@
-﻿namespace preguntaods.Entities
+﻿// ReSharper disable once CheckNamespace
+namespace preguntaods.Entities
 {
     public interface IEntity
     {

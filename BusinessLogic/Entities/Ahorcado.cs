@@ -1,9 +1,7 @@
-﻿using Postgrest.Models;
-
-// ReSharper disable once CheckNamespace
+﻿// ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
-    public partial class Ahorcado : BaseModel, IEntity
+    public partial class Ahorcado
     {
         public const int DifAlta = 1003;
         public const int DifMedia = 1002;

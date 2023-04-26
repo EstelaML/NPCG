@@ -26,19 +26,19 @@ namespace preguntaods.Persistencia.Repository.impl
             //
             //return preguntas ?? new List<Pregunta>();
 
-            var id = (conexion.usuario.Id);
-            var task1 = (conexion.cliente.From<Usuario>().Where(x => x.Uuid == id).Single());
-            var task2 = (conexion.cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
+            var id = (conexion.Usuario.Id);
+            var task1 = (conexion.Cliente.From<Usuario>().Where(x => x.Uuid == id).Single());
+            var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
             List<Task> tareas = new List<Task> { task1, task2 };
             await Task.WhenAll(tareas);
 
             var usuario = task1.Result;
             var response = task2.Result;
-            List<Pregunta> preguntas = response?.Models?.ToList();
-            List<int> preguntasHechas = usuario?.PreguntasRealizadas?.ToList();
-            preguntas = preguntasHechas != null ? preguntas?.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
+            var preguntas = response.Models.ToList();
+            var preguntasHechas = usuario?.PreguntasRealizadas?.ToList();
+            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
-            return preguntas ?? new List<Pregunta>();
+            return preguntas;
         }
     }
 }

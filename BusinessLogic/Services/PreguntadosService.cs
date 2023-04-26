@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 
@@ -9,7 +8,7 @@ namespace preguntaods.BusinessLogic.Services
 {
     public class PreguntadosService : IPreguntadosService
     {
-        private object sync = new object();
+        private readonly object sync = new object();
         private readonly RepositorioPregunta repositorioPre;
         private readonly RepositorioAhorcado repositorioAhorcado;
         private static List<Pregunta> _preguntasBajas;
