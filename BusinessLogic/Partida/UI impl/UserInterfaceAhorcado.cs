@@ -21,6 +21,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private Activity activity;
 
         private Facade fachada;
+        private EstrategiaSonidoReloj reloj;
         private Sonido sonido;
         private int _fallos;
         private int puntuacionTotal;
@@ -91,6 +92,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             letrasAcertadas = 0;
             ronda = 1;
+
+            sonido = new Sonido();
+
+            // Initialization of Vars
+            reloj = new EstrategiaSonidoReloj();
 
             if (_fallos == 1)
             {
@@ -172,6 +178,8 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             if (palabraAdivinar.Contains(letra))
             {
+                sonido.SetEstrategia(new EstrategiaSonidoLetraAcierto(), activity);
+                sonido.EjecutarSonido();
                 List<int> indexes = new List<int>();
                 char[] aux = palabraAdivinar.ToCharArray();
 
