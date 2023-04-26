@@ -36,7 +36,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var response = task2.Result;
             var preguntas = response.Models.ToList();
             var preguntasHechas = usuario?.PreguntasRealizadas?.ToList();
-            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
+            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => pregunta.Id != null && !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
             return preguntas;
         }

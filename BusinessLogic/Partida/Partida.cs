@@ -209,7 +209,7 @@ namespace preguntaods.BusinessLogic.Partida
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
-            alertBuilder.SetPositiveButton("Aceptar", (sender, args) =>
+            alertBuilder.SetPositiveButton("Aceptar", (o, args) =>
             {
             userInterface.FinReto();
             sonido.PararSonido();
@@ -221,7 +221,7 @@ namespace preguntaods.BusinessLogic.Partida
                     var dialogoMal = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
                     dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.GetPuntosConsolidados()} puntos");
-                    dialogoMal.SetPositiveButton("Salir", (sender, args) =>
+                    dialogoMal.SetPositiveButton("Salir", (o1, eventArgs) =>
                     {
                         var i = new Intent(activity, typeof(MenuViewModel));
                         activity.StartActivity(i);
@@ -234,14 +234,14 @@ namespace preguntaods.BusinessLogic.Partida
                 }
 
             });
-            alertBuilder.SetNegativeButton("Cancelar", (sender, args) =>
+            alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
             {
             });
             alertBuilder.SetCancelable(false);
 
             alertDialog = alertBuilder.Create();
             if (alertDialog == null) return;
-            alertDialog.Window.SetDimAmount(0.8f);
+            alertDialog.Window?.SetDimAmount(0.8f);
             alertDialog.Show();
         }
 
@@ -273,7 +273,7 @@ namespace preguntaods.BusinessLogic.Partida
 
             alertBuilder.SetMessage(mensaje);
             alertBuilder.SetTitle(titulo);
-            alertBuilder.SetPositiveButton("Salir", (sender, args) =>
+            alertBuilder.SetPositiveButton("Salir", (o, args) =>
             {
                 userInterface.FinReto();
                 sonido.PararSonido();
@@ -284,8 +284,8 @@ namespace preguntaods.BusinessLogic.Partida
             alertBuilder.SetCancelable(false);
 
             alertDialog = alertBuilder.Create();
-            alertDialog.Window.SetDimAmount(0.8f);
-            alertDialog.Show();
+            alertDialog?.Window?.SetDimAmount(0.8f);
+            alertDialog?.Show();
         }
 
         public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)

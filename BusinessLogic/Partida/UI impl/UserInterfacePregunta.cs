@@ -44,16 +44,16 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         // Interactive Elements
         private ObjectAnimator animation;
 
-        public override void SetActivity(Activity activity)
+        public override void SetActivity(Activity newActivity)
         {
-            this.activity = activity;
+            this.activity = newActivity;
         }
 
-        public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
+        public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this.fallos = fallos;
-            puntuacionTotal = puntuacion;
-            _puntosConsolidados = ptsConsolidados;
+            this.fallos = newFallos;
+            puntuacionTotal = newPuntuacion;
+            _puntosConsolidados = newPtsConsolidados;
         }
 
         public override void Init()

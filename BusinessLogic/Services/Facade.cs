@@ -24,7 +24,7 @@ namespace preguntaods.BusinessLogic.Services
         public async Task LoginAsync(string correo, string password)
         {
             var session = await conexion.Cliente.Auth.SignIn(correo, password);
-            conexion.Usuario = session.User;
+            conexion.Usuario = session?.User;
         }
 
         public async Task LogoutAsync()
@@ -35,8 +35,8 @@ namespace preguntaods.BusinessLogic.Services
         public async Task<User> SignUpAsync(string correo, string password)
         {
             var session = await conexion.Cliente.Auth.SignUp(correo, password); 
-            conexion.Usuario = session.User;
-            return session.User;
+            conexion.Usuario = session?.User;
+            return session?.User;
         }
 
         public async Task<Usuario> GetUsuarioLogged()
@@ -70,7 +70,7 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task GuardarPregunta(Reto reto)
         {
-            var pregunta = (reto as RetoPre).GetPregunta();
+            var pregunta = ((RetoPre)reto).GetPregunta();
             var a = conexion.Usuario.Id;
             var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a);
             if (preguntas != null)
@@ -78,13 +78,16 @@ namespace preguntaods.BusinessLogic.Services
                 // redimensionas el array
                 Array.Resize(ref preguntas, preguntas.Length + 1);
                 // agregar el nuevo valor al final del arreglo
-                preguntas[^1] = (int)pregunta.Id;
+                if (pregunta.Id != null) preguntas[^1] = (int)pregunta.Id;
                 await repositorioUser.UpdatePreguntaAcertada(a, preguntas);
             }
             else
             {
-                int[] preguntass = { (int)pregunta.Id };
-                await repositorioUser.UpdatePreguntaAcertada(a, preguntass);
+                if (pregunta.Id != null)
+                {
+                    int[] preguntass = { (int)pregunta.Id };
+                    await repositorioUser.UpdatePreguntaAcertada(a, preguntass);
+                }
             }
         }
 
