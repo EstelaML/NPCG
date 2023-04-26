@@ -4,7 +4,6 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using Java.Util;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
@@ -83,13 +82,12 @@ namespace preguntaods.ViewModels
                     var userAux = await fachada.SignUpAsync(email.Text, password.Text);
                     if (userAux != null)
                     {
-                        UUID id = UUID.FromString(userAux.Id);
-                        Usuario user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
+                        var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                         await fachada.NewUsuario(user);
 
                         // se registra
                         // que inicie sesión
-                        Intent i = new Intent(this, typeof(InicioSesionViewModel));
+                        var i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
                     }
                     else {

@@ -36,7 +36,7 @@ namespace preguntaods.BusinessLogic.Partida.Retos
             {
                 pregunta = await _servicio.SolicitarPregunta(Pregunta.DifBaja);
             }
-            else if (4 <= orden && orden < 7 || orden == 11)
+            else if (orden < 7 || orden == 11)
             {
                 pregunta = await _servicio.SolicitarPregunta(Pregunta.DifMedia);
             }

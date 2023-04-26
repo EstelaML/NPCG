@@ -6,7 +6,6 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
-using preguntaods.Entities;
 
 namespace preguntaods.ViewModels
 {
@@ -48,7 +47,7 @@ namespace preguntaods.ViewModels
         {
             sonido.EjecutarSonido();
 
-            Intent i = new Intent(this, typeof(RegistroViewModel));
+            var i = new Intent(this, typeof(RegistroViewModel));
             StartActivity(i);
         }
 

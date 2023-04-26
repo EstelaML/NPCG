@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 

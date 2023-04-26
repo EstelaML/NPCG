@@ -78,7 +78,7 @@ namespace preguntaods.BusinessLogic.Services
                 // redimensionas el array
                 Array.Resize(ref preguntas, preguntas.Length + 1);
                 // agregar el nuevo valor al final del arreglo
-                preguntas[preguntas.Length - 1] = (int)pregunta.Id;
+                preguntas[^1] = (int)pregunta.Id;
                 await repositorioUser.UpdatePreguntaAcertada(a, preguntas);
             }
             else

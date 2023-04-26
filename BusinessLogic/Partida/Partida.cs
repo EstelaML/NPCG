@@ -47,10 +47,10 @@ namespace preguntaods.BusinessLogic.Partida
 
         #region Setters/Getters
 
-        public void SetActivity(Android.App.Activity activity)
+        public void SetActivity(Android.App.Activity newActivity)
         {
-            this.activity = activity;
-            userInterface.SetActivity(activity);
+            this.activity = newActivity;
+            userInterface.SetActivity(newActivity);
 
             if (!primeraVez) return;
             sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
@@ -83,9 +83,9 @@ namespace preguntaods.BusinessLogic.Partida
             return Fachada;
         }
 
-        private void SetUi(UserInterface userInterface)
+        private void SetUi(UserInterface newUserInterface)
         {
-            this.userInterface = userInterface;
+            this.userInterface = newUserInterface;
         }
 
         public UserInterface GetUi()
@@ -191,8 +191,8 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
-            var titulo = "";
-            var mensaje = "";
+            string titulo;
+            string mensaje;
             if (((VistaPartidaViewModel)activity).GetConsolidado())
             {
                 titulo = "¿Estás seguro?";

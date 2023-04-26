@@ -44,9 +44,6 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         // Interactive Elements
         private ObjectAnimator animation;
 
-        public UserInterfacePregunta()
-        { }
-
         public override void SetActivity(Activity activity)
         {
             this.activity = activity;
@@ -213,13 +210,13 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             return _puntosConsolidados;
         }
 
-        private async Task<bool> MostrarAlerta(bool acertado, bool fin)
+        private async Task MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            Android.App.AlertDialog.Builder alertBuilder = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
-            string titulo = "";
-            string mensaje = "";
-            bool result = false;
+            var alertBuilder = new AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
+            string titulo;
+            string mensaje;
+            var result = false;
 
             if (acertado && !fin)
             {
@@ -250,7 +247,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     });
                 }
                 alertBuilder.SetCancelable(false);
-                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                var alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
 #pragma warning disable CS0618 // El tipo o el miembro están obsoletos
@@ -265,7 +262,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     }
                 }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
-                result = await tcs.Task;
+                await tcs.Task;
             }
             else if (!acertado && !fin)
             {
@@ -285,10 +282,9 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     (activity as VistaPartidaViewModel).Abandonar();
                 });
                 alertBuilder.SetCancelable(false);
-                Android.App.AlertDialog alertDialog = alertBuilder.Create();
+                var alertDialog = alertBuilder.Create();
                 alertDialog.Show();
 
-#pragma warning disable CS0618 // El tipo o el miembro están obsoletos
                 new Handler().PostDelayed(() =>
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
@@ -299,15 +295,12 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                         alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                     }
                 }, 15000);
-#pragma warning restore CS0618 // El tipo o el miembro están obsoletos
-                result = await tcs.Task;
-                return result;
+                await tcs.Task;
             }
             else
             {
                (activity as VistaPartidaViewModel).AbandonarFallido(puntuacionTotal);
             }
-            return result;
         }
     }
 }
