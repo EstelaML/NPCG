@@ -35,21 +35,36 @@ namespace preguntaods.Persistencia.Repository.impl
                         .Update();
         }
 
-        public async Task UpdatePreguntaAcertada(string a, int[] preguntas)
+        public async Task UpdatePreguntaAcertada(string a, int[] preguntas, Usuario usuario)
         {
+            var id = (int)usuario.Id;
             var update = await conexion.Cliente
-                     .From<Usuario>()
-                     .Where(x => x.Uuid == a)
-                     .Set(x => x.PreguntasRealizadas, preguntas)
+                     .From<RetosRealizados>()
+                     .Where(x => x.Usuario == id)
+                     .Set(x => x.Pregunta2, preguntas)
                      .Update();
         }
 
-        public async Task<int[]> GetPreguntasAcertadasAsync(string a)
+        public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
         {
-            var res = await conexion.Cliente
-                .From<Usuario>()
-                .Where(x => x.Uuid == a).Single();
-            return res.PreguntasRealizadas;
+            var id = (int)usuario.Id;
+            var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Get();
+            var b = respuesta.Models;
+            if (respuesta == null) 
+            {
+                RetosRealizados inser = new RetosRealizados(1, 1, (int)usuario.Id, null, null);
+                await conexion.Cliente.From<RetosRealizados>().Insert(inser);
+                return null;
+            } 
+            if (reto is RetoPre)
+            {
+                return b?.First().Pregunta2;
+            }
+            else if (reto is RetoAhorcado) 
+            {
+                return b?.First().Ahorcado2;
+            }
+            return null;
         }
 
         public async Task<int[]> GetRetoAcertado(string a, Reto reto) {

@@ -18,5 +18,12 @@ namespace preguntaods.Entities
 
         [Column("Usuario")]
         public int Usuario { get; set; }
+
+        [Column("Pregunta2")]
+
+        public int[] Pregunta2 { get; set; }
+
+        [Column("Ahorcado2")]
+        public int[] Ahorcado2 { get; set; }
     }
 }

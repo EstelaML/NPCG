@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using preguntaods.BusinessLogic.Partida.Retos;
@@ -9,10 +10,12 @@ namespace preguntaods.Persistencia.Repository.impl
     public class RepositorioPregunta : Repository<Pregunta>
     {
         private SingletonConexion conexion;
+        private readonly RepositorioUsuario repositorioUser;
 
         public RepositorioPregunta()
         {
             conexion = SingletonConexion.GetInstance();
+            repositorioUser = new RepositorioUsuario();
         }
 
         public async Task<List<Pregunta>> GetByDificultad(int dificultad)
@@ -47,13 +50,24 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task AñadirPreguntaRealizada(int id, Reto reto) 
         {
-            var model = new RetosRealizados
+            // cogemos del usuario las preguntas acertadas ya
+            var pregunta = (reto as RetoPre).GetPregunta();
+            var a = conexion.Usuario.Id;
+            var usuario = await repositorioUser.GetUserByUUid(a);
+            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a, reto, usuario);
+            if (preguntas != null)
             {
-                Usuario = id,
-                Ahorcado = null,
-                Pregunta = (reto as RetoPre).GetPregunta().Id,
-            };
-            await conexion.Cliente.From<RetosRealizados>().Insert(model);
+                // redimensionas el array
+                Array.Resize(ref preguntas, preguntas.Length + 1);
+                // agregar el nuevo valor al final del arreglo
+                preguntas[^1] = (int)pregunta.Id;
+                await repositorioUser.UpdatePreguntaAcertada(a, preguntas, usuario);
+            }
+            else
+            {
+                int[] preguntass = { (int) pregunta.Id };
+                await repositorioUser.UpdatePreguntaAcertada(a, preguntass, usuario);
+            }
         }
     }
 }
