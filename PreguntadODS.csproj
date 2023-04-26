@@ -102,7 +102,6 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="ViewModels\VistaPartidaViewModel.cs" />
-    <Compile Include="ViewModels\RetoPreguntaViewModel.cs" />
     <Compile Include="ViewModels\InicioSesionViewModel.cs" />
     <Compile Include="ViewModels\RegistroViewModel.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />

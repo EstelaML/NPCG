@@ -13,12 +13,12 @@ namespace preguntaods.BusinessLogic.Services
         object sync = new object();
         private readonly RepositorioPregunta repositorioPre;
         private readonly RepositorioAhorcado repositorioAhorcado;
-        private static List<Pregunta> preguntasBajas;
-        private static List<Pregunta> preguntasMedias;
-        private static List<Pregunta> preguntasAltas;
-        private static List<Ahorcado> ahorcadoBajo;
-        private static List<Ahorcado> ahorcadoMedio;
-        private static List<Ahorcado> ahorcadoAlto;
+        private static List<Pregunta> _preguntasBajas;
+        private static List<Pregunta> _preguntasMedias;
+        private static List<Pregunta> _preguntasAltas;
+        private static List<Ahorcado> _ahorcadoBajo;
+        private static List<Ahorcado> _ahorcadoMedio;
+        private static List<Ahorcado> _ahorcadoAlto;
 
         public PreguntadosService()
         {
@@ -30,35 +30,35 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task InitAhorcadoList()
         {
-            if (ahorcadoBajo == null)
+            if (_ahorcadoBajo == null)
             {
-                ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
+                _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
             }
-            if (ahorcadoMedio == null)
+            if (_ahorcadoMedio == null)
             {
-                ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
+                _ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
             }
             var p = (List<Ahorcado>) await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
             lock (sync)
             {
-                ahorcadoAlto ??= p;
+                _ahorcadoAlto ??= p;
             }
         }
 
         public async Task InitPreguntaList()
         {
-            if (preguntasBajas == null)
+            if (_preguntasBajas == null)
             {
-                preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.DifBaja);
+                _preguntasBajas = await repositorioPre.GetByDificultad(Pregunta.DifBaja);
             }
-            if (preguntasMedias == null)
+            if (_preguntasMedias == null)
             {
-                preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.DifMedia);
+                _preguntasMedias = await repositorioPre.GetByDificultad(Pregunta.DifMedia);
             }
             var p = await repositorioPre.GetByDificultad(Pregunta.DifAlta);
             lock (sync)
             {
-                preguntasAltas ??= p;
+                _preguntasAltas ??= p;
             }
         }
 
@@ -70,21 +70,21 @@ namespace preguntaods.BusinessLogic.Services
             {
                 case Ahorcado.DifBaja:
                     {
-                        ahor = ahorcadoBajo.Last();
-                        ahorcadoBajo.Remove(ahor);
+                        ahor = _ahorcadoBajo.Last();
+                        _ahorcadoBajo.Remove(ahor);
                         break;
                     }
                 case Ahorcado.DifMedia:
                     {
-                        ahor = ahorcadoMedio.Last();
-                        ahorcadoMedio.Remove(ahor);
+                        ahor = _ahorcadoMedio.Last();
+                        _ahorcadoMedio.Remove(ahor);
 
                         break;
                     }
                 case Ahorcado.DifAlta:
                     {
-                        ahor = ahorcadoAlto.Last();
-                        ahorcadoAlto.Remove(ahor);
+                        ahor = _ahorcadoAlto.Last();
+                        _ahorcadoAlto.Remove(ahor);
                         break;
                     }
             }
@@ -100,21 +100,21 @@ namespace preguntaods.BusinessLogic.Services
             {
                 case Pregunta.DifBaja:
                     {
-                        respuesta = preguntasBajas.Last();
-                        preguntasBajas.Remove(respuesta);
+                        respuesta = _preguntasBajas.Last();
+                        _preguntasBajas.Remove(respuesta);
                         break;
                     }
                 case Pregunta.DifMedia:
                     {
-                        respuesta = preguntasMedias.Last();
-                        preguntasMedias.Remove(respuesta);
+                        respuesta = _preguntasMedias.Last();
+                        _preguntasMedias.Remove(respuesta);
 
                         break;
                     }
                 case Pregunta.DifAlta:
                     {
-                        respuesta = preguntasAltas.Last();
-                        preguntasAltas.Remove(respuesta);
+                        respuesta = _preguntasAltas.Last();
+                        _preguntasAltas.Remove(respuesta);
                         break;
                     }
             }
