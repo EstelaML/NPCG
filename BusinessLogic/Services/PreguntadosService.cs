@@ -108,29 +108,6 @@ namespace preguntaods.BusinessLogic.Services
 
             return Task.FromResult(respuesta);
         }
-
-        public Pregunta PreguntaAleatoria(List<Pregunta> respuesta, List<Reto> retos)
-        {
-            System.Random random = new System.Random();
-
-            // Obtener un índice aleatorio dentro del rango de la lista de preguntas
-            int indiceAleatorio = random.Next(respuesta.Count);
-            Pregunta preguntaAleatoria = respuesta[indiceAleatorio];
-
-            if (retos != null)
-            {
-                if (!retos.Any(reto => (reto as RetoPre).GetPregunta().Enunciado == preguntaAleatoria.Enunciado))
-                {
-                    return preguntaAleatoria;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            return respuesta[random.Next(respuesta.Count)];
-        }
-
         #endregion RetoPregunta
     }
 }
