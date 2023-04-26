@@ -10,10 +10,9 @@ using preguntaods.Entities;
 
 namespace preguntaods.ViewModels
 {
+    [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class RankingViewModel : AppCompatActivity
     {
-        private Facade fachada;
-        private Sonido sonido;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

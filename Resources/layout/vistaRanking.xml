@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ranking general"
+        android:id="@+id/textRanking"
+        android:textColor="@android:color/black"
+        tools:ignore="HardcodedText"/>
 </LinearLayout>
