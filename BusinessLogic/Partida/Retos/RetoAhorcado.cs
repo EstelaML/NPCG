@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Services;
+﻿using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida.Retos
 {
@@ -22,7 +22,8 @@ namespace preguntaods.BusinessLogic.Partida.Retos
             return type;
         }
 
-        public Ahorcado GetAhorcado() { return ahorcado;  }
+        public Ahorcado GetAhorcado()
+        { return ahorcado; }
 
         public async Task SetDiff(int orden)
         {

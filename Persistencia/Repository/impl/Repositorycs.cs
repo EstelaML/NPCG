@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Postgrest.Models;
+using preguntaods.Entities;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Postgrest.Models;
-using preguntaods.Entities;
 
 namespace preguntaods.Persistencia.Repository.impl
 {

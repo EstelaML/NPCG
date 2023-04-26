@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using preguntaods.Entities;
+using preguntaods.Persistencia.Repository.impl;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using preguntaods.Entities;
-using preguntaods.Persistencia.Repository.impl;
 
 namespace preguntaods.BusinessLogic.Services
 {
@@ -48,7 +48,7 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public Task<Ahorcado> SolicitarAhorcado(int dif) 
+        public Task<Ahorcado> SolicitarAhorcado(int dif)
         {
             Ahorcado ahorca = null;
 
@@ -107,6 +107,7 @@ namespace preguntaods.BusinessLogic.Services
 
             return Task.FromResult(respuesta);
         }
+
         #endregion RetoPregunta
     }
 }

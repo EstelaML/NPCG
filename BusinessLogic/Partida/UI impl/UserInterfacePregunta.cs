@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,6 +8,8 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.ViewModels;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
@@ -110,6 +110,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     case 1:
                         imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
                         break;
+
                     case 2:
                         imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
                         break;
@@ -154,7 +155,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             if (pregunta.OdsRelacionada == null)
             {
-                var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName); 
+                var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
                 imagenOds.SetImageResource(idDeImagen);
             }
             else
@@ -229,7 +230,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             if (acertado && !fin)
             {
                 titulo = "Felicitaciones";
-                mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal-puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
                 alertBuilder.SetMessage(mensaje);
                 alertBuilder.SetTitle(titulo);
@@ -305,7 +306,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             }
             else
             {
-               ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
+                ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
             }
         }
     }

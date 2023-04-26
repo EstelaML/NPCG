@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Services;
+﻿using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida.Retos
 {
@@ -38,8 +37,9 @@ namespace preguntaods.BusinessLogic.Partida.Retos
             {
                 pregunta = await _servicio.SolicitarPregunta(Pregunta.DifMedia);
             }
-            else { 
-                pregunta = await _servicio.SolicitarPregunta(Pregunta.DifAlta); 
+            else
+            {
+                pregunta = await _servicio.SolicitarPregunta(Pregunta.DifAlta);
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.OS;
 using Android.Widget;
@@ -7,6 +6,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Partida.UI_impl;
+using System;
 
 namespace preguntaods.ViewModels
 {
@@ -111,10 +111,10 @@ namespace preguntaods.ViewModels
             partida.EventoConsolidarBoton(new object(), EventArgs.Empty, puntosConsolidados);
         }
 
-        public void ConsolidarUltimaPregunta() {
+        public void ConsolidarUltimaPregunta()
+        {
             consolidado = true;
         }
-
 
         public bool GetConsolidado()
         {

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Services
 {
@@ -34,7 +34,7 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task<User> SignUpAsync(string correo, string password)
         {
-            var session = await conexion.Cliente.Auth.SignUp(correo, password); 
+            var session = await conexion.Cliente.Auth.SignUp(correo, password);
             conexion.Usuario = session?.User;
             return session?.User;
         }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,6 +8,10 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
@@ -29,14 +29,16 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private string palabraAdivinar;
         private char[] guionesPalabra;
         private int ronda;
-        private int letrasAcertadas; 
+        private int letrasAcertadas;
 
         // UI
         private ImageView ahorcadoImg;
+
         private TextView enunciado;
         private TextView palabra;
 
         #region Button letters
+
         private Button buttonA;
         private Button buttonB;
         private Button buttonC;
@@ -64,12 +66,13 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         private Button buttonX;
         private Button buttonY;
         private Button buttonZ;
-        #endregion
-        
+
+        #endregion Button letters
+
         // tiempo limite
         private ObjectAnimator animation;
-        private ProgressBar barTime;
 
+        private ProgressBar barTime;
 
         public override void SetActivity(Activity newActivity)
         {
@@ -86,6 +89,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             ronda = 1;
 
             #region buttonletters FindByID
+
             buttonA = activity.FindViewById<Button>(Resource.Id.buttonA);
             buttonB = activity.FindViewById<Button>(Resource.Id.buttonB);
             buttonC = activity.FindViewById<Button>(Resource.Id.buttonC);
@@ -113,9 +117,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             buttonX = activity.FindViewById<Button>(Resource.Id.buttonX);
             buttonY = activity.FindViewById<Button>(Resource.Id.buttonY);
             buttonZ = activity.FindViewById<Button>(Resource.Id.buttonZ);
-            #endregion
+
+            #endregion buttonletters FindByID
 
             #region buttonLetters Handler
+
             buttonA.Click += Letter_Click;
             buttonB.Click += Letter_Click;
             buttonC.Click += Letter_Click;
@@ -125,7 +131,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             buttonG.Click += Letter_Click;
             buttonH.Click += Letter_Click;
             buttonI.Click += Letter_Click;
-            buttonJ.Click += Letter_Click;  
+            buttonJ.Click += Letter_Click;
             buttonK.Click += Letter_Click;
             buttonL.Click += Letter_Click;
             buttonM.Click += Letter_Click;
@@ -143,11 +149,11 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             buttonX.Click += Letter_Click;
             buttonY.Click += Letter_Click;
             buttonZ.Click += Letter_Click;
-            #endregion
+
+            #endregion buttonLetters Handler
 
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(30000*4); //30*4 = 2min
-
+            animation.SetDuration(30000 * 4); //30*4 = 2min
         }
 
         private async void Letter_Click(object sender, EventArgs e)
@@ -159,7 +165,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             {
                 List<int> indexes = new List<int>();
                 char[] aux = palabraAdivinar.ToCharArray();
-                
+
                 //Compruebo a ver si está dos veces y añado el indice a una lista
                 for (int i = 0; i < palabraAdivinar.Length; i++)
                 {
@@ -171,7 +177,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 }
                 foreach (var t in indexes)
                 {
-                    guionesPalabra[t*2] = aux[t];
+                    guionesPalabra[t * 2] = aux[t];
                 }
                 palabra.Text = new string(guionesPalabra);
                 if (boton != null) boton.Enabled = false;
@@ -182,7 +188,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 FinReto();
                 ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
-            else 
+            else
             {
                 if (boton != null) boton.Enabled = false;
                 string path = "ahorcado_" + ++ronda;
@@ -196,22 +202,21 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                     await MostrarAlerta(false, fallos == 2);
                     ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
                 }
-
             }
         }
 
-        public override void SetDatosReto(Reto reto) 
+        public override void SetDatosReto(Reto reto)
         {
             // comienza cuentra atrás
             animation.Start();
-           
+
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta?.GetAhorcado();
 
             switch (a?.Dificultad)
             {
                 case Ahorcado.DifBaja: puntuacion = 100; ronda = 0; break;
-                case Ahorcado.DifMedia: puntuacion = 200; ronda = 3;  break;
+                case Ahorcado.DifMedia: puntuacion = 200; ronda = 3; break;
                 case Ahorcado.DifAlta: puntuacion = 300; ronda = 5; break;
             }
 
@@ -233,7 +238,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                                                  .Replace("U", "_ ").Replace("V", "_ ").Replace("W", "_ ")
                                                  .Replace("X", "_ ").Replace("Y", "_ ").Replace("Z", "_ ");
             palabra.Text = guiones;
-            
+
             guionesPalabra = guiones.ToCharArray();
         }
 
@@ -241,7 +246,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
         {
             letrasAcertadas = 0;
 
-            /*buttonA.Enabled = true; 
+            /*buttonA.Enabled = true;
             buttonB.Enabled = true;
             buttonC.Enabled= true;
             buttonD.Enabled = true;
@@ -268,9 +273,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             buttonY.Enabled = true;
             buttonZ.Enabled = true;*/
 
-
             animation.Pause();
-           
         }
 
         public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
@@ -278,7 +281,6 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             this.fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
-            
         }
 
         private async Task MostrarAlerta(bool acertado, bool fin)
@@ -291,88 +293,88 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
             switch (acertado)
             {
                 case true when !fin:
-                {
-                    titulo = "Felicitaciones";
-                    mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    {
+                        titulo = "Felicitaciones";
+                        mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
-                    alertBuilder.SetMessage(mensaje);
-                    alertBuilder.SetTitle(titulo);
-                    alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
-                    {
-                        tcs.TrySetResult(true);
-
-                        // sigue generando pregunta
-                    });
-                    alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                    {
-                        // vuelves a menu principal
-                        ((VistaPartidaViewModel)activity).Abandonar();
-                    });
-                    if (!((VistaPartidaViewModel)activity).GetConsolidado())
-                    {
-                        alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                        alertBuilder.SetMessage(mensaje);
+                        alertBuilder.SetTitle(titulo);
+                        alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
-                            _puntosConsolidados = puntuacionTotal;
-                            animation.Pause();
-                            ((VistaPartidaViewModel)activity).Consolidar(_puntosConsolidados);
                             tcs.TrySetResult(true);
+
+                            // sigue generando pregunta
                         });
+                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                        {
+                            // vuelves a menu principal
+                            ((VistaPartidaViewModel)activity).Abandonar();
+                        });
+                        if (!((VistaPartidaViewModel)activity).GetConsolidado())
+                        {
+                            alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                            {
+                                _puntosConsolidados = puntuacionTotal;
+                                animation.Pause();
+                                ((VistaPartidaViewModel)activity).Consolidar(_puntosConsolidados);
+                                tcs.TrySetResult(true);
+                            });
+                        }
+                        alertBuilder.SetCancelable(false);
+                        var alertDialog = alertBuilder.Create();
+                        alertDialog?.Show();
+
+#pragma warning disable CS0618
+                        new Handler().PostDelayed(() =>
+#pragma warning restore CS0618
+                        {
+                            // Acciones a realizar cuando quedan 10 segundos o menos
+                            if (alertDialog.IsShowing)
+                            {
+                                //sonido.SetEstrategia(reloj, _activity);
+                                //sonido.PararSonido();
+                                alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
+                            }
+                        }, 15000);
+                        await tcs.Task;
+                        break;
                     }
-                    alertBuilder.SetCancelable(false);
-                    var alertDialog = alertBuilder.Create();
-                    alertDialog?.Show();
-
-#pragma warning disable CS0618
-                    new Handler().PostDelayed(() =>
-#pragma warning restore CS0618
-                    {
-                        // Acciones a realizar cuando quedan 10 segundos o menos
-                        if (alertDialog.IsShowing)
-                        {
-                            //sonido.SetEstrategia(reloj, _activity);
-                            //sonido.PararSonido();
-                            alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
-                        }
-                    }, 15000);
-                    await tcs.Task;
-                    break;
-                }
                 case false when !fin:
-                {
-                    // sumar los consolidados
-                    titulo = "Vuelve a intentarlo";
-                    mensaje = $"Tienes {puntuacionTotal} puntos.";
-                    alertBuilder.SetMessage(mensaje);
-                    alertBuilder.SetTitle(titulo);
-                    alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                     {
-                        tcs.TrySetResult(true);
-                        FinReto();
-                        // se genera nueva pregunta
-                    });
-                    alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                    {
-                        ((VistaPartidaViewModel)activity).Abandonar();
-                    });
-                    alertBuilder.SetCancelable(false);
-                    var alertDialog = alertBuilder.Create();
-                    alertDialog?.Show();
+                        // sumar los consolidados
+                        titulo = "Vuelve a intentarlo";
+                        mensaje = $"Tienes {puntuacionTotal} puntos.";
+                        alertBuilder.SetMessage(mensaje);
+                        alertBuilder.SetTitle(titulo);
+                        alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
+                        {
+                            tcs.TrySetResult(true);
+                            FinReto();
+                            // se genera nueva pregunta
+                        });
+                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                        {
+                            ((VistaPartidaViewModel)activity).Abandonar();
+                        });
+                        alertBuilder.SetCancelable(false);
+                        var alertDialog = alertBuilder.Create();
+                        alertDialog?.Show();
 
 #pragma warning disable CS0618
-                    new Handler().PostDelayed(() =>
+                        new Handler().PostDelayed(() =>
 #pragma warning restore CS0618
-                    {
-                        // Acciones a realizar cuando quedan 10 segundos o menos
-                        if (alertDialog.IsShowing)
                         {
-                            //sonido.SetEstrategia(reloj, _activity);
-                            //sonido.PararSonido();
-                            alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
-                        }
-                    }, 15000);
-                    await tcs.Task;
-                    break;
-                }
+                            // Acciones a realizar cuando quedan 10 segundos o menos
+                            if (alertDialog.IsShowing)
+                            {
+                                //sonido.SetEstrategia(reloj, _activity);
+                                //sonido.PararSonido();
+                                alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
+                            }
+                        }, 15000);
+                        await tcs.Task;
+                        break;
+                    }
                 default:
                     ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
                     break;

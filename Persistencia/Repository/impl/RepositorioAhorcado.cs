@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using preguntaods.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using preguntaods.Entities;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -15,7 +15,6 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<List<Ahorcado>> GetAhorcadoDificultad(int dificultad)
         {
-            
             var ahorcados = await (conexion.Cliente.From<Ahorcado>().Where(x => x.Dificultad == dificultad).Get());
             return ahorcados.Models;
         }
