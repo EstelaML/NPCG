@@ -1,20 +1,19 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.Animation;
-using preguntaods.Services;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using Android.Database.Sqlite;
-using preguntaods.ViewModels;
+using System.Linq;
 using System.Threading.Tasks;
-using Android.OS;
+using Android.Animation;
+using Android.App;
 using Android.Content;
-using static Android.Graphics.Path;
+using Android.OS;
+using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using System.Reflection.Emit;
+using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
+using preguntaods.ViewModels;
 
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
     public class UserInterfaceAhorcado : UserInterface
     {

@@ -3,7 +3,9 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.Entities;
+using preguntaods.BusinessLogic.Partida;
+using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Partida.UI_impl;
 
 namespace preguntaods.ViewModels
 {

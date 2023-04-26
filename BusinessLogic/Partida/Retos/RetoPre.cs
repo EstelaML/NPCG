@@ -1,8 +1,9 @@
-﻿using preguntaods.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
 
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Partida.Retos
 {
     public class RetoPre : Reto
     {

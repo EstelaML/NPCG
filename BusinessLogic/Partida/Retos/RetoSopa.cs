@@ -1,4 +1,4 @@
-﻿namespace preguntaods.Entities
+﻿namespace preguntaods.BusinessLogic.Partida.Retos
 {
     public class RetoSopa : Reto
     {

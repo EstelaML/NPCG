@@ -1,16 +1,17 @@
-﻿using Android.Animation;
+﻿using System;
+using System.Threading.Tasks;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using preguntaods.Services;
-using System;
-using System.Threading.Tasks;
-using preguntaods.ViewModels;
-using preguntaods.Entities;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
+using preguntaods.ViewModels;
 
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
     public class UserInterfacePregunta : UserInterface
     {

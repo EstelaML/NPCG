@@ -1,6 +1,7 @@
 ﻿using Android.App;
+using preguntaods.BusinessLogic.Partida.Retos;
 
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
     public class UserInterfaceSopa : UserInterface
     {

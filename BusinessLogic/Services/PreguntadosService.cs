@@ -1,16 +1,12 @@
-﻿using Android.Hardware.Camera2;
-using Java.Util;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 
-namespace preguntaods.Services
+namespace preguntaods.BusinessLogic.Services
 {
     public class PreguntadosService : IPreguntadosService
     {

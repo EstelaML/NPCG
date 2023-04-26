@@ -1,12 +1,12 @@
-﻿using preguntaods.Entities;
-using preguntaods.Persistencia;
-using preguntaods.Persistencia.Repository;
-using Supabase.Gotrue;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.Entities;
+using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
+using Supabase.Gotrue;
 
-namespace preguntaods.Services
+namespace preguntaods.BusinessLogic.Services
 {
     public class Facade : IFacade
     {

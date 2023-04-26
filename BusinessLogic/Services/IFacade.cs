@@ -1,8 +1,8 @@
-﻿using preguntaods.Entities;
+﻿using System.Threading.Tasks;
+using preguntaods.Entities;
 using Supabase.Gotrue;
-using System.Threading.Tasks;
 
-namespace preguntaods.Services
+namespace preguntaods.BusinessLogic.Services
 {
     public interface IFacade
     {

@@ -1,8 +1,9 @@
-﻿using preguntaods.Services;
-using System;
+﻿using System;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Services;
 
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Partida
 {
     public class PartidaBuilder : IPartidaBuilder
     {

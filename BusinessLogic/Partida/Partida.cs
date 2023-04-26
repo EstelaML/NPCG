@@ -1,12 +1,16 @@
-﻿using Android.Content;
-using Android.Widget;
-using preguntaods.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using preguntaods.ViewModels;
+using Android.Content;
+using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-namespace preguntaods.Entities
+using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Partida.UI_impl;
+using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
+using preguntaods.ViewModels;
+
+namespace preguntaods.BusinessLogic.Partida
 {
     public class Partida
     {

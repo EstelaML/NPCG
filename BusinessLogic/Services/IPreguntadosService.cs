@@ -1,7 +1,7 @@
-﻿using preguntaods.Entities;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using preguntaods.Entities;
 
-namespace preguntaods.Services
+namespace preguntaods.BusinessLogic.Services
 {
     public interface IPreguntadosService
     {
