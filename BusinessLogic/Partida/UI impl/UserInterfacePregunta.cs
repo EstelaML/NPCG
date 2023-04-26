@@ -149,7 +149,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                 _ => puntuacion
             };
 
-            textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
+            //textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
 
             correcta = pregunta.Correcta;
 
