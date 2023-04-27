@@ -73,37 +73,34 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
-            if (passwordCorrect && emailCorrect)
-            {
-                if (email.Text != null && !email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
-                if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
-                try
-                {
-                    var userAux = await fachada.SignUpAsync(email.Text, password.Text);
-                    if (userAux != null)
-                    {
-                        var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
-                        await fachada.NewUsuario(user);
+            if (!passwordCorrect || !emailCorrect) return;
+            if (email.Text != null && !email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
+            if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
 
-                        // se registra
-                        // que inicie sesión
-                        var i = new Intent(this, typeof(InicioSesionViewModel));
-                        StartActivity(i);
-                    }
-                    else
-                    {
-                        error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
-                    }
-                }
-                catch (Supabase.Gotrue.RequestException)
+            try
+            {
+                var userAux = await fachada.SignUpAsync(email.Text, password.Text);
+
+                if (userAux != null)
                 {
-                    error.Text = "La contraseña debe estar formada como mínimo de 6 caráceteres";
+                    var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
+                    await fachada.NewUsuario(user);
+
+                    var i = new Intent(this, typeof(InicioSesionViewModel));
+                    StartActivity(i);
                 }
-                catch (Exception)
+                else
                 {
-                    //await fachada.LogoutAsync();
                     error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
                 }
+            }
+            catch (Supabase.Gotrue.RequestException)
+            {
+                error.Text = "La contraseña debe estar formada como mínimo de 8 caráceteres";
+            }
+            catch (Exception)
+            {
+                error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
             }
         }
 
