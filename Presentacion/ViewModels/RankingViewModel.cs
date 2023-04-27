@@ -2,7 +2,7 @@
 using Android.OS;
 using AndroidX.AppCompat.App;
 
-namespace preguntaods.ViewModels
+namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class RankingViewModel : AppCompatActivity

@@ -1,14 +1,14 @@
-﻿using Android.Animation;
+﻿using System;
+using Android.Animation;
 using Android.App;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Partida.UI_impl;
-using System;
+using preguntaods.Presentacion.UI_impl;
 
-namespace preguntaods.ViewModels
+namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class VistaPartidaViewModel : AppCompatActivity
