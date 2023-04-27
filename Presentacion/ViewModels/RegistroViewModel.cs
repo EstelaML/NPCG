@@ -17,6 +17,7 @@ namespace preguntaods.Presentacion.ViewModels
         private EditText password;
         private EditText email;
         private EditText password2;
+        private bool userCorrect;
         private bool passwordCorrect;
         private bool emailCorrect;
         private Button registroB;
@@ -36,11 +37,13 @@ namespace preguntaods.Presentacion.ViewModels
 
             passwordCorrect = false;
             emailCorrect = false;
+            userCorrect = false;
 
             var atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
 
             username = FindViewById<EditText>(Resource.Id.nombreUsuario);
+            if (username != null) username.TextChanged += User_TextChanged;
 
             email = FindViewById<EditText>(Resource.Id.correo);
             if (email != null) email.TextChanged += Email_TextChanged;
@@ -54,6 +57,12 @@ namespace preguntaods.Presentacion.ViewModels
 
             registroB = FindViewById<Button>(Resource.Id.registroB);
             if (registroB != null) registroB.Click += Registrar;
+        }
+
+        private void User_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        {
+            userCorrect = true;
+            error.Text = "";
         }
 
         private void Email_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
@@ -73,9 +82,34 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
+            // Locks a pasar para el registro
+
+            // Si ha sido incorrecta, que se haya cambiado
             if (!passwordCorrect || !emailCorrect) return;
-            if (email.Text != null && !email.Text.Contains("@gmail.com")) { error.Text = "Elija un correo electrónico válido"; emailCorrect = false; return; }
-            if (password.Text != password2.Text) { error.Text = "Las contraseñas no coinciden"; passwordCorrect = false; return; }
+
+            // El correo contenga @gmail.com
+            if (email.Text != null && !email.Text.Contains("@gmail.com"))
+            {
+                error.Text = "Elija un correo electrónico válido"; 
+                emailCorrect = false; 
+                return;
+            }
+            
+            // Las 2 contraseñas sean iguales
+            if (password.Text != password2.Text)
+            {
+                error.Text = "Las contraseñas no coinciden"; 
+                passwordCorrect = false; 
+                return;
+            }
+
+            // El usuario no está en la base de datos registrado
+
+            if (userCorrect && fachada.ComprobarUsuario(username.Text).Result) { 
+                error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
+                userCorrect = false;
+                return;
+            }
 
             try
             {
@@ -96,7 +130,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
             catch (Supabase.Gotrue.RequestException)
             {
-                error.Text = "La contraseña debe estar formada como mínimo de 8 caráceteres";
+                error.Text = "La contraseña debe estar formada como mínimo de 8 caracteres";
             }
             catch (Exception)
             {
@@ -108,7 +142,7 @@ namespace preguntaods.Presentacion.ViewModels
         {
             sonido.EjecutarSonido();
 
-            Intent i = new Intent(this, typeof(InicioSesionViewModel));
+            var i = new Intent(this, typeof(InicioSesionViewModel));
             StartActivity(i);
         }
     }

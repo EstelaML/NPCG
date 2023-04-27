@@ -1,4 +1,5 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using System.Linq;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
@@ -88,6 +89,13 @@ namespace preguntaods.BusinessLogic.Services
                         break;
                 }
             }
+        }
+
+        public async Task<bool> ComprobarUsuario(string nombre)
+        {
+            var respuesta = await repositorioUser.GetAll();
+
+            return respuesta.All(u => !u.Nombre.Equals(nombre));
         }
 
         #endregion Usuario

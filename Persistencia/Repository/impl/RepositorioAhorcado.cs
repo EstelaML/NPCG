@@ -55,13 +55,9 @@ namespace preguntaods.Persistencia.Repository.impl
             var preguntasHechas = retos?.AhorcadosRealizados?.ToList();
             preguntas = preguntasHechas != null ? preguntas.Where(pregunta => pregunta.Id != null && !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
-            if (preguntas.Count < 5)
-            {
-                repositorioUser.UpdateAhorcadoAcertado("", null, user);
-                return response.Models.ToList();
-            }
-
-            return preguntas;
+            if (preguntas.Count >= 5) return preguntas;
+            repositorioUser.UpdateAhorcadoAcertado("", null, user);
+            return response.Models.ToList();
 
         }
 
