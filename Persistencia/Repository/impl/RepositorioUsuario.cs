@@ -38,6 +38,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdatePreguntaAcertada(string a, int[] preguntas, Usuario usuario)
         {
+            preguntas ??= new int[0];
             var id = (int)usuario.Id;
             var update = await conexion.Cliente
                      .From<RetosRealizados>()
@@ -48,6 +49,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdateAhorcadoAcertado(string a, int[] preguntas, Usuario usuario)
         {
+            preguntas ??= new int[0];
             var id = (int)usuario.Id;
             var update = await conexion.Cliente
                      .From<RetosRealizados>()
