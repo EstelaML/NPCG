@@ -366,6 +366,8 @@ namespace preguntaods.Presentacion.UI_impl
             {
                 case true when !fin:
                     {
+                        sonido.SetEstrategia(new EstrategiaSonidoAcierto(), activity);
+                        sonido.EjecutarSonido();
                         titulo = "Felicitaciones";
                         mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
@@ -374,6 +376,8 @@ namespace preguntaods.Presentacion.UI_impl
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
                             tcs.TrySetResult(true);
+
+                            
 
                             // sigue generando pregunta
                         });
@@ -413,6 +417,8 @@ namespace preguntaods.Presentacion.UI_impl
                     }
                 case false when !fin:
                     {
+                        sonido.SetEstrategia(new EstrategiaSonidoError(), activity);
+                        sonido.EjecutarSonido();
                         // sumar los consolidados
                         titulo = "Vuelve a intentarlo";
                         mensaje = $"Tienes {puntuacionTotal} puntos.";
