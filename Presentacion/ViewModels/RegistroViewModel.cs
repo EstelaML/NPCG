@@ -105,10 +105,15 @@ namespace preguntaods.Presentacion.ViewModels
 
             // El usuario no está en la base de datos registrado
 
-            if (userCorrect && fachada.ComprobarUsuario(username.Text).Result) { 
-                error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
-                userCorrect = false;
-                return;
+            if (userCorrect)
+            {
+                var respuesta = await fachada.ComprobarUsuario(username.Text);
+                if (respuesta == false)
+                {
+                    error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
+                    userCorrect = false;
+                    return;
+                }
             }
 
             try
