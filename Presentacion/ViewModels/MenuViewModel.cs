@@ -1,13 +1,13 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
-using System;
 
-namespace preguntaods.ViewModels
+namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "", Theme = "@style/AppTheme")]
     public class MenuViewModel : AppCompatActivity

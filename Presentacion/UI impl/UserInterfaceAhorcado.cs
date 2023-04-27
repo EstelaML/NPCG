@@ -1,4 +1,8 @@
-﻿using Android.Animation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -7,14 +11,14 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
-using preguntaods.ViewModels;
+using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static Android.Provider.CallLog;
 
-namespace preguntaods.BusinessLogic.Partida.UI_impl
+namespace preguntaods.Presentacion.UI_impl
 {
     public class UserInterfaceAhorcado : UserInterface
     {
