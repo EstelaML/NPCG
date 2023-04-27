@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Android.Content;
+﻿using Android.Content;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Partida.UI_impl;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
-using preguntaods.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using preguntaods.Presentacion.UI_impl;
+using preguntaods.Presentacion.ViewModels;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -126,8 +126,9 @@ namespace preguntaods.BusinessLogic.Partida
             this.ptsTotales = newPtsTotales;
             this.ptsConsolidados = newPtsConsolidados;
 
-            if (contadorRetoSiguiente == 9) { 
-                ((VistaPartidaViewModel)activity).ConsolidarUltimaPregunta(); 
+            if (contadorRetoSiguiente == 9)
+            {
+                ((VistaPartidaViewModel)activity).ConsolidarUltimaPregunta();
             }
 
             if (newFallos < 2 && contadorRetoSiguiente != listaRetos.Count - 2)
@@ -139,10 +140,12 @@ namespace preguntaods.BusinessLogic.Partida
                         contadorRetoSiguiente++;
                         falloFacil = true;
                         break;
+
                     case 1 when !falloFacil && contadorRetoSiguiente == 7:
                         retoActual = listaRetos[11];
                         contadorRetoSiguiente++;
                         break;
+
                     default:
                         retoActual = listaRetos[contadorRetoSiguiente];
                         contadorRetoSiguiente++;
@@ -210,8 +213,8 @@ namespace preguntaods.BusinessLogic.Partida
             alertBuilder.SetTitle(titulo);
             alertBuilder.SetPositiveButton("Aceptar", (o, args) =>
             {
-            userInterface.FinReto();
-            sonido.PararSonido();
+                userInterface.FinReto();
+                sonido.PararSonido();
 
                 if (((VistaPartidaViewModel)activity).GetConsolidado())
                 {
@@ -227,11 +230,11 @@ namespace preguntaods.BusinessLogic.Partida
                     });
                     dialogoMal.Create()?.Show();
                 }
-                else {
+                else
+                {
                     var i = new Intent(activity, typeof(MenuViewModel));
                     activity.StartActivity(i);
                 }
-
             });
             alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
             {

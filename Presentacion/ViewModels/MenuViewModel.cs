@@ -7,7 +7,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 
-namespace preguntaods.ViewModels
+namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "", Theme = "@style/AppTheme")]
     public class MenuViewModel : AppCompatActivity

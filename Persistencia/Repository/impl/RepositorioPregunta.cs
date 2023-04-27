@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 
 namespace preguntaods.Persistencia.Repository.impl
@@ -8,10 +10,12 @@ namespace preguntaods.Persistencia.Repository.impl
     public class RepositorioPregunta : Repository<Pregunta>
     {
         private SingletonConexion conexion;
+        private readonly RepositorioUsuario repositorioUser;
 
         public RepositorioPregunta()
         {
             conexion = SingletonConexion.GetInstance();
+            repositorioUser = new RepositorioUsuario();
         }
 
         public async Task<List<Pregunta>> GetByDificultad(int dificultad)
@@ -26,19 +30,50 @@ namespace preguntaods.Persistencia.Repository.impl
             //
             //return preguntas ?? new List<Pregunta>();
 
-            var id = (conexion.Usuario.Id);
-            var task1 = (conexion.Cliente.From<Usuario>().Where(x => x.Uuid == id).Single());
+            // get lista de retos 
+
+            var uuid = (conexion.Usuario.Id);
+            var user = await repositorioUser.GetUserByUUid(uuid);
+            var id = (int) user?.Id;
+            var task1 = (conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single());
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
             List<Task> tareas = new List<Task> { task1, task2 };
             await Task.WhenAll(tareas);
 
-            var usuario = task1.Result;
+            var retos = task1.Result;
             var response = task2.Result;
             var preguntas = response.Models.ToList();
-            var preguntasHechas = usuario?.PreguntasRealizadas?.ToList();
-            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => pregunta.Id != null && !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
+            var preguntasHechas = retos?.PreguntasRealizadas?.ToList();
+            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
+
+            if (preguntas.Count < 5) {
+                repositorioUser.UpdatePreguntaAcertada("", null, user);
+                return response.Models.ToList();
+            }
 
             return preguntas;
+        }
+
+        public async Task AñadirPreguntaRealizada(int id, Reto reto) 
+        {
+            // cogemos del usuario las preguntas acertadas ya
+            var pregunta = (reto as RetoPre).GetPregunta();
+            var a = conexion.Usuario.Id;
+            var usuario = await repositorioUser.GetUserByUUid(a);
+            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a, reto, usuario);
+            if (preguntas != null)
+            {
+                // redimensionas el array
+                Array.Resize(ref preguntas, preguntas.Length + 1);
+                // agregar el nuevo valor al final del arreglo
+                preguntas[^1] = (int)pregunta.Id;
+                await repositorioUser.UpdatePreguntaAcertada(a, preguntas, usuario);
+            }
+            else
+            {
+                int[] preguntass = { (int) pregunta.Id };
+                await repositorioUser.UpdatePreguntaAcertada(a, preguntass, usuario);
+            }
         }
     }
 }

@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\Entities\Ahorcado.cs" />
+    <Compile Include="BusinessLogic\Entities\RetosRealizados.cs" />
+    <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoLetraAcierto.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoVictoria.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\Sonido.cs" />
@@ -81,11 +83,11 @@
     <Compile Include="BusinessLogic\Partida\PartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\IPartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\PartidaDirector.cs" />
-    <Compile Include="BusinessLogic\Partida\UI impl\UserInterfaceFrase.cs" />
-    <Compile Include="BusinessLogic\Partida\UI impl\UserInterfaceSopa.cs" />
-    <Compile Include="BusinessLogic\Partida\UI impl\UserInterfaceAhorcado.cs" />
-    <Compile Include="BusinessLogic\Partida\UI impl\UserInterfacePregunta.cs" />
-    <Compile Include="BusinessLogic\Partida\UI impl\UserInterface.cs" />
+    <Compile Include="Presentacion\UI impl\UserInterfaceFrase.cs" />
+    <Compile Include="Presentacion\UI impl\UserInterfaceSopa.cs" />
+    <Compile Include="Presentacion\UI impl\UserInterfaceAhorcado.cs" />
+    <Compile Include="Presentacion\UI impl\UserInterfacePregunta.cs" />
+    <Compile Include="Presentacion\UI impl\UserInterface.cs" />
     <Compile Include="BusinessLogic\Entities\Usuario.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoReloj.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoAcierto.cs" />
@@ -95,23 +97,24 @@
     <Compile Include="BusinessLogic\Services\IPreguntadosService.cs" />
     <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
     <Compile Include="Persistencia\Entities\Ahorcado.cs" />
+    <Compile Include="Persistencia\Entities\RetosRealizados.cs" />
     <Compile Include="Persistencia\Entities\Usuario.cs" />
     <Compile Include="Persistencia\Entities\IEntity.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioAhorcado.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
-    <Compile Include="ViewModels\RankingViewModel.cs" />
-    <Compile Include="ViewModels\VistaPartidaViewModel.cs" />
-    <Compile Include="ViewModels\InicioSesionViewModel.cs" />
-    <Compile Include="ViewModels\RegistroViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\RankingViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\VistaPartidaViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\InicioSesionViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\RegistroViewModel.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />
     <Compile Include="BusinessLogic\Entities\Pregunta.cs" />
     <Compile Include="BusinessLogic\Services\IFacade.cs" />
     <Compile Include="BusinessLogic\Services\Facade.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
     <Compile Include="Persistencia\Entities\Pregunta.cs" />
-    <Compile Include="ViewModels\MenuViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\MenuViewModel.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />
     <Compile Include="Persistencia\Repository\impl\Repositorycs.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -360,6 +363,10 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\vistaRanking.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\letra_correcta_sonido.mp3" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.

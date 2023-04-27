@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Services
 {
@@ -12,11 +12,14 @@ namespace preguntaods.BusinessLogic.Services
     {
         private readonly SingletonConexion conexion;
         private readonly RepositorioUsuario repositorioUser;
-
+        private readonly RepositorioAhorcado repositorioAhorcado;
+        private readonly RepositorioPregunta repositorioPregunta;
         public Facade()
         {
             conexion = SingletonConexion.GetInstance();
             repositorioUser = new RepositorioUsuario();
+            repositorioAhorcado = new RepositorioAhorcado();
+            repositorioPregunta = new RepositorioPregunta();
         }
 
         #region Usuario
@@ -34,7 +37,7 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task<User> SignUpAsync(string correo, string password)
         {
-            var session = await conexion.Cliente.Auth.SignUp(correo, password); 
+            var session = await conexion.Cliente.Auth.SignUp(correo, password);
             conexion.Usuario = session?.User;
             return session?.User;
         }
@@ -70,24 +73,17 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task GuardarPregunta(Reto reto)
         {
-            var pregunta = ((RetoPre)reto).GetPregunta();
-            var a = conexion.Usuario.Id;
-            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a);
-            if (preguntas != null)
+            // obtengo el id del usuario
+            var usuario = await GetUsuarioLogged();
+            var id = (int)usuario?.Id;
+            // añado a la BD ese reto
+            if (reto is RetoPre)
             {
-                // redimensionas el array
-                Array.Resize(ref preguntas, preguntas.Length + 1);
-                // agregar el nuevo valor al final del arreglo
-                if (pregunta.Id != null) preguntas[^1] = (int)pregunta.Id;
-                await repositorioUser.UpdatePreguntaAcertada(a, preguntas);
+                await repositorioPregunta.AñadirPreguntaRealizada(id, reto);
             }
-            else
+            else if (reto is RetoAhorcado)
             {
-                if (pregunta.Id != null)
-                {
-                    int[] preguntass = { (int)pregunta.Id };
-                    await repositorioUser.UpdatePreguntaAcertada(a, preguntass);
-                }
+                await repositorioAhorcado.AñadirAhorcadoRealizado(id, reto);
             }
         }
 

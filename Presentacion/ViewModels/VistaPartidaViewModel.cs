@@ -6,9 +6,9 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Partida.UI_impl;
+using preguntaods.Presentacion.UI_impl;
 
-namespace preguntaods.ViewModels
+namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class VistaPartidaViewModel : AppCompatActivity
@@ -40,7 +40,7 @@ namespace preguntaods.ViewModels
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
             animation = ObjectAnimator.OfInt(progressBar, "ProgressBar", 100, 0);
             if (animation == null) return;
-            animation.SetDuration(4500); //volver a 5 segundos en caso de que de error al cargar la partida
+            animation.SetDuration(6000); //volver a 5 segundos en caso de que de error al cargar la partida
             animation.Start();
 
             // Cuando termine el tiempo de carga
@@ -111,10 +111,10 @@ namespace preguntaods.ViewModels
             partida.EventoConsolidarBoton(new object(), EventArgs.Empty, puntosConsolidados);
         }
 
-        public void ConsolidarUltimaPregunta() {
+        public void ConsolidarUltimaPregunta()
+        {
             consolidado = true;
         }
-
 
         public bool GetConsolidado()
         {

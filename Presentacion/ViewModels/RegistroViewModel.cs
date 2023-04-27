@@ -8,7 +8,7 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 
-namespace preguntaods.ViewModels
+namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "Activity2")]
     public class RegistroViewModel : AppCompatActivity
@@ -90,7 +90,8 @@ namespace preguntaods.ViewModels
                         var i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
                     }
-                    else {
+                    else
+                    {
                         error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
                     }
                 }

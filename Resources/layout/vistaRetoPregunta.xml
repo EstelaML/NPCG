@@ -60,15 +60,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="24sp"
             android:orientation="vertical">
-
-            <TextView
-                android:text=""
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:gravity="left"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView1" />
 
             <TextView
                 android:text=""
@@ -110,6 +103,7 @@
             android:layout_gravity="center"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginRight="11sp"
             android:adjustViewBounds="true"
             android:contentDescription=""
             android:id="@+id/heart2"/>

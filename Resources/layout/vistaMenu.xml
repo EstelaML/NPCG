@@ -32,7 +32,7 @@
                 android:layout_width="140sp"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                android:id="@+id/partidaB" 
+                android:id="@+id/partidaB"
                 tools:ignore="HardcodedText"/>
 
              <Space
@@ -46,7 +46,7 @@
                 android:background="@color/colorPrimary"
                 android:layout_width="140sp"
                 android:layout_height="match_parent"
-                android:id="@+id/ahorcadoB" 
+                android:id="@+id/ahorcadoB"
                 tools:ignore="HardcodedText"/>
 
         </LinearLayout>
@@ -54,7 +54,7 @@
         <Space
         android:layout_width="match_parent"
         android:layout_height="30sp"/>
-        
+
         <LinearLayout
             android:gravity="center"
             android:orientation="horizontal"
@@ -71,7 +71,7 @@
                 android:layout_width="140sp"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimaryDisabled"
-                android:id="@+id/sopaB" 
+                android:id="@+id/sopaB"
                 tools:ignore="HardcodedText"/>
 
              <Space
@@ -85,7 +85,7 @@
                 android:background="@color/colorPrimaryDisabled"
                 android:layout_width="140sp"
                 android:layout_height="match_parent"
-                android:id="@+id/fraseB" 
+                android:id="@+id/fraseB"
                 tools:ignore="HardcodedText"/>
 
         </LinearLayout>
@@ -101,7 +101,7 @@
                 android:background="@color/colorPrimaryDisabled"
                 android:layout_width="140sp"
                 android:layout_height="140sp"
-                android:id="@+id/fiestaB" 
+                android:id="@+id/fiestaB"
                 tools:ignore="HardcodedText"/>
 
     </LinearLayout>
