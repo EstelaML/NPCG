@@ -147,7 +147,7 @@
             android:text="ENERGIAS RENOVABLES"
             android:gravity="center"
             android:padding="20sp"
-            android:textSize="19sp"
+            android:textSize="17sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="360sp"
             android:layout_height="90sp"
@@ -179,52 +179,52 @@
 
                 <Button
                     android:text="Q"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonQ" />
                 <Button
                     android:text="W"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonW" />
                 <Button
                     android:text="E"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonE" />
                 <Button
                     android:text="R"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonR" />
                 <Button
                     android:text="T"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonT" />
                 <Button
                     android:text="Y"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonY" />
                 <Button
                     android:text="U"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonU" />
                 <Button
                     android:text="I"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonI" />
                 <Button
                     android:text="O"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonO" />
                 <Button
                     android:text="P"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonP" />
             </LinearLayout>
@@ -244,52 +244,52 @@
 
                 <Button
                     android:text="A"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonA" />
                 <Button
                     android:text="S"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonS" />
                 <Button
                     android:text="D"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonD" />
                 <Button
                     android:text="F"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonF" />
                 <Button
                     android:text="G"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonG" />
                 <Button
                     android:text="H"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonH" />
                 <Button
                     android:text="J"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonJ" />
                 <Button
                     android:text="K"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonK" />
                 <Button
                     android:text="L"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonL" />
                 <Button
                     android:text="Ñ"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonÑ" />
             </LinearLayout>
@@ -309,37 +309,37 @@
 
                 <Button
                     android:text="Z"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonZ" />
                 <Button
                     android:text="X"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonX" />
                 <Button
                     android:text="C"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonC" />
                 <Button
                     android:text="V"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonV" />
                 <Button
                     android:text="B"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonB" />
                 <Button
                     android:text="N"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonN" />
                 <Button
                     android:text="M"
-                    android:layout_width="40sp"
+                    android:layout_width="35sp"
                     android:layout_height="40sp"
                     android:id="@+id/buttonM" />
             </LinearLayout>

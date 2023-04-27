@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Android.Provider.CallLog;
 
 namespace preguntaods.BusinessLogic.Partida.UI_impl
 {
@@ -169,12 +170,52 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
 
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
             animation.SetDuration(30000 * 4); //30*4 = 2min
+
+            animation.AnimationPause += (sender, e) =>
+            {
+                sonido.SetEstrategia(reloj, activity);
+                sonido.PararSonido();
+            };
+            if (animation == null) return;
+            animation.Update += (sender, e) =>
+            {
+                var playtime = animation.CurrentPlayTime;
+                if (playtime >= 20000 && playtime < 20020)
+                {
+                    sonido.SetEstrategia(reloj, activity);
+                    sonido.EjecutarSonido();
+                }
+            };
+            animation.AnimationEnd += async (sender, e) =>
+            {
+                _fallos++;
+                switch (_fallos)
+                {
+                    case 1:
+                        imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                        break;
+
+                    case 2:
+                        imagenCorazon2.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                        break;
+                }
+
+                sonido.SetEstrategia(reloj, activity);
+                sonido.PararSonido();
+
+                await MostrarAlerta(false, _fallos == 2);
+
+                FinReto();
+                ((VistaPartidaViewModel)activity).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
+            };
+
         }
 
         private async void Letter_Click(object sender, EventArgs e)
         {
             var boton = sender as Button;
             var letra = char.Parse(boton?.Text ?? string.Empty);
+            animation.Pause();
 
             if (palabraAdivinar.Contains(letra))
             {
@@ -350,8 +391,8 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                             // Acciones a realizar cuando quedan 10 segundos o menos
                             if (alertDialog.IsShowing)
                             {
-                                //sonido.SetEstrategia(reloj, _activity);
-                                //sonido.PararSonido();
+                                sonido.SetEstrategia(reloj, activity);
+                                sonido.PararSonido();
                                 alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                             }
                         }, 15000);
@@ -386,8 +427,8 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                             // Acciones a realizar cuando quedan 10 segundos o menos
                             if (alertDialog.IsShowing)
                             {
-                                //sonido.SetEstrategia(reloj, _activity);
-                                //sonido.PararSonido();
+                                sonido.SetEstrategia(reloj, _activity);
+                                sonido.PararSonido();
                                 alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                             }
                         }, 15000);
