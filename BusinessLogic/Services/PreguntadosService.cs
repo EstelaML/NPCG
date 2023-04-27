@@ -1,4 +1,5 @@
-﻿using preguntaods.Entities;
+﻿using Java.Util;
+using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,58 @@ namespace preguntaods.BusinessLogic.Services
 
         #region RetoPregunta
 
+
+        public async Task InitPreguntaList()
+        {
+            _preguntasBajas ??= await repositorioPre.GetByDificultad(Pregunta.DifBaja);
+            _preguntasMedias ??= await repositorioPre.GetByDificultad(Pregunta.DifMedia);
+            var p = await repositorioPre.GetByDificultad(Pregunta.DifAlta);
+            lock (sync)
+            {
+                _preguntasAltas ??= p;
+            }
+        }        
+
+        public Task<Pregunta> SolicitarPregunta(int dificultad)
+        {
+            Pregunta respuesta = null;
+
+            switch (dificultad)
+            {
+                case Pregunta.DifBaja:
+                    {
+                        Random rnd = new Random();
+                        int indiceAleatorio = rnd.NextInt(_preguntasBajas.Count);
+                        respuesta = _preguntasBajas[indiceAleatorio];
+                        _preguntasBajas.Remove(respuesta);
+                        break;
+                    }
+                case Pregunta.DifMedia:
+                    {
+                        Random rnd = new Random();
+                        int indiceAleatorio = rnd.NextInt(_preguntasMedias.Count);
+                        respuesta = _preguntasMedias[indiceAleatorio];
+                        _preguntasMedias.Remove(respuesta);
+
+                        break;
+                    }
+                case Pregunta.DifAlta:
+                    {
+                        Random rnd = new Random();
+                        int indiceAleatorio = rnd.NextInt(_preguntasAltas.Count);
+                        respuesta = _preguntasAltas[indiceAleatorio];
+                        _preguntasAltas.Remove(respuesta);
+                        break;
+                    }
+            }
+
+            return Task.FromResult(respuesta);
+        }
+
+        #endregion RetoPregunta
+
+        #region RetoAhorcado
+
         public async Task InitAhorcadoList()
         {
             _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
@@ -37,17 +90,6 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public async Task InitPreguntaList()
-        {
-            _preguntasBajas ??= await repositorioPre.GetByDificultad(Pregunta.DifBaja);
-            _preguntasMedias ??= await repositorioPre.GetByDificultad(Pregunta.DifMedia);
-            var p = await repositorioPre.GetByDificultad(Pregunta.DifAlta);
-            lock (sync)
-            {
-                _preguntasAltas ??= p;
-            }
-        }
-
         public Task<Ahorcado> SolicitarAhorcado(int dif)
         {
             Ahorcado ahorca = null;
@@ -56,20 +98,26 @@ namespace preguntaods.BusinessLogic.Services
             {
                 case Ahorcado.DifBaja:
                     {
-                        ahorca = _ahorcadoBajo.Last();
+                        Random rnd = new Random();
+                        int indiceAleatorio = rnd.NextInt(_ahorcadoBajo.Count);
+                        ahorca = _ahorcadoBajo[indiceAleatorio];
                         _ahorcadoBajo.Remove(ahorca);
                         break;
                     }
                 case Ahorcado.DifMedia:
                     {
-                        ahorca = _ahorcadoMedio.Last();
+                        Random rnd = new Random();
+                        int indiceAleatorio = rnd.NextInt(_ahorcadoMedio.Count);
+                        ahorca = _ahorcadoMedio[indiceAleatorio];
                         _ahorcadoMedio.Remove(ahorca);
 
                         break;
                     }
                 case Ahorcado.DifAlta:
                     {
-                        ahorca = _ahorcadoAlto.Last();
+                        Random rnd = new Random();
+                        int indiceAleatorio = rnd.NextInt(_ahorcadoAlto.Count);
+                        ahorca = _ahorcadoAlto[indiceAleatorio];
                         _ahorcadoAlto.Remove(ahorca);
                         break;
                     }
@@ -78,36 +126,6 @@ namespace preguntaods.BusinessLogic.Services
             return Task.FromResult(ahorca);
         }
 
-        public Task<Pregunta> SolicitarPregunta(int dificultad)
-        {
-            Pregunta respuesta = null;
-
-            switch (dificultad)
-            {
-                case Pregunta.DifBaja:
-                    {
-                        respuesta = _preguntasBajas.Last();
-                        _preguntasBajas.Remove(respuesta);
-                        break;
-                    }
-                case Pregunta.DifMedia:
-                    {
-                        respuesta = _preguntasMedias.Last();
-                        _preguntasMedias.Remove(respuesta);
-
-                        break;
-                    }
-                case Pregunta.DifAlta:
-                    {
-                        respuesta = _preguntasAltas.Last();
-                        _preguntasAltas.Remove(respuesta);
-                        break;
-                    }
-            }
-
-            return Task.FromResult(respuesta);
-        }
-
-        #endregion RetoPregunta
+        #endregion RetoAhorcado
     }
 }
