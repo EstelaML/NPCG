@@ -29,7 +29,7 @@ namespace preguntaods.Presentacion.UI_impl
         private string correcta;
         private EstrategiaSonidoReloj reloj;
         private int numRetos = 10;
-        private int odsRelacion;
+        private int? odsRelacion;
 
         // UI Elements
         private TextView enunciado;
@@ -139,7 +139,8 @@ namespace preguntaods.Presentacion.UI_impl
 
         private void InterroganteClick(object sender, EventArgs e)
         {
-            ((VistaPartidaViewModel)activity).AbrirApoyo(odsRelacion);
+            if (odsRelacion == null) { ((VistaPartidaViewModel)activity).AbrirApoyo(0); }
+            else ((VistaPartidaViewModel)activity).AbrirApoyo((int)odsRelacion);
         }
 
         public override void SetDatosReto(Reto reto)

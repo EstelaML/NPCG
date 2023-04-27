@@ -31,7 +31,7 @@ namespace preguntaods.Presentacion.UI_impl
         private char[] guionesPalabra;
         private int ronda;
         private int letrasAcertadas;
-
+        private int? odsRelacion;
         // UI
         private ImageView ahorcadoImg;
 
@@ -89,8 +89,8 @@ namespace preguntaods.Presentacion.UI_impl
             barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-
-
+            ImageButton interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            interroganteButton.Click += InterroganteClick;
 
             letrasAcertadas = 0;
             ronda = 1;
@@ -212,7 +212,11 @@ namespace preguntaods.Presentacion.UI_impl
 
         }
 
-
+        private void InterroganteClick(object sender, EventArgs e)
+        {
+            if (odsRelacion >= 1 && odsRelacion <= 17) { ((VistaPartidaViewModel)activity).AbrirApoyo((int)odsRelacion); }
+            else ((VistaPartidaViewModel)activity).AbrirApoyo(0);
+        }
 
         private async void Letter_Click(object sender, EventArgs e)
         {
@@ -275,6 +279,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             var pregunta = (reto as RetoAhorcado);
             Ahorcado a = pregunta?.GetAhorcado();
+            odsRelacion = a.OdsRelacionada;
 
             switch (a?.Dificultad)
             {

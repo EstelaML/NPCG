@@ -18,5 +18,8 @@ namespace preguntaods.Entities
 
         [Column("Dificultad")]
         public int Dificultad { get; set; }
+
+        [Column("OdsRelacionada")]
+        public int? OdsRelacionada { get; set; }
     }
 }

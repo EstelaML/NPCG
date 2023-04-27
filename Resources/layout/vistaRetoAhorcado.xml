@@ -127,9 +127,18 @@
             android:contentDescription=""
             android:id="@+id/ahorcadoImg"/>
 
+        <ImageButton
+                android:src="@drawable/interrogante"
+                android:scaleType="centerInside"
+                android:background="@drawable/m3_tabs_transparent_background"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:id="@+id/interroganteButton"
+                android:contentDescription="?" />
+
         <Space
         android:layout_width="match_parent"
-        android:layout_height="6sp"/>
+        android:layout_height="10sp"/>
 
         <TextView
             android:gravity="center"

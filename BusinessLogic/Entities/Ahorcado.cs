@@ -10,11 +10,12 @@ namespace preguntaods.Entities
         public Ahorcado()
         { }
 
-        public Ahorcado(string enunciado, string palabra, int dif)
+        public Ahorcado(string enunciado, string palabra, int dif, int? ods)
         {
             Enunciado = enunciado;
             Palabra = palabra;
             Dificultad = dif;
+            OdsRelacionada = ods;
         }
     }
 }

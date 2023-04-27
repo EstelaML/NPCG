@@ -123,7 +123,11 @@ namespace preguntaods.Presentacion.ViewModels
         }
 
         public void AbrirApoyo(int ods) {
-            var path = "https://www.fao.org/sustainable-development-goals/goals/goal-" + ods + "/es/";
+            var path = "";
+            if (ods == 0) {
+                path = "https://www.fao.org/sustainable-development-goals/overview/es/";
+
+            } else path = "https://www.fao.org/sustainable-development-goals/goals/goal-" + ods + "/es/";
             var uri = Android.Net.Uri.Parse(path);
             var intent = new Intent(Intent.ActionView, uri);
             intent.SetFlags(ActivityFlags.NewTask);
