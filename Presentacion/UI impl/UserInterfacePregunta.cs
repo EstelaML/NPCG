@@ -303,10 +303,10 @@ namespace preguntaods.Presentacion.UI_impl
 #pragma warning restore CS0618
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (!alertDialog.IsShowing) return;
+                    if (alertDialog != null && !alertDialog.IsShowing) return;
                     sonido.SetEstrategia(reloj, activity);
                     sonido.PararSonido();
-                    alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
+                    alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                 }, 15000);
                 await tcs.Task;
             }
