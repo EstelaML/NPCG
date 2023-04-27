@@ -28,15 +28,10 @@ namespace preguntaods.Presentacion.ViewModels
             if (partida != null) partida.Click += Partida_Click;
             Button ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
             if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
+            Button fiesta = FindViewById<Button>(Resource.Id.fiestaB);
+            if (fiesta != null) fiesta.Click += Fiesta_Click;
         }
 
-        private void Ahorcado_Click(object sender, EventArgs e)
-        {
-            sonido.EjecutarSonido();
-            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
-            i.PutExtra("BOTON_PULSADO", "2");
-            StartActivity(i);
-        }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
@@ -83,6 +78,22 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.EjecutarSonido();
             var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "1");
+            StartActivity(i);
+        }
+
+        private void Ahorcado_Click(object sender, EventArgs e)
+        {
+            sonido.EjecutarSonido();
+            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "2");
+            StartActivity(i);
+        }
+
+        private void Fiesta_Click(object sender, EventArgs e)
+        {
+            sonido.EjecutarSonido();
+            var i = new Android.Content.Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "5");
             StartActivity(i);
         }
     }
