@@ -12,11 +12,6 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static Android.Provider.CallLog;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -28,7 +23,7 @@ namespace preguntaods.Presentacion.UI_impl
         private Facade fachada;
         private EstrategiaSonidoReloj reloj;
         private Sonido sonido;
-        private int _fallos;
+        private int fallos;
         private int puntuacionTotal;
         private int puntuacion;
         private static int _puntosConsolidados;
@@ -103,9 +98,9 @@ namespace preguntaods.Presentacion.UI_impl
             // Initialization of Vars
             reloj = new EstrategiaSonidoReloj();
 
-            if (_fallos == 1)
+            if (fallos == 1)
             {
-                imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
+                imagenCorazon1?.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
 
             #region buttonletters FindByID
@@ -192,8 +187,8 @@ namespace preguntaods.Presentacion.UI_impl
             };
             animation.AnimationEnd += async (sender, e) =>
             {
-                _fallos++;
-                switch (_fallos)
+                fallos++;
+                switch (fallos)
                 {
                     case 1:
                         imagenCorazon1.SetImageResource(Resource.Drawable.icon_emptyHeart);
@@ -207,10 +202,10 @@ namespace preguntaods.Presentacion.UI_impl
                 sonido.SetEstrategia(reloj, activity);
                 sonido.PararSonido();
 
-                await MostrarAlerta(false, _fallos == 2);
+                await MostrarAlerta(false, fallos == 2);
 
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             };
 
         }
@@ -247,24 +242,25 @@ namespace preguntaods.Presentacion.UI_impl
                 if (guionesPalabra.Contains('_')) return;
                 puntuacionTotal += puntuacion;
                 await MostrarAlerta(true, false);
-                (activity as VistaPartidaViewModel).GuardarPreguntaAcertada();
+                ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
                 FinReto();
-                (activity as VistaPartidaViewModel).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
             else
             {
                 if (boton != null) boton.Enabled = false;
-                string path = "ahorcado_" + ++ronda;
-                var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
-                ahorcadoImg.SetImageResource(idDeImagen);
-
-                if (ronda == 10)
+                var path = "ahorcado_" + ++ronda;
+                if (activity.Resources != null)
                 {
-                    //_puntuacionTotal -= puntuacion * 2;
-                    _fallos++;
-                    await MostrarAlerta(false, _fallos == 2);
-                    (activity as VistaPartidaViewModel).RetoSiguiente(_fallos, puntuacionTotal, _puntosConsolidados);
+                    var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
+                    ahorcadoImg.SetImageResource(idDeImagen);
                 }
+
+                if (ronda != 10) return;
+                //_puntuacionTotal -= puntuacion * 2;
+                fallos++;
+                await MostrarAlerta(false, fallos == 2);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
         }
 
@@ -284,13 +280,16 @@ namespace preguntaods.Presentacion.UI_impl
             }
 
             var path = "ahorcado_" + ronda;
-            var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
-            ahorcadoImg.SetImageResource(idDeImagen);
+            if (activity.Resources != null)
+            {
+                var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
+                ahorcadoImg.SetImageResource(idDeImagen);
+            }
 
             enunciado.Text = a?.Enunciado;
-            palabraAdivinar = a.Palabra;
+            palabraAdivinar = a?.Palabra;
 
-            var guiones = palabraAdivinar.Replace(" ", "  ").Replace("A", "_ ").Replace("B", "_ ").Replace("C", "_ ")
+            var guiones = palabraAdivinar?.Replace(" ", "  ").Replace("A", "_ ").Replace("B", "_ ").Replace("C", "_ ")
                                                  .Replace("D", "_ ").Replace("E", "_ ").Replace("F", "_ ")
                                                  .Replace("A", "_ ").Replace("B", "_ ").Replace("C", "_ ")
                                                  .Replace("G", "_ ").Replace("H", "_ ").Replace("I", "_ ")
@@ -302,7 +301,7 @@ namespace preguntaods.Presentacion.UI_impl
                                                  .Replace("X", "_ ").Replace("Y", "_ ").Replace("Z", "_ ");
             palabra.Text = guiones;
 
-            guionesPalabra = guiones.ToCharArray();
+            guionesPalabra = guiones?.ToCharArray();
         }
 
         public override void FinReto()
@@ -341,7 +340,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this._fallos = newFallos;
+            this.fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
             
@@ -393,7 +392,7 @@ namespace preguntaods.Presentacion.UI_impl
 #pragma warning restore CS0618
                         {
                             // Acciones a realizar cuando quedan 10 segundos o menos
-                            if (alertDialog.IsShowing)
+                            if (alertDialog is { IsShowing: true })
                             {
                                 sonido.SetEstrategia(reloj, activity);
                                 sonido.PararSonido();
@@ -429,12 +428,10 @@ namespace preguntaods.Presentacion.UI_impl
 #pragma warning restore CS0618
                         {
                             // Acciones a realizar cuando quedan 10 segundos o menos
-                            if (alertDialog.IsShowing)
-                            {
-                                sonido.SetEstrategia(reloj, activity);
-                                sonido.PararSonido();
-                                alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
-                            }
+                            if (!(alertDialog is { IsShowing: true })) return;
+                            sonido.SetEstrategia(reloj, activity);
+                            sonido.PararSonido();
+                            alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                         }, 15000);
                         await tcs.Task;
                         break;

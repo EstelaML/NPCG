@@ -155,14 +155,20 @@ namespace preguntaods.Presentacion.UI_impl
 
             if (pregunta.OdsRelacionada == null)
             {
-                var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
-                imagenOds.SetImageResource(idDeImagen);
+                if (activity.Resources != null)
+                {
+                    var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
+                    imagenOds.SetImageResource(idDeImagen);
+                }
             }
             else
             {
                 var nombreDeImagen = "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
-                var idDeImagen = activity.Resources.GetIdentifier(nombreDeImagen, "drawable", activity.PackageName); // obtener el identificador de recurso correspondiente
-                imagenOds.SetImageResource(idDeImagen);
+                if (activity.Resources != null)
+                {
+                    var idDeImagen = activity.Resources.GetIdentifier(nombreDeImagen, "drawable", activity.PackageName); // obtener el identificador de recurso correspondiente
+                    imagenOds.SetImageResource(idDeImagen);
+                }
             }
             animation.Start();
         }
@@ -175,7 +181,7 @@ namespace preguntaods.Presentacion.UI_impl
             bool acierto;
             bool condicion;
 
-            if (boton.Text.Equals(correcta))
+            if (boton?.Text != null && boton.Text.Equals(correcta))
             {
                 sonido.SetEstrategia(new EstrategiaSonidoAcierto(), activity);
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
@@ -186,7 +192,7 @@ namespace preguntaods.Presentacion.UI_impl
             else
             {
                 sonido.SetEstrategia(new EstrategiaSonidoError(), activity);
-                boton.SetBackgroundResource(Resource.Drawable.style_preFallo);
+                boton?.SetBackgroundResource(Resource.Drawable.style_preFallo);
 
                 puntuacionTotal -= puntuacion * 2;
                 if (puntuacionTotal < 0) puntuacionTotal = 0;
@@ -263,10 +269,10 @@ namespace preguntaods.Presentacion.UI_impl
                 new Handler().PostDelayed(() =>
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (!alertDialog.IsShowing) return;
+                    if (alertDialog is { IsShowing: false }) return;
                     sonido.SetEstrategia(reloj, activity);
                     sonido.PararSonido();
-                    alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
+                    alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                 }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
                 await tcs.Task;
@@ -290,7 +296,7 @@ namespace preguntaods.Presentacion.UI_impl
                 });
                 alertBuilder.SetCancelable(false);
                 var alertDialog = alertBuilder.Create();
-                alertDialog.Show();
+                alertDialog?.Show();
 
 #pragma warning disable CS0618
                 new Handler().PostDelayed(() =>

@@ -3,7 +3,6 @@ using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
-using System;
 using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Services
@@ -75,15 +74,19 @@ namespace preguntaods.BusinessLogic.Services
         {
             // obtengo el id del usuario
             var usuario = await GetUsuarioLogged();
-            var id = (int)usuario?.Id;
-            // añado a la BD ese reto
-            if (reto is RetoPre)
+            if (usuario?.Id != null)
             {
-                await repositorioPregunta.AñadirPreguntaRealizada(id, reto);
-            }
-            else if (reto is RetoAhorcado)
-            {
-                await repositorioAhorcado.AñadirAhorcadoRealizado(id, reto);
+                var id = (int)usuario.Id;
+                switch (reto)
+                {
+                    // añado a la BD ese reto
+                    case RetoPre _:
+                        await repositorioPregunta.AñadirPreguntaRealizada(id, reto);
+                        break;
+                    case RetoAhorcado _:
+                        await repositorioAhorcado.AñadirAhorcadoRealizado(id, reto);
+                        break;
+                }
             }
         }
 

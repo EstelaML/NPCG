@@ -1,6 +1,5 @@
-﻿// ReSharper disable once CheckNamespace
-using Android.OS;
-
+﻿
+// ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
     public partial class RetosRealizados

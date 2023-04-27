@@ -34,7 +34,8 @@ namespace preguntaods.Persistencia.Repository.impl
 
             var uuid = (conexion.Usuario.Id);
             var user = await repositorioUser.GetUserByUUid(uuid);
-            var id = (int) user?.Id;
+            if (user?.Id == null) return null;
+            var id = (int) user.Id;
             var task1 = (conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single());
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
             List<Task> tareas = new List<Task> { task1, task2 };
@@ -44,20 +45,17 @@ namespace preguntaods.Persistencia.Repository.impl
             var response = task2.Result;
             var preguntas = response.Models.ToList();
             var preguntasHechas = retos?.PreguntasRealizadas?.ToList();
-            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
+            preguntas = preguntasHechas != null ? preguntas.Where(pregunta => pregunta.Id != null && !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
 
-            if (preguntas.Count < 5) {
-                repositorioUser.UpdatePreguntaAcertada("", null, user);
-                return response.Models.ToList();
-            }
-
-            return preguntas;
+            if (preguntas.Count >= 5) return preguntas;
+            repositorioUser.UpdatePreguntaAcertada("", null, user);
+            return response.Models.ToList();
         }
 
         public async Task AñadirPreguntaRealizada(int id, Reto reto) 
         {
             // cogemos del usuario las preguntas acertadas ya
-            var pregunta = (reto as RetoPre).GetPregunta();
+            var pregunta = ((RetoPre)reto).GetPregunta();
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
             var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a, reto, usuario);
@@ -66,13 +64,16 @@ namespace preguntaods.Persistencia.Repository.impl
                 // redimensionas el array
                 Array.Resize(ref preguntas, preguntas.Length + 1);
                 // agregar el nuevo valor al final del arreglo
-                preguntas[^1] = (int)pregunta.Id;
+                if (pregunta.Id != null) preguntas[^1] = (int)pregunta.Id;
                 await repositorioUser.UpdatePreguntaAcertada(a, preguntas, usuario);
             }
             else
             {
-                int[] preguntass = { (int) pregunta.Id };
-                await repositorioUser.UpdatePreguntaAcertada(a, preguntass, usuario);
+                if (pregunta.Id != null)
+                {
+                    int[] preguntass = { (int) pregunta.Id };
+                    await repositorioUser.UpdatePreguntaAcertada(a, preguntass, usuario);
+                }
             }
         }
     }

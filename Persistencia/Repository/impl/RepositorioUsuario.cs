@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System;
 using System.Threading.Tasks;
-using Java.Util;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
-using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -38,33 +35,40 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdatePreguntaAcertada(string a, int[] preguntas, Usuario usuario)
         {
-            preguntas ??= new int[0];
-            var id = (int)usuario.Id;
-            var update = await conexion.Cliente
-                     .From<RetosRealizados>()
-                     .Where(x => x.Usuario == id)
-                     .Set(x => x.PreguntasRealizadas, preguntas)
-                     .Update();
+            preguntas ??= Array.Empty<int>();
+            if (usuario.Id != null)
+            {
+                var id = (int)usuario.Id;
+                await conexion.Cliente
+                    .From<RetosRealizados>()
+                    .Where(x => x.Usuario == id)
+                    .Set(x => x.PreguntasRealizadas, preguntas)
+                    .Update();
+            }
         }
 
         public async Task UpdateAhorcadoAcertado(string a, int[] preguntas, Usuario usuario)
         {
-            preguntas ??= new int[0];
-            var id = (int)usuario.Id;
-            var update = await conexion.Cliente
-                     .From<RetosRealizados>()
-                     .Where(x => x.Usuario == id)
-                     .Set(x => x.AhorcadosRealizados, preguntas)
-                     .Update();
+            preguntas ??= Array.Empty<int>();
+            if (usuario.Id != null)
+            {
+                var id = (int)usuario.Id;
+                await conexion.Cliente
+                    .From<RetosRealizados>()
+                    .Where(x => x.Usuario == id)
+                    .Set(x => x.AhorcadosRealizados, preguntas)
+                    .Update();
+            }
         }
 
         public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
         {
+            if (usuario.Id == null) return null;
             var id = (int)usuario.Id;
             var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
             if (respuesta == null) 
             {
-                RetosRealizados inser = new RetosRealizados((int)usuario.Id, null, null);
+                var inser = new RetosRealizados((int)usuario.Id, null, null);
                 await conexion.Cliente.From<RetosRealizados>().Insert(inser);
                 return null;
             } 
@@ -76,6 +80,7 @@ namespace preguntaods.Persistencia.Repository.impl
             {
                 return respuesta.AhorcadosRealizados;
             }
+
             return null;
         }
 
