@@ -145,7 +145,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void SetDatosReto(Reto reto)
         {
-            var pregunta = ((RetoPre)reto).GetPregunta();
+            var pregunta = (reto as RetoPre).GetPregunta();
 
             enunciado.Text = pregunta.Enunciado;
             botonPregunta1.Text = pregunta.Respuesta1;
