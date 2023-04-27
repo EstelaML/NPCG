@@ -427,7 +427,7 @@ namespace preguntaods.BusinessLogic.Partida.UI_impl
                             // Acciones a realizar cuando quedan 10 segundos o menos
                             if (alertDialog.IsShowing)
                             {
-                                sonido.SetEstrategia(reloj, _activity);
+                                sonido.SetEstrategia(reloj, activity);
                                 sonido.PararSonido();
                                 alertDialog.GetButton((int)DialogButtonType.Positive).PerformClick();
                             }
