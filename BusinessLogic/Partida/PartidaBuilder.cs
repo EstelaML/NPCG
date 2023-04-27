@@ -19,9 +19,19 @@ namespace preguntaods.BusinessLogic.Partida
         {
             for (var i = 0; i < 12; i++)
             {
-                var random = new Random();
 
-                switch (j) //ampliar conforme se añadan nuevos >> random.Next(1,5)
+                int n = j;
+
+                if (j == 5)
+                {
+
+                    Random random = new Random();
+
+                    n = random.Next(1,3);
+
+                }
+
+                switch (n) //ampliar conforme se añadan nuevos >> random.Next(1,5)
                 {
                     case 1:
                         {
