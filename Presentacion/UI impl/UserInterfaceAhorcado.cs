@@ -90,6 +90,8 @@ namespace preguntaods.Presentacion.UI_impl
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
 
+
+
             letrasAcertadas = 0;
             ronda = 1;
 
@@ -209,6 +211,8 @@ namespace preguntaods.Presentacion.UI_impl
             };
 
         }
+
+
 
         private async void Letter_Click(object sender, EventArgs e)
         {

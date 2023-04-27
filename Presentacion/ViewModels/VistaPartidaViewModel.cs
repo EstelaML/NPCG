@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.Animation;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
@@ -119,6 +120,14 @@ namespace preguntaods.Presentacion.ViewModels
         public bool GetConsolidado()
         {
             return consolidado;
+        }
+
+        public void AbrirApoyo(int ods) {
+            var path = "https://www.fao.org/sustainable-development-goals/goals/goal-" + ods + "/es/";
+            var uri = Android.Net.Uri.Parse(path);
+            var intent = new Intent(Intent.ActionView, uri);
+            intent.SetFlags(ActivityFlags.NewTask);
+            Android.App.Application.Context.StartActivity(intent);
         }
     }
 }

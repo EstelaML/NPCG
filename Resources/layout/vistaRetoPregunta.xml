@@ -130,14 +130,35 @@
             android:gravity="center"
             android:id="@+id/pregunta"/>
 
-        <ImageView
-            android:paddingTop="30dp"
-            android:src="@drawable/abc_ab_share_pack_mtrl_alpha"
-            android:layout_width="170sp"
-            android:layout_height="170sp"
-            android:layout_gravity="center"
-            android:id="@+id/imagenOds"
-            android:contentDescription=""/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/linearLayout1">
+
+            <ImageView
+                android:paddingTop="30dp"
+                android:src="@drawable/abc_ab_share_pack_mtrl_alpha"
+                android:layout_width="170sp"
+                android:layout_height="170sp"
+                android:layout_gravity="center"
+                android:id="@+id/imagenOds"
+                android:contentDescription=""/>
+        
+            <ImageButton
+                android:src="@drawable/interrogante"
+                android:scaleType="centerInside"
+                android:layout_marginTop="19sp"
+                android:background="@drawable/m3_tabs_transparent_background"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:id="@+id/interroganteButton"
+                android:contentDescription="?" />
+
+         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"

@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Android.Animation;
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
@@ -27,6 +29,7 @@ namespace preguntaods.Presentacion.UI_impl
         private string correcta;
         private EstrategiaSonidoReloj reloj;
         private int numRetos = 10;
+        private int odsRelacion;
 
         // UI Elements
         private TextView enunciado;
@@ -69,6 +72,9 @@ namespace preguntaods.Presentacion.UI_impl
             imagenOds = activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
+            ImageButton interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            interroganteButton.Click += InterroganteClick;
+
 
             if (fallos == 1)
             {
@@ -131,6 +137,11 @@ namespace preguntaods.Presentacion.UI_impl
             };
         }
 
+        private void InterroganteClick(object sender, EventArgs e)
+        {
+            ((VistaPartidaViewModel)activity).AbrirApoyo(odsRelacion);
+        }
+
         public override void SetDatosReto(Reto reto)
         {
             var pregunta = ((RetoPre)reto).GetPregunta();
@@ -163,6 +174,7 @@ namespace preguntaods.Presentacion.UI_impl
             }
             else
             {
+                odsRelacion = int.Parse(pregunta.OdsRelacionada);
                 var nombreDeImagen = "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
                 if (activity.Resources != null)
                 {
