@@ -7,11 +7,78 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Diario"/>
+            <Button
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Semanal"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ranking general"
-        android:id="@+id/textRanking"
-        android:textColor="@android:color/black"
-        tools:ignore="HardcodedText"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="75px"
+        android:paddingRight="75px"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ranking general"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/textRanking"
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText"/>
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rankingGridwiew"
+            android:background="@android:color/black"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Texto de ánimo"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:id="@+id/textAnimo"
+            android:textColor="@android:color/black"
+            tools:ignore="HardcodedText"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingVertical="1dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_logo"
+            android:contentDescription="" />
+
+    </LinearLayout>
+        
 </LinearLayout>
