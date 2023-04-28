@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
@@ -86,7 +87,7 @@ namespace preguntaods.Presentacion.ViewModels
             // Locks a pasar para el registro
 
             // Si ha sido incorrecta, que se haya cambiado
-            if (!passwordCorrect || !emailCorrect) return;
+            if (!passwordCorrect || !emailCorrect || !userCorrect) return;
 
             // El correo contenga @gmail.com
             if (email.Text != null && !email.Text.Contains("@gmail.com"))
@@ -108,10 +109,19 @@ namespace preguntaods.Presentacion.ViewModels
 
             if (userCorrect)
             {
-                fachada.ComprobarUsuario(username.Text).RunSynchronously();
+                UserDialogs.Instance.ShowLoading("Comprobando...", MaskType.Clear);
+                var respuesta = await fachada.ComprobarUsuario(username.Text);
 
-                error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
-                userCorrect = false;
+                if (respuesta)
+                {
+
+                    error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
+                    userCorrect = false;
+
+                    UserDialogs.Instance.HideLoading();
+
+                    return;
+                }
             }
 
             try
@@ -123,26 +133,35 @@ namespace preguntaods.Presentacion.ViewModels
                     var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                     await fachada.NewUsuario(user);
 
+                    UserDialogs.Instance.HideLoading();
+
                     var i = new Intent(this, typeof(InicioSesionViewModel));
                     StartActivity(i);
                 }
                 else
                 {
+                    UserDialogs.Instance.HideLoading();
+
                     error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
                 }
             }
             catch (Supabase.Gotrue.RequestException)
             {
+                UserDialogs.Instance.HideLoading();
+
                 error.Text = "La contraseña debe estar formada como mínimo de 8 caracteres";
             }
             catch (Exception)
             {
+                UserDialogs.Instance.HideLoading();
+
                 error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
             }
         }
 
         private void Atras(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(InicioSesionViewModel));
