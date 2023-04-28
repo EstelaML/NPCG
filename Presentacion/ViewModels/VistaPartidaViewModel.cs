@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Diagnostics;
 using Android.Animation;
 using Android.App;
 using Android.Content;
+using Android.Hardware.Usb;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Presentacion.UI_impl;
+using static Android.Icu.Text.CaseMap;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -116,22 +120,40 @@ namespace preguntaods.Presentacion.ViewModels
         {
             consolidado = true;
         }
-
         public bool GetConsolidado()
         {
             return consolidado;
         }
 
         public void AbrirApoyo(int ods) {
-            var path = "";
-            if (ods == 0) {
-                path = "https://www.fao.org/sustainable-development-goals/overview/es/";
+            var alertBuilder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
 
-            } else path = "https://www.fao.org/sustainable-development-goals/goals/goal-" + ods + "/es/";
-            var uri = Android.Net.Uri.Parse(path);
-            var intent = new Intent(Intent.ActionView, uri);
-            intent.SetFlags(ActivityFlags.NewTask);
-            Android.App.Application.Context.StartActivity(intent);
+            alertBuilder.SetMessage("El tiempo no parará");
+            alertBuilder.SetTitle("¿Estás seguro?");
+            alertBuilder.SetPositiveButton("Aceptar", (o, args) =>
+            {
+                var path = "";
+                if (ods == 0)
+                {
+                    path = "https://www.fao.org/sustainable-development-goals/overview/es/";
+
+                }
+                else path = "https://www.fao.org/sustainable-development-goals/goals/goal-" + ods + "/es/";
+                var uri = Android.Net.Uri.Parse(path);
+                var intent = new Intent(Intent.ActionView, uri);
+                intent.SetFlags(ActivityFlags.NewTask);
+                Android.App.Application.Context.StartActivity(intent);
+            });
+            alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
+            {
+
+            });
+            alertBuilder.SetCancelable(false);
+
+            var alertDialog = alertBuilder.Create();
+            if (alertDialog == null) return;
+            alertDialog.Window?.SetDimAmount(0.8f);
+            alertDialog.Show();  
         }
     }
 }
