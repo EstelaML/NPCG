@@ -59,7 +59,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void BuildUserInterface()
         {
-            partida.UpdateUi();
+            //partida.UpdateUi();
         }
 
         public void BuildFacade()
