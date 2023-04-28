@@ -9,6 +9,7 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Presentacion.UI_impl;
 using System;
 using System.Diagnostics;
+using Acr.UserDialogs;
 
 namespace preguntaods.Presentacion.ViewModels
 {

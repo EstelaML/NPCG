@@ -15,13 +15,13 @@ namespace preguntaods.BusinessLogic.Partida
             partida.User = await fachada.GetUsuarioLogged();
         }
 
-        public void BuildRetos(int j)
+        public void BuildRetos(int numeroReto)
         {
             for (var i = 0; i < 12; i++)
             {
-                int n = j;
+                int n = numeroReto;
 
-                if (j == 5)
+                if (numeroReto == 5)
                 {
                     Random random = new Random();
 

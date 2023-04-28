@@ -108,12 +108,10 @@ namespace preguntaods.Presentacion.ViewModels
 
             if (userCorrect)
             {
-                Task respuesta = fachada.ComprobarUsuario(username.Text);
-                if (respuesta.IsCompleted)
-                {
-                    error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
-                    userCorrect = false;
-                }
+                fachada.ComprobarUsuario(username.Text).RunSynchronously();
+
+                error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
+                userCorrect = false;
             }
 
             try
