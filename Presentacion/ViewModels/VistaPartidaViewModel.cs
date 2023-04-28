@@ -35,9 +35,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var botonPulsado = int.Parse(Intent?.GetStringExtra("BOTON_PULSADO") ?? throw new InvalidOperationException());
 
-            UserDialogs.Init(this);
-
-            UserDialogs.Instance.ShowLoading("Iniciando...", MaskType.Gradient);
+            UserDialogs.Instance.ShowLoading("Iniciando...", MaskType.Clear);
             await Task.Delay(1);
 
             // Cargar partida

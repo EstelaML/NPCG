@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
@@ -6,6 +7,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -29,6 +31,8 @@ namespace preguntaods.Presentacion.ViewModels
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+
+            UserDialogs.Init(this);
 
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);
@@ -58,7 +62,11 @@ namespace preguntaods.Presentacion.ViewModels
                 sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
                 sonido.EjecutarSonido();
 
+                UserDialogs.Instance.ShowLoading("Comprobando...", MaskType.Clear);
+
                 await fachada.LoginAsync(correo.Text, password.Text);
+
+                UserDialogs.Instance.HideLoading();
 
                 // inicia sesion
                 Intent i = new Intent(this, typeof(MenuViewModel));
@@ -66,6 +74,8 @@ namespace preguntaods.Presentacion.ViewModels
             }
             catch (Exception)
             {
+                UserDialogs.Instance.HideLoading();
+
                 await fachada.LogoutAsync();
                 error.Text = "Correo electrónico o contraseña incorrecta";
             }
