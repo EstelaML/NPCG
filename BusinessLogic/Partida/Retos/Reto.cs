@@ -1,4 +1,6 @@
-﻿namespace preguntaods.BusinessLogic.Partida.Retos
+﻿using System.Threading.Tasks;
+
+namespace preguntaods.BusinessLogic.Partida.Retos
 {
     public abstract class Reto
     {
@@ -8,5 +10,6 @@
         public const int TypeSopa = 103;
 
         public abstract new int GetType();
+        public abstract Task SetValues();
     }
 }

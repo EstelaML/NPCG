@@ -2,6 +2,7 @@
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -15,10 +16,11 @@ namespace preguntaods.BusinessLogic.Partida
             partida.User = await fachada.GetUsuarioLogged();
         }
 
-        public void BuildRetos(int numeroReto)
+        public async Task BuildRetos(int numeroReto)
         {
             for (var i = 0; i < 12; i++)
             {
+                Reto reto;
                 int n = numeroReto;
 
                 if (numeroReto == 5)
@@ -32,25 +34,29 @@ namespace preguntaods.BusinessLogic.Partida
                 {
                     case 1:
                         {
-                            partida.AddReto(new RetoPre(i));
+                            reto = new RetoPre(i);
                             break;
                         }
                     case 2:
                         {
-                            partida.AddReto(new RetoAhorcado(i));
+                            reto = new RetoAhorcado(i);
                             break;
                         }
                     case 3:
                         {
-                            partida.AddReto(new RetoFrase());
+                            reto = new RetoFrase();
                             break;
                         }
-                    case 4:
+                    default:
                         {
-                            partida.AddReto(new RetoSopa());
+                            reto = new RetoSopa();
                             break;
                         }
                 }
+
+                await reto.SetValues();
+
+                partida.AddReto(reto);
             }
         }
 

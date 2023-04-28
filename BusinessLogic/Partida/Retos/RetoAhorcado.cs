@@ -22,6 +22,11 @@ namespace preguntaods.BusinessLogic.Partida.Retos
             return type;
         }
 
+        public override async Task SetValues()
+        {
+
+        }
+
         public Ahorcado GetAhorcado()
         { return ahorcado; }
 

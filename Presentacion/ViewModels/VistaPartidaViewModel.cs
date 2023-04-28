@@ -10,6 +10,8 @@ using preguntaods.Presentacion.UI_impl;
 using System;
 using System.Diagnostics;
 using Acr.UserDialogs;
+using System.Threading.Tasks;
+using Android.Content.Res;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -24,7 +26,7 @@ namespace preguntaods.Presentacion.ViewModels
         private Animator animation;
         private ProgressBar progressBar;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             // Inicio de la vista
             base.OnCreate(savedInstanceState);
@@ -33,11 +35,21 @@ namespace preguntaods.Presentacion.ViewModels
 
             var botonPulsado = int.Parse(Intent?.GetStringExtra("BOTON_PULSADO") ?? throw new InvalidOperationException());
 
+            UserDialogs.Init(this);
+
+            UserDialogs.Instance.ShowLoading("Iniciando...", MaskType.Gradient);
+            await Task.Delay(1);
+
             // Cargar partida
             var director = new PartidaDirector();
             var builder = new PartidaBuilder();
-            director.ConstructPartida(builder, botonPulsado);
+            await director.ConstructPartida(builder, botonPulsado);
             partida = builder.GetPartida();
+
+            UserDialogs.Instance.HideLoading();
+            RetoSiguiente(0, 0, 0);
+
+            /*
 
             // Animar Circulo Loading
             progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
@@ -52,6 +64,7 @@ namespace preguntaods.Presentacion.ViewModels
                 // Iniciar el reto
                 RetoSiguiente(0, 0, 0);
             };
+            */
         }
 
         public void UpdateView()

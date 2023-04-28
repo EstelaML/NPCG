@@ -1,4 +1,6 @@
-﻿namespace preguntaods.BusinessLogic.Partida.Retos
+﻿using System.Threading.Tasks;
+
+namespace preguntaods.BusinessLogic.Partida.Retos
 {
     public class RetoFrase : Reto
     {
@@ -12,6 +14,11 @@
         public override int GetType()
         {
             return type;
+        }
+
+        public override async Task SetValues()
+        {
+
         }
     }
 }
