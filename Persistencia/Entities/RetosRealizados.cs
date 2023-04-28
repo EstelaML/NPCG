@@ -14,7 +14,6 @@ namespace preguntaods.Entities
         public int Usuario { get; set; }
 
         [Column("PreguntasRealizadas")]
-
         public int[] PreguntasRealizadas { get; set; }
 
         [Column("AhorcadosRealizados")]

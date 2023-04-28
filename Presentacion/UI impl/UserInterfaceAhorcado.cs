@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,6 +8,10 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -32,6 +32,7 @@ namespace preguntaods.Presentacion.UI_impl
         private int ronda;
         private int letrasAcertadas;
         private int? odsRelacion;
+
         // UI
         private ImageView ahorcadoImg;
 
@@ -39,6 +40,7 @@ namespace preguntaods.Presentacion.UI_impl
         private TextView palabra;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
+
         #region Button letters
 
         private Button buttonA;
@@ -209,7 +211,6 @@ namespace preguntaods.Presentacion.UI_impl
                 FinReto();
                 ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             };
-
         }
 
         private void InterroganteClick(object sender, EventArgs e)
@@ -352,7 +353,6 @@ namespace preguntaods.Presentacion.UI_impl
             this.fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
-            
         }
 
         private async Task MostrarAlerta(bool acertado, bool fin)
@@ -376,8 +376,6 @@ namespace preguntaods.Presentacion.UI_impl
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
                             tcs.TrySetResult(true);
-
-                            
 
                             // sigue generando pregunta
                         });

@@ -2,7 +2,6 @@
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Services
@@ -27,7 +26,6 @@ namespace preguntaods.BusinessLogic.Services
 
         #region RetoPregunta
 
-
         public async Task InitPreguntaList()
         {
             _preguntasBajas ??= await repositorioPre.GetByDificultad(Pregunta.DifBaja);
@@ -37,7 +35,7 @@ namespace preguntaods.BusinessLogic.Services
             {
                 _preguntasAltas ??= p;
             }
-        }        
+        }
 
         public Task<Pregunta> SolicitarPregunta(int dificultad)
         {

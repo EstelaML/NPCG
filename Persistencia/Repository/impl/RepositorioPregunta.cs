@@ -1,9 +1,9 @@
-﻿using System;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.Entities;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -23,7 +23,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var uuid = (conexion.Usuario.Id);
             var user = await repositorioUser.GetUserByUUid(uuid);
             if (user?.Id == null) return null;
-            var id = (int) user.Id;
+            var id = (int)user.Id;
             var task1 = (conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single());
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
             List<Task> tareas = new List<Task> { task1, task2 };
@@ -40,7 +40,7 @@ namespace preguntaods.Persistencia.Repository.impl
             return response.Models.ToList();
         }
 
-        public async Task AñadirPreguntaRealizada(int id, Reto reto) 
+        public async Task AñadirPreguntaRealizada(int id, Reto reto)
         {
             // cogemos del usuario las preguntas acertadas ya
             var pregunta = ((RetoPre)reto).GetPregunta();
@@ -59,7 +59,7 @@ namespace preguntaods.Persistencia.Repository.impl
             {
                 if (pregunta.Id != null)
                 {
-                    int[] preguntass = { (int) pregunta.Id };
+                    int[] preguntass = { (int)pregunta.Id };
                     await repositorioUser.UpdatePreguntaAcertada(a, preguntass, usuario);
                 }
             }

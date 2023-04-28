@@ -147,7 +147,7 @@
                 android:layout_gravity="center"
                 android:id="@+id/imagenOds"
                 android:contentDescription=""/>
-        
+
             <ImageButton
                 android:src="@drawable/interrogante"
                 android:scaleType="centerInside"

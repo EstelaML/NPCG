@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -66,17 +66,17 @@ namespace preguntaods.Persistencia.Repository.impl
             if (usuario.Id == null) return null;
             var id = (int)usuario.Id;
             var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
-            if (respuesta == null) 
+            if (respuesta == null)
             {
                 var inser = new RetosRealizados((int)usuario.Id, null, null);
                 await conexion.Cliente.From<RetosRealizados>().Insert(inser);
                 return null;
-            } 
+            }
             if (reto is RetoPre)
             {
                 return respuesta.PreguntasRealizadas;
             }
-            else if (reto is RetoAhorcado) 
+            else if (reto is RetoAhorcado)
             {
                 return respuesta.AhorcadosRealizados;
             }
@@ -84,8 +84,8 @@ namespace preguntaods.Persistencia.Repository.impl
             return null;
         }
 
-        
-        public async Task<int[]> GetRetoAcertado(string a, Reto reto) {
+        public async Task<int[]> GetRetoAcertado(string a, Reto reto)
+        {
             return null;
             /*var usuario = await conexion.Cliente.From<Usuario>().Where(x => x.Uuid == a).Single();
             int id = (int)usuario.Id;
@@ -102,7 +102,7 @@ namespace preguntaods.Persistencia.Repository.impl
                     respuesta[i] = (int)listaPreguntasRealizadas[i].Pregunta;
                 }
                 return respuesta;
-            } else if (reto is RetoAhorcado) 
+            } else if (reto is RetoAhorcado)
             {
                 var retosPreguntas = await conexion.Cliente
                      .From<RetosRealizados>()

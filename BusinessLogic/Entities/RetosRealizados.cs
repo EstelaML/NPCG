@@ -1,5 +1,4 @@
-﻿
-// ReSharper disable once CheckNamespace
+﻿// ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
     public partial class RetosRealizados

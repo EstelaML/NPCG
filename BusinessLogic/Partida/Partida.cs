@@ -4,11 +4,11 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
+using preguntaods.Presentacion.UI_impl;
+using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using preguntaods.Presentacion.UI_impl;
-using preguntaods.Presentacion.ViewModels;
 
 namespace preguntaods.BusinessLogic.Partida
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
@@ -8,6 +6,8 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -91,16 +91,16 @@ namespace preguntaods.Presentacion.ViewModels
             // El correo contenga @gmail.com
             if (email.Text != null && !email.Text.Contains("@gmail.com"))
             {
-                error.Text = "Elija un correo electrónico válido"; 
-                emailCorrect = false; 
+                error.Text = "Elija un correo electrónico válido";
+                emailCorrect = false;
                 return;
             }
-            
+
             // Las 2 contraseñas sean iguales
             if (password.Text != password2.Text)
             {
-                error.Text = "Las contraseñas no coinciden"; 
-                passwordCorrect = false; 
+                error.Text = "Las contraseñas no coinciden";
+                passwordCorrect = false;
                 return;
             }
 
@@ -112,9 +112,8 @@ namespace preguntaods.Presentacion.ViewModels
                 if (respuesta.IsCompleted)
                 {
                     error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
-                userCorrect = false;
+                    userCorrect = false;
                 }
-
             }
 
             try

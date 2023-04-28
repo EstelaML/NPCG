@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Services
@@ -14,6 +14,7 @@ namespace preguntaods.BusinessLogic.Services
         private readonly RepositorioUsuario repositorioUser;
         private readonly RepositorioAhorcado repositorioAhorcado;
         private readonly RepositorioPregunta repositorioPregunta;
+
         public Facade()
         {
             conexion = SingletonConexion.GetInstance();
@@ -84,6 +85,7 @@ namespace preguntaods.BusinessLogic.Services
                     case RetoPre _:
                         await repositorioPregunta.AñadirPreguntaRealizada(id, reto);
                         break;
+
                     case RetoAhorcado _:
                         await repositorioAhorcado.AñadirAhorcadoRealizado(id, reto);
                         break;

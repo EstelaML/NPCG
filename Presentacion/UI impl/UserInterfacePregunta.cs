@@ -1,10 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
-using Android.Content.Res;
-using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
@@ -12,6 +8,8 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
+using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -74,7 +72,6 @@ namespace preguntaods.Presentacion.UI_impl
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
             ImageButton interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
             interroganteButton.Click += InterroganteClick;
-
 
             if (fallos == 1)
             {
