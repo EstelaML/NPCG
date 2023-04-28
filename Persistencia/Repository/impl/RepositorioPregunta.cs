@@ -20,18 +20,6 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<List<Pregunta>> GetByDificultad(int dificultad)
         {
-            //var id = (conexion.usuario.Id);
-            //var user = await conexion.cliente.From<Usuario>().Where(x => x.Uuid == id).Single();
-            //var response = await conexion.cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get();
-            //
-            //List<Pregunta> preguntas = response?.Models?.ToList();
-            //List<int> preguntasHechas = user?.PreguntasRealizadas?.ToList();
-            //preguntas = preguntasHechas != null ? preguntas?.Where(pregunta => !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
-            //
-            //return preguntas ?? new List<Pregunta>();
-
-            // get lista de retos 
-
             var uuid = (conexion.Usuario.Id);
             var user = await repositorioUser.GetUserByUUid(uuid);
             if (user?.Id == null) return null;

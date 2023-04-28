@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -107,13 +108,13 @@ namespace preguntaods.Presentacion.ViewModels
 
             if (userCorrect)
             {
-                var respuesta = await fachada.ComprobarUsuario(username.Text);
-                if (respuesta == false)
+                Task respuesta = fachada.ComprobarUsuario(username.Text);
+                if (respuesta.IsCompleted)
                 {
                     error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
-                    userCorrect = false;
-                    return;
+                userCorrect = false;
                 }
+
             }
 
             try
