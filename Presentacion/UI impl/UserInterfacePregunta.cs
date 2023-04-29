@@ -47,12 +47,12 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void SetActivity(Activity newActivity)
         {
-            this.activity = newActivity;
+            activity = newActivity;
         }
 
         public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this.fallos = newFallos;
+            fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
         }

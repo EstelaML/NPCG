@@ -8,9 +8,9 @@ namespace preguntaods.Entities
 
         public Ods(string nombre, string descripcion, string imagen)
         {
-            this.Nombre = nombre;
-            this.Descripcion = descripcion;
-            this.Imagen = imagen;
+            Nombre = nombre;
+            Descripcion = descripcion;
+            Imagen = imagen;
         }
     }
 }

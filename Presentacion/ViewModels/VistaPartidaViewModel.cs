@@ -1,17 +1,13 @@
-﻿using Android.Animation;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Presentacion.UI_impl;
 using System;
-using System.Diagnostics;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
-using Android.Content.Res;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -126,7 +122,7 @@ namespace preguntaods.Presentacion.ViewModels
             alertBuilder.SetTitle("¿Estás seguro?");
             alertBuilder.SetPositiveButton("Aceptar", (o, args) =>
             {
-                var path = "";
+                string path;
                 if (ods == 0)
                 {
                     path = "https://www.fao.org/sustainable-development-goals/overview/es/";
@@ -135,7 +131,7 @@ namespace preguntaods.Presentacion.ViewModels
                 var uri = Android.Net.Uri.Parse(path);
                 var intent = new Intent(Intent.ActionView, uri);
                 intent.SetFlags(ActivityFlags.NewTask);
-                Android.App.Application.Context.StartActivity(intent);
+                Application.Context.StartActivity(intent);
             });
             alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
             {

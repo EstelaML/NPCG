@@ -8,7 +8,6 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
