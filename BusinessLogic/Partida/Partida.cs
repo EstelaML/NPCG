@@ -161,7 +161,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void UpdateUi()
         {
-            switch (listaRetos[contadorRetoSiguiente].GetType())
+            switch (listaRetos[contadorRetoSiguiente-1].GetType())
             {
                 case Reto.TypePregunta:
                     {
