@@ -13,11 +13,17 @@ namespace preguntaods.Presentacion.ViewModels
     public class RankingViewModel : AppCompatActivity
     {
         private GridView rankingGridView;
-        protected override void OnCreate(Bundle savedInstanceState)
+        private RepositorioUsuario repositorioUser;
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
+
             rankingGridView = FindViewById<GridView>(Resource.Id.rankingGridView);
+
+            
+            var respuesta = await repositorioUser.GetAll();
+            var listaUsuarios = (List<Usuario>)respuesta.ToList().OrderBy(usuario => usuario.Puntos).Take(20);
         }
     }
 }
