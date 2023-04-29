@@ -12737,6 +12737,7 @@ namespace preguntaods
 			public const int progress_horizontal = 2131231130;
 			
 			// aapt resource value: 0x7F08019B
+			public const int rankingGridView = 2131231131;
 			public const int radio = 2131231131;
 			
 			// aapt resource value: 0x7F08019C
