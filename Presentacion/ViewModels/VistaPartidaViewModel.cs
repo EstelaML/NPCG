@@ -20,7 +20,6 @@ namespace preguntaods.Presentacion.ViewModels
     {
         // Vars
         private Reto reto;
-
         private Partida partida;
         private bool consolidado;
 

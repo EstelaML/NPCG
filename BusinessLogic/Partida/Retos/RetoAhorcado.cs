@@ -9,12 +9,13 @@ namespace preguntaods.BusinessLogic.Partida.Retos
         private readonly int type;
         private Ahorcado ahorcado;
         private static PreguntadosService _servicio;
+        private readonly int numeroReto;
 
-        public RetoAhorcado(int dificultad)
+        public RetoAhorcado(int orden)
         {
             type = TypeAhorcado;
             _servicio = new PreguntadosService();
-            _servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(dificultad); });
+            numeroReto = orden;
         }
 
         public override int GetType()
@@ -24,7 +25,7 @@ namespace preguntaods.BusinessLogic.Partida.Retos
 
         public override async Task SetValues()
         {
-
+            await _servicio.InitAhorcadoList().ContinueWith(t => { _ = SetDiff(numeroReto); });
         }
 
         public Ahorcado GetAhorcado()
