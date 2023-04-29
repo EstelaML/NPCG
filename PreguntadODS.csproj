@@ -105,6 +105,7 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="Presentacion\ViewModels\RankingViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\MenuViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\VistaPartidaViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\InicioSesionViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RegistroViewModel.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="BusinessLogic\Services\Facade.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
     <Compile Include="Persistencia\Entities\Pregunta.cs" />
-    <Compile Include="Presentacion\ViewModels\MenuViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\SeleccionRetoViewModel.cs" />
     <Compile Include="Persistencia\Repository\IRepository.cs" />
     <Compile Include="Persistencia\Repository\impl\Repositorycs.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -126,7 +127,7 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\vistaMenu.xml">
+    <AndroidResource Include="Resources\layout\vistaSeleccionReto.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />
@@ -383,6 +384,9 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\vistaMenu.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

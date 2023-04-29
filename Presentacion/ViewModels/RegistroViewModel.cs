@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
-    [Activity(Label = "Activity2")]
+    [Activity(Label = "")]
     public class RegistroViewModel : AppCompatActivity
     {
         private EditText username;

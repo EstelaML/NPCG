@@ -219,7 +219,6 @@ namespace preguntaods.BusinessLogic.Partida
                 if (((VistaPartidaViewModel)activity).GetConsolidado())
                 {
                     // guardamos puntos consolidados
-                    //(_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                     var dialogoMal = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
                     dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.GetPuntosConsolidados()} puntos");

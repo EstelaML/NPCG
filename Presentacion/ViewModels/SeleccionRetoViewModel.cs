@@ -6,11 +6,12 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using System;
+using Android.Content;
 
 namespace preguntaods.Presentacion.ViewModels
 {
     [Activity(Label = "", Theme = "@style/AppTheme")]
-    public class MenuViewModel : AppCompatActivity
+    public class SeleccionRetoViewModel : AppCompatActivity
     {
         private Facade fachada;
         private Sonido sonido;
@@ -18,20 +19,23 @@ namespace preguntaods.Presentacion.ViewModels
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.vistaMenu);
+            SetContentView(Resource.Layout.vistaSeleccionReto);
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
             fachada = new Facade();
 
-            var perfil = FindViewById<Button>(Resource.Id.perfil);
-            if (perfil != null) perfil.Click += Perfil_Click;
+            var partida = FindViewById<Button>(Resource.Id.partidaB);
+            if (partida != null) partida.Click += Partida_Click;
 
-            var ranking = FindViewById<Button>(Resource.Id.ranking);
-            if (ranking != null) ranking.Click += Ranking_Click;
+            var ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
+            if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
 
-            var nuevaPartida = FindViewById<Button>(Resource.Id.nuevaPartida);
-            if (nuevaPartida != null) nuevaPartida.Click += NuevaPartida_Click;
+            var fiesta = FindViewById<Button>(Resource.Id.fiestaB);
+            if (fiesta != null) fiesta.Click += Fiesta_Click;
+
+            var atras = FindViewById<ImageButton>(Resource.Id.button1);
+            if (atras != null) atras.Click += Atras;
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -56,7 +60,7 @@ namespace preguntaods.Presentacion.ViewModels
                     }
                 case Resource.Id.menuItem3:
                     {
-                        var i = new Android.Content.Intent(this, typeof(RankingViewModel));
+                        var i = new Intent(this, typeof(RankingViewModel));
                         StartActivity(i);
                         break;
                     }
@@ -64,7 +68,7 @@ namespace preguntaods.Presentacion.ViewModels
                     {
                         _ = fachada.LogoutAsync();
 
-                        var i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
+                        var i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
 
                         break;
@@ -74,30 +78,36 @@ namespace preguntaods.Presentacion.ViewModels
             return base.OnOptionsItemSelected(item);
         }
 
-        private void Perfil_Click(object sender, EventArgs e)
+        private void Partida_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-
-            /*
-            var i = new Android.Content.Intent(this, typeof(SeleccionRetoViewModel));
+            var i = new Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "1");
             StartActivity(i);
-            */
         }
 
-        private void Ranking_Click(object sender, EventArgs e)
+        private void Ahorcado_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
-
-            var i = new Android.Content.Intent(this, typeof(RankingViewModel));
+            var i = new Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "2");
             StartActivity(i);
-            
         }
 
-        private void NuevaPartida_Click(object sender, EventArgs e)
+        private void Fiesta_Click(object sender, EventArgs e)
         {
             sonido.EjecutarSonido();
+            var i = new Intent(this, typeof(VistaPartidaViewModel));
+            i.PutExtra("BOTON_PULSADO", "5");
+            StartActivity(i);
+        }
 
-            var i = new Android.Content.Intent(this, typeof(SeleccionRetoViewModel));
+        private void Atras(object sender, EventArgs e)
+        {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            sonido.EjecutarSonido();
+
+            var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
         }
     }
