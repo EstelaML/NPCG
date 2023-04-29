@@ -23,8 +23,6 @@ namespace preguntaods.Presentacion.ViewModels
 
         private Partida partida;
         private bool consolidado;
-        private Animator animation;
-        private ProgressBar progressBar;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -35,6 +33,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var botonPulsado = int.Parse(Intent?.GetStringExtra("BOTON_PULSADO") ?? throw new InvalidOperationException());
 
+            // Mostrar dialogo
             UserDialogs.Instance.ShowLoading("Iniciando...", MaskType.Clear);
             await Task.Delay(1);
 
@@ -44,25 +43,10 @@ namespace preguntaods.Presentacion.ViewModels
             await director.ConstructPartida(builder, botonPulsado);
             partida = builder.GetPartida();
 
+            //Ocultar dialogo
             UserDialogs.Instance.HideLoading();
+
             RetoSiguiente(0, 0, 0);
-
-            /*
-
-            // Animar Circulo Loading
-            progressBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
-            animation = ObjectAnimator.OfInt(progressBar, "ProgressBar", 100, 0);
-            if (animation == null) return;
-            animation.SetDuration(8000); //volver a 5 segundos en caso de que de error al cargar la partida
-            animation.Start();
-
-            // Cuando termine el tiempo de carga
-            animation.AnimationEnd += (sender, e) =>
-            {
-                // Iniciar el reto
-                RetoSiguiente(0, 0, 0);
-            };
-            */
         }
 
         public void UpdateView()

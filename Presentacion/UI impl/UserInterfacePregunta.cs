@@ -70,8 +70,8 @@ namespace preguntaods.Presentacion.UI_impl
             imagenOds = activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-            ImageButton interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
-            interroganteButton.Click += InterroganteClick;
+            var interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
 
             if (fallos == 1)
             {
@@ -142,7 +142,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void SetDatosReto(Reto reto)
         {
-            var pregunta = (reto as RetoPre).GetPregunta();
+            var pregunta = (reto as RetoPre)?.GetPregunta();
 
             enunciado.Text = pregunta.Enunciado;
             botonPregunta1.Text = pregunta.Respuesta1;

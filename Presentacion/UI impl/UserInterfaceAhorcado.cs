@@ -91,8 +91,8 @@ namespace preguntaods.Presentacion.UI_impl
             barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-            ImageButton interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
-            interroganteButton.Click += InterroganteClick;
+            var interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
 
             letrasAcertadas = 0;
             ronda = 1;
@@ -279,8 +279,8 @@ namespace preguntaods.Presentacion.UI_impl
             animation.Start();
 
             var pregunta = (reto as RetoAhorcado);
-            Ahorcado a = pregunta?.GetAhorcado();
-            odsRelacion = a.OdsRelacionada;
+            var a = pregunta?.GetAhorcado();
+            odsRelacion = a?.OdsRelacionada;
 
             switch (a?.Dificultad)
             {
