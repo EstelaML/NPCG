@@ -13895,7 +13895,13 @@ namespace preguntaods
 			public const int vistaRetoAhorcado = 2131427443;
 			
 			// aapt resource value: 0x7F0B0074
-			public const int vistaRetoPregunta = 2131427444;
+			public const int vistaRetoFrase = 2131427444;
+			
+			// aapt resource value: 0x7F0B0075
+			public const int vistaRetoPregunta = 2131427445;
+			
+			// aapt resource value: 0x7F0B0076
+			public const int vistaRetoSopa = 2131427446;
 			
 			static Layout()
 			{

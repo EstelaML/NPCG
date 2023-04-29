@@ -65,12 +65,12 @@ namespace preguntaods.Presentacion.ViewModels
                     }
                 case Reto.TypeFrase:
                     {
-                        //SetContentView(Resource.Layout.vistaRetoFrase);
+                        SetContentView(Resource.Layout.vistaRetoFrase);
                         break;
                     }
                 case Reto.TypeSopa:
                     {
-                        //SetContentView(Resource.Layout.vistaRetoSopa);
+                        SetContentView(Resource.Layout.vistaRetoSopa);
                         break;
                     }
             }
