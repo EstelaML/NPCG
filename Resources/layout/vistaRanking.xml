@@ -45,7 +45,7 @@
         <GridView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rankingGridwiew"
+            android:id="@+id/rankingGridView"
             android:background="@android:color/black"
             android:numColumns="3"
             android:stretchMode="columnWidth"

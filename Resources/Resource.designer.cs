@@ -12737,7 +12737,7 @@ namespace preguntaods
 			public const int radio = 2131231130;
 			
 			// aapt resource value: 0x7F08019B
-			public const int rankingGridwiew = 2131231131;
+			public const int rankingGridView = 2131231131;
 			
 			// aapt resource value: 0x7F08019C
 			public const int ratio = 2131231132;
