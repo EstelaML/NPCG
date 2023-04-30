@@ -1,10 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@android:color/white"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="75px"
+        android:paddingRight="75px"
+        android:gravity="center"
+        android:orientation="vertical">
+        
+        <ImageButton
+            android:src="@drawable/icon_userNotLog"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/buttonAvatar"
+            android:background="@color/mtrl_btn_transparent_bg_color"
+            android:contentDescription="" />
+        
+        <Space
+                android:layout_width="30sp"
+                android:layout_height="45sp"/>
+
+        <TextView
+            android:text="Nombre de usuario:"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/textView4"
+            android:textColor="@android:color/black"
+            android:paddingBottom="20dp"
+            tools:ignore="HardcodedText" />
+        
+        <TextView
+            android:text="-------"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/textView5"
+            android:textColor="@android:color/black"
+            android:paddingBottom="20dp"
+            tools:ignore="HardcodedText" />
+        
+
+        
+       
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingVertical="1dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorPrimary">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_logo"
+            android:contentDescription="" />
+
+
+
+    </LinearLayout>
 </LinearLayout>
