@@ -2,6 +2,7 @@
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Persistencia.Repository.impl;
 using System.Collections.Generic;
@@ -13,11 +14,16 @@ namespace preguntaods.Presentacion.ViewModels
     public class RankingViewModel : AppCompatActivity
     {
         private GridView rankingGridView;
-        protected override void OnCreate(Bundle savedInstanceState)
+        private Facade fachada;
+        private List<Usuario> listaUsuarios;
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
+            fachada = new Facade();
             rankingGridView = FindViewById<GridView>(Resource.Id.rankingGridView);
+            listaUsuarios = await fachada.Get20OrderedUsers();
+            rankingGridView.Adapter = new ArrayAdapter<Usuario>(this, Android.Resource.Layout.SimpleListItem1, listaUsuarios);
         }
     }
 }
