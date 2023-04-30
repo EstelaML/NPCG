@@ -183,11 +183,9 @@ namespace preguntaods.Presentacion.UI_impl
             animation.Update += (sender, e) =>
             {
                 var playtime = animation.CurrentPlayTime;
-                if (playtime >= 20000 && playtime < 20020)
-                {
-                    sonido.SetEstrategia(reloj, activity);
-                    sonido.EjecutarSonido();
-                }
+                if (playtime < 20000 || playtime >= 20020) return;
+                sonido.SetEstrategia(reloj, activity);
+                sonido.EjecutarSonido();
             };
             animation.AnimationEnd += async (sender, e) =>
             {

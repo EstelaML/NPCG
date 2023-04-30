@@ -144,42 +144,50 @@ namespace preguntaods.Presentacion.UI_impl
         {
             var pregunta = (reto as RetoPre)?.GetPregunta();
 
-            enunciado.Text = pregunta?.Enunciado;
-            botonPregunta1.Text = pregunta.Respuesta1;
-            botonPregunta2.Text = pregunta.Respuesta2;
-            botonPregunta3.Text = pregunta.Respuesta3;
-            botonPregunta4.Text = pregunta.Respuesta4;
-
-            puntuacion = pregunta.Dificultad switch
+            if (pregunta != null)
             {
-                Pregunta.DifBaja => 100,
-                Pregunta.DifMedia => 200,
-                Pregunta.DifAlta => 300,
-                _ => puntuacion
-            };
+                enunciado.Text = pregunta.Enunciado;
+                botonPregunta1.Text = pregunta.Respuesta1;
+                botonPregunta2.Text = pregunta.Respuesta2;
+                botonPregunta3.Text = pregunta.Respuesta3;
+                botonPregunta4.Text = pregunta.Respuesta4;
 
-            //textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
-
-            correcta = pregunta.Correcta;
-
-            if (pregunta.OdsRelacionada == null)
-            {
-                if (activity.Resources != null)
+                puntuacion = pregunta.Dificultad switch
                 {
-                    var idDeImagen = activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
-                    imagenOds.SetImageResource(idDeImagen);
+                    Pregunta.DifBaja => 100,
+                    Pregunta.DifMedia => 200,
+                    Pregunta.DifAlta => 300,
+                    _ => puntuacion
+                };
+
+                //textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
+
+                correcta = pregunta.Correcta;
+
+                if (pregunta.OdsRelacionada == null)
+                {
+                    if (activity.Resources != null)
+                    {
+                        var idDeImagen =
+                            activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
+                        imagenOds.SetImageResource(idDeImagen);
+                    }
+                }
+                else
+                {
+                    odsRelacion = int.Parse(pregunta.OdsRelacionada);
+                    var nombreDeImagen =
+                        "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
+                    if (activity.Resources != null)
+                    {
+                        var idDeImagen =
+                            activity.Resources.GetIdentifier(nombreDeImagen, "drawable",
+                                activity.PackageName); // obtener el identificador de recurso correspondiente
+                        imagenOds.SetImageResource(idDeImagen);
+                    }
                 }
             }
-            else
-            {
-                odsRelacion = int.Parse(pregunta.OdsRelacionada);
-                var nombreDeImagen = "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
-                if (activity.Resources != null)
-                {
-                    var idDeImagen = activity.Resources.GetIdentifier(nombreDeImagen, "drawable", activity.PackageName); // obtener el identificador de recurso correspondiente
-                    imagenOds.SetImageResource(idDeImagen);
-                }
-            }
+
             animation.Start();
         }
 

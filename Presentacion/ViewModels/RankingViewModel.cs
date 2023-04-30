@@ -4,9 +4,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
-using preguntaods.Persistencia.Repository.impl;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace preguntaods.Presentacion.ViewModels
 {

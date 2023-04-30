@@ -1,17 +1,17 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using AndroidX.AppCompat.App;
 
 namespace preguntaods.Presentacion.ViewModels
 {
-    internal class Class1
+    [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
+    public class PerfilViewModel : AppCompatActivity
     {
+        protected override async void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.vistaPerfil);
+
+        }
     }
 }
