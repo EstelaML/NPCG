@@ -103,10 +103,13 @@ namespace preguntaods.BusinessLogic.Services
 
         #endregion Usuario
 
-        public async Task<List<Usuario>> GetPuntuaciones()
+        public async Task<List<int>> GetPuntuaciones()
         {
             var respuesta = await repositorioUser.GetAll();
-            return (List<Usuario>)respuesta.ToList().OrderBy(usuario => usuario.Puntos).Take(20);
+            var listaUsuarios = (List<Usuario>)respuesta.ToList().OrderBy(usuario => usuario.Puntos).Take(20);
+            var puntuaciones = listaUsuarios.Select(usuario => usuario.Puntos).ToList();
+
+            return puntuaciones;
         }
     }
 }
