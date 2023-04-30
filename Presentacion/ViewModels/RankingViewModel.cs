@@ -23,8 +23,8 @@ namespace preguntaods.Presentacion.ViewModels
             fachada = new Facade();
             rankingGridView = FindViewById<GridView>(Resource.Id.rankingGridView);
 
-            
-            
+            var listUsuarios = fachada.GetPuntuaciones();
+
         }
     }
 }
