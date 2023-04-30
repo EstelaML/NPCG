@@ -104,6 +104,7 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
+    <Compile Include="Presentacion\ViewModels\PerfilViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RankingViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\MenuViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\VistaPartidaViewModel.cs" />
@@ -387,6 +388,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\vistaMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\vistaPerfil.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
