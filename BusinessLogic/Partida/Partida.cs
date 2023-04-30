@@ -48,11 +48,11 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetActivity(Android.App.Activity newActivity)
         {
-            this.activity = newActivity;
+            activity = newActivity;
             userInterface.SetActivity(newActivity);
 
             if (!primeraVez) return;
-            sonido.SetEstrategia(new EstrategiaSonidoMusica(), this.activity);
+            sonido.SetEstrategia(new EstrategiaSonidoMusica(), activity);
             sonido.EjecutarSonido();
             primeraVez = false;
         }
@@ -74,7 +74,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetFacade(Facade fachada)
         {
-            this.Fachada = fachada;
+            Fachada = fachada;
         }
 
         public Facade GetFacade()
@@ -84,7 +84,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         private void SetUi(UserInterface newUserInterface)
         {
-            this.userInterface = newUserInterface;
+            userInterface = newUserInterface;
         }
 
         public UserInterface GetUi()
@@ -94,7 +94,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetSonido(Sonido newSonido)
         {
-            this.sonido = newSonido;
+            sonido = newSonido;
         }
 
         public Sonido GetSonido()
@@ -122,9 +122,9 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void NextReto(int newFallos, int newPtsTotales, int newPtsConsolidados)
         {
-            this.fallos = newFallos;
-            this.ptsTotales = newPtsTotales;
-            this.ptsConsolidados = newPtsConsolidados;
+            fallos = newFallos;
+            ptsTotales = newPtsTotales;
+            ptsConsolidados = newPtsConsolidados;
 
             if (contadorRetoSiguiente == 9)
             {
@@ -219,7 +219,6 @@ namespace preguntaods.BusinessLogic.Partida
                 if (((VistaPartidaViewModel)activity).GetConsolidado())
                 {
                     // guardamos puntos consolidados
-                    //(_activity as VistaPartidaViewModel).Consolidar(UserInterfacePregunta.getPuntosConsolidados());
                     var dialogoMal = new Android.App.AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
                     dialogoMal.SetTitle("No está mal");
                     dialogoMal.SetMessage($"Te llevas {UserInterfacePregunta.GetPuntosConsolidados()} puntos");

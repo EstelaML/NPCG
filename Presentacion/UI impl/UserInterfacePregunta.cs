@@ -47,12 +47,12 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void SetActivity(Activity newActivity)
         {
-            this.activity = newActivity;
+            activity = newActivity;
         }
 
         public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {
-            this.fallos = newFallos;
+            fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
         }
@@ -144,7 +144,7 @@ namespace preguntaods.Presentacion.UI_impl
         {
             var pregunta = (reto as RetoPre)?.GetPregunta();
 
-            enunciado.Text = pregunta.Enunciado;
+            enunciado.Text = pregunta?.Enunciado;
             botonPregunta1.Text = pregunta.Respuesta1;
             botonPregunta2.Text = pregunta.Respuesta2;
             botonPregunta3.Text = pregunta.Respuesta3;
@@ -313,7 +313,7 @@ namespace preguntaods.Presentacion.UI_impl
 #pragma warning restore CS0618
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
-                    if (alertDialog != null && !alertDialog.IsShowing) return;
+                    if (alertDialog is { IsShowing: false }) return;
                     sonido.SetEstrategia(reloj, activity);
                     sonido.PararSonido();
                     alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();

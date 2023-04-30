@@ -3,7 +3,6 @@ using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -102,10 +101,5 @@ namespace preguntaods.BusinessLogic.Services
         }
 
         #endregion Usuario
-        public async Task<List<Usuario>> Get20OrderedUsers()
-        {
-            var respuesta = await repositorioUser.GetAll();
-            return (List<Usuario>) respuesta.ToList().OrderBy(usuario => usuario.Puntos).Take(20);
-        }
     }
 }

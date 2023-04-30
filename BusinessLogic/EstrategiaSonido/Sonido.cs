@@ -7,8 +7,8 @@
 
         public void SetEstrategia(IEstrategiaSonido newEstrategia, Android.Content.Context newContext)
         {
-            this.estrategia = newEstrategia;
-            this.context = newContext;
+            estrategia = newEstrategia;
+            context = newContext;
         }
 
         public void EjecutarSonido()

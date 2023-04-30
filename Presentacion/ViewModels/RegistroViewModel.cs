@@ -8,11 +8,10 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
-    [Activity(Label = "Activity2")]
+    [Activity(Label = "")]
     public class RegistroViewModel : AppCompatActivity
     {
         private EditText username;

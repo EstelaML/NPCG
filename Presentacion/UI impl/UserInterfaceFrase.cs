@@ -9,7 +9,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void SetActivity(Activity newActivity)
         {
-            this.activity = newActivity;
+            activity = newActivity;
         }
 
         public override void Init()

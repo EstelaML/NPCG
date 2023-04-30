@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,41 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="5dp"
+      android:orientation="horizontal">
+
+    <Button
+      android:text="Perfil"
+      android:textColor="@android:color/black"
+      android:textStyle="bold"
+      android:background="@color/colorPrimary"
+      android:layout_width="160sp"
+      android:layout_height="wrap_content"
+      android:id="@+id/perfil"
+      tools:ignore="HardcodedText"/>
+      />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <Button
+      android:text="Ranking"
+      android:textColor="@android:color/black"
+      android:textStyle="bold"
+      android:background="@color/colorPrimary"
+      android:layout_width="160sp"
+      android:layout_height="wrap_content"
+      android:id="@+id/ranking"
+      tools:ignore="HardcodedText"/>
+    />
+  </LinearLayout>
+
+  <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -15,94 +49,16 @@
         android:paddingRight="75px"
         android:gravity="center"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:minWidth="40sp"
-            android:minHeight="140sp"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayout1">
-
-            <Button
-                android:text="Pregunta"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:layout_width="140sp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:id="@+id/partidaB"
-                tools:ignore="HardcodedText"/>
-
-             <Space
-                android:layout_width="30sp"
-                android:layout_height="match_parent"/>
-
-            <Button
-                android:text="Ahorcado"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:background="@color/colorPrimary"
-                android:layout_width="140sp"
-                android:layout_height="match_parent"
-                android:id="@+id/ahorcadoB"
-                tools:ignore="HardcodedText"/>
-
-        </LinearLayout>
-
-        <Space
-        android:layout_width="match_parent"
-        android:layout_height="30sp"/>
-
-        <LinearLayout
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:minWidth="80sp"
-            android:minHeight="140sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linearLayou">
-
-            <Button
-                android:text="Sopa"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:layout_width="140sp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDisabled"
-                android:id="@+id/sopaB"
-                tools:ignore="HardcodedText"/>
-
-             <Space
-                android:layout_width="30sp"
-                android:layout_height="match_parent"/>
-
-            <Button
-                android:text="Frase"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:background="@color/colorPrimaryDisabled"
-                android:layout_width="140sp"
-                android:layout_height="match_parent"
-                android:id="@+id/fraseB"
-                tools:ignore="HardcodedText"/>
-
-        </LinearLayout>
-
-        <Space
-                android:layout_width="match_parent"
-                android:layout_height="30sp"/>
-
-         <Button
-                android:text="Fiesta"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:background="@color/colorPrimary"
-                android:layout_width="140sp"
-                android:layout_height="140sp"
-                android:id="@+id/fiestaB"
-                tools:ignore="HardcodedText"/>
+        
+      <Button
+        android:text="Nueva partida"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:layout_width="160sp"
+        android:layout_height="140sp"
+        android:id="@+id/nuevaPartida"
+        tools:ignore="HardcodedText"/>
 
     </LinearLayout>
 
