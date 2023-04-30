@@ -22,8 +22,7 @@ namespace preguntaods.Presentacion.ViewModels
             rankingGridView = FindViewById<GridView>(Resource.Id.rankingGridView);
 
             
-            var respuesta = await repositorioUser.GetAll();
-            var listaUsuarios = (List<Usuario>)respuesta.ToList().OrderBy(usuario => usuario.Puntos).Take(20);
+            
         }
     }
 }
