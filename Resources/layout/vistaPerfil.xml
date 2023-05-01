@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:id="@+id/textView5"
+            android:id="@+id/textViewNombre"
             android:textColor="@android:color/black"
             android:paddingBottom="20dp"
             tools:ignore="HardcodedText" />

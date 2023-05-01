@@ -14,7 +14,7 @@ namespace preguntaods
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.0.5")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.93")]
 	public partial class Resource
 	{
 		
@@ -13139,22 +13139,22 @@ namespace preguntaods
 			public const int textView4 = 2131231252;
 			
 			// aapt resource value: 0x7F080215
-			public const int textView5 = 2131231253;
+			public const int textView6 = 2131231253;
 			
 			// aapt resource value: 0x7F080216
-			public const int textView6 = 2131231254;
+			public const int textView7 = 2131231254;
 			
 			// aapt resource value: 0x7F080217
-			public const int textView7 = 2131231255;
+			public const int textViewAciertos = 2131231255;
 			
 			// aapt resource value: 0x7F080218
-			public const int textViewAciertos = 2131231256;
+			public const int textViewFallos = 2131231256;
 			
 			// aapt resource value: 0x7F080219
-			public const int textViewFallos = 2131231257;
+			public const int textViewMail = 2131231257;
 			
 			// aapt resource value: 0x7F08021A
-			public const int textViewMail = 2131231258;
+			public const int textViewNombre = 2131231258;
 			
 			// aapt resource value: 0x7F08021B
 			public const int textViewPass = 2131231259;
