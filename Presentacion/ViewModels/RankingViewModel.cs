@@ -50,11 +50,20 @@ namespace preguntaods.Presentacion.ViewModels
             rankingGridLayout.AddView(new TextView(this) { Text = "Puntos", TextAlignment = TextAlignment.Center });
 
             // Agregar los datos al GridLayout
-            for (int j = 0; j < usuarios.Count; j++)
+            for (int j = 0; j < posiciones.Count; j++)
             {
                 rankingGridLayout.AddView(new TextView(this) { Text = posiciones[j], TextAlignment = TextAlignment.Center });
-                rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Nombre, TextAlignment = TextAlignment.Center });
-                rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Puntos.ToString(), TextAlignment = TextAlignment.Center });
+                if (j < usuarios.Count)
+                {
+                    rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Nombre, TextAlignment = TextAlignment.Center });
+                    rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Puntos.ToString(), TextAlignment = TextAlignment.Center });
+                }
+                else {
+                    rankingGridLayout.AddView(new TextView(this) { Text = "---", TextAlignment = TextAlignment.Center });
+                    rankingGridLayout.AddView(new TextView(this) { Text = "---", TextAlignment = TextAlignment.Center });
+                }
+                
+                
             }
         }
     }
