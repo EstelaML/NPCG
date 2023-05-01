@@ -1,10 +1,14 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -12,17 +16,45 @@ namespace preguntaods.Presentacion.ViewModels
     public class PerfilViewModel : AppCompatActivity
     {
         private Sonido sonido;
+        private Facade fachada;
+        private Usuario usuario;
+        private TextView nombre;
+        private TextView aciertos;
+        private TextView fallos;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPerfil);
 
+           // UserDialogs.Instance.ShowLoading("Cargando Usuario...", MaskType.Clear);
+            fachada = new Facade();
+
+            usuario = await fachada.GetUsuarioLogged();
+
+            //await Task.Delay(1000);
+
+           // UserDialogs.Instance.HideLoading();
+
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) atras.Click += Atras;
+
+            nombre = FindViewById<TextView>(Resource.Id.textViewNombre);
+            aciertos = FindViewById<TextView>(Resource.Id.textViewAciertos);
+            fallos = FindViewById<TextView>(Resource.Id.textViewFallos);
+
+            
+            Init();
+        }
+
+        private void Init()
+        {
+
+            nombre.Text = usuario.Nombre;
+
         }
 
         private void Atras(object sender, EventArgs e)

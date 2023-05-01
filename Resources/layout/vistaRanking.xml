@@ -12,21 +12,16 @@
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content">
-
             <Button
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Diario"
-                tools:ignore="HardcodedText" />
-
+                android:text="Diario" />
             <Button
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Semanal"
-                tools:ignore="HardcodedText" />
-
+                android:text="Semanal" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +32,6 @@
         android:paddingRight="75px"
         android:gravity="center"
         android:orientation="vertical">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +41,6 @@
             android:id="@+id/textRanking"
             android:textColor="@android:color/black"
             tools:ignore="HardcodedText"/>
-
         <LinearLayout
             android:orientation="vertical"
             android:minHeight="100px"
@@ -56,12 +49,17 @@
             android:id="@+id/linearLayout1">
 
             <GridLayout
+                android:minHeight="100px"
                 android:layout_width="match_parent"
-                android:layout_height="100px"
+                android:layout_height="wrap_content"
                 android:id="@+id/rankingGridLayout"
                 android:columnCount="3"
                 android:rowCount="20"
-                android:background="#fff45719" />
+                android:background="#fff45719"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbarThumbVertical="@android:color/black"
+                android:scrollbarTrackVertical="@android:color/darker_gray"
+                android:verticalScrollbarPosition="right"/>
         </LinearLayout>
 
         <TextView
