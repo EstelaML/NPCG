@@ -41,15 +41,24 @@
             android:id="@+id/textRanking"
             android:textColor="@android:color/black"
             tools:ignore="HardcodedText"/>
-
-        <GridView
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="match_parent"
+            android:minHeight="100px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rankingGridView"
-            android:background="@android:color/black"
-            android:numColumns="3"
-            android:stretchMode="columnWidth"
-            />
+            android:id="@+id/linearLayout1">
+
+            <GridLayout
+                android:minWidth="match_parent"
+                android:minHeight="100px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rankingGridLayout"
+                android:columnCount="3"
+                android:rowCount="20"
+                android:background="#fff45719" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
