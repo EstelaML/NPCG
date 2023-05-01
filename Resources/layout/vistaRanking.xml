@@ -43,21 +43,23 @@
             tools:ignore="HardcodedText"/>
         <LinearLayout
             android:orientation="vertical"
-            android:minWidth="match_parent"
             android:minHeight="100px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout1">
 
             <GridLayout
-                android:minWidth="match_parent"
                 android:minHeight="100px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rankingGridLayout"
                 android:columnCount="3"
                 android:rowCount="20"
-                android:background="#fff45719" />
+                android:background="#fff45719"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbarThumbVertical="@android:color/black"
+                android:scrollbarTrackVertical="@android:color/darker_gray"
+                android:verticalScrollbarPosition="right"/>
         </LinearLayout>
 
         <TextView
