@@ -76,6 +76,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Perfil_Click(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             /*
@@ -86,6 +87,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Ranking_Click(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             var i = new Android.Content.Intent(this, typeof(RankingViewModel));
@@ -94,6 +96,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void NuevaPartida_Click(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             var i = new Android.Content.Intent(this, typeof(SeleccionRetoViewModel));

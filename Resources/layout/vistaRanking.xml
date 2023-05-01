@@ -50,7 +50,6 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:minWidth="match_parent"
             android:minHeight="100px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
