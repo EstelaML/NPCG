@@ -40,8 +40,13 @@ namespace preguntaods.BusinessLogic.Services
         public async Task<User> SignUpAsync(string correo, string password)
         {
             var session = await conexion.Cliente.Auth.SignUp(correo, password);
-            conexion.Usuario = session?.User;
-            return session?.User;
+            if (session.User.AppMetadata != null)
+            {
+                conexion.Usuario = session?.User;
+                return session?.User;
+            }
+
+            return null;
         }
 
         public async Task<Usuario> GetUsuarioLogged()

@@ -111,7 +111,7 @@ namespace preguntaods.Presentacion.ViewModels
                 UserDialogs.Instance.ShowLoading("Comprobando...", MaskType.Clear);
                 var respuesta = await fachada.ComprobarUsuario(username.Text);
 
-                if (respuesta)
+                if (!respuesta)
                 {
                     error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
                     userCorrect = false;
