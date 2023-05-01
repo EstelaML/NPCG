@@ -143,11 +143,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="360sp"
             android:layout_height="90sp"
-            android:id="@+id/enunciado" />
-
-        <Space
-        android:layout_width="match_parent"
-        android:layout_height="6sp" />
+            android:id="@+id/enunciado"
+            tools:ignore="HardcodedText"/>
 
         <TextView
             android:text="ENERGIAS RENOVABLES"
@@ -156,8 +153,9 @@
             android:textSize="17sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="360sp"
-            android:layout_height="90sp"
-            android:id="@+id/palabra" />
+            android:layout_height="70sp"
+            android:id="@+id/palabra"
+            tools:ignore="HardcodedText"/>
 
         <Space
         android:layout_width="match_parent"
@@ -187,52 +185,62 @@
                     android:text="Q"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonQ" />
+                    android:id="@+id/buttonQ"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="W"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonW" />
+                    android:id="@+id/buttonW"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="E"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonE" />
+                    android:id="@+id/buttonE"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="R"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonR" />
+                    android:id="@+id/buttonR"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="T"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonT" />
+                    android:id="@+id/buttonT"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="Y"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonY" />
+                    android:id="@+id/buttonY"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="U"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonU" />
+                    android:id="@+id/buttonU"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="I"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonI" />
+                    android:id="@+id/buttonI"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="O"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonO" />
+                    android:id="@+id/buttonO"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="P"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonP" />
+                    android:id="@+id/buttonP"
+                    tools:ignore="HardcodedText"/>
             </LinearLayout>
 
             <Space
@@ -252,52 +260,62 @@
                     android:text="A"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonA" />
+                    android:id="@+id/buttonA"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="S"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonS" />
+                    android:id="@+id/buttonS"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="D"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonD" />
+                    android:id="@+id/buttonD"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="F"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonF" />
+                    android:id="@+id/buttonF"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="G"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonG" />
+                    android:id="@+id/buttonG"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="H"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonH" />
+                    android:id="@+id/buttonH"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="J"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonJ" />
+                    android:id="@+id/buttonJ"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="K"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonK" />
+                    android:id="@+id/buttonK"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="L"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonL" />
+                    android:id="@+id/buttonL"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="Ñ"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonÑ" />
+                    android:id="@+id/buttonÑ"
+                    tools:ignore="HardcodedText"/>
             </LinearLayout>
 
             <Space
@@ -317,37 +335,44 @@
                     android:text="Z"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonZ" />
+                    android:id="@+id/buttonZ"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="X"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonX" />
+                    android:id="@+id/buttonX"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="C"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonC" />
+                    android:id="@+id/buttonC"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="V"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonV" />
+                    android:id="@+id/buttonV"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="B"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonB" />
+                    android:id="@+id/buttonB"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="N"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonN" />
+                    android:id="@+id/buttonN"
+                    tools:ignore="HardcodedText"/>
                 <Button
                     android:text="M"
                     android:layout_width="35sp"
                     android:layout_height="40sp"
-                    android:id="@+id/buttonM" />
+                    android:id="@+id/buttonM"
+                    tools:ignore="HardcodedText"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

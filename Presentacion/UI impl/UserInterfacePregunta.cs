@@ -41,6 +41,7 @@ namespace preguntaods.Presentacion.UI_impl
         private TextView textoPuntos;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
+        private ImageButton interroganteButton;
 
         // Interactive Elements
         private ObjectAnimator animation;
@@ -70,8 +71,7 @@ namespace preguntaods.Presentacion.UI_impl
             imagenOds = activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-            var interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
-            if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
+            interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
 
             if (fallos == 1)
             {
@@ -94,6 +94,8 @@ namespace preguntaods.Presentacion.UI_impl
             if (botonPregunta2 != null) botonPregunta2.Click += ButtonClickAsync;
             if (botonPregunta3 != null) botonPregunta3.Click += ButtonClickAsync;
             if (botonPregunta4 != null) botonPregunta4.Click += ButtonClickAsync;
+
+            if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
 
             if (animation == null) return;
             animation.Update += (sender, e) =>
