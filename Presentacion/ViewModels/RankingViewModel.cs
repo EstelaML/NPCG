@@ -14,6 +14,7 @@ namespace preguntaods.Presentacion.ViewModels
         private GridView rankingGridView;
         private Facade fachada;
         private List<Usuario> listaUsuarios;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -22,7 +23,6 @@ namespace preguntaods.Presentacion.ViewModels
             rankingGridView = FindViewById<GridView>(Resource.Id.rankingGridView);
 
             var listUsuarios = fachada.GetPuntuaciones();
-
         }
     }
 }

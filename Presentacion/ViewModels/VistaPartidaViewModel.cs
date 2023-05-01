@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using AndroidX.AppCompat.App;
@@ -6,7 +7,6 @@ using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Presentacion.UI_impl;
 using System;
-using Acr.UserDialogs;
 using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
@@ -16,6 +16,7 @@ namespace preguntaods.Presentacion.ViewModels
     {
         // Vars
         private Reto reto;
+
         private Partida partida;
         private bool consolidado;
 

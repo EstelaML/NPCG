@@ -21,13 +21,12 @@
       android:layout_width="160sp"
       android:layout_height="wrap_content"
       android:id="@+id/perfil"
-      tools:ignore="HardcodedText"/>
-      />
+      tools:ignore="HardcodedText" /> />
 
     <Space
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <Button
       android:text="Ranking"
@@ -37,8 +36,7 @@
       android:layout_width="160sp"
       android:layout_height="wrap_content"
       android:id="@+id/ranking"
-      tools:ignore="HardcodedText"/>
-    />
+      tools:ignore="HardcodedText" /> />
   </LinearLayout>
 
   <LinearLayout
@@ -49,7 +47,7 @@
         android:paddingRight="75px"
         android:gravity="center"
         android:orientation="vertical">
-        
+
       <Button
         android:text="Nueva partida"
         android:textColor="@android:color/black"
@@ -58,8 +56,7 @@
         android:layout_width="160sp"
         android:layout_height="140sp"
         android:id="@+id/nuevaPartida"
-        tools:ignore="HardcodedText"/>
-
+        tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,6 +74,5 @@
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
             android:contentDescription="" />
-
     </LinearLayout>
 </LinearLayout>

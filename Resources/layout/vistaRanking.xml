@@ -16,12 +16,12 @@
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Diario"/>
+                android:text="Diario" />
             <Button
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Semanal"/>
+                android:text="Semanal" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +40,7 @@
             android:textStyle="bold"
             android:id="@+id/textRanking"
             android:textColor="@android:color/black"
-            tools:ignore="HardcodedText"/>
+            tools:ignore="HardcodedText" />
 
         <GridView
             android:layout_width="match_parent"
@@ -48,8 +48,7 @@
             android:id="@+id/rankingGridView"
             android:background="@android:color/black"
             android:numColumns="3"
-            android:stretchMode="columnWidth"
-            />
+            android:stretchMode="columnWidth" />
 
         <TextView
             android:layout_width="match_parent"
@@ -60,7 +59,7 @@
             android:textSize="40sp"
             android:id="@+id/textAnimo"
             android:textColor="@android:color/black"
-            tools:ignore="HardcodedText"/>
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +77,5 @@
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
             android:contentDescription="" />
-
     </LinearLayout>
-
 </LinearLayout>

@@ -17,7 +17,7 @@
       android:layout_marginTop="20dp"
       android:id="@+id/button1"
       android:background="@color/mtrl_btn_transparent_bg_color"
-      android:contentDescription=""/>
+      android:contentDescription="" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,11 +45,11 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 android:id="@+id/partidaB"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
              <Space
                 android:layout_width="30sp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <Button
                 android:text="Ahorcado"
@@ -59,13 +59,12 @@
                 android:layout_width="140sp"
                 android:layout_height="match_parent"
                 android:id="@+id/ahorcadoB"
-                tools:ignore="HardcodedText"/>
-
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="30sp"/>
+        android:layout_height="30sp" />
 
         <LinearLayout
             android:gravity="center"
@@ -84,11 +83,11 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimaryDisabled"
                 android:id="@+id/sopaB"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
              <Space
                 android:layout_width="30sp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <Button
                 android:text="Frase"
@@ -98,13 +97,12 @@
                 android:layout_width="140sp"
                 android:layout_height="match_parent"
                 android:id="@+id/fraseB"
-                tools:ignore="HardcodedText"/>
-
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <Space
                 android:layout_width="match_parent"
-                android:layout_height="30sp"/>
+                android:layout_height="30sp" />
 
          <Button
                 android:text="Fiesta"
@@ -114,8 +112,7 @@
                 android:layout_width="140sp"
                 android:layout_height="140sp"
                 android:id="@+id/fiestaB"
-                tools:ignore="HardcodedText"/>
-
+                tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <LinearLayout
@@ -133,6 +130,5 @@
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
             android:contentDescription="" />
-
     </LinearLayout>
 </LinearLayout>

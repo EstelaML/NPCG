@@ -113,7 +113,6 @@ namespace preguntaods.Presentacion.ViewModels
 
                 if (respuesta)
                 {
-
                     error.Text = "El nombre de usuario está ya en uso, utiliza otro.";
                     userCorrect = false;
 

@@ -90,7 +90,6 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Android.Content.Intent(this, typeof(RankingViewModel));
             StartActivity(i);
-            
         }
 
         private void NuevaPartida_Click(object sender, EventArgs e)
