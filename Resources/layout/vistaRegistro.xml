@@ -15,7 +15,7 @@
         android:paddingTop="20dp"
         android:id="@+id/button1"
         android:background="@color/mtrl_btn_transparent_bg_color"
-        android:contentDescription=""/>
+        android:contentDescription="" />
 
     <ImageButton
         android:src="@drawable/icon_userNotLog"
@@ -53,8 +53,7 @@
         android:background="@drawable/style_camposinf"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/nombreUsuario"
-        />
+        android:id="@+id/nombreUsuario" />
     <TextView
         android:text="Correo electrónico"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -103,8 +102,7 @@
         android:textAlignment="textStart"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:id="@+id/contraseña2"
-        />
+        android:id="@+id/contraseña2" />
     <TextView
         android:text=""
         android:paddingTop="20dp"
@@ -123,7 +121,5 @@
         android:id="@+id/registroB"
         android:textColor="@android:color/black"
         android:backgroundTint="@color/colorPrimary"
-        tools:ignore="HardcodedText"
-        />
-
+        tools:ignore="HardcodedText" />
 </LinearLayout>

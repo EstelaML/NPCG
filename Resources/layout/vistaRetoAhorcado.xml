@@ -31,7 +31,7 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -43,12 +43,11 @@
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:id="@+id/perfil"
             android:contentDescription="" />
-
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="20sp"/>
+        android:layout_height="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,13 +77,12 @@
                 android:gravity="left"
                 android:layout_height="wrap_content"
                 android:id="@+id/textPtsConsolidados" />
-
         </LinearLayout>
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:src="@drawable/icon_heart"
@@ -95,7 +93,7 @@
             android:adjustViewBounds="true"
             android:layout_marginRight="5sp"
             android:contentDescription=""
-            android:id="@+id/heart1"/>
+            android:id="@+id/heart1" />
 
         <ImageView
             android:src="@drawable/icon_heart"
@@ -106,8 +104,7 @@
             android:layout_marginRight="7sp"
             android:adjustViewBounds="true"
             android:contentDescription=""
-            android:id="@+id/heart2"/>
-
+            android:id="@+id/heart2" />
     </LinearLayout>
 
     <LinearLayout
@@ -125,7 +122,7 @@
             android:layout_height="240dp"
             android:adjustViewBounds="true"
             android:contentDescription=""
-            android:id="@+id/ahorcadoImg"/>
+            android:id="@+id/ahorcadoImg" />
 
         <ImageButton
                 android:src="@drawable/interrogante"
@@ -138,7 +135,7 @@
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="10sp"/>
+        android:layout_height="10sp" />
 
         <TextView
             android:gravity="center"
@@ -150,7 +147,7 @@
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="6sp"/>
+        android:layout_height="6sp" />
 
         <TextView
             android:text="ENERGIAS RENOVABLES"
@@ -164,7 +161,7 @@
 
         <Space
         android:layout_width="match_parent"
-        android:layout_height="6sp"/>
+        android:layout_height="6sp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -240,7 +237,7 @@
 
             <Space
             android:layout_width="match_parent"
-            android:layout_height="6sp"/>
+            android:layout_height="6sp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -305,7 +302,7 @@
 
             <Space
             android:layout_width="match_parent"
-            android:layout_height="6sp"/>
+            android:layout_height="6sp" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -352,7 +349,6 @@
                     android:layout_height="40sp"
                     android:id="@+id/buttonM" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 
@@ -364,7 +360,7 @@
         android:layout_marginHorizontal="10sp"
         android:layout_marginBottom="10sp"
         android:layout_marginTop="10sp"
-        android:progress="100"/>
+        android:progress="100" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -380,8 +376,6 @@
             android:scaleType="centerInside"
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
-            android:contentDescription=""/>
-
+            android:contentDescription="" />
     </LinearLayout>
-
 </LinearLayout>

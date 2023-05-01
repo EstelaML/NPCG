@@ -31,7 +31,7 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -43,13 +43,12 @@
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:id="@+id/perfil"
             android:contentDescription="" />
-
     </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0sp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,8 +64,6 @@
             android:scaleType="centerInside"
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
-            android:contentDescription=""/>
-
+            android:contentDescription="" />
     </LinearLayout>
-
 </LinearLayout>

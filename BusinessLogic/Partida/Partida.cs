@@ -21,7 +21,7 @@ namespace preguntaods.BusinessLogic.Partida
         public Facade Fachada;
 
         private Android.App.Activity activity;
-        private Button botonAbandonar;  
+        private Button botonAbandonar;
         private TextView textoPuntosTotales;
         private TextView textoPuntosConsolidados;
 
@@ -114,7 +114,7 @@ namespace preguntaods.BusinessLogic.Partida
             if (textoPuntosTotales != null) textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
             textoPuntosConsolidados = activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
-                if (textoPuntosConsolidados != null) textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
+            if (textoPuntosConsolidados != null) textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
@@ -161,7 +161,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void UpdateUi()
         {
-            switch (listaRetos[contadorRetoSiguiente-1].GetType())
+            switch (listaRetos[contadorRetoSiguiente - 1].GetType())
             {
                 case Reto.TypePregunta:
                     {

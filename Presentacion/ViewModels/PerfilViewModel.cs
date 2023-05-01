@@ -11,7 +11,6 @@ namespace preguntaods.Presentacion.ViewModels
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPerfil);
-
         }
     }
 }
