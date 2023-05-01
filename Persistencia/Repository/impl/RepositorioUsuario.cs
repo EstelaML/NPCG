@@ -1,4 +1,5 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using Java.Util;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using System;
 using System.Threading.Tasks;
@@ -14,11 +15,20 @@ namespace preguntaods.Persistencia.Repository.impl
             conexion = SingletonConexion.GetInstance();
         }
 
-        public async Task<Usuario> GetUserByUUid(string u)
+        public async Task<Usuario> GetUserByUUid(string uuid)
         {
             var response = await conexion.Cliente
                 .From<Usuario>()
-                .Where(x => x.Uuid == u)
+                .Where(x => x.Uuid == uuid)
+                .Single();
+            return response;
+        }
+
+        public async Task<Usuario> GetUserByName(string nombre)
+        {
+            var response = await conexion.Cliente
+                .From<Usuario>()
+                .Where(x => x.Nombre == nombre)
                 .Single();
             return response;
         }
