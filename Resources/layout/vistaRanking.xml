@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingVertical="1dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/colorPrimary">
 
+        <ImageButton
+            android:src="@android:drawable/ic_menu_revert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="1dp"
+            android:id="@+id/buttonAtras"
+            android:background="@color/mtrl_btn_transparent_bg_color"
+            android:contentDescription=""
+            android:foregroundGravity="right" />
+    </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -40,7 +57,8 @@
             android:textStyle="bold"
             android:id="@+id/textRanking"
             android:textColor="@android:color/black"
-            tools:ignore="HardcodedText"/>
+            tools:ignore="HardcodedText"
+            android:textSize="18sp" />
         <LinearLayout
             android:orientation="vertical"
             android:minHeight="100px"
@@ -55,11 +73,7 @@
                 android:id="@+id/rankingGridLayout"
                 android:columnCount="3"
                 android:rowCount="20"
-                android:background="#fff45719"
-                android:scrollbarStyle="outsideInset"
-                android:scrollbarThumbVertical="@android:color/black"
-                android:scrollbarTrackVertical="@android:color/darker_gray"
-                android:verticalScrollbarPosition="right"/>
+                android:background="#ffe68b14"/>
         </LinearLayout>
 
         <TextView
