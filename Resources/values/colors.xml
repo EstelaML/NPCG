@@ -7,4 +7,5 @@
 	<color name="colorSecundary">#000000</color>
 	<color name="colorAccent">#FFB347</color>
 	<color name="colorError">#FF0000</color>
+	<color name="colorAcierto">#FF99CC00</color>
 </resources>
