@@ -76,7 +76,7 @@ namespace preguntaods.Presentacion.ViewModels
                 UserDialogs.Instance.HideLoading();
 
                 await fachada.LogoutAsync();
-                error.Text = "Correo electrónico o contraseña incorrecta";
+                error.Text = "Correo electrónico/Usuario o contraseña incorrecta";
             }
         }
     }

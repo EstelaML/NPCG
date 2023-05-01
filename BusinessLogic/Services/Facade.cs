@@ -29,8 +29,13 @@ namespace preguntaods.BusinessLogic.Services
         public async Task LoginAsync(string correoNombre, string password)
         {
             var correo = "";
-            if (correoNombre.Contains('@')) { correo = correoNombre; }
-            else {  }
+            if (correoNombre.Contains("@gmail.com")) { correo = correoNombre; }
+            else
+            {
+                var usuario = await repositorioUser.GetUserByName(correoNombre) ?? throw new System.Exception();
+
+                var response = await conexion.Cliente.Auth.GetUserById(correo, usuario.Uuid);
+            }
 
             var session = await conexion.Cliente.Auth.SignIn(correo, password);
             conexion.Usuario = session?.User;
