@@ -28,7 +28,7 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:text="Correo electrónico"
+            android:text="Correo electrónico o Usuario"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:background="@drawable/style_camposInf"
-            android:id="@+id/correo" />
+            android:id="@+id/correoNombre" />
 
         <TextView
             android:text="Contraseña"

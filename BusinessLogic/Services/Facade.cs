@@ -26,8 +26,12 @@ namespace preguntaods.BusinessLogic.Services
 
         #region Usuario
 
-        public async Task LoginAsync(string correo, string password)
+        public async Task LoginAsync(string correoNombre, string password)
         {
+            var correo = "";
+            if (correoNombre.Contains('@')) { correo = correoNombre; }
+            else {  }
+
             var session = await conexion.Cliente.Auth.SignIn(correo, password);
             conexion.Usuario = session?.User;
         }
