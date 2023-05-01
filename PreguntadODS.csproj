@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\Entities\Ahorcado.cs" />
+    <Compile Include="BusinessLogic\Entities\Estadisticas.cs" />
     <Compile Include="BusinessLogic\Entities\RetosRealizados.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoLetraAcierto.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="BusinessLogic\Partida\PartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\IPartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\PartidaDirector.cs" />
+    <Compile Include="Persistencia\Entities\Estadisticas.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceFrase.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceSopa.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceAhorcado.cs" />
