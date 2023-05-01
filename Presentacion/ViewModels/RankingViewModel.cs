@@ -2,11 +2,7 @@
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using AndroidX.RecyclerView.Widget;
-using Java.Lang;
-using Java.Util;
 using preguntaods.BusinessLogic.Services;
-using preguntaods.Entities;
 using System.Collections.Generic;
 
 namespace preguntaods.Presentacion.ViewModels

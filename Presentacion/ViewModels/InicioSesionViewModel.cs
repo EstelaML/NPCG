@@ -14,7 +14,7 @@ namespace preguntaods.Presentacion.ViewModels
     public class InicioSesionViewModel : AppCompatActivity
     {
         private Button iniciarSesion;
-        private EditText correoNombre;
+        private EditText correo;
         private EditText password;
         private TextView error;
         private TextView registrar;
@@ -34,7 +34,7 @@ namespace preguntaods.Presentacion.ViewModels
             UserDialogs.Init(this);
 
             // Create your application here
-            correoNombre = FindViewById<EditText>(Resource.Id.correoNombre);
+            correo = FindViewById<EditText>(Resource.Id.correo);
             password = FindViewById<EditText>(Resource.Id.contraseña);
 
             iniciarSesion = FindViewById<Button>(Resource.Id.inicioSesion);
@@ -63,7 +63,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 UserDialogs.Instance.ShowLoading("Comprobando...", MaskType.Clear);
 
-                await fachada.LoginAsync(correoNombre.Text, password.Text);
+                await fachada.LoginAsync(correo.Text, password.Text);
 
                 UserDialogs.Instance.HideLoading();
 
@@ -76,7 +76,7 @@ namespace preguntaods.Presentacion.ViewModels
                 UserDialogs.Instance.HideLoading();
 
                 await fachada.LogoutAsync();
-                error.Text = "Correo electrónico/Usuario o contraseña incorrecta";
+                error.Text = "Correo electrónico o contraseña incorrecta";
             }
         }
     }

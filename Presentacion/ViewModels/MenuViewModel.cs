@@ -79,10 +79,8 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
-            
             var i = new Android.Content.Intent(this, typeof(PerfilViewModel));
             StartActivity(i);
-            
         }
 
         private void Ranking_Click(object sender, EventArgs e)

@@ -12,6 +12,7 @@ namespace preguntaods.Presentacion.ViewModels
     public class PerfilViewModel : AppCompatActivity
     {
         private Sonido sonido;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -28,7 +29,6 @@ namespace preguntaods.Presentacion.ViewModels
         {
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
-
 
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
