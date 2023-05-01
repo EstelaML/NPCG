@@ -26,7 +26,7 @@ namespace preguntaods.Presentacion.ViewModels
             int i = 1;
             while (i <= 20)
             {
-                posiciones.Add(i.ToString()+".");
+                posiciones.Add(i.ToString() + ".");
                 i++;
             }
             //for (int j = 0; j < posiciones.Count; j++)

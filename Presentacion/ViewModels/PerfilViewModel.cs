@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
@@ -8,7 +7,6 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -27,14 +25,14 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPerfil);
 
-           // UserDialogs.Instance.ShowLoading("Cargando Usuario...", MaskType.Clear);
+            // UserDialogs.Instance.ShowLoading("Cargando Usuario...", MaskType.Clear);
             fachada = new Facade();
 
             usuario = await fachada.GetUsuarioLogged();
 
             //await Task.Delay(1000);
 
-           // UserDialogs.Instance.HideLoading();
+            // UserDialogs.Instance.HideLoading();
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
@@ -46,15 +44,12 @@ namespace preguntaods.Presentacion.ViewModels
             aciertos = FindViewById<TextView>(Resource.Id.textViewAciertos);
             fallos = FindViewById<TextView>(Resource.Id.textViewFallos);
 
-            
             Init();
         }
 
         private void Init()
         {
-
             nombre.Text = usuario.Nombre;
-
         }
 
         private void Atras(object sender, EventArgs e)
