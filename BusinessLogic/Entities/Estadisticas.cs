@@ -6,14 +6,12 @@ namespace preguntaods.Entities
         public Estadisticas() 
         { }
 
-        public Estadisticas(int user, int puntuacion, int[] aciertos, int[] fallos)
-        { 
-        
+        public Estadisticas(string user, int puntuacion, int[] aciertos, int[] fallos)
+        {        
             Usuario = user;
             Puntuacion = puntuacion;
             Aciertos = aciertos;
-            Fallos = fallos;
-        
+            Fallos = fallos;     
         }
     }
 }

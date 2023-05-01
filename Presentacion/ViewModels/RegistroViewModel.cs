@@ -130,6 +130,8 @@ namespace preguntaods.Presentacion.ViewModels
                 {
                     var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                     await fachada.NewUsuario(user);
+                    await fachada.crearEstadisticas(user);
+                 
 
                     UserDialogs.Instance.HideLoading();
 
@@ -149,12 +151,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 error.Text = "La contraseña debe estar formada como mínimo de 8 caracteres";
             }
-            catch (Exception)
-            {
-                UserDialogs.Instance.HideLoading();
-
-                error.Text = "Ese correo ya está en uso, utiliza otro o inicia sesión";
-            }
+            
         }
 
         private void Atras(object sender, EventArgs e)

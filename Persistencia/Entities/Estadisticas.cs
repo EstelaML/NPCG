@@ -12,7 +12,7 @@ namespace preguntaods.Entities
         public int? Id { get; set; }
 
         [Column("Usuario")]
-        public int Usuario { get; set; }
+        public string Usuario { get; set; }
 
         [Column("Puntuacion")]
         public int Puntuacion { get; set;}

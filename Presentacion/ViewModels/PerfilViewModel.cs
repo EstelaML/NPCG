@@ -25,14 +25,11 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPerfil);
 
-            // UserDialogs.Instance.ShowLoading("Cargando Usuario...", MaskType.Clear);
+ 
             fachada = new Facade();
 
             usuario = await fachada.GetUsuarioLogged();
 
-            //await Task.Delay(1000);
-
-            // UserDialogs.Instance.HideLoading();
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
@@ -50,6 +47,7 @@ namespace preguntaods.Presentacion.ViewModels
         private void Init()
         {
             nombre.Text = usuario.Nombre;
+          
         }
 
         private void Atras(object sender, EventArgs e)
