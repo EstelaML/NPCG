@@ -30,10 +30,10 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
-            var usuarios = await fachada.Get20OrderedUsers();
+            var usuarios = await fachada.Get10OrderedUsers();
             List<string> posiciones = new List<string>();
             int i = 1;
-            while (i <= 20)
+            while (i <= 10)
             {
                 posiciones.Add(i.ToString() + ".");
                 i++;
