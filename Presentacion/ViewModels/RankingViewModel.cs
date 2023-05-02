@@ -17,6 +17,7 @@ namespace preguntaods.Presentacion.ViewModels
         private Sonido sonido;
         private GridLayout rankingGridLayout;
         private Facade fachada;
+        private const int numFilas = 10;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -30,10 +31,10 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
-            var usuarios = await fachada.Get10OrderedUsers();
+            var usuarios = await fachada.GetOrderedUsers(numFilas);
             List<string> posiciones = new List<string>();
             int i = 1;
-            while (i <= 10)
+            while (i <= numFilas)
             {
                 posiciones.Add(i.ToString() + ".");
                 i++;
@@ -59,7 +60,7 @@ namespace preguntaods.Presentacion.ViewModels
             rankingGridLayout.AddView(new TextView(this) { Text = "Puntos", TextAlignment = TextAlignment.Center });
 
             // Agregar los datos al GridLayout
-            for (int j = 0; j < posiciones.Count; j++)
+            for (int j = 0; j < numFilas; j++)
             {
                 rankingGridLayout.AddView(new TextView(this) { Text = posiciones[j], TextAlignment = TextAlignment.Center });
                 if (j < usuarios.Count)
