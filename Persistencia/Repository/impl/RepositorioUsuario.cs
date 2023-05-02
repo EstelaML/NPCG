@@ -36,7 +36,7 @@ namespace preguntaods.Persistencia.Repository.impl
         {
             int p = puntosA + puntosS;
             await conexion.Cliente
-                        .From<Estadisticas>()
+                        .From<Estadistica>()
                         .Where(x => x.Usuario == uuid)
                         .Set(x => x.Puntuacion, p)
                         .Update();
