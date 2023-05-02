@@ -68,12 +68,11 @@ namespace preguntaods.Presentacion.ViewModels
                     rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Nombre, TextAlignment = TextAlignment.Center });
                     rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Puntos.ToString(), TextAlignment = TextAlignment.Center });
                 }
-                else {
+                else
+                {
                     rankingGridLayout.AddView(new TextView(this) { Text = "---", TextAlignment = TextAlignment.Center });
                     rankingGridLayout.AddView(new TextView(this) { Text = "---", TextAlignment = TextAlignment.Center });
                 }
-                
-                
             }
         }
 

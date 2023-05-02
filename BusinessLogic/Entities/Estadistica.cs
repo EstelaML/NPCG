@@ -1,5 +1,4 @@
-﻿
-namespace preguntaods.Entities
+﻿namespace preguntaods.Entities
 {
     public partial class Estadistica
     {

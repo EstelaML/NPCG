@@ -78,7 +78,6 @@ namespace preguntaods.BusinessLogic.Services
         public async Task NewUsuario(Usuario user)
         {
             await repositorioUser.Add(user);
-
         }
 
         public async Task GuardarPregunta(Reto reto)
@@ -108,7 +107,6 @@ namespace preguntaods.BusinessLogic.Services
             var usuario = await GetUsuarioLogged();
             if (usuario?.Id != null)
             {
-
                 switch (reto)
                 {
                     // añado a la BD ese reto
@@ -145,10 +143,8 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task crearEstadisticas(Usuario user)
         {
-
             var a = new Estadistica(user.Uuid, 0, null, null);
             await repositorioEstadisticas.Add(a);
-
         }
     }
 }

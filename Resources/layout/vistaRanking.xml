@@ -73,7 +73,7 @@
                 android:id="@+id/rankingGridLayout"
                 android:columnCount="3"
                 android:rowCount="20"
-                android:background="#ffe68b14"/>
+                android:background="#ffe68b14" />
         </LinearLayout>
 
         <TextView
