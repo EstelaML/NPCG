@@ -141,7 +141,7 @@ namespace preguntaods.Presentacion.ViewModels
                         OkText = "Entendido"
                     });
 
-                    await Task.Delay(1000);
+                    await Task.Delay(5000);
 
                     var i = new Intent(this, typeof(InicioSesionViewModel));
                     StartActivity(i);
