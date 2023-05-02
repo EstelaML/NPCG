@@ -85,7 +85,6 @@
     <Compile Include="BusinessLogic\Partida\IPartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\PartidaDirector.cs" />
     <Compile Include="Persistencia\Entities\Estadisticas.cs" />
-    <Compile Include="Persistencia\Repository\impl\RespositorioEstadisticas.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceFrase.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceSopa.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceAhorcado.cs" />
@@ -394,6 +393,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\vistaPerfil.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\interrogante2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\interrogante3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

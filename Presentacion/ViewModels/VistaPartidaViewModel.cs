@@ -119,8 +119,8 @@ namespace preguntaods.Presentacion.ViewModels
         {
             var alertBuilder = new Android.App.AlertDialog.Builder(this, Resource.Style.AlertDialogCustom);
 
-            alertBuilder.SetMessage("El tiempo no parará");
-            alertBuilder.SetTitle("¿Estás seguro?");
+            alertBuilder.SetMessage("¿Estás seguro? El tiempo no parará.");
+            alertBuilder.SetTitle("Enlace de apoyo");
             alertBuilder.SetPositiveButton("Aceptar", (o, args) =>
             {
                 string path;

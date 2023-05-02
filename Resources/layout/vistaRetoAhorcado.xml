@@ -53,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:paddingRight="40sp"
+        android:paddingRight="20sp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -114,6 +114,43 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+          <Space
+        android:layout_width="match_parent"
+        android:layout_height="20sp" />
+
+        <AbsoluteLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/absoluteLayout1">
+
+            <TextView
+                android:gravity="center"
+                android:layout_y="10sp"
+                android:layout_x="1sp"
+                android:text="Los derechos fundamentales que todas las personas tienen, como la libertad de expresión, la igualdad ante la ley y el derecho a un trabajo digno:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="347sp"
+                android:background="@drawable/style_camposInf"
+                android:layout_height="100sp"
+                android:id="@+id/enunciado"
+                tools:ignore="HardcodedText"/>
+        
+              <ImageButton
+                android:src="@drawable/interrogante3"
+                android:scaleType="centerInside"
+                android:background="@drawable/m3_tabs_transparent_background"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:id="@+id/interroganteButton"
+                android:contentDescription="?" />
+        </AbsoluteLayout>
+       
+        <Space
+        android:layout_width="match_parent"
+        android:layout_height="7sp" />
+
         <ImageView
             android:src="@drawable/ahorcado_1"
             android:scaleType="centerInside"
@@ -124,27 +161,6 @@
             android:contentDescription=""
             android:id="@+id/ahorcadoImg" />
 
-        <ImageButton
-                android:src="@drawable/interrogante"
-                android:scaleType="centerInside"
-                android:background="@drawable/m3_tabs_transparent_background"
-                android:layout_width="30sp"
-                android:layout_height="30sp"
-                android:id="@+id/interroganteButton"
-                android:contentDescription="?" />
-
-        <Space
-        android:layout_width="match_parent"
-        android:layout_height="10sp" />
-
-        <TextView
-            android:gravity="center"
-            android:text="Los derechos fundamentales que todas las personas tienen, como la libertad de expresión, la igualdad ante la ley y el derecho a un trabajo digno:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="360sp"
-            android:layout_height="90sp"
-            android:id="@+id/enunciado"
-            tools:ignore="HardcodedText"/>
 
         <TextView
             android:text="ENERGIAS RENOVABLES"
