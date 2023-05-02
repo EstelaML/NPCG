@@ -1,4 +1,5 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using Java.Util;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using System;
 using System.Threading.Tasks;
@@ -70,6 +71,22 @@ namespace preguntaods.Persistencia.Repository.impl
             }
         }
 
+        public async Task UpdateRetoAcertado(string a, int[] preguntas, Usuario usuario) 
+        {
+
+            preguntas ??= Array.Empty<int>();
+            if (usuario.Id != null)
+            {
+                var uuid = usuario.Uuid;
+                await conexion.Cliente
+                    .From<Estadisticas>()
+                    .Where(x => x.Usuario == uuid)
+                    .Set(x => x.Aciertos, preguntas)
+                    .Update();
+            }
+
+        }
+
         public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
         {
             if (usuario.Id == null) return null;
@@ -91,6 +108,15 @@ namespace preguntaods.Persistencia.Repository.impl
             }
 
             return null;
+        }
+
+        public async Task<int[]> GetRetosAcertadosAsync(string a, Reto reto, Usuario usuario)
+        {
+            if (usuario.Id == null) return null;
+            var uuid = usuario.Uuid;
+            var respuesta = await conexion.Cliente.From<Estadisticas>().Where(x => x.Usuario == uuid).Single();    
+            
+            return respuesta.Aciertos;
         }
     }
 }
