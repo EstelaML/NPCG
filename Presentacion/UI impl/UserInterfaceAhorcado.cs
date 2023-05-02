@@ -267,6 +267,7 @@ namespace preguntaods.Presentacion.UI_impl
                 //_puntuacionTotal -= puntuacion * 2;
                 fallos++;
                 await MostrarAlerta(false, fallos == 2);
+                ((VistaPartidaViewModel)activity).GuardarPreguntaFallada();
                 ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
         }

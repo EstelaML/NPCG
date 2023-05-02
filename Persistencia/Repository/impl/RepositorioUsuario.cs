@@ -87,6 +87,22 @@ namespace preguntaods.Persistencia.Repository.impl
 
         }
 
+        public async Task UpdateRetoFallado(int[] preguntas, Usuario usuario)
+        {
+
+            preguntas ??= Array.Empty<int>();
+            if (usuario.Id != null)
+            {
+                var uuid = usuario.Uuid;
+                await conexion.Cliente
+                    .From<Estadisticas>()
+                    .Where(x => x.Usuario == uuid)
+                    .Set(x => x.Fallos, preguntas)
+                    .Update();
+            }
+
+        }
+
         public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
         {
             if (usuario.Id == null) return null;
@@ -110,7 +126,7 @@ namespace preguntaods.Persistencia.Repository.impl
             return null;
         }
 
-        public async Task<int[]> GetRetosAcertadosAsync(string a, Reto reto, Usuario usuario)
+        public async Task<int[]> GetRetosAcertadosAsync(Usuario usuario)
         {
             if (usuario.Id == null) return null;
             var uuid = usuario.Uuid;
@@ -118,5 +134,15 @@ namespace preguntaods.Persistencia.Repository.impl
             
             return respuesta.Aciertos;
         }
+
+        public async Task<int[]> GetRetosFalladosAsync(Usuario usuario)
+        {
+            if (usuario.Id == null) return null;
+            var uuid = usuario.Uuid;
+            var respuesta = await conexion.Cliente.From<Estadisticas>().Where(x => x.Usuario == uuid).Single();
+
+            return respuesta.Fallos;
+        }
+
     }
 }

@@ -214,6 +214,8 @@ namespace preguntaods.Presentacion.UI_impl
                 sonido.SetEstrategia(new EstrategiaSonidoError(), activity);
                 boton?.SetBackgroundResource(Resource.Drawable.style_preFallo);
 
+                ((VistaPartidaViewModel)activity).GuardarPreguntaFallada();
+
                 puntuacionTotal -= puntuacion * 2;
                 if (puntuacionTotal < 0) puntuacionTotal = 0;
 

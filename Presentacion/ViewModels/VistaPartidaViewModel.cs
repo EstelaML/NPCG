@@ -77,6 +77,11 @@ namespace preguntaods.Presentacion.ViewModels
             await partida.GuardarPreguntaUsuario(partida.GetRetoActual());
         }
 
+        public async void GuardarPreguntaFallada()
+        {
+            await partida.GuardarPreguntaFalladaUsuario(partida.GetRetoActual());
+        }
+
         public void RetoSiguiente(int fallos, int ptsTotales, int ptsConsolidados)
         {
             partida.NextReto(fallos, ptsTotales, ptsConsolidados);

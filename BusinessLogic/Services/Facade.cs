@@ -102,6 +102,27 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async Task GuardarPreguntaFallada(Reto reto)
+        {
+            // obtengo el id del usuario
+            var usuario = await GetUsuarioLogged();
+            if (usuario?.Id != null)
+            {
+                
+                switch (reto)
+                {
+                    // añado a la BD ese reto
+                    case RetoPre _:
+                        await repositorioPregunta.AñadirPreguntaFallada(reto);
+                        break;
+
+                    case RetoAhorcado _:
+                        await repositorioAhorcado.AñadirAhorcadoFallado(reto);
+                        break;
+                }
+            }
+        }
+
         public async Task<bool> ComprobarUsuario(string nombre)
         {
             var respuesta = await repositorioUser.GetAll();

@@ -191,6 +191,11 @@ namespace preguntaods.BusinessLogic.Partida
             await Fachada.GuardarPregunta(reto);
         }
 
+        public async Task GuardarPreguntaFalladaUsuario(Reto reto)
+        {
+            await Fachada.GuardarPreguntaFallada(reto);
+        }
+
         public void EventoAbandonarBoton(object sender, EventArgs e)
         {
             string titulo;
