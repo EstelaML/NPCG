@@ -131,9 +131,14 @@ namespace preguntaods.Presentacion.ViewModels
                     var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                     await fachada.NewUsuario(user);
                     await fachada.crearEstadisticas(user);
-                 
+
 
                     UserDialogs.Instance.HideLoading();
+
+                    UserDialogs.Instance.Alert(new AlertConfig {
+                        Message = "Te has registrado con exito! Verifica tu cuenta con el correo que se te ha enviado",
+                        OkText = "Entendido"
+                    });
 
                     var i = new Intent(this, typeof(InicioSesionViewModel));
                     StartActivity(i);
