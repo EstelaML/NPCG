@@ -8,6 +8,7 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -131,9 +132,16 @@ namespace preguntaods.Presentacion.ViewModels
                     var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                     await fachada.NewUsuario(user);
                     await fachada.crearEstadisticas(user);
-                 
+
 
                     UserDialogs.Instance.HideLoading();
+
+                    UserDialogs.Instance.Alert(new AlertConfig {
+                        Message = "Te has registrado con exito! Verifica tu cuenta con el correo que se te ha enviado",
+                        OkText = "Entendido"
+                    });
+
+                    await Task.Delay(5000);
 
                     var i = new Intent(this, typeof(InicioSesionViewModel));
                     StartActivity(i);

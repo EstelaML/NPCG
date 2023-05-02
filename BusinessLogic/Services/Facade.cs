@@ -111,12 +111,12 @@ namespace preguntaods.BusinessLogic.Services
 
         #endregion Usuario
 
-        public async Task<List<Usuario>> Get20OrderedUsers()
+        public async Task<List<Usuario>> Get10OrderedUsers()
         {
             var respuesta = await repositorioUser.GetAll();
             var listaUsuarios = respuesta.Select(usuario => new Usuario { Nombre = usuario.Nombre, Puntos = usuario.Puntos })
                                          .OrderByDescending(usuario => usuario.Puntos)
-                                         .Take(20)
+                                         .Take(10)
                                          .ToList();
 
             return listaUsuarios;
