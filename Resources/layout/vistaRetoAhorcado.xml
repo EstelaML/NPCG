@@ -136,7 +136,7 @@
                 android:layout_height="100sp"
                 android:id="@+id/enunciado"
                 tools:ignore="HardcodedText"/>
-        
+
               <ImageButton
                 android:src="@drawable/interrogante3"
                 android:scaleType="centerInside"
@@ -146,7 +146,7 @@
                 android:id="@+id/interroganteButton"
                 android:contentDescription="?" />
         </AbsoluteLayout>
-       
+
         <Space
         android:layout_width="match_parent"
         android:layout_height="7sp" />

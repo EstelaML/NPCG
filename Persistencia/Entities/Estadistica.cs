@@ -6,7 +6,7 @@ namespace preguntaods.Entities
 {
 
     [Table("Estadisticas")]
-    public partial class Estadisticas : BaseModel, IEntity
+    public partial class Estadistica : BaseModel, IEntity
     {
         [PrimaryKey("id")]
         public int? Id { get; set; }

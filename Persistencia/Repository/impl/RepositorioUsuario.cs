@@ -79,7 +79,7 @@ namespace preguntaods.Persistencia.Repository.impl
             {
                 var uuid = usuario.Uuid;
                 await conexion.Cliente
-                    .From<Estadisticas>()
+                    .From<Estadistica>()
                     .Where(x => x.Usuario == uuid)
                     .Set(x => x.Aciertos, preguntas)
                     .Update();
@@ -95,7 +95,7 @@ namespace preguntaods.Persistencia.Repository.impl
             {
                 var uuid = usuario.Uuid;
                 await conexion.Cliente
-                    .From<Estadisticas>()
+                    .From<Estadistica>()
                     .Where(x => x.Usuario == uuid)
                     .Set(x => x.Fallos, preguntas)
                     .Update();
@@ -130,7 +130,7 @@ namespace preguntaods.Persistencia.Repository.impl
         {
             if (usuario.Id == null) return null;
             var uuid = usuario.Uuid;
-            var respuesta = await conexion.Cliente.From<Estadisticas>().Where(x => x.Usuario == uuid).Single();    
+            var respuesta = await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Single();    
             
             return respuesta.Aciertos;
         }
@@ -139,7 +139,7 @@ namespace preguntaods.Persistencia.Repository.impl
         {
             if (usuario.Id == null) return null;
             var uuid = usuario.Uuid;
-            var respuesta = await conexion.Cliente.From<Estadisticas>().Where(x => x.Usuario == uuid).Single();
+            var respuesta = await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Single();
 
             return respuesta.Fallos;
         }
