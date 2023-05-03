@@ -19,6 +19,13 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView nombre;
         private TextView aciertos;
         private TextView fallos;
+        private Estadisticas estadisticas;
+
+        private int retosAcertados;
+        private int retosFallados;
+        private int retosTotales;
+        private int probAcierto;
+        private int probFallo;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -30,6 +37,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             usuario = await fachada.GetUsuarioLogged();
 
+            estadisticas = await fachada.GetEstadisticasByUUID(usuario.Uuid);
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
@@ -47,7 +55,26 @@ namespace preguntaods.Presentacion.ViewModels
         private void Init()
         {
             nombre.Text = usuario.Nombre;
-          
+            retosFallados = estadisticas.Fallos.Length;
+            retosAcertados = estadisticas.Aciertos.Length;
+
+            retosTotales = retosFallados + retosAcertados; 
+            probAcierto = (int)(((float)retosAcertados / (float)retosTotales) * 100);
+
+            if (probAcierto < 0) 
+            { 
+                aciertos.Text = "0"; 
+
+            } else { aciertos.Text = probAcierto.ToString(); }
+
+            probFallo = (100 - probAcierto);
+
+            if (probAcierto < 0)
+            {
+                fallos.Text = "0";
+
+            }
+            else { fallos.Text = probFallo.ToString(); }
         }
 
         private void Atras(object sender, EventArgs e)
