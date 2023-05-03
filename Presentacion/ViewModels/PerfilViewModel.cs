@@ -19,6 +19,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView nombre;
         private TextView aciertos;
         private TextView fallos;
+        private TextView puntuacion;
         private Estadistica estadisticas;
 
         private int retosAcertados;
@@ -47,6 +48,7 @@ namespace preguntaods.Presentacion.ViewModels
             nombre = FindViewById<TextView>(Resource.Id.textViewNombre);
             aciertos = FindViewById<TextView>(Resource.Id.textViewAciertos);
             fallos = FindViewById<TextView>(Resource.Id.textViewFallos);
+            puntuacion = FindViewById<TextView>(Resource.Id.textViewPuntuacion);
 
             Init();
         }
@@ -54,6 +56,9 @@ namespace preguntaods.Presentacion.ViewModels
         private void Init()
         {
             nombre.Text = usuario.Nombre;
+
+            puntuacion.Text = estadisticas.Puntuacion.ToString();
+
             retosFallados = estadisticas.Fallos.Length;
             retosAcertados = estadisticas.Aciertos.Length;
 
