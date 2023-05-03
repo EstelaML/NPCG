@@ -9,6 +9,7 @@ using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -18,6 +19,7 @@ namespace preguntaods.Presentacion.ViewModels
         private Sonido sonido;
         private GridLayout rankingGridLayout;
         private Facade fachada;
+        private TextView textAnimo;
         private const int numFilas = 10;
 
         protected override async void OnCreate(Bundle savedInstanceState)
@@ -34,6 +36,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var usuarios = await fachada.GetOrderedUsers(numFilas);
             CrearRanking(usuarios);
+            MensajeAnimo(usuarios);
         }
         private void CrearRanking(List<Usuario> usuarios) {
             List<string> posiciones = new List<string>();
@@ -66,8 +69,17 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private void MensajeAnimo() { 
-            
+        private async void MensajeAnimo(List<Usuario> usuarios) {
+            var usuarioLogged = await fachada.GetUsuarioLogged();
+            bool estaEnLaLista = usuarios.Any(u => u.Nombre == usuarioLogged.Nombre);
+            if (estaEnLaLista)
+            {
+                textAnimo.Text = "";
+            }
+            else
+            {
+                textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima";
+            }
         }
         private void Atras(object sender, EventArgs e)
         {
