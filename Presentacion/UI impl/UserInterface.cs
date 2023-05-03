@@ -5,6 +5,7 @@ namespace preguntaods.Presentacion.UI_impl
 {
     public abstract class UserInterface
     {
+        public Initialize
         public abstract void Init();
 
         public abstract void SetDatosReto(Reto reto);
