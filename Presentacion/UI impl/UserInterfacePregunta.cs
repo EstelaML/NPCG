@@ -16,8 +16,6 @@ namespace preguntaods.Presentacion.UI_impl
     public class UserInterfacePregunta : UserInterface
     {
         // Class Elements
-        private Activity activity;
-
         private Facade fachada;
         private Sonido sonido;
         private int fallos;
@@ -45,11 +43,6 @@ namespace preguntaods.Presentacion.UI_impl
 
         // Interactive Elements
         private ObjectAnimator animation;
-
-        public override void SetActivity(Activity newActivity)
-        {
-            activity = newActivity;
-        }
 
         public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
         {

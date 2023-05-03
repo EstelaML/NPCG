@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using Java.Beans;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
@@ -40,7 +39,9 @@ namespace preguntaods.Presentacion.ViewModels
             CrearRanking(usuarios);
             MensajeAnimo(usuarios);
         }
-        private void CrearRanking(List<Usuario> usuarios) {
+
+        private void CrearRanking(List<Usuario> usuarios)
+        {
             List<string> posiciones = new List<string>();
             int i = 1;
             while (i <= numFilas)
@@ -71,7 +72,8 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private async void MensajeAnimo(List<Usuario> usuarios) {
+        private async void MensajeAnimo(List<Usuario> usuarios)
+        {
             var usuarioLogged = await fachada.GetUsuarioLogged();
             bool estaEnLaLista = usuarios.Any(u => u.Nombre == usuarioLogged.Nombre);
             int indice = usuarios.FindIndex(u => u.Nombre == usuarioLogged.Nombre);
@@ -85,6 +87,7 @@ namespace preguntaods.Presentacion.ViewModels
                 textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
             }
         }
+
         private void Atras(object sender, EventArgs e)
         {
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);

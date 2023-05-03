@@ -18,8 +18,6 @@ namespace preguntaods.Presentacion.UI_impl
     public class UserInterfaceAhorcado : UserInterface
     {
         // Class Elements
-        private Activity activity;
-
         private Facade fachada;
         private EstrategiaSonidoReloj reloj;
         private Sonido sonido;
@@ -77,11 +75,6 @@ namespace preguntaods.Presentacion.UI_impl
         private ObjectAnimator animation;
 
         private ProgressBar barTime;
-
-        public override void SetActivity(Activity newActivity)
-        {
-            activity = newActivity;
-        }
 
         public override void Init()
         {
@@ -260,7 +253,8 @@ namespace preguntaods.Presentacion.UI_impl
             }
         }
 
-        private List<int> GetIndexesOfLetter(string word, char letter) {
+        private List<int> GetIndexesOfLetter(string word, char letter)
+        {
             var indexes = new List<int>();
             var aux = word.ToCharArray();
 
@@ -283,7 +277,8 @@ namespace preguntaods.Presentacion.UI_impl
             palabra.Text = new string(guionesPalabra);
         }
 
-        private void ActualizaImagenAhorcado() {
+        private void ActualizaImagenAhorcado()
+        {
             var path = "ahorcado_" + ++ronda;
             if (activity.Resources != null)
             {
@@ -291,7 +286,6 @@ namespace preguntaods.Presentacion.UI_impl
                 ahorcadoImg.SetImageResource(idDeImagen);
             }
         }
-
 
         public override void SetDatosReto(Reto reto)
         {

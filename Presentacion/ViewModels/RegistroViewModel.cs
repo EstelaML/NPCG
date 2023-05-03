@@ -8,7 +8,6 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -139,7 +138,8 @@ namespace preguntaods.Presentacion.ViewModels
                     {
                         Message = "Te has registrado con exito! Verifica tu cuenta con el correo que se te ha enviado",
                         OkText = "Entendido",
-                        OnAction = () => {
+                        OnAction = () =>
+                        {
                             var i = new Intent(this, typeof(InicioSesionViewModel));
                             StartActivity(i);
                         }

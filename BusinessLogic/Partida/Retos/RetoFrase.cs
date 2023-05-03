@@ -11,7 +11,6 @@ namespace preguntaods.BusinessLogic.Partida.Retos
 
         public override async Task SetValues()
         {
-
         }
     }
 }

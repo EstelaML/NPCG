@@ -5,13 +5,6 @@ namespace preguntaods.Presentacion.UI_impl
 {
     public class UserInterfaceSopa : UserInterface
     {
-        private Activity activity;
-
-        public override void SetActivity(Activity newActivity)
-        {
-            activity = newActivity;
-        }
-
         public override void Init()
         {
             throw new System.NotImplementedException();

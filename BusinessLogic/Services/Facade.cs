@@ -144,20 +144,17 @@ namespace preguntaods.BusinessLogic.Services
         public async Task crearEstadisticas(Usuario user)
         {
             int[] aux = new int[0];
-            var a = new Estadisticas(user.Uuid, 0, aux, aux);
+            var a = new Estadistica(user.Uuid, 0, aux, aux);
             await repositorioEstadisticas.Add(a);
-
         }
 
-        public async Task<Estadisticas> GetEstadisticasByUUID(string uuid) 
+        public async Task<Estadistica> GetEstadisticasByUUID(string uuid)
         {
-
             var response = await conexion.Cliente
-                .From<Estadisticas>()
+                .From<Estadistica>()
                 .Where(x => x.Usuario == uuid)
                 .Single();
             return response;
-
         }
     }
 }

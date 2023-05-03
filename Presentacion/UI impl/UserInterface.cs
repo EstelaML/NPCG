@@ -1,13 +1,6 @@
-﻿using Android.App;
-using Android.Hardware.Usb;
-using Android.Widget;
+﻿using Android.Widget;
 using preguntaods.BusinessLogic.Partida.Retos;
-using static Android.Provider.CallLog;
-using System.Diagnostics;
-using Android.Content;
 using Activity = Android.App.Activity;
-using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.Presentacion.ViewModels;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -15,7 +8,7 @@ namespace preguntaods.Presentacion.UI_impl
     {
         private TextView textoPuntosTotales;
         private TextView textoPuntosConsolidados;
-        private Activity activity;
+        protected Activity activity;
 
         public void InitializeUi(int fallos, int ptsTotales, int ptsConsolidados, Reto retoActual)
         {
