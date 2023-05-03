@@ -75,17 +75,24 @@
                 android:rowCount="20"
                 android:background="#ffe68b14" />
         </LinearLayout>
-
-        <TextView
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Texto de ánimo"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:id="@+id/textAnimo"
-            android:textColor="@android:color/black"
-            tools:ignore="HardcodedText" />
+            android:id="@+id/linearLayout2"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:id="@+id/textAnimo"
+                android:textColor="@android:color/black"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
