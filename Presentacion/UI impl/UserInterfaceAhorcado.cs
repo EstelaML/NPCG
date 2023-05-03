@@ -219,58 +219,79 @@ namespace preguntaods.Presentacion.UI_impl
 
         private async void Letter_Click(object sender, EventArgs e)
         {
-            var boton = sender as Button;
-            var letra = char.Parse(boton?.Text ?? string.Empty);
+            var button = sender as Button;
+            if (button == null) return;
+
+            char letter = char.Parse(button.Text);
+
             animation.Pause();
 
-            if (palabraAdivinar.Contains(letra))
+            if (palabraAdivinar.Contains(letter))
             {
                 sonido.SetEstrategia(new EstrategiaSonidoLetraAcierto(), activity);
                 sonido.EjecutarSonido();
-                List<int> indexes = new List<int>();
-                char[] aux = palabraAdivinar.ToCharArray();
 
-                //Compruebo a ver si está dos veces y añado el indice a una lista
-                for (int i = 0; i < palabraAdivinar.Length; i++)
-                {
-                    if (aux[i] == letra)
-                    {
-                        indexes.Add(i);
-                        letrasAcertadas++;
-                    }
-                }
-                foreach (var t in indexes)
-                {
-                    guionesPalabra[t * 2] = aux[t];
-                }
-                palabra.Text = new string(guionesPalabra);
-                if (boton != null) boton.Enabled = false;
+                var indexes = GetIndexesOfLetter(palabraAdivinar, letter);
+                ActualizaProgresoPalabra(indexes);
+
+                button.Enabled = false;
 
                 if (guionesPalabra.Contains('_')) return;
+
                 puntuacionTotal += puntuacion;
+
                 await MostrarAlerta(true, false);
+
                 ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
                 FinReto();
                 ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
             else
             {
-                if (boton != null) boton.Enabled = false;
-                var path = "ahorcado_" + ++ronda;
-                if (activity.Resources != null)
-                {
-                    var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
-                    ahorcadoImg.SetImageResource(idDeImagen);
-                }
+                button.Enabled = false;
+
+                ActualizaImagenAhorcado();
 
                 if (ronda != 10) return;
-                //_puntuacionTotal -= puntuacion * 2;
                 fallos++;
                 await MostrarAlerta(false, fallos == 2);
-                ((VistaPartidaViewModel)activity).GuardarPreguntaFallada();
+
                 ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
             }
         }
+
+        private List<int> GetIndexesOfLetter(string word, char letter) {
+            var indexes = new List<int>();
+            var aux = word.ToCharArray();
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (aux[i] == letter)
+                {
+                    indexes.Add(i);
+                }
+            }
+            return indexes;
+        }
+
+        private void ActualizaProgresoPalabra(List<int> indexes)
+        {
+            foreach (var t in indexes)
+            {
+                guionesPalabra[t * 2] = palabraAdivinar[t];
+            }
+            palabra.Text = new string(guionesPalabra);
+        }
+
+        private void ActualizaImagenAhorcado() {
+            var path = "ahorcado_" + ++ronda;
+            if (activity.Resources != null)
+            {
+                var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
+                ahorcadoImg.SetImageResource(idDeImagen);
+            }
+        }
+
 
         public override void SetDatosReto(Reto reto)
         {

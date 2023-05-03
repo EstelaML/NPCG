@@ -133,18 +133,17 @@ namespace preguntaods.Presentacion.ViewModels
                     await fachada.NewUsuario(user);
                     await fachada.crearEstadisticas(user);
 
-
                     UserDialogs.Instance.HideLoading();
 
-                    UserDialogs.Instance.Alert(new AlertConfig {
+                    UserDialogs.Instance.Alert(new AlertConfig
+                    {
                         Message = "Te has registrado con exito! Verifica tu cuenta con el correo que se te ha enviado",
-                        OkText = "Entendido"
+                        OkText = "Entendido",
+                        OnAction = () => {
+                            var i = new Intent(this, typeof(InicioSesionViewModel));
+                            StartActivity(i);
+                        }
                     });
-
-                    await Task.Delay(5000);
-
-                    var i = new Intent(this, typeof(InicioSesionViewModel));
-                    StartActivity(i);
                 }
                 else
                 {
@@ -159,7 +158,6 @@ namespace preguntaods.Presentacion.ViewModels
 
                 error.Text = "La contraseña debe estar formada como mínimo de 8 caracteres";
             }
-            
         }
 
         private void Atras(object sender, EventArgs e)

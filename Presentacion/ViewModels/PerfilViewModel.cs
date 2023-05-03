@@ -32,7 +32,6 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPerfil);
 
- 
             fachada = new Facade();
 
             usuario = await fachada.GetUsuarioLogged();

@@ -40,7 +40,7 @@
 
         <Space
             android:layout_width="30sp"
-            android:layout_height="45sp"/>
+            android:layout_height="45sp" />
 
         <TextView
             android:text="Nombre de usuario:"
@@ -87,7 +87,7 @@
                     android:textColor="@android:color/black"
                     android:paddingBottom="20dp"
                     tools:ignore="HardcodedText"
-                    android:text="% Aciertos"/>
+                    android:text="% Aciertos" />
 
                 <TextView
                     android:textAppearance="?android:attr/textAppearanceLarge"
@@ -98,13 +98,12 @@
                     android:textColor="@color/colorAcierto"
                     android:paddingBottom="20dp"
                     tools:ignore="HardcodedText"
-                    android:text="----"/>
-
+                    android:text="----" />
             </LinearLayout>
 
             <Space
                 android:layout_width="100px"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -124,7 +123,7 @@
                     android:textColor="@android:color/black"
                     android:paddingBottom="20dp"
                     tools:ignore="HardcodedText"
-                    android:text="% Fallos"/>
+                    android:text="% Fallos" />
 
                 <TextView
                     android:textAppearance="?android:attr/textAppearanceLarge"
@@ -135,12 +134,9 @@
                     android:textColor="@color/colorError"
                     android:paddingBottom="20dp"
                     tools:ignore="HardcodedText"
-                    android:text="----"/>
-
+                    android:text="----" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -158,6 +154,5 @@
             android:adjustViewBounds="true"
             android:src="@drawable/icon_logo"
             android:contentDescription="" />
-
     </LinearLayout>
 </LinearLayout>

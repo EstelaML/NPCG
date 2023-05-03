@@ -15,7 +15,7 @@ namespace preguntaods.BusinessLogic.Services
         private readonly RepositorioUsuario repositorioUser;
         private readonly RepositorioAhorcado repositorioAhorcado;
         private readonly RepositorioPregunta repositorioPregunta;
-        private readonly Repository<Estadisticas> repositorioEstadisticas;
+        private readonly Repository<Estadistica> repositorioEstadisticas;
 
         public Facade()
         {
@@ -23,7 +23,7 @@ namespace preguntaods.BusinessLogic.Services
             repositorioUser = new RepositorioUsuario();
             repositorioAhorcado = new RepositorioAhorcado();
             repositorioPregunta = new RepositorioPregunta();
-            repositorioEstadisticas = new Repository<Estadisticas>();
+            repositorioEstadisticas = new Repository<Estadistica>();
         }
 
         #region Usuario
@@ -78,7 +78,6 @@ namespace preguntaods.BusinessLogic.Services
         public async Task NewUsuario(Usuario user)
         {
             await repositorioUser.Add(user);
-            
         }
 
         public async Task GuardarPregunta(Reto reto)
@@ -108,7 +107,6 @@ namespace preguntaods.BusinessLogic.Services
             var usuario = await GetUsuarioLogged();
             if (usuario?.Id != null)
             {
-                
                 switch (reto)
                 {
                     // añado a la BD ese reto
@@ -143,7 +141,7 @@ namespace preguntaods.BusinessLogic.Services
             return listaUsuarios;
         }
 
-        public async Task crearEstadisticas(Usuario user) 
+        public async Task crearEstadisticas(Usuario user)
         {
             int[] aux = new int[0];
             var a = new Estadisticas(user.Uuid, 0, aux, aux);

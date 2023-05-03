@@ -81,7 +81,6 @@ namespace preguntaods.Persistencia.Repository.impl
                     await repositorioUser.UpdateRetoAcertado(a, retosAcertadoss, usuario);
                 }
             }
-
         }
 
         public async Task AñadirPreguntaFallada(Reto reto)

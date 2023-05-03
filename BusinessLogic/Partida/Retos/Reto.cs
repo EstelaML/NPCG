@@ -9,7 +9,12 @@ namespace preguntaods.BusinessLogic.Partida.Retos
         public const int TypeFrase = 102;
         public const int TypeSopa = 103;
 
-        public abstract new int GetType();
+        private int type;
+
+        public int GetType()
+        {
+            return type;
+        };
 
         public abstract Task SetValues();
     }
