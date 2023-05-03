@@ -106,15 +106,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void InitValues()
         {
-            userInterface.SetValues(fallos, ptsTotales, ptsConsolidados);
-            userInterface.Init();
-            userInterface.SetDatosReto(retoActual);
-
-            textoPuntosTotales = activity.FindViewById<TextView>(Resource.Id.textView2);
-            if (textoPuntosTotales != null) textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
-
-            textoPuntosConsolidados = activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
-            if (textoPuntosConsolidados != null) textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
+            userInterface.InitializeUi(fallos, ptsTotales, ptsConsolidados, retoActual); userInterface.SetValues(fallos, ptsTotales, ptsConsolidados);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
