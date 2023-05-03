@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using Java.Beans;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
@@ -28,6 +29,7 @@ namespace preguntaods.Presentacion.ViewModels
             SetContentView(Resource.Layout.vistaRanking);
             fachada = new Facade();
             rankingGridLayout = FindViewById<GridLayout>(Resource.Id.rankingGridLayout);
+            textAnimo = FindViewById<TextView>(Resource.Id.textAnimo);
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
@@ -72,13 +74,15 @@ namespace preguntaods.Presentacion.ViewModels
         private async void MensajeAnimo(List<Usuario> usuarios) {
             var usuarioLogged = await fachada.GetUsuarioLogged();
             bool estaEnLaLista = usuarios.Any(u => u.Nombre == usuarioLogged.Nombre);
-            if (estaEnLaLista)
+            int indice = usuarios.FindIndex(u => u.Nombre == usuarioLogged.Nombre);
+            if (estaEnLaLista && indice != -1)
             {
-                textAnimo.Text = "";
+                int pos = indice + 1;
+                textAnimo.Text = "Eres el Top " + pos + ". ¡ENHORABUENA!";
             }
             else
             {
-                textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima";
+                textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
             }
         }
         private void Atras(object sender, EventArgs e)
