@@ -6,6 +6,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -32,6 +33,9 @@ namespace preguntaods.Presentacion.ViewModels
             if (atras != null) { atras.Click += Atras; }
 
             var usuarios = await fachada.GetOrderedUsers(numFilas);
+            CrearRanking(usuarios);
+        }
+        private void CrearRanking(List<Usuario> usuarios) {
             List<string> posiciones = new List<string>();
             int i = 1;
             while (i <= numFilas)
@@ -39,20 +43,6 @@ namespace preguntaods.Presentacion.ViewModels
                 posiciones.Add(i.ToString() + ".");
                 i++;
             }
-            //for (int j = 0; j < posiciones.Count; j++)
-            //{
-            //    var textView = new TextView(this);
-            //    textView.Text = posiciones[j];
-            //    rankingGridLayout.AddView(textView);
-            //
-            //    var textViewNombre = new TextView(this);
-            //    textViewNombre.Text = usuarios[j].Nombre;
-            //    rankingGridLayout.AddView(textViewNombre);
-            //
-            //    var textViewPuntos = new TextView(this);
-            //    textViewPuntos.Text = usuarios[j].Puntos.ToString();
-            //    rankingGridLayout.AddView(textViewPuntos);
-            //}
 
             // Agregar la fila de encabezado al GridLayout
             rankingGridLayout.AddView(new TextView(this) { Text = "Posición", TextAlignment = TextAlignment.Center });
@@ -76,6 +66,9 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
+        private void MensajeAnimo() { 
+            
+        }
         private void Atras(object sender, EventArgs e)
         {
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
