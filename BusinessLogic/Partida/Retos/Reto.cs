@@ -14,7 +14,12 @@ namespace preguntaods.BusinessLogic.Partida.Retos
         public int GetType()
         {
             return type;
-        };
+        }
+
+        public void SetType(int newType)
+        {
+            type = newType;
+        }
 
         public abstract Task SetValues();
     }

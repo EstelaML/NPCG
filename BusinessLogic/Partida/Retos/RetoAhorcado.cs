@@ -6,21 +6,16 @@ namespace preguntaods.BusinessLogic.Partida.Retos
 {
     public class RetoAhorcado : Reto
     {
-        private readonly int type;
         private Ahorcado ahorcado;
         private static PreguntadosService _servicio;
         private readonly int numeroReto;
 
         public RetoAhorcado(int orden)
         {
-            type = TypeAhorcado;
+            SetType(TypeAhorcado);
+
             _servicio = new PreguntadosService();
             numeroReto = orden;
-        }
-
-        public override int GetType()
-        {
-            return type;
         }
 
         public override async Task SetValues()

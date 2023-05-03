@@ -13,19 +13,15 @@ namespace preguntaods.BusinessLogic.Partida.Retos
 
         public RetoPre(int orden)
         {
+            SetType(TypePregunta);
+
             _servicio = new PreguntadosService();
-            type = TypePregunta;
             numeroReto = orden;
         }
 
         public override async Task SetValues()
         {
             await _servicio.InitPreguntaList().ContinueWith(t => { _ = SetDif(numeroReto); });
-        }
-
-        public override int GetType()
-        {
-            return type;
         }
 
         public Pregunta GetPregunta()
