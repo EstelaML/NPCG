@@ -11,7 +11,7 @@ namespace preguntaods.BusinessLogic.Partida.Retos
 
         private int type;
 
-        public int GetType()
+        public new int GetType()
         {
             return type;
         }
