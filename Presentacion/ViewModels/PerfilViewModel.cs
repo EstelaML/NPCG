@@ -36,7 +36,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             usuario = await fachada.GetUsuarioLogged();
 
-            estadisticas = await fachada.GetEstadisticasByUUID(usuario.Uuid);
+            estadisticas = await fachada.pedirEstadisticas(usuario.Uuid);
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
