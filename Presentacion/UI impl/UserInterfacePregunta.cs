@@ -17,6 +17,7 @@ namespace preguntaods.Presentacion.UI_impl
     {
         // Class Elements
         private Facade fachada;
+
         private Sonido sonido;
         private int fallos;
         private int puntuacionTotal;

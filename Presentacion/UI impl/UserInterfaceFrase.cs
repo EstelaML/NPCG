@@ -1,5 +1,4 @@
-﻿using Android.App;
-using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
 
 namespace preguntaods.Presentacion.UI_impl
 {

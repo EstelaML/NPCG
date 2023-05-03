@@ -19,6 +19,7 @@ namespace preguntaods.Presentacion.UI_impl
     {
         // Class Elements
         private Facade fachada;
+
         private EstrategiaSonidoReloj reloj;
         private Sonido sonido;
         private int fallos;

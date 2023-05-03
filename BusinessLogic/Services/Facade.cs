@@ -150,7 +150,7 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task<Estadistica> pedirEstadisticas(string uuid)
         {
-            var respuesto =  await repositorioUser.GetEstadisticasByUUID(uuid);
+            var respuesto = await repositorioUser.GetEstadisticasByUUID(uuid);
             return respuesto;
         }
     }
