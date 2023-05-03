@@ -47,6 +47,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
             var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a, reto, usuario);
+            var retosAcertados = await repositorioUser.GetRetosAcertadosAsync(usuario);
             if (preguntas != null)
             {
                 // redimensionas el array
@@ -61,6 +62,47 @@ namespace preguntaods.Persistencia.Repository.impl
                 {
                     int[] preguntass = { (int)pregunta.Id };
                     await repositorioUser.UpdatePreguntaAcertada(a, preguntass, usuario);
+                }
+            }
+
+            if (retosAcertados != null)
+            {
+                // redimensionas el array
+                Array.Resize(ref retosAcertados, retosAcertados.Length + 1);
+                // agregar el nuevo valor al final del arreglo
+                if (pregunta.Id != null) retosAcertados[^1] = (int)pregunta.Id;
+                await repositorioUser.UpdateRetoAcertado(a, retosAcertados, usuario);
+            }
+            else
+            {
+                if (pregunta.Id != null)
+                {
+                    int[] retosAcertadoss = { (int)pregunta.Id };
+                    await repositorioUser.UpdateRetoAcertado(a, retosAcertadoss, usuario);
+                }
+            }
+        }
+
+        public async Task AñadirPreguntaFallada(Reto reto)
+        {
+            var a = conexion.Usuario.Id;
+            var usuario = await repositorioUser.GetUserByUUid(a);
+            var pregunta = ((RetoPre)reto).GetPregunta();
+            var retosFallados = await repositorioUser.GetRetosFalladosAsync(usuario);
+            if (retosFallados != null)
+            {
+                // redimensionas el array
+                Array.Resize(ref retosFallados, retosFallados.Length + 1);
+                // agregar el nuevo valor al final del arreglo
+                if (pregunta.Id != null) retosFallados[^1] = (int)pregunta.Id;
+                await repositorioUser.UpdateRetoFallado(retosFallados, usuario);
+            }
+            else
+            {
+                if (pregunta.Id != null)
+                {
+                    int[] retosFalladoss = { (int)pregunta.Id };
+                    await repositorioUser.UpdateRetoFallado(retosFalladoss, usuario);
                 }
             }
         }

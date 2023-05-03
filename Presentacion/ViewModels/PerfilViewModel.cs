@@ -25,11 +25,9 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaPerfil);
 
- 
             fachada = new Facade();
 
             usuario = await fachada.GetUsuarioLogged();
-
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
@@ -47,7 +45,6 @@ namespace preguntaods.Presentacion.ViewModels
         private void Init()
         {
             nombre.Text = usuario.Nombre;
-          
         }
 
         private void Atras(object sender, EventArgs e)

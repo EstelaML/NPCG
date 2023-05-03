@@ -145,7 +145,6 @@
                 android:layout_height="37sp"
                 android:id="@+id/interroganteButton"
                 android:contentDescription="?" />
-
         </AbsoluteLayout>
 
         <ImageView
@@ -156,7 +155,6 @@
             android:layout_gravity="center"
             android:id="@+id/imagenOds"
             android:contentDescription="" />
-
 
         <Space
             android:layout_width="match_parent"

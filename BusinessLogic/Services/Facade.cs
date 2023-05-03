@@ -15,7 +15,7 @@ namespace preguntaods.BusinessLogic.Services
         private readonly RepositorioUsuario repositorioUser;
         private readonly RepositorioAhorcado repositorioAhorcado;
         private readonly RepositorioPregunta repositorioPregunta;
-        private readonly Repository<Estadisticas> repositorioEstadisticas;
+        private readonly Repository<Estadistica> repositorioEstadisticas;
 
         public Facade()
         {
@@ -23,7 +23,7 @@ namespace preguntaods.BusinessLogic.Services
             repositorioUser = new RepositorioUsuario();
             repositorioAhorcado = new RepositorioAhorcado();
             repositorioPregunta = new RepositorioPregunta();
-            repositorioEstadisticas = new Repository<Estadisticas>();
+            repositorioEstadisticas = new Repository<Estadistica>();
         }
 
         #region Usuario
@@ -78,7 +78,6 @@ namespace preguntaods.BusinessLogic.Services
         public async Task NewUsuario(Usuario user)
         {
             await repositorioUser.Add(user);
-            
         }
 
         public async Task GuardarPregunta(Reto reto)
@@ -102,6 +101,26 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async Task GuardarPreguntaFallada(Reto reto)
+        {
+            // obtengo el id del usuario
+            var usuario = await GetUsuarioLogged();
+            if (usuario?.Id != null)
+            {
+                switch (reto)
+                {
+                    // añado a la BD ese reto
+                    case RetoPre _:
+                        await repositorioPregunta.AñadirPreguntaFallada(reto);
+                        break;
+
+                    case RetoAhorcado _:
+                        await repositorioAhorcado.AñadirAhorcadoFallado(reto);
+                        break;
+                }
+            }
+        }
+
         public async Task<bool> ComprobarUsuario(string nombre)
         {
             var respuesta = await repositorioUser.GetAll();
@@ -111,23 +130,21 @@ namespace preguntaods.BusinessLogic.Services
 
         #endregion Usuario
 
-        public async Task<List<Usuario>> Get10OrderedUsers()
+        public async Task<List<Usuario>> GetOrderedUsers(int cantidad)
         {
             var respuesta = await repositorioUser.GetAll();
             var listaUsuarios = respuesta.Select(usuario => new Usuario { Nombre = usuario.Nombre, Puntos = usuario.Puntos })
                                          .OrderByDescending(usuario => usuario.Puntos)
-                                         .Take(10)
+                                         .Take(cantidad)
                                          .ToList();
 
             return listaUsuarios;
         }
 
-        public async Task crearEstadisticas(Usuario user) 
+        public async Task crearEstadisticas(Usuario user)
         {
-
-            var a = new Estadisticas(user.Uuid, 0, null, null);
+            var a = new Estadistica(user.Uuid, 0, null, null);
             await repositorioEstadisticas.Add(a);
-
         }
     }
 }

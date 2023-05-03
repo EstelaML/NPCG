@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\Entities\Ahorcado.cs" />
-    <Compile Include="BusinessLogic\Entities\Estadisticas.cs" />
+    <Compile Include="BusinessLogic\Entities\Estadistica.cs" />
     <Compile Include="BusinessLogic\Entities\RetosRealizados.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoLetraAcierto.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="BusinessLogic\Partida\PartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\IPartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\PartidaDirector.cs" />
-    <Compile Include="Persistencia\Entities\Estadisticas.cs" />
+    <Compile Include="Persistencia\Entities\Estadistica.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceFrase.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceSopa.cs" />
     <Compile Include="Presentacion\UI impl\UserInterfaceAhorcado.cs" />
@@ -374,7 +374,7 @@
     <AndroidResource Include="Resources\raw\letra_correcta_sonido.mp3" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\interrogante.png" />
+    <AndroidResource Include="Resources\drawable\icon_interrogante.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\vistaRetoFrase.xml">
@@ -393,9 +393,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\vistaPerfil.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\interrogante2.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\interrogante3.png" />
