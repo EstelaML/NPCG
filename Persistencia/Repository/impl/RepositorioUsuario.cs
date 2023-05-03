@@ -138,5 +138,14 @@ namespace preguntaods.Persistencia.Repository.impl
 
             return respuesta.Fallos;
         }
+
+        public async Task<Estadistica> GetEstadisticasByUUID(string uuid)
+        {
+            var response = await conexion.Cliente
+                .From<Estadistica>()
+                .Where(x => x.Usuario == uuid)
+                .Single();
+            return response;
+        }
     }
 }

@@ -70,8 +70,8 @@ namespace preguntaods.BusinessLogic.Services
             if (conexion.Usuario != null)
             {
                 var a = conexion.Usuario.Id;
-                var usuario = await repositorioUser.GetUserByUUid(a);
-                await repositorioUser.UpdatePuntosUsuario(a, usuario.Puntos, puntos);
+                var estadisticas = await repositorioUser.GetEstadisticasByUUID(a);
+                await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos);
             }
         }
 
@@ -148,13 +148,10 @@ namespace preguntaods.BusinessLogic.Services
             await repositorioEstadisticas.Add(a);
         }
 
-        public async Task<Estadistica> GetEstadisticasByUUID(string uuid)
+        public async Task<Estadistica> pedirEstadisticas(string uuid)
         {
-            var response = await conexion.Cliente
-                .From<Estadistica>()
-                .Where(x => x.Usuario == uuid)
-                .Single();
-            return response;
+            var respuesto =  await repositorioUser.GetEstadisticasByUUID(uuid);
+            return respuesto;
         }
     }
 }
