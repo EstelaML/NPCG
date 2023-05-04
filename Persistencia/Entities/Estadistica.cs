@@ -20,5 +20,8 @@ namespace preguntaods.Entities
 
         [Column("Fallos")]
         public int[] Fallos { get; set; }
+
+        [Column("Nombre")]
+        public string Nombre { get; set; }
     }
 }

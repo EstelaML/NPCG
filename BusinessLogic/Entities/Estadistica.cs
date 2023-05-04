@@ -5,12 +5,13 @@
         public Estadistica()
         { }
 
-        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos)
+        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre)
         {
             Usuario = user;
             Puntuacion = puntuacion;
             Aciertos = aciertos;
             Fallos = fallos;
+            Nombre = nombre;
         }
     }
 }
