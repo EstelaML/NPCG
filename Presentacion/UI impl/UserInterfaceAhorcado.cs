@@ -166,7 +166,7 @@ namespace preguntaods.Presentacion.UI_impl
             #endregion buttonLetters Handler
 
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(30000 * 4); //30*4 = 2min
+            animation.SetDuration(120000); //30*4 = 2min
 
             animation.AnimationPause += (sender, e) =>
             {
@@ -177,7 +177,7 @@ namespace preguntaods.Presentacion.UI_impl
             animation.Update += (sender, e) =>
             {
                 var playtime = animation.CurrentPlayTime;
-                if (playtime < 20000 || playtime >= 20020) return;
+                if (playtime < 100000 || playtime >= 100020) return;
                 sonido.SetEstrategia(reloj, activity);
                 sonido.EjecutarSonido();
             };
@@ -217,8 +217,6 @@ namespace preguntaods.Presentacion.UI_impl
             if (button == null) return;
 
             char letter = char.Parse(button.Text);
-
-            animation.Pause();
 
             if (palabraAdivinar.Contains(letter))
             {
