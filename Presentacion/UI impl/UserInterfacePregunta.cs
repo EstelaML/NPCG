@@ -20,6 +20,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         private Sonido sonido;
         private int fallos;
+        private int pistasUsadas;
         private int puntuacionTotal;
         private static int _puntosConsolidados;
         private int puntuacion;
@@ -41,15 +42,17 @@ namespace preguntaods.Presentacion.UI_impl
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
         private ImageButton interroganteButton;
+        private ImageButton pistaButton;
 
         // Interactive Elements
         private ObjectAnimator animation;
 
-        public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
+        public override void SetValues(int newFallos, int newPistasUsadas, int newPuntuacion, int newPtsConsolidados)
         {
             fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
+            pistasUsadas = newPistasUsadas;
         }
 
         public override void Init()
@@ -66,6 +69,7 @@ namespace preguntaods.Presentacion.UI_impl
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
             interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            pistaButton = activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
 
             if (fallos == 1)
             {
@@ -90,6 +94,7 @@ namespace preguntaods.Presentacion.UI_impl
             if (botonPregunta4 != null) botonPregunta4.Click += ButtonClickAsync;
 
             if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
+            if (pistaButton != null) pistaButton.Click += PistaClick;
 
             if (animation == null) return;
             animation.Update += (sender, e) =>
@@ -121,7 +126,7 @@ namespace preguntaods.Presentacion.UI_impl
                 await MostrarAlerta(false, fallos == 2);
 
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             };
             animation.AnimationPause += (sender, e) =>
             {
@@ -134,6 +139,10 @@ namespace preguntaods.Presentacion.UI_impl
         {
             if (odsRelacion == null) { ((VistaPartidaViewModel)activity).AbrirApoyo(0); }
             else ((VistaPartidaViewModel)activity).AbrirApoyo((int)odsRelacion);
+        }
+
+        private void PistaClick(object sender, EventArgs e)
+        {
         }
 
         public override void SetDatosReto(Reto reto)
@@ -222,7 +231,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             FinReto();
 
-            ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+            ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
         }
 
         public override void FinReto()

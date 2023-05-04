@@ -27,6 +27,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         private int contadorRetoSiguiente;
         private int fallos;
+        private int pistasUsadas;
         private Sonido sonido;
         private int ptsTotales;
         private int ptsConsolidados;
@@ -39,9 +40,6 @@ namespace preguntaods.BusinessLogic.Partida
             listaRetos = new List<Reto>();
             falloFacil = false;
             primeraVez = true;
-            ptsTotales = 0;
-            ptsConsolidados = 0;
-            fallos = 0;
         }
 
         #region Setters/Getters
@@ -106,17 +104,18 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void InitValues()
         {
-            userInterface.InitializeUi(fallos, ptsTotales, ptsConsolidados, retoActual); userInterface.SetValues(fallos, ptsTotales, ptsConsolidados);
+            userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
-        public void NextReto(int newFallos, int newPtsTotales, int newPtsConsolidados)
+        public void NextReto(int newFallos, int newPtsTotales, int newPtsConsolidados, int newPistasUsadas)
         {
             fallos = newFallos;
             ptsTotales = newPtsTotales;
             ptsConsolidados = newPtsConsolidados;
+            pistasUsadas = newPistasUsadas;
 
             if (contadorRetoSiguiente == 9)
             {

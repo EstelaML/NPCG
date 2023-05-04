@@ -23,6 +23,7 @@ namespace preguntaods.Presentacion.UI_impl
         private EstrategiaSonidoReloj reloj;
         private Sonido sonido;
         private int fallos;
+        private int pistasUsadas;
         private int puntuacionTotal;
         private int puntuacion;
         private static int _puntosConsolidados;
@@ -39,6 +40,9 @@ namespace preguntaods.Presentacion.UI_impl
         private TextView palabra;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
+
+        private ImageButton interroganteButton;
+        private ImageButton pistaButton;
 
         #region Button letters
 
@@ -85,21 +89,21 @@ namespace preguntaods.Presentacion.UI_impl
             barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-            var interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
-            if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
-
-            letrasAcertadas = 0;
-            ronda = 1;
-
-            sonido = new Sonido();
-
-            // Initialization of Vars
-            reloj = new EstrategiaSonidoReloj();
+            interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
 
             if (fallos == 1)
             {
                 imagenCorazon1?.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
+
+            letrasAcertadas = 0;
+            ronda = 1;
+
+            // Initialization of Services
+            sonido = new Sonido();
+
+            // Initialization of Vars
+            reloj = new EstrategiaSonidoReloj();
 
             #region buttonletters FindByID
 
@@ -165,6 +169,9 @@ namespace preguntaods.Presentacion.UI_impl
 
             #endregion buttonLetters Handler
 
+            if (interroganteButton != null) interroganteButton.Click += InterroganteClick;
+            if (pistaButton != null) pistaButton.Click += PistaClick;
+
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
             animation.SetDuration(120000); //30*4 = 2min
 
@@ -201,7 +208,7 @@ namespace preguntaods.Presentacion.UI_impl
                 await MostrarAlerta(false, fallos == 2);
 
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             };
         }
 
@@ -209,6 +216,10 @@ namespace preguntaods.Presentacion.UI_impl
         {
             if (odsRelacion >= 1 && odsRelacion <= 17) { ((VistaPartidaViewModel)activity).AbrirApoyo((int)odsRelacion); }
             else ((VistaPartidaViewModel)activity).AbrirApoyo(0);
+        }
+
+        private void PistaClick(object sender, EventArgs e)
+        {
         }
 
         private async void Letter_Click(object sender, EventArgs e)
@@ -236,7 +247,7 @@ namespace preguntaods.Presentacion.UI_impl
 
                 ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             }
             else
             {
@@ -248,7 +259,7 @@ namespace preguntaods.Presentacion.UI_impl
                 fallos++;
                 await MostrarAlerta(false, fallos == 2);
 
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             }
         }
 
@@ -361,11 +372,12 @@ namespace preguntaods.Presentacion.UI_impl
             animation.Pause();
         }
 
-        public override void SetValues(int newFallos, int newPuntuacion, int newPtsConsolidados)
+        public override void SetValues(int newFallos, int newPistasUsadas, int newPuntuacion, int newPtsConsolidados)
         {
             fallos = newFallos;
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
+            pistasUsadas = newPistasUsadas;
         }
 
         private async Task MostrarAlerta(bool acertado, bool fin)

@@ -10,9 +10,9 @@ namespace preguntaods.Presentacion.UI_impl
         private TextView textoPuntosConsolidados;
         protected Activity activity;
 
-        public void InitializeUi(int fallos, int ptsTotales, int ptsConsolidados, Reto retoActual)
+        public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, Reto retoActual)
         {
-            SetValues(fallos, ptsTotales, ptsConsolidados);
+            SetValues(fallos, pistasUsadas, ptsTotales, ptsConsolidados);
             Init();
             SetDatosReto(retoActual);
 
@@ -32,7 +32,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public abstract void SetDatosReto(Reto reto);
 
-        public abstract void SetValues(int fallos, int puntuacion, int ptsConsolidados);
+        public abstract void SetValues(int fallos, int pistasUsadas, int puntuacion, int ptsConsolidados);
 
         public abstract void FinReto();
     }

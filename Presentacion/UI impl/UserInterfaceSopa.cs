@@ -19,7 +19,7 @@ namespace preguntaods.Presentacion.UI_impl
             throw new System.NotImplementedException();
         }
 
-        public override void SetValues(int fallos, int puntuacion, int ptsConsolidados)
+        public override void SetValues(int newFallos, int newPistasUsadas, int newPuntuacion, int newPtsConsolidados)
         {
             throw new System.NotImplementedException();
         }

@@ -42,7 +42,7 @@ namespace preguntaods.Presentacion.ViewModels
             //Ocultar dialogo
             UserDialogs.Instance.HideLoading();
 
-            RetoSiguiente(0, 0, 0);
+            RetoSiguiente(0, 0, 0, 0);
         }
 
         public void UpdateView()
@@ -82,9 +82,9 @@ namespace preguntaods.Presentacion.ViewModels
             await partida.GuardarPreguntaFalladaUsuario(partida.GetRetoActual());
         }
 
-        public void RetoSiguiente(int fallos, int ptsTotales, int ptsConsolidados)
+        public void RetoSiguiente(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados)
         {
-            partida.NextReto(fallos, ptsTotales, ptsConsolidados);
+            partida.NextReto(fallos, pistasUsadas, ptsTotales, ptsConsolidados);
 
             reto = partida.GetRetoActual();
 

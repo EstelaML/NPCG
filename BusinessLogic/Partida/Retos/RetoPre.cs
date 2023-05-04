@@ -8,7 +8,6 @@ namespace preguntaods.BusinessLogic.Partida.Retos
     {
         private Pregunta pregunta;
         private static PreguntadosService _servicio;
-        private readonly int type;
         private readonly int numeroReto;
 
         public RetoPre(int orden)
