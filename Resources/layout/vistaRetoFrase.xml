@@ -146,7 +146,7 @@
                 android:contentDescription="" />
 
             <ImageButton
-                android:src="@drawable/icon_interrogante"
+                android:src="@drawable/icon_interrogacion"
                 android:scaleType="centerInside"
                 android:layout_marginTop="19sp"
                 android:background="@drawable/m3_tabs_transparent_background"
