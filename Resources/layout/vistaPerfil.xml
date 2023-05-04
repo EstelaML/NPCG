@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:paddingLeft="75px"
         android:paddingRight="75px"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <ImageButton
@@ -26,43 +26,41 @@
             android:contentDescription=""
             android:foregroundGravity="right" />
 
-        <ImageButton
-            android:src="@drawable/icon_userNotLog"
-            android:scaleType="centerInside"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginVertical="10dp"
-            android:id="@+id/buttonAvatar"
-            android:background="@color/mtrl_btn_transparent_bg_color"
-            android:contentDescription="" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:src="@drawable/icon_userNotLog"
+                android:scaleType="centerInside"
+                android:layout_gravity="left"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:id="@+id/buttonAvatar"
+                android:background="@color/mtrl_btn_transparent_bg_color"
+                android:contentDescription="" />
+
+            <TextView
+              android:text="-------"
+              android:textAppearance="?android:attr/textAppearanceLarge"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+              android:padding="10dp"
+              android:textStyle="bold"
+              android:id="@+id/textViewNombre"
+              android:textColor="@android:color/black"
+              tools:ignore="HardcodedText" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="30sp"
             android:layout_height="45sp" />
-
-        <TextView
-            android:text="Nombre de usuario:"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:id="@+id/textView4"
-            android:textColor="@android:color/black"
-            android:paddingBottom="20dp"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:text="-------"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:id="@+id/textViewNombre"
-            android:textColor="@android:color/black"
-            android:paddingBottom="20dp"
-            tools:ignore="HardcodedText" />
 
         <TextView
             android:text="Puntuación:"
