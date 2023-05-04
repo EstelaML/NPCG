@@ -26,8 +26,9 @@ namespace preguntaods.Presentacion.UI_impl
         private int puntuacion;
         private string correcta;
         private EstrategiaSonidoReloj reloj;
-        private int numRetos = 10;
+        private int numRetos;
         private int? odsRelacion;
+        private bool tienePista;
 
         // UI Elements
         private TextView enunciado;
@@ -53,6 +54,9 @@ namespace preguntaods.Presentacion.UI_impl
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
             pistasUsadas = newPistasUsadas;
+
+            numRetos = 10;
+            tienePista = true;
         }
 
         public override void Init()
@@ -143,6 +147,39 @@ namespace preguntaods.Presentacion.UI_impl
 
         private void PistaClick(object sender, EventArgs e)
         {
+            if (pistasUsadas < 2 && tienePista)
+            {
+                OcultarBoton();
+                OcultarBoton();
+
+                pistasUsadas++;
+                tienePista = false;
+
+                puntuacion /= 2;
+            }
+        }
+
+        public void OcultarBoton()
+        {
+            while (true)
+            {
+                var random = new Random();
+                var n = random.Next(1, 4);
+                Button boton = n switch
+                {
+                    1 => botonPregunta1,
+                    2 => botonPregunta2,
+                    3 => botonPregunta3,
+                    _ => botonPregunta4,
+                };
+
+                if (boton.Enabled == true && !boton.Text.Equals(correcta))
+                {
+                    boton.SetBackgroundResource(Resource.Drawable.style_preNotEnabled);
+                    boton.Enabled = false;
+                    break;
+                }
+            }
         }
 
         public override void SetDatosReto(Reto reto)

@@ -11509,16 +11509,19 @@ namespace preguntaods
 			public const int style_pregunta = 2131165443;
 			
 			// aapt resource value: 0x7F070104
-			public const int style_rounded_dialog_bg = 2131165444;
+			public const int style_preNotEnabled = 2131165444;
 			
 			// aapt resource value: 0x7F070105
-			public const int test_level_drawable = 2131165445;
+			public const int style_rounded_dialog_bg = 2131165445;
 			
 			// aapt resource value: 0x7F070106
-			public const int tooltip_frame_dark = 2131165446;
+			public const int test_level_drawable = 2131165446;
 			
 			// aapt resource value: 0x7F070107
-			public const int tooltip_frame_light = 2131165447;
+			public const int tooltip_frame_dark = 2131165447;
+			
+			// aapt resource value: 0x7F070108
+			public const int tooltip_frame_light = 2131165448;
 			
 			static Drawable()
 			{
