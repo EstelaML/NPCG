@@ -40,7 +40,7 @@ namespace preguntaods.Presentacion.ViewModels
             MensajeAnimo(usuarios);
         }
 
-        private void CrearRanking(List<Usuario> usuarios)
+        private void CrearRanking(List<Estadistica> usuarios)
         {
             List<string> posiciones = new List<string>();
             int i = 1;
@@ -62,7 +62,7 @@ namespace preguntaods.Presentacion.ViewModels
                 if (j < usuarios.Count)
                 {
                     rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Nombre, TextAlignment = TextAlignment.Center });
-                    rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Puntos.ToString(), TextAlignment = TextAlignment.Center });
+                    rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Puntuacion.ToString(), TextAlignment = TextAlignment.Center });
                 }
                 else
                 {
@@ -72,7 +72,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private async void MensajeAnimo(List<Usuario> usuarios)
+        private async void MensajeAnimo(List<Estadistica> usuarios)
         {
             var usuarioLogged = await fachada.GetUsuarioLogged();
             bool estaEnLaLista = usuarios.Any(u => u.Nombre == usuarioLogged.Nombre);
