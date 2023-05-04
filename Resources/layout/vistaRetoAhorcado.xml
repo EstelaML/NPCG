@@ -118,7 +118,7 @@
           android:layout_width="match_parent"
           android:layout_height="20sp" />
 
-        <AbsoluteLayout
+        <RelativeLayout
             android:layout_width="350sp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
@@ -140,17 +140,29 @@
                 android:id="@+id/enunciado"
                 tools:ignore="HardcodedText" />
 
-              <ImageButton
+            <ImageButton
                 android:src="@drawable/icon_interrogacion"
                 android:scaleType="centerInside"
                 android:background="@drawable/m3_tabs_transparent_background"
                 android:layout_width="20sp"
                 android:layout_height="20sp"
-                android:translationY="18dp"
-                android:translationX="5dp"
+                android:translationY="5dp"
+                android:translationX="2dp"
                 android:id="@+id/interroganteButton"
                 android:contentDescription="?" />
-        </AbsoluteLayout>
+
+            <ImageButton
+                android:src="@drawable/icon_bombilla"
+                android:scaleType="centerInside"
+                android:background="@drawable/m3_tabs_transparent_background"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:translationY="3dp"
+                android:translationX="-2dp"
+                android:layout_alignParentRight="true"
+                android:id="@+id/pistaButton"
+                android:contentDescription="?" />
+        </RelativeLayout>
 
         <Space
         android:layout_width="match_parent"
