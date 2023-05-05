@@ -55,7 +55,6 @@
               android:id="@+id/textViewNombre"
               android:textColor="@android:color/black"
               tools:ignore="HardcodedText" />
-
         </LinearLayout>
 
         <Space

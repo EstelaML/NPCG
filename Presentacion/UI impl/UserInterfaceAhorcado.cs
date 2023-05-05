@@ -3,7 +3,6 @@ using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Provider;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
@@ -115,6 +114,7 @@ namespace preguntaods.Presentacion.UI_impl
             #endregion buttonletters FindByID
 
             #region buttonLetters Handler
+
             buttonValuePairs['A'].Click += Letter_Click;
             buttonValuePairs['B'].Click += Letter_Click;
             buttonValuePairs['C'].Click += Letter_Click;

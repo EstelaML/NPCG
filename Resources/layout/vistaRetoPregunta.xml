@@ -158,7 +158,6 @@
                 android:layout_alignParentRight="true"
                 android:id="@+id/pistaButton"
                 android:contentDescription="?" />
-
         </RelativeLayout>
 
         <ImageView

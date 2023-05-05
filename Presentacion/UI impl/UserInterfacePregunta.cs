@@ -146,7 +146,8 @@ namespace preguntaods.Presentacion.UI_impl
         {
             if (pistasUsadas < 2 && tienePista)
             {
-                UserDialogs.Instance.Confirm(new ConfirmConfig {
+                UserDialogs.Instance.Confirm(new ConfirmConfig
+                {
                     Message = "¿Estás seguro de usar una pista? Te quedan un total de " + (2 - pistasUsadas) + " pistas por usar.",
                     OkText = "Si, estoy seguro",
                     CancelText = "No quiero",
