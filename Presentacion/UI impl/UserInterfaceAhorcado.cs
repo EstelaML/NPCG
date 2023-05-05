@@ -3,6 +3,7 @@ using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Provider;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
@@ -46,37 +47,7 @@ namespace preguntaods.Presentacion.UI_impl
         private ImageButton interroganteButton;
         private ImageButton pistaButton;
 
-        #region Button letters
-
-        private Button buttonA;
-        private Button buttonB;
-        private Button buttonC;
-        private Button buttonD;
-        private Button buttonE;
-        private Button buttonF;
-        private Button buttonG;
-        private Button buttonH;
-        private Button buttonI;
-        private Button buttonJ;
-        private Button buttonK;
-        private Button buttonL;
-        private Button buttonM;
-        private Button buttonN;
-        private Button buttonÑ;
-        private Button buttonO;
-        private Button buttonP;
-        private Button buttonQ;
-        private Button buttonR;
-        private Button buttonS;
-        private Button buttonT;
-        private Button buttonU;
-        private Button buttonV;
-        private Button buttonW;
-        private Button buttonX;
-        private Button buttonY;
-        private Button buttonZ;
-
-        #endregion Button letters
+        private Dictionary<char, Button> buttonValuePairs;
 
         // tiempo limite
         private ObjectAnimator animation;
@@ -92,6 +63,7 @@ namespace preguntaods.Presentacion.UI_impl
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
             interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            pistaButton = activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
 
             if (fallos == 1)
             {
@@ -109,65 +81,67 @@ namespace preguntaods.Presentacion.UI_impl
 
             #region buttonletters FindByID
 
-            buttonA = activity.FindViewById<Button>(Resource.Id.buttonA);
-            buttonB = activity.FindViewById<Button>(Resource.Id.buttonB);
-            buttonC = activity.FindViewById<Button>(Resource.Id.buttonC);
-            buttonD = activity.FindViewById<Button>(Resource.Id.buttonD);
-            buttonE = activity.FindViewById<Button>(Resource.Id.buttonE);
-            buttonF = activity.FindViewById<Button>(Resource.Id.buttonF);
-            buttonG = activity.FindViewById<Button>(Resource.Id.buttonG);
-            buttonH = activity.FindViewById<Button>(Resource.Id.buttonH);
-            buttonI = activity.FindViewById<Button>(Resource.Id.buttonI);
-            buttonJ = activity.FindViewById<Button>(Resource.Id.buttonJ);
-            buttonK = activity.FindViewById<Button>(Resource.Id.buttonK);
-            buttonL = activity.FindViewById<Button>(Resource.Id.buttonL);
-            buttonM = activity.FindViewById<Button>(Resource.Id.buttonM);
-            buttonN = activity.FindViewById<Button>(Resource.Id.buttonN);
-            buttonÑ = activity.FindViewById<Button>(Resource.Id.buttonÑ);
-            buttonO = activity.FindViewById<Button>(Resource.Id.buttonO);
-            buttonP = activity.FindViewById<Button>(Resource.Id.buttonP);
-            buttonQ = activity.FindViewById<Button>(Resource.Id.buttonQ);
-            buttonR = activity.FindViewById<Button>(Resource.Id.buttonR);
-            buttonS = activity.FindViewById<Button>(Resource.Id.buttonS);
-            buttonT = activity.FindViewById<Button>(Resource.Id.buttonT);
-            buttonU = activity.FindViewById<Button>(Resource.Id.buttonU);
-            buttonV = activity.FindViewById<Button>(Resource.Id.buttonV);
-            buttonW = activity.FindViewById<Button>(Resource.Id.buttonW);
-            buttonX = activity.FindViewById<Button>(Resource.Id.buttonX);
-            buttonY = activity.FindViewById<Button>(Resource.Id.buttonY);
-            buttonZ = activity.FindViewById<Button>(Resource.Id.buttonZ);
+            buttonValuePairs = new Dictionary<char, Button>
+            {
+                { 'A', activity.FindViewById<Button>(Resource.Id.buttonA) },
+                { 'B', activity.FindViewById<Button>(Resource.Id.buttonB) },
+                { 'C', activity.FindViewById<Button>(Resource.Id.buttonC) },
+                { 'D', activity.FindViewById<Button>(Resource.Id.buttonD) },
+                { 'E', activity.FindViewById<Button>(Resource.Id.buttonE) },
+                { 'F', activity.FindViewById<Button>(Resource.Id.buttonF) },
+                { 'G', activity.FindViewById<Button>(Resource.Id.buttonG) },
+                { 'H', activity.FindViewById<Button>(Resource.Id.buttonH) },
+                { 'I', activity.FindViewById<Button>(Resource.Id.buttonI) },
+                { 'J', activity.FindViewById<Button>(Resource.Id.buttonJ) },
+                { 'K', activity.FindViewById<Button>(Resource.Id.buttonK) },
+                { 'L', activity.FindViewById<Button>(Resource.Id.buttonL) },
+                { 'M', activity.FindViewById<Button>(Resource.Id.buttonM) },
+                { 'N', activity.FindViewById<Button>(Resource.Id.buttonN) },
+                { 'Ñ', activity.FindViewById<Button>(Resource.Id.buttonÑ) },
+                { 'O', activity.FindViewById<Button>(Resource.Id.buttonO) },
+                { 'P', activity.FindViewById<Button>(Resource.Id.buttonP) },
+                { 'Q', activity.FindViewById<Button>(Resource.Id.buttonQ) },
+                { 'R', activity.FindViewById<Button>(Resource.Id.buttonR) },
+                { 'S', activity.FindViewById<Button>(Resource.Id.buttonS) },
+                { 'T', activity.FindViewById<Button>(Resource.Id.buttonT) },
+                { 'U', activity.FindViewById<Button>(Resource.Id.buttonU) },
+                { 'V', activity.FindViewById<Button>(Resource.Id.buttonV) },
+                { 'W', activity.FindViewById<Button>(Resource.Id.buttonW) },
+                { 'X', activity.FindViewById<Button>(Resource.Id.buttonX) },
+                { 'Y', activity.FindViewById<Button>(Resource.Id.buttonY) },
+                { 'Z', activity.FindViewById<Button>(Resource.Id.buttonZ) }
+            };
 
             #endregion buttonletters FindByID
 
             #region buttonLetters Handler
-
-            buttonA.Click += Letter_Click;
-            buttonB.Click += Letter_Click;
-            buttonC.Click += Letter_Click;
-            buttonD.Click += Letter_Click;
-            buttonE.Click += Letter_Click;
-            buttonF.Click += Letter_Click;
-            buttonG.Click += Letter_Click;
-            buttonH.Click += Letter_Click;
-            buttonI.Click += Letter_Click;
-            buttonJ.Click += Letter_Click;
-            buttonK.Click += Letter_Click;
-            buttonL.Click += Letter_Click;
-            buttonM.Click += Letter_Click;
-            buttonN.Click += Letter_Click;
-            buttonÑ.Click += Letter_Click;
-            buttonO.Click += Letter_Click;
-            buttonP.Click += Letter_Click;
-            buttonQ.Click += Letter_Click;
-            buttonR.Click += Letter_Click;
-            buttonS.Click += Letter_Click;
-            buttonT.Click += Letter_Click;
-            buttonU.Click += Letter_Click;
-            buttonV.Click += Letter_Click;
-            buttonW.Click += Letter_Click;
-            buttonX.Click += Letter_Click;
-            buttonY.Click += Letter_Click;
-            buttonZ.Click += Letter_Click;
+            buttonValuePairs['A'].Click += Letter_Click;
+            buttonValuePairs['B'].Click += Letter_Click;
+            buttonValuePairs['C'].Click += Letter_Click;
+            buttonValuePairs['D'].Click += Letter_Click;
+            buttonValuePairs['E'].Click += Letter_Click;
+            buttonValuePairs['F'].Click += Letter_Click;
+            buttonValuePairs['G'].Click += Letter_Click;
+            buttonValuePairs['H'].Click += Letter_Click;
+            buttonValuePairs['I'].Click += Letter_Click;
+            buttonValuePairs['J'].Click += Letter_Click;
+            buttonValuePairs['K'].Click += Letter_Click;
+            buttonValuePairs['L'].Click += Letter_Click;
+            buttonValuePairs['M'].Click += Letter_Click;
+            buttonValuePairs['N'].Click += Letter_Click;
+            buttonValuePairs['Ñ'].Click += Letter_Click;
+            buttonValuePairs['O'].Click += Letter_Click;
+            buttonValuePairs['P'].Click += Letter_Click;
+            buttonValuePairs['Q'].Click += Letter_Click;
+            buttonValuePairs['R'].Click += Letter_Click;
+            buttonValuePairs['S'].Click += Letter_Click;
+            buttonValuePairs['T'].Click += Letter_Click;
+            buttonValuePairs['U'].Click += Letter_Click;
+            buttonValuePairs['V'].Click += Letter_Click;
+            buttonValuePairs['W'].Click += Letter_Click;
+            buttonValuePairs['X'].Click += Letter_Click;
+            buttonValuePairs['Y'].Click += Letter_Click;
+            buttonValuePairs['Z'].Click += Letter_Click;
 
             #endregion buttonLetters Handler
 
@@ -233,7 +207,7 @@ namespace preguntaods.Presentacion.UI_impl
                     {
                         if (confirmed)
                         {
-
+                            SeleccionarLetra();
 
                             pistasUsadas++;
                             tienePista = false;
@@ -243,6 +217,25 @@ namespace preguntaods.Presentacion.UI_impl
                     }
                 });
             }
+        }
+
+        public void SeleccionarLetra()
+        {
+            int pos = Array.IndexOf(guionesPalabra, '_');
+            if (pos != -1)
+            {
+                char letter = palabraAdivinar.ElementAt(pos);
+
+                MostrarLetras(letter);
+            }
+        }
+
+        public void MostrarLetras(char letter)
+        {
+            var indexes = GetIndexesOfLetter(palabraAdivinar, letter);
+            ActualizaProgresoPalabra(indexes);
+
+            buttonValuePairs[letter].Enabled = false;
         }
 
         private async void Letter_Click(object sender, EventArgs e)
@@ -257,10 +250,7 @@ namespace preguntaods.Presentacion.UI_impl
                 sonido.SetEstrategia(new EstrategiaSonidoLetraAcierto(), activity);
                 sonido.EjecutarSonido();
 
-                var indexes = GetIndexesOfLetter(palabraAdivinar, letter);
-                ActualizaProgresoPalabra(indexes);
-
-                button.Enabled = false;
+                MostrarLetras(letter);
 
                 if (guionesPalabra.Contains('_')) return;
 
@@ -364,33 +354,6 @@ namespace preguntaods.Presentacion.UI_impl
         public override void FinReto()
         {
             letrasAcertadas = 0;
-
-            /*buttonA.Enabled = true;
-            buttonB.Enabled = true;
-            buttonC.Enabled= true;
-            buttonD.Enabled = true;
-            buttonE.Enabled = true;
-            buttonF.Enabled = true;
-            buttonG.Enabled = true;
-            buttonH.Enabled = true;
-            buttonI.Enabled = true;
-            buttonJ.Enabled = true;
-            buttonK.Enabled = true;
-            buttonL.Enabled = true;
-            buttonM.Enabled = true;
-            buttonN.Enabled = true;
-            buttonO.Enabled = true;
-            buttonP.Enabled = true;
-            buttonQ.Enabled = true;
-            buttonR.Enabled = true;
-            buttonS.Enabled = true;
-            buttonT.Enabled = true;
-            buttonU.Enabled = true;
-            buttonV.Enabled = true;
-            buttonW.Enabled = true;
-            buttonX.Enabled = true;
-            buttonY.Enabled = true;
-            buttonZ.Enabled = true;*/
 
             animation.Pause();
         }
