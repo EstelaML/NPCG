@@ -7,31 +7,31 @@ namespace preguntaods.Entities
     [Table("Pregunta")]
     public partial class Pregunta : BaseModel, IEntity
     {
-        [PrimaryKey("Id")]
+        [PrimaryKey]
         public int? Id { get; set; }
 
-        [Column("Pregunta")]
+        [Column]
         public string Enunciado { get; set; }
 
-        [Column("Respuesta1")]
+        [Column]
         public string Respuesta1 { get; set; }
 
-        [Column("Respuesta2")]
+        [Column]
         public string Respuesta2 { get; set; }
 
-        [Column("Respuesta3")]
+        [Column]
         public string Respuesta3 { get; set; }
 
-        [Column("Respuesta4")]
+        [Column]
         public string Respuesta4 { get; set; }
 
-        [Column("Correcta")]
+        [Column]
         public string Correcta { get; set; }
 
-        [Column("Dificultad")]
+        [Column]
         public int Dificultad { get; set; }
 
-        [Column("OdsRelacionada")]
+        [Column]
         public string OdsRelacionada { get; set; }
     }
 }

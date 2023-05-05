@@ -20,7 +20,7 @@ namespace preguntaods.Presentacion.ViewModels
         private GridLayout rankingGridLayout;
         private Facade fachada;
         private TextView textAnimo;
-        private const int numFilas = 10;
+        private const int NumFilas = 10;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -35,7 +35,7 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
-            var usuarios = await fachada.GetOrderedUsers(numFilas);
+            var usuarios = await fachada.GetOrderedUsers(NumFilas);
             CrearRanking(usuarios);
             MensajeAnimo(usuarios);
         }
@@ -44,7 +44,7 @@ namespace preguntaods.Presentacion.ViewModels
         {
             List<string> posiciones = new List<string>();
             int i = 1;
-            while (i <= numFilas)
+            while (i <= NumFilas)
             {
                 posiciones.Add(i.ToString() + ".");
                 i++;
@@ -56,7 +56,7 @@ namespace preguntaods.Presentacion.ViewModels
             rankingGridLayout.AddView(new TextView(this) { Text = "Puntos", TextAlignment = TextAlignment.Center });
 
             // Agregar los datos al GridLayout
-            for (int j = 0; j < numFilas; j++)
+            for (int j = 0; j < NumFilas; j++)
             {
                 rankingGridLayout.AddView(new TextView(this) { Text = posiciones[j], TextAlignment = TextAlignment.Center });
                 if (j < usuarios.Count)

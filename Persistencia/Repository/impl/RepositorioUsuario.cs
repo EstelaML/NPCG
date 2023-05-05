@@ -127,7 +127,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var uuid = usuario.Uuid;
             var respuesta = await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Single();
 
-            return respuesta.Aciertos;
+            return respuesta?.Aciertos;
         }
 
         public async Task<int[]> GetRetosFalladosAsync(Usuario usuario)
@@ -136,10 +136,10 @@ namespace preguntaods.Persistencia.Repository.impl
             var uuid = usuario.Uuid;
             var respuesta = await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Single();
 
-            return respuesta.Fallos;
+            return respuesta?.Fallos;
         }
 
-        public async Task<Estadistica> GetEstadisticasByUUID(string uuid)
+        public async Task<Estadistica> GetEstadisticasByUuid(string uuid)
         {
             var response = await conexion.Cliente
                 .From<Estadistica>()

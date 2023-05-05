@@ -37,7 +37,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             usuario = await fachada.GetUsuarioLogged();
 
-            estadisticas = await fachada.pedirEstadisticas(usuario.Uuid);
+            estadisticas = await fachada.PedirEstadisticas(usuario.Uuid);
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
@@ -63,21 +63,13 @@ namespace preguntaods.Presentacion.ViewModels
             retosAcertados = estadisticas.Aciertos.Length;
 
             retosTotales = retosFallados + retosAcertados;
-            probAcierto = (int)(((float)retosAcertados / (float)retosTotales) * 100);
+            probAcierto = (int)((retosAcertados / (float)retosTotales) * 100);
 
-            if (probAcierto < 0)
-            {
-                aciertos.Text = "0";
-            }
-            else { aciertos.Text = probAcierto.ToString(); }
+            aciertos.Text = probAcierto < 0 ? "0" : probAcierto.ToString();
 
             probFallo = (100 - probAcierto);
 
-            if (probAcierto < 0)
-            {
-                fallos.Text = "0";
-            }
-            else { fallos.Text = probFallo.ToString(); }
+            fallos.Text = probAcierto < 0 ? "0" : probFallo.ToString();
         }
 
         private void Atras(object sender, EventArgs e)

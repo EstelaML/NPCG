@@ -7,19 +7,19 @@ namespace preguntaods.Entities
     [Table("Ahorcado")]
     public partial class Ahorcado : BaseModel, IEntity
     {
-        [PrimaryKey("Id")]
+        [PrimaryKey]
         public int? Id { get; set; }
 
-        [Column("Enunciado")]
+        [Column]
         public string Enunciado { get; set; }
 
-        [Column("Palabra")]
+        [Column]
         public string Palabra { get; set; }
 
-        [Column("Dificultad")]
+        [Column]
         public int Dificultad { get; set; }
 
-        [Column("OdsRelacionada")]
+        [Column]
         public int? OdsRelacionada { get; set; }
     }
 }

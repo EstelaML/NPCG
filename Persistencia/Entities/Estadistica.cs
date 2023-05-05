@@ -1,27 +1,28 @@
 ﻿using Postgrest.Attributes;
 using Postgrest.Models;
 
+// ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
 {
     [Table("Estadisticas")]
     public partial class Estadistica : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey]
         public int? Id { get; set; }
 
-        [Column("Usuario")]
+        [Column]
         public string Usuario { get; set; }
 
-        [Column("Puntuacion")]
+        [Column]
         public int Puntuacion { get; set; }
 
-        [Column("Aciertos")]
+        [Column]
         public int[] Aciertos { get; set; }
 
-        [Column("Fallos")]
+        [Column]
         public int[] Fallos { get; set; }
 
-        [Column("Nombre")]
+        [Column]
         public string Nombre { get; set; }
     }
 }

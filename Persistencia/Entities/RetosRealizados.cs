@@ -7,16 +7,16 @@ namespace preguntaods.Entities
     [Table("RetosRealizados")]
     public partial class RetosRealizados : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey]
         public int? Id { get; set; }
 
-        [Column("Usuario")]
+        [Column]
         public int Usuario { get; set; }
 
-        [Column("PreguntasRealizadas")]
+        [Column]
         public int[] PreguntasRealizadas { get; set; }
 
-        [Column("AhorcadosRealizados")]
+        [Column]
         public int[] AhorcadosRealizados { get; set; }
     }
 }

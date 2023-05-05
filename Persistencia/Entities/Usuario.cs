@@ -7,25 +7,25 @@ namespace preguntaods.Entities
     [Table("Usuario")]
     public partial class Usuario : BaseModel, IEntity
     {
-        [PrimaryKey("Id")]
+        [PrimaryKey]
         public int? Id { get; set; }
 
-        [Column("UUID")]
+        [Column]
         public string Uuid { get; set; }
 
-        [Column("Nombre")]
+        [Column]
         public string Nombre { get; set; }
 
-        [Column("Puntos")]
+        [Column]
         public int Puntos { get; set; }
 
-        [Column("Sonidos")]
+        [Column]
         public bool Sonidos { get; set; }
 
-        [Column("Musica")]
+        [Column]
         public int Musica { get; set; }
 
-        [Column("PreguntasRealizadas")]
+        [Column]
         public int[] PreguntasRealizadas { get; set; }
     }
 }

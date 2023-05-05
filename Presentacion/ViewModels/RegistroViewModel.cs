@@ -130,7 +130,7 @@ namespace preguntaods.Presentacion.ViewModels
                 {
                     var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
                     await fachada.NewUsuario(user);
-                    await fachada.crearEstadisticas(user);
+                    await fachada.CrearEstadisticas(user);
 
                     UserDialogs.Instance.HideLoading();
 

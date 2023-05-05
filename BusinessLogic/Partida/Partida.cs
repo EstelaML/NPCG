@@ -22,8 +22,6 @@ namespace preguntaods.BusinessLogic.Partida
 
         private Android.App.Activity activity;
         private Button botonAbandonar;
-        private TextView textoPuntosTotales;
-        private TextView textoPuntosConsolidados;
 
         private int contadorRetoSiguiente;
         private int fallos;

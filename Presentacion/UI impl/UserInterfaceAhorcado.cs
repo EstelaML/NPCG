@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
@@ -19,9 +18,8 @@ namespace preguntaods.Presentacion.UI_impl
     public class UserInterfaceAhorcado : UserInterface
     {
         // Class Elements
-        private Facade fachada;
-
         private EstrategiaSonidoReloj reloj;
+
         private Sonido sonido;
         private int fallos;
         private bool tienePista;
@@ -32,7 +30,6 @@ namespace preguntaods.Presentacion.UI_impl
         private string palabraAdivinar;
         private char[] guionesPalabra;
         private int ronda;
-        private int letrasAcertadas;
         private int? odsRelacion;
 
         // UI
@@ -55,21 +52,20 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void Init()
         {
-            ahorcadoImg = activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
-            enunciado = activity.FindViewById<TextView>(Resource.Id.enunciado);
-            palabra = activity.FindViewById<TextView>(Resource.Id.palabra);
-            barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
-            imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-            interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
-            pistaButton = activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
+            ahorcadoImg = Activity.FindViewById<ImageView>(Resource.Id.ahorcadoImg);
+            enunciado = Activity.FindViewById<TextView>(Resource.Id.enunciado);
+            palabra = Activity.FindViewById<TextView>(Resource.Id.palabra);
+            barTime = Activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            imagenCorazon1 = Activity.FindViewById<ImageView>(Resource.Id.heart1);
+            imagenCorazon2 = Activity.FindViewById<ImageView>(Resource.Id.heart2);
+            interroganteButton = Activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            pistaButton = Activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
 
             if (fallos == 1)
             {
                 imagenCorazon1?.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
 
-            letrasAcertadas = 0;
             ronda = 1;
 
             // Initialization of Services
@@ -82,33 +78,33 @@ namespace preguntaods.Presentacion.UI_impl
 
             buttonValuePairs = new Dictionary<char, Button>
             {
-                { 'A', activity.FindViewById<Button>(Resource.Id.buttonA) },
-                { 'B', activity.FindViewById<Button>(Resource.Id.buttonB) },
-                { 'C', activity.FindViewById<Button>(Resource.Id.buttonC) },
-                { 'D', activity.FindViewById<Button>(Resource.Id.buttonD) },
-                { 'E', activity.FindViewById<Button>(Resource.Id.buttonE) },
-                { 'F', activity.FindViewById<Button>(Resource.Id.buttonF) },
-                { 'G', activity.FindViewById<Button>(Resource.Id.buttonG) },
-                { 'H', activity.FindViewById<Button>(Resource.Id.buttonH) },
-                { 'I', activity.FindViewById<Button>(Resource.Id.buttonI) },
-                { 'J', activity.FindViewById<Button>(Resource.Id.buttonJ) },
-                { 'K', activity.FindViewById<Button>(Resource.Id.buttonK) },
-                { 'L', activity.FindViewById<Button>(Resource.Id.buttonL) },
-                { 'M', activity.FindViewById<Button>(Resource.Id.buttonM) },
-                { 'N', activity.FindViewById<Button>(Resource.Id.buttonN) },
-                { 'Ñ', activity.FindViewById<Button>(Resource.Id.buttonÑ) },
-                { 'O', activity.FindViewById<Button>(Resource.Id.buttonO) },
-                { 'P', activity.FindViewById<Button>(Resource.Id.buttonP) },
-                { 'Q', activity.FindViewById<Button>(Resource.Id.buttonQ) },
-                { 'R', activity.FindViewById<Button>(Resource.Id.buttonR) },
-                { 'S', activity.FindViewById<Button>(Resource.Id.buttonS) },
-                { 'T', activity.FindViewById<Button>(Resource.Id.buttonT) },
-                { 'U', activity.FindViewById<Button>(Resource.Id.buttonU) },
-                { 'V', activity.FindViewById<Button>(Resource.Id.buttonV) },
-                { 'W', activity.FindViewById<Button>(Resource.Id.buttonW) },
-                { 'X', activity.FindViewById<Button>(Resource.Id.buttonX) },
-                { 'Y', activity.FindViewById<Button>(Resource.Id.buttonY) },
-                { 'Z', activity.FindViewById<Button>(Resource.Id.buttonZ) }
+                { 'A', Activity.FindViewById<Button>(Resource.Id.buttonA) },
+                { 'B', Activity.FindViewById<Button>(Resource.Id.buttonB) },
+                { 'C', Activity.FindViewById<Button>(Resource.Id.buttonC) },
+                { 'D', Activity.FindViewById<Button>(Resource.Id.buttonD) },
+                { 'E', Activity.FindViewById<Button>(Resource.Id.buttonE) },
+                { 'F', Activity.FindViewById<Button>(Resource.Id.buttonF) },
+                { 'G', Activity.FindViewById<Button>(Resource.Id.buttonG) },
+                { 'H', Activity.FindViewById<Button>(Resource.Id.buttonH) },
+                { 'I', Activity.FindViewById<Button>(Resource.Id.buttonI) },
+                { 'J', Activity.FindViewById<Button>(Resource.Id.buttonJ) },
+                { 'K', Activity.FindViewById<Button>(Resource.Id.buttonK) },
+                { 'L', Activity.FindViewById<Button>(Resource.Id.buttonL) },
+                { 'M', Activity.FindViewById<Button>(Resource.Id.buttonM) },
+                { 'N', Activity.FindViewById<Button>(Resource.Id.buttonN) },
+                { 'Ñ', Activity.FindViewById<Button>(Resource.Id.buttonÑ) },
+                { 'O', Activity.FindViewById<Button>(Resource.Id.buttonO) },
+                { 'P', Activity.FindViewById<Button>(Resource.Id.buttonP) },
+                { 'Q', Activity.FindViewById<Button>(Resource.Id.buttonQ) },
+                { 'R', Activity.FindViewById<Button>(Resource.Id.buttonR) },
+                { 'S', Activity.FindViewById<Button>(Resource.Id.buttonS) },
+                { 'T', Activity.FindViewById<Button>(Resource.Id.buttonT) },
+                { 'U', Activity.FindViewById<Button>(Resource.Id.buttonU) },
+                { 'V', Activity.FindViewById<Button>(Resource.Id.buttonV) },
+                { 'W', Activity.FindViewById<Button>(Resource.Id.buttonW) },
+                { 'X', Activity.FindViewById<Button>(Resource.Id.buttonX) },
+                { 'Y', Activity.FindViewById<Button>(Resource.Id.buttonY) },
+                { 'Z', Activity.FindViewById<Button>(Resource.Id.buttonZ) }
             };
 
             #endregion buttonletters FindByID
@@ -149,11 +145,12 @@ namespace preguntaods.Presentacion.UI_impl
             if (pistaButton != null) pistaButton.Click += PistaClick;
 
             animation = animation = ObjectAnimator.OfInt(barTime, "Progress", 100, 0);
-            animation.SetDuration(120000); //30*4 = 2min
+            animation?.SetDuration(120000); //30*4 = 2min
 
+            if (animation == null) return;
             animation.AnimationPause += (sender, e) =>
             {
-                sonido.SetEstrategia(reloj, activity);
+                sonido.SetEstrategia(reloj, Activity);
                 sonido.PararSonido();
             };
             if (animation == null) return;
@@ -161,7 +158,7 @@ namespace preguntaods.Presentacion.UI_impl
             {
                 var playtime = animation.CurrentPlayTime;
                 if (playtime < 100000 || playtime >= 100020) return;
-                sonido.SetEstrategia(reloj, activity);
+                sonido.SetEstrategia(reloj, Activity);
                 sonido.EjecutarSonido();
             };
             animation.AnimationEnd += async (sender, e) =>
@@ -178,20 +175,21 @@ namespace preguntaods.Presentacion.UI_impl
                         break;
                 }
 
-                sonido.SetEstrategia(reloj, activity);
+                sonido.SetEstrategia(reloj, Activity);
                 sonido.PararSonido();
 
                 await MostrarAlerta(false, fallos == 2);
 
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)Activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal,
+                    _puntosConsolidados);
             };
         }
 
         private void InterroganteClick(object sender, EventArgs e)
         {
-            if (odsRelacion >= 1 && odsRelacion <= 17) { ((VistaPartidaViewModel)activity).AbrirApoyo((int)odsRelacion); }
-            else ((VistaPartidaViewModel)activity).AbrirApoyo(0);
+            if (odsRelacion >= 1 && odsRelacion <= 17) { ((VistaPartidaViewModel)Activity).AbrirApoyo((int)odsRelacion); }
+            else ((VistaPartidaViewModel)Activity).AbrirApoyo(0);
         }
 
         private void PistaClick(object sender, EventArgs e)
@@ -205,15 +203,13 @@ namespace preguntaods.Presentacion.UI_impl
                     CancelText = "No quiero",
                     OnAction = (confirmed) =>
                     {
-                        if (confirmed)
-                        {
-                            SeleccionarLetra();
+                        if (!confirmed) return;
+                        SeleccionarLetra();
 
-                            pistasUsadas++;
-                            tienePista = false;
+                        pistasUsadas++;
+                        tienePista = false;
 
-                            puntuacion /= 2;
-                        }
+                        puntuacion /= 2;
                     }
                 });
             }
@@ -221,13 +217,11 @@ namespace preguntaods.Presentacion.UI_impl
 
         public void SeleccionarLetra()
         {
-            int pos = Array.IndexOf(guionesPalabra, '_');
-            if (pos != -1)
-            {
-                char letter = palabraAdivinar.ElementAt(pos);
+            var pos = Array.IndexOf(guionesPalabra, '_');
+            if (pos == -1) return;
+            var letter = palabraAdivinar.ElementAt(pos);
 
-                MostrarLetras(letter);
-            }
+            MostrarLetras(letter);
         }
 
         public void MostrarLetras(char letter)
@@ -240,14 +234,15 @@ namespace preguntaods.Presentacion.UI_impl
 
         private async void Letter_Click(object sender, EventArgs e)
         {
-            var button = sender as Button;
+            var button = (Button)sender;
             if (button == null) return;
 
-            char letter = char.Parse(button.Text);
+            if (button.Text == null) return;
+            var letter = char.Parse(button.Text);
 
             if (palabraAdivinar.Contains(letter))
             {
-                sonido.SetEstrategia(new EstrategiaSonidoLetraAcierto(), activity);
+                sonido.SetEstrategia(new EstrategiaSonidoLetraAcierto(), Activity);
                 sonido.EjecutarSonido();
 
                 MostrarLetras(letter);
@@ -258,9 +253,9 @@ namespace preguntaods.Presentacion.UI_impl
 
                 await MostrarAlerta(true, false);
 
-                ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
+                ((VistaPartidaViewModel)Activity).GuardarPreguntaAcertada();
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)Activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             }
             else
             {
@@ -272,7 +267,7 @@ namespace preguntaods.Presentacion.UI_impl
                 fallos++;
                 await MostrarAlerta(false, fallos == 2);
 
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)Activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             }
         }
 
@@ -281,7 +276,7 @@ namespace preguntaods.Presentacion.UI_impl
             var indexes = new List<int>();
             var aux = word.ToCharArray();
 
-            for (int i = 0; i < word.Length; i++)
+            for (var i = 0; i < word.Length; i++)
             {
                 if (aux[i] == letter)
                 {
@@ -303,11 +298,9 @@ namespace preguntaods.Presentacion.UI_impl
         private void ActualizaImagenAhorcado()
         {
             var path = "ahorcado_" + ++ronda;
-            if (activity.Resources != null)
-            {
-                var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
-                ahorcadoImg.SetImageResource(idDeImagen);
-            }
+            if (Activity.Resources == null) return;
+            var idDeImagen = Activity.Resources.GetIdentifier(path, "drawable", Activity.PackageName);
+            ahorcadoImg.SetImageResource(idDeImagen);
         }
 
         public override void SetDatosReto(Reto reto)
@@ -327,9 +320,9 @@ namespace preguntaods.Presentacion.UI_impl
             }
 
             var path = "ahorcado_" + ronda;
-            if (activity.Resources != null)
+            if (Activity.Resources != null)
             {
-                var idDeImagen = activity.Resources.GetIdentifier(path, "drawable", activity.PackageName);
+                var idDeImagen = Activity.Resources.GetIdentifier(path, "drawable", Activity.PackageName);
                 ahorcadoImg.SetImageResource(idDeImagen);
             }
 
@@ -353,8 +346,6 @@ namespace preguntaods.Presentacion.UI_impl
 
         public override void FinReto()
         {
-            letrasAcertadas = 0;
-
             animation.Pause();
         }
 
@@ -371,7 +362,7 @@ namespace preguntaods.Presentacion.UI_impl
         private async Task MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            var alertBuilder = new AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
+            var alertBuilder = new AlertDialog.Builder(Activity, Resource.Style.AlertDialogCustom);
             string titulo;
             string mensaje;
 
@@ -379,10 +370,10 @@ namespace preguntaods.Presentacion.UI_impl
             {
                 case true when !fin:
                     {
-                        sonido.SetEstrategia(new EstrategiaSonidoAcierto(), activity);
+                        sonido.SetEstrategia(new EstrategiaSonidoAcierto(), Activity);
                         sonido.EjecutarSonido();
                         titulo = "Felicitaciones";
-                        mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                        mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
@@ -395,15 +386,15 @@ namespace preguntaods.Presentacion.UI_impl
                         alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                         {
                             // vuelves a menu principal
-                            ((VistaPartidaViewModel)activity).Abandonar();
+                            ((VistaPartidaViewModel)Activity).Abandonar();
                         });
-                        if (!((VistaPartidaViewModel)activity).GetConsolidado())
+                        if (!((VistaPartidaViewModel)Activity).GetConsolidado())
                         {
                             alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                             {
                                 _puntosConsolidados = puntuacionTotal;
                                 animation.Pause();
-                                ((VistaPartidaViewModel)activity).Consolidar(_puntosConsolidados);
+                                ((VistaPartidaViewModel)Activity).Consolidar(_puntosConsolidados);
                                 tcs.TrySetResult(true);
                             });
                         }
@@ -416,19 +407,17 @@ namespace preguntaods.Presentacion.UI_impl
 #pragma warning restore CS0618
                         {
                             // Acciones a realizar cuando quedan 10 segundos o menos
-                            if (alertDialog is { IsShowing: true })
-                            {
-                                sonido.SetEstrategia(reloj, activity);
-                                sonido.PararSonido();
-                                alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
-                            }
+                            if (!(alertDialog is { IsShowing: true })) return;
+                            sonido.SetEstrategia(reloj, Activity);
+                            sonido.PararSonido();
+                            alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                         }, 15000);
                         await tcs.Task;
                         break;
                     }
                 case false when !fin:
                     {
-                        sonido.SetEstrategia(new EstrategiaSonidoError(), activity);
+                        sonido.SetEstrategia(new EstrategiaSonidoError(), Activity);
                         sonido.EjecutarSonido();
                         // sumar los consolidados
                         titulo = "Vuelve a intentarlo";
@@ -443,7 +432,7 @@ namespace preguntaods.Presentacion.UI_impl
                         });
                         alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                         {
-                            ((VistaPartidaViewModel)activity).Abandonar();
+                            ((VistaPartidaViewModel)Activity).Abandonar();
                         });
                         alertBuilder.SetCancelable(false);
                         var alertDialog = alertBuilder.Create();
@@ -455,7 +444,7 @@ namespace preguntaods.Presentacion.UI_impl
                         {
                             // Acciones a realizar cuando quedan 10 segundos o menos
                             if (!(alertDialog is { IsShowing: true })) return;
-                            sonido.SetEstrategia(reloj, activity);
+                            sonido.SetEstrategia(reloj, Activity);
                             sonido.PararSonido();
                             alertDialog.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                         }, 15000);
@@ -463,7 +452,7 @@ namespace preguntaods.Presentacion.UI_impl
                         break;
                     }
                 default:
-                    ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
+                    ((VistaPartidaViewModel)Activity).AbandonarFallido(puntuacionTotal);
                     break;
             }
         }

@@ -3,6 +3,7 @@ using preguntaods.Entities;
 using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,13 +43,9 @@ namespace preguntaods.BusinessLogic.Services
         public async Task<User> SignUpAsync(string correo, string password)
         {
             var session = await conexion.Cliente.Auth.SignUp(correo, password);
-            if (session.User.AppMetadata != null)
-            {
-                conexion.Usuario = session?.User;
-                return session?.User;
-            }
-
-            return null;
+            if (session?.User?.AppMetadata == null) return null;
+            conexion.Usuario = session.User;
+            return session.User;
         }
 
         public async Task<Usuario> GetUsuarioLogged()
@@ -70,7 +67,7 @@ namespace preguntaods.BusinessLogic.Services
             if (conexion.Usuario != null)
             {
                 var a = conexion.Usuario.Id;
-                var estadisticas = await repositorioUser.GetEstadisticasByUUID(a);
+                var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
                 await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos);
             }
         }
@@ -141,16 +138,16 @@ namespace preguntaods.BusinessLogic.Services
             return listaUsuarios;
         }
 
-        public async Task crearEstadisticas(Usuario user)
+        public async Task CrearEstadisticas(Usuario user)
         {
-            int[] aux = new int[0];
+            var aux = Array.Empty<int>();
             var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre);
             await repositorioEstadisticas.Add(a);
         }
 
-        public async Task<Estadistica> pedirEstadisticas(string uuid)
+        public async Task<Estadistica> PedirEstadisticas(string uuid)
         {
-            var respuesto = await repositorioUser.GetEstadisticasByUUID(uuid);
+            var respuesto = await repositorioUser.GetEstadisticasByUuid(uuid);
             return respuesto;
         }
     }

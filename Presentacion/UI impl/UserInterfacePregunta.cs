@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
@@ -17,9 +16,8 @@ namespace preguntaods.Presentacion.UI_impl
     public class UserInterfacePregunta : UserInterface
     {
         // Class Elements
-        private Facade fachada;
-
         private Sonido sonido;
+
         private int fallos;
         private int pistasUsadas;
         private int puntuacionTotal;
@@ -60,17 +58,17 @@ namespace preguntaods.Presentacion.UI_impl
         public override void Init()
         {
             // Initialization of UI Elements
-            enunciado = activity.FindViewById<TextView>(Resource.Id.pregunta);
-            botonPregunta1 = activity.FindViewById<Button>(Resource.Id.button1);
-            botonPregunta2 = activity.FindViewById<Button>(Resource.Id.button2);
-            botonPregunta3 = activity.FindViewById<Button>(Resource.Id.button3);
-            botonPregunta4 = activity.FindViewById<Button>(Resource.Id.button4);
-            barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            imagenOds = activity.FindViewById<ImageView>(Resource.Id.imagenOds);
-            imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
-            imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
-            interroganteButton = activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
-            pistaButton = activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
+            enunciado = Activity.FindViewById<TextView>(Resource.Id.pregunta);
+            botonPregunta1 = Activity.FindViewById<Button>(Resource.Id.button1);
+            botonPregunta2 = Activity.FindViewById<Button>(Resource.Id.button2);
+            botonPregunta3 = Activity.FindViewById<Button>(Resource.Id.button3);
+            botonPregunta4 = Activity.FindViewById<Button>(Resource.Id.button4);
+            barTime = Activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
+            imagenOds = Activity.FindViewById<ImageView>(Resource.Id.imagenOds);
+            imagenCorazon1 = Activity.FindViewById<ImageView>(Resource.Id.heart1);
+            imagenCorazon2 = Activity.FindViewById<ImageView>(Resource.Id.heart2);
+            interroganteButton = Activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
+            pistaButton = Activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
 
             if (fallos == 1)
             {
@@ -78,7 +76,6 @@ namespace preguntaods.Presentacion.UI_impl
             }
 
             // Initialization of Services
-            fachada = new Facade();
             sonido = new Sonido();
 
             // Initialization of Vars
@@ -103,7 +100,7 @@ namespace preguntaods.Presentacion.UI_impl
                 var playtime = animation.CurrentPlayTime;
                 if (playtime >= 20000 && playtime < 20020)
                 {
-                    sonido.SetEstrategia(reloj, activity);
+                    sonido.SetEstrategia(reloj, Activity);
                     sonido.EjecutarSonido();
                 }
             };
@@ -121,25 +118,25 @@ namespace preguntaods.Presentacion.UI_impl
                         break;
                 }
 
-                sonido.SetEstrategia(reloj, activity);
+                sonido.SetEstrategia(reloj, Activity);
                 sonido.PararSonido();
 
                 await MostrarAlerta(false, fallos == 2);
 
                 FinReto();
-                ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
+                ((VistaPartidaViewModel)Activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
             };
             animation.AnimationPause += (sender, e) =>
             {
-                sonido.SetEstrategia(reloj, activity);
+                sonido.SetEstrategia(reloj, Activity);
                 sonido.PararSonido();
             };
         }
 
         private void InterroganteClick(object sender, EventArgs e)
         {
-            if (odsRelacion == null) { ((VistaPartidaViewModel)activity).AbrirApoyo(0); }
-            else ((VistaPartidaViewModel)activity).AbrirApoyo((int)odsRelacion);
+            if (odsRelacion == null) { ((VistaPartidaViewModel)Activity).AbrirApoyo(0); }
+            else ((VistaPartidaViewModel)Activity).AbrirApoyo((int)odsRelacion);
         }
 
         private void PistaClick(object sender, EventArgs e)
@@ -174,7 +171,7 @@ namespace preguntaods.Presentacion.UI_impl
             {
                 var random = new Random();
                 var n = random.Next(1, 4);
-                Button boton = n switch
+                var boton = n switch
                 {
                     1 => botonPregunta1,
                     2 => botonPregunta2,
@@ -182,12 +179,10 @@ namespace preguntaods.Presentacion.UI_impl
                     _ => botonPregunta4,
                 };
 
-                if (boton.Enabled == true && !boton.Text.Equals(correcta))
-                {
-                    boton.SetBackgroundResource(Resource.Drawable.style_preNotEnabled);
-                    boton.Enabled = false;
-                    break;
-                }
+                if (boton.Text == null || boton.Enabled != true || boton.Text.Equals(correcta)) continue;
+                boton.SetBackgroundResource(Resource.Drawable.style_preNotEnabled);
+                boton.Enabled = false;
+                break;
             }
         }
 
@@ -215,10 +210,10 @@ namespace preguntaods.Presentacion.UI_impl
 
                 if (pregunta.OdsRelacionada == null)
                 {
-                    if (activity.Resources != null)
+                    if (Activity.Resources != null)
                     {
                         var idDeImagen =
-                            activity.Resources.GetIdentifier("icon_logo", "drawable", activity.PackageName);
+                            Activity.Resources.GetIdentifier("icon_logo", "drawable", Activity.PackageName);
                         imagenOds.SetImageResource(idDeImagen);
                     }
                 }
@@ -227,11 +222,11 @@ namespace preguntaods.Presentacion.UI_impl
                     odsRelacion = int.Parse(pregunta.OdsRelacionada);
                     var nombreDeImagen =
                         "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
-                    if (activity.Resources != null)
+                    if (Activity.Resources != null)
                     {
                         var idDeImagen =
-                            activity.Resources.GetIdentifier(nombreDeImagen, "drawable",
-                                activity.PackageName); // obtener el identificador de recurso correspondiente
+                            Activity.Resources.GetIdentifier(nombreDeImagen, "drawable",
+                                Activity.PackageName); // obtener el identificador de recurso correspondiente
                         imagenOds.SetImageResource(idDeImagen);
                     }
                 }
@@ -249,18 +244,18 @@ namespace preguntaods.Presentacion.UI_impl
 
             if (boton?.Text != null && boton.Text.Equals(correcta))
             {
-                sonido.SetEstrategia(new EstrategiaSonidoAcierto(), activity);
+                sonido.SetEstrategia(new EstrategiaSonidoAcierto(), Activity);
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
-                ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
+                ((VistaPartidaViewModel)Activity).GuardarPreguntaAcertada();
                 puntuacionTotal += puntuacion;
                 acierto = true; condicion = false;
             }
             else
             {
-                sonido.SetEstrategia(new EstrategiaSonidoError(), activity);
+                sonido.SetEstrategia(new EstrategiaSonidoError(), Activity);
                 boton?.SetBackgroundResource(Resource.Drawable.style_preFallo);
 
-                ((VistaPartidaViewModel)activity).GuardarPreguntaFallada();
+                ((VistaPartidaViewModel)Activity).GuardarPreguntaFallada();
 
                 puntuacionTotal -= puntuacion * 2;
                 if (puntuacionTotal < 0) puntuacionTotal = 0;
@@ -274,7 +269,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             FinReto();
 
-            ((VistaPartidaViewModel)activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
+            ((VistaPartidaViewModel)Activity).RetoSiguiente(fallos, pistasUsadas, puntuacionTotal, _puntosConsolidados);
         }
 
         public override void FinReto()
@@ -297,14 +292,14 @@ namespace preguntaods.Presentacion.UI_impl
         private async Task MostrarAlerta(bool acertado, bool fin)
         {
             var tcs = new TaskCompletionSource<bool>();
-            var alertBuilder = new AlertDialog.Builder(activity, Resource.Style.AlertDialogCustom);
+            var alertBuilder = new AlertDialog.Builder(Activity, Resource.Style.AlertDialogCustom);
             string titulo;
             string mensaje;
 
             if (acertado && !fin)
             {
                 titulo = "Felicitaciones";
-                mensaje = ((VistaPartidaViewModel)activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
                 alertBuilder.SetMessage(mensaje);
                 alertBuilder.SetTitle(titulo);
@@ -317,15 +312,15 @@ namespace preguntaods.Presentacion.UI_impl
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
                     // vuelves a menu principal
-                    ((VistaPartidaViewModel)activity).Abandonar();
+                    ((VistaPartidaViewModel)Activity).Abandonar();
                 });
-                if (!((VistaPartidaViewModel)activity).GetConsolidado())
+                if (!((VistaPartidaViewModel)Activity).GetConsolidado())
                 {
                     alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
                     {
                         _puntosConsolidados = puntuacionTotal;
                         animation.Pause();
-                        ((VistaPartidaViewModel)activity).Consolidar(_puntosConsolidados);
+                        ((VistaPartidaViewModel)Activity).Consolidar(_puntosConsolidados);
                         tcs.TrySetResult(true);
                     });
                 }
@@ -338,7 +333,7 @@ namespace preguntaods.Presentacion.UI_impl
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog is { IsShowing: false }) return;
-                    sonido.SetEstrategia(reloj, activity);
+                    sonido.SetEstrategia(reloj, Activity);
                     sonido.PararSonido();
                     alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                 }, 15000);
@@ -360,7 +355,7 @@ namespace preguntaods.Presentacion.UI_impl
                 });
                 alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
                 {
-                    ((VistaPartidaViewModel)activity).Abandonar();
+                    ((VistaPartidaViewModel)Activity).Abandonar();
                 });
                 alertBuilder.SetCancelable(false);
                 var alertDialog = alertBuilder.Create();
@@ -372,7 +367,7 @@ namespace preguntaods.Presentacion.UI_impl
                 {
                     // Acciones a realizar cuando quedan 10 segundos o menos
                     if (alertDialog is { IsShowing: false }) return;
-                    sonido.SetEstrategia(reloj, activity);
+                    sonido.SetEstrategia(reloj, Activity);
                     sonido.PararSonido();
                     alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
                 }, 15000);
@@ -380,7 +375,7 @@ namespace preguntaods.Presentacion.UI_impl
             }
             else
             {
-                ((VistaPartidaViewModel)activity).AbandonarFallido(puntuacionTotal);
+                ((VistaPartidaViewModel)Activity).AbandonarFallido(puntuacionTotal);
             }
         }
     }

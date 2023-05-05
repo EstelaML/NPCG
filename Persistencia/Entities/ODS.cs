@@ -7,16 +7,16 @@ namespace preguntaods.Entities
     [Table("ods")]
     public partial class Ods : BaseModel, IEntity
     {
-        [PrimaryKey("id")]
+        [PrimaryKey]
         public int? Id { get; set; }
 
-        [Column("Nombre")]
+        [Column]
         public string Nombre { get; set; }
 
-        [Column("Descripcion")]
+        [Column]
         public string Descripcion { get; set; }
 
-        [Column("Imagen")]
+        [Column]
         public string Imagen { get; set; }
     }
 }

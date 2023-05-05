@@ -8,7 +8,7 @@ namespace preguntaods.Presentacion.UI_impl
     {
         private TextView textoPuntosTotales;
         private TextView textoPuntosConsolidados;
-        protected Activity activity;
+        protected Activity Activity;
 
         public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, Reto retoActual)
         {
@@ -16,16 +16,16 @@ namespace preguntaods.Presentacion.UI_impl
             Init();
             SetDatosReto(retoActual);
 
-            textoPuntosTotales = activity.FindViewById<TextView>(Resource.Id.textView2);
+            textoPuntosTotales = Activity.FindViewById<TextView>(Resource.Id.textView2);
             if (textoPuntosTotales != null) textoPuntosTotales.Text = "Puntos totales: " + ptsTotales;
 
-            textoPuntosConsolidados = activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
+            textoPuntosConsolidados = Activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
             if (textoPuntosConsolidados != null) textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
         }
 
         public void SetActivity(Activity activity)
         {
-            this.activity = activity;
+            this.Activity = activity;
         }
 
         public abstract void Init();
