@@ -1,4 +1,5 @@
-﻿using Android.Animation;
+﻿using Acr.UserDialogs;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -26,7 +27,6 @@ namespace preguntaods.Presentacion.UI_impl
         private int puntuacion;
         private string correcta;
         private EstrategiaSonidoReloj reloj;
-        private int numRetos;
         private int? odsRelacion;
         private bool tienePista;
 
@@ -39,7 +39,6 @@ namespace preguntaods.Presentacion.UI_impl
         private Button botonPregunta4;
         private ProgressBar barTime;
         private ImageView imagenOds;
-        private TextView textoPuntos;
         private ImageView imagenCorazon1;
         private ImageView imagenCorazon2;
         private ImageButton interroganteButton;
@@ -55,7 +54,6 @@ namespace preguntaods.Presentacion.UI_impl
             _puntosConsolidados = newPtsConsolidados;
             pistasUsadas = newPistasUsadas;
 
-            numRetos = 10;
             tienePista = true;
         }
 
@@ -68,7 +66,6 @@ namespace preguntaods.Presentacion.UI_impl
             botonPregunta3 = activity.FindViewById<Button>(Resource.Id.button3);
             botonPregunta4 = activity.FindViewById<Button>(Resource.Id.button4);
             barTime = activity.FindViewById<ProgressBar>(Resource.Id.timeBar);
-            textoPuntos = activity.FindViewById<TextView>(Resource.Id.textView1);
             imagenOds = activity.FindViewById<ImageView>(Resource.Id.imagenOds);
             imagenCorazon1 = activity.FindViewById<ImageView>(Resource.Id.heart1);
             imagenCorazon2 = activity.FindViewById<ImageView>(Resource.Id.heart2);
@@ -149,13 +146,24 @@ namespace preguntaods.Presentacion.UI_impl
         {
             if (pistasUsadas < 2 && tienePista)
             {
-                OcultarBoton();
-                OcultarBoton();
+                UserDialogs.Instance.Confirm(new ConfirmConfig {
+                    Message = "¿Estás seguro de usar una pista? Te quedan un total de " + (2 - pistasUsadas) + " pistas por usar.",
+                    OkText = "Si, estoy seguro",
+                    CancelText = "No quiero",
+                    OnAction = (confirmed) =>
+                    {
+                        if (confirmed)
+                        {
+                            OcultarBoton();
+                            OcultarBoton();
 
-                pistasUsadas++;
-                tienePista = false;
+                            pistasUsadas++;
+                            tienePista = false;
 
-                puntuacion /= 2;
+                            puntuacion /= 2;
+                        }
+                    }
+                });
             }
         }
 
@@ -202,8 +210,6 @@ namespace preguntaods.Presentacion.UI_impl
                     _ => puntuacion
                 };
 
-                //textoPuntos.Text = "Puntuación de la pregunta: " + puntuacion;
-
                 correcta = pregunta.Correcta;
 
                 if (pregunta.OdsRelacionada == null)
@@ -235,7 +241,6 @@ namespace preguntaods.Presentacion.UI_impl
 
         private async void ButtonClickAsync(object sender, EventArgs e)
         {
-            numRetos--;
             animation.Pause();
             var boton = sender as Button;
             bool acierto;
@@ -247,7 +252,7 @@ namespace preguntaods.Presentacion.UI_impl
                 boton.SetBackgroundResource(Resource.Drawable.style_preAcierto);
                 ((VistaPartidaViewModel)activity).GuardarPreguntaAcertada();
                 puntuacionTotal += puntuacion;
-                acierto = true; condicion = numRetos == 1;
+                acierto = true; condicion = false;
             }
             else
             {
