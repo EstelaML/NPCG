@@ -84,7 +84,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         public void RetoSiguiente(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados)
         {
-            partida.NextReto(fallos, pistasUsadas, ptsTotales, ptsConsolidados);
+            partida.NextReto(fallos, ptsTotales, ptsConsolidados, pistasUsadas);
 
             reto = partida.GetRetoActual();
 
