@@ -14038,6 +14038,9 @@ namespace preguntaods
 			// aapt resource value: 0x7F100007
 			public const int sonido_victoria = 2131755015;
 			
+			// aapt resource value: 0x7F100008
+			public const int tictac = 2131755016;
+			
 			static Raw()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
