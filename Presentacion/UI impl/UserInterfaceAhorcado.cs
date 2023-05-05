@@ -1,4 +1,5 @@
-﻿using Android.Animation;
+﻿using Acr.UserDialogs;
+using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -23,6 +24,7 @@ namespace preguntaods.Presentacion.UI_impl
         private EstrategiaSonidoReloj reloj;
         private Sonido sonido;
         private int fallos;
+        private bool tienePista;
         private int pistasUsadas;
         private int puntuacionTotal;
         private int puntuacion;
@@ -220,6 +222,27 @@ namespace preguntaods.Presentacion.UI_impl
 
         private void PistaClick(object sender, EventArgs e)
         {
+            if (pistasUsadas < 2 && tienePista)
+            {
+                UserDialogs.Instance.Confirm(new ConfirmConfig
+                {
+                    Message = "¿Estás seguro de usar una pista? Te quedan un total de " + (2 - pistasUsadas) + " pistas por usar.",
+                    OkText = "Si, estoy seguro",
+                    CancelText = "No quiero",
+                    OnAction = (confirmed) =>
+                    {
+                        if (confirmed)
+                        {
+
+
+                            pistasUsadas++;
+                            tienePista = false;
+
+                            puntuacion /= 2;
+                        }
+                    }
+                });
+            }
         }
 
         private async void Letter_Click(object sender, EventArgs e)
@@ -378,6 +401,8 @@ namespace preguntaods.Presentacion.UI_impl
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
             pistasUsadas = newPistasUsadas;
+
+            tienePista = true;
         }
 
         private async Task MostrarAlerta(bool acertado, bool fin)
