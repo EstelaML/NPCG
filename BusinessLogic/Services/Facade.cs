@@ -80,6 +80,13 @@ namespace preguntaods.BusinessLogic.Services
 
         }
 
+        public async Task CambiarFoto(string uuid, byte[] foto)
+        {
+
+            await repositorioUser.UpdateFoto(uuid, foto);
+
+        }
+
         public async Task NewUsuario(Usuario user)
         {
             await repositorioUser.Add(user);

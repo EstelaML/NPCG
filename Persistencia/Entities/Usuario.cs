@@ -27,5 +27,8 @@ namespace preguntaods.Entities
 
         [Column("PreguntasRealizadas")]
         public int[] PreguntasRealizadas { get; set; }
+
+        [Column("Foto")]
+        public string Foto { get; set; }
     }
 }

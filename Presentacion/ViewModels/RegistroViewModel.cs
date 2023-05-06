@@ -133,7 +133,6 @@ namespace preguntaods.Presentacion.ViewModels
                     await fachada.CrearEstadisticas(user);
 
                     UserDialogs.Instance.HideLoading();
-
                     UserDialogs.Instance.Alert(new AlertConfig
                     {
                         Message = "Te has registrado con exito! Verifica tu cuenta con el correo que se te ha enviado",

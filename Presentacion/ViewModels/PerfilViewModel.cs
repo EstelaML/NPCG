@@ -1,13 +1,17 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using Xamarin.Essentials;
 
 namespace preguntaods.Presentacion.ViewModels
@@ -53,7 +57,7 @@ namespace preguntaods.Presentacion.ViewModels
             if (editar != null) editar.Click += Atras;
 
             avatar = FindViewById<ImageButton>(Resource.Id.buttonAvatar);
-            if (avatar != null) avatar.Click += cambiarFoto;
+            if (avatar != null) avatar.Click += CambiarFoto;
 
             nombre = FindViewById<TextView>(Resource.Id.textViewNombre);
             aciertos = FindViewById<TextView>(Resource.Id.textViewAciertos);
@@ -66,6 +70,8 @@ namespace preguntaods.Presentacion.ViewModels
         private void Init()
         {
             nombre.Text = usuario.Nombre;
+
+            iniciarFoto();
 
             puntuacion.Text = estadisticas.Puntuacion.ToString();
 
@@ -82,27 +88,53 @@ namespace preguntaods.Presentacion.ViewModels
             fallos.Text = probAcierto < 0 ? "0" : probFallo.ToString();
         }
 
-        public async void cambiarFoto(object sender, EventArgs e) 
+        public async void CambiarFoto(object sender, EventArgs e) 
+        {
+            // Obtener una lista de IDs de recursos de imágenes predefinidas
+            List<int> profilePictureIds = new List<int>
+            {
+                 Resource.Drawable.icon_hombre,
+                 Resource.Drawable.icon_mujer,
+                 // Agregar aquí más IDs de recursos de imágenes predefinidas
+            };
+
+            // Crear una lista de miniaturas de las imágenes predefinidas
+            List<Bitmap> profilePictures = new List<Bitmap>();
+            foreach (int id in profilePictureIds)
+            {
+                profilePictures.Add(BitmapFactory.DecodeResource(Resources, id));
+            }
+
+            // Mostrar un cuadro de diálogo emergente con la lista de miniaturas de las imágenes predefinidas
+            List<string> pictureTitles = new List<string> { "Hombre", "Mujer" }; // Aquí puede agregar títulos para las imágenes
+            string selectedPictureTitle = await UserDialogs.Instance.ActionSheetAsync("Seleccionar imagen", "Cancelar", null, null , pictureTitles.ToArray());
+            int selectedPictureIndex = pictureTitles.IndexOf(selectedPictureTitle);
+
+            if (selectedPictureIndex >= 0)
+            {
+                // Convertir la imagen seleccionada en un arreglo de bytes
+                byte[] photoData = ConvertBitmapToByteArray(profilePictures[selectedPictureIndex]);
+
+
+                // Convertir el arreglo de bytes en un Bitmap
+                Bitmap selectedPhoto = BitmapFactory.DecodeByteArray(photoData, 0, photoData.Length);
+
+                // Actualizar la imagen de perfil del usuario con la imagen seleccionada
+                avatar.SetImageBitmap(selectedPhoto);
+
+                // Actualizar la imagen de perfil del usuario con la imagen seleccionada
+                await fachada.CambiarFoto(usuario.Uuid,photoData);
+            }
+
+            
+        }
+
+        private void iniciarFoto() 
         {
 
-            try
-            {
-                // Pedir al usuario que seleccione una imagen de la galería
-                FileResult fileResult = await MediaPicker.PickPhotoAsync();
-
-                // Si el usuario seleccionó una imagen, mostrarla en la ImageView de la foto de perfil
-                if (fileResult != null)
-                {
-                    Bitmap bitmap = await BitmapFactory.DecodeFileAsync(fileResult.FullPath);
-                    avatar.SetImageBitmap(bitmap);
-                }
-            }
-            catch (Exception ex)
-            {
-                // Manejar cualquier excepción que se produzca al seleccionar la imagen
-                // por ejemplo, si el usuario cancela la selección
-                Console.WriteLine(ex.Message);
-            }
+            var foto = Convert.FromBase64String(usuario.Foto);
+            
+            avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));
 
         }
 
@@ -113,6 +145,15 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
+        }
+
+        public byte[] ConvertBitmapToByteArray(Bitmap bitmap)
+        {
+            using (var stream = new MemoryStream())
+            {
+                bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+                return stream.ToArray();
+            }
         }
     }
 }

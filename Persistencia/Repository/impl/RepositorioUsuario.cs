@@ -1,4 +1,6 @@
-﻿using Org.Apache.Http.Impl.Client;
+﻿using Java.Lang;
+using Java.Util;
+using Org.Apache.Http.Impl.Client;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using System;
@@ -32,6 +34,7 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Single();
             return response;
         }
+
 
         public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS)
         {
@@ -108,6 +111,17 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Set(x => x.Nombre, newNombre)
                 .Update();
 
+        }
+
+        public async Task UpdateFoto(string uuid, byte[] foto) 
+        {
+        
+            string fotoT = Convert.ToBase64String(foto);
+            await conexion.Cliente
+               .From<Usuario>()
+               .Where(x => x.Uuid == uuid)
+               .Set(x => x.Foto, fotoT)
+               .Update();
         }
 
         public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
