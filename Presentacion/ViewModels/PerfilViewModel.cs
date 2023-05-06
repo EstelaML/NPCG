@@ -129,13 +129,16 @@ namespace preguntaods.Presentacion.ViewModels
             
         }
 
-        private void iniciarFoto() 
+        private void iniciarFoto()
         {
+            var uf = usuario.Foto;
 
-            var foto = Convert.FromBase64String(usuario.Foto);
-            
-            avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));
+            if (uf != null) 
+            { 
+                var foto = Convert.FromBase64String(uf);
 
+                avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));
+            }
         }
 
         private void Atras(object sender, EventArgs e)
