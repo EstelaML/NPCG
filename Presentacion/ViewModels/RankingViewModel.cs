@@ -35,12 +35,13 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
-            var usuarios = await fachada.GetOrderedUsers(NumFilas);
-            CrearRanking(usuarios);
-            MensajeAnimo(usuarios);
+            var usuarios = await fachada.GetAllUsersOrdered();
+            var topRanking = usuarios.Take(NumFilas).ToList();
+            CrearRanking(topRanking);
+            MensajeAnimo(topRanking, usuarios);
         }
 
-        private void CrearRanking(List<Estadistica> usuarios)
+        private void CrearRanking(List<Estadistica> topRanking)
         {
             List<string> posiciones = new List<string>();
             int i = 1;
@@ -59,10 +60,10 @@ namespace preguntaods.Presentacion.ViewModels
             for (int j = 0; j < NumFilas; j++)
             {
                 rankingGridLayout.AddView(new TextView(this) { Text = posiciones[j], TextAlignment = TextAlignment.Center });
-                if (j < usuarios.Count)
+                if (j < topRanking.Count)
                 {
-                    rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Nombre, TextAlignment = TextAlignment.Center });
-                    rankingGridLayout.AddView(new TextView(this) { Text = usuarios[j].Puntuacion.ToString(), TextAlignment = TextAlignment.Center });
+                    rankingGridLayout.AddView(new TextView(this) { Text = topRanking[j].Nombre, TextAlignment = TextAlignment.Center });
+                    rankingGridLayout.AddView(new TextView(this) { Text = topRanking[j].Puntuacion.ToString(), TextAlignment = TextAlignment.Center });
                 }
                 else
                 {
@@ -72,19 +73,19 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private async void MensajeAnimo(List<Estadistica> usuarios)
+        private async void MensajeAnimo(List<Estadistica> topRanking, List<Estadistica> usuarios)
         {
             var usuarioLogged = await fachada.GetUsuarioLogged();
-            bool estaEnLaLista = usuarios.Any(u => u.Nombre == usuarioLogged.Nombre);
+            bool estaEnElRanking = topRanking.Any(u => u.Nombre == usuarioLogged.Nombre);
             int indice = usuarios.FindIndex(u => u.Nombre == usuarioLogged.Nombre);
-            if (estaEnLaLista && indice != -1)
+            int pos = indice + 1;
+            if (estaEnElRanking)
             {
-                int pos = indice + 1;
                 textAnimo.Text = "Eres el Top " + pos + ". ¡ENHORABUENA!";
             }
             else
             {
-                textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
+                textAnimo.Text = "Estás en la posición " + pos + ". Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
             }
         }
 

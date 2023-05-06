@@ -142,12 +142,11 @@ namespace preguntaods.BusinessLogic.Services
 
         #endregion Usuario
 
-        public async Task<List<Estadistica>> GetOrderedUsers(int cantidad)
+        public async Task<List<Estadistica>> GetAllUsersOrdered()
         {
             var respuesta = await repositorioEstadisticas.GetAll();
             var listaUsuarios = respuesta.Select(estadisticas => new Estadistica { Nombre = estadisticas.Nombre, Puntuacion = estadisticas.Puntuacion })
                                          .OrderByDescending(estadisticas => estadisticas.Puntuacion)
-                                         .Take(cantidad)
                                          .ToList();
 
             return listaUsuarios;
