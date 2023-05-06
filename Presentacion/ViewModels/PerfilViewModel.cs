@@ -54,7 +54,7 @@ namespace preguntaods.Presentacion.ViewModels
             if (atras != null) atras.Click += Atras;
 
             var editar = FindViewById<ImageButton>(Resource.Id.buttonEditarTexto);
-            if (editar != null) editar.Click += Atras;
+            if (editar != null) editar.Click += CambiarNombre;
 
             avatar = FindViewById<ImageButton>(Resource.Id.buttonAvatar);
             if (avatar != null) avatar.Click += CambiarFoto;
@@ -127,6 +127,25 @@ namespace preguntaods.Presentacion.ViewModels
             }
 
             
+        }
+
+        public async void CambiarNombre(object sender, EventArgs e) 
+        {
+
+            var config = new PromptConfig
+            {
+                Title = "Introduce tu nuevo nombre",
+                OkText = "Aceptar",
+                CancelText = "Cancelar"
+            };
+            var result = await UserDialogs.Instance.PromptAsync(config);
+            if (result.Ok)
+            {
+                string newNombre = result.Text;
+                nombre.Text = newNombre;
+                await fachada.CambiarNombre(newNombre);
+            }
+
         }
 
         private void iniciarFoto()

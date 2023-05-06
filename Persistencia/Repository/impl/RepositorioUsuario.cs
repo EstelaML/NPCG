@@ -111,6 +111,11 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Set(x => x.Nombre, newNombre)
                 .Update();
 
+            await conexion.Cliente
+                .From<Estadistica>()
+                .Where(x => x.Usuario == uuid)
+                .Set(x => x.Nombre, newNombre)
+                .Update();
         }
 
         public async Task UpdateFoto(string uuid, byte[] foto) 
