@@ -47,7 +47,7 @@
             <TextView
               android:text="-------"
               android:textAppearance="?android:attr/textAppearanceLarge"
-              android:layout_width="match_parent"
+              android:layout_width="wrap_content"
               android:layout_height="match_parent"
               android:gravity="center_vertical"
               android:padding="10dp"
@@ -55,6 +55,18 @@
               android:id="@+id/textViewNombre"
               android:textColor="@android:color/black"
               tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:src="@drawable/icon_editar"
+                android:scaleType="centerInside"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="20dp"
+                android:id="@+id/buttonEditarTexto"
+                android:background="@color/mtrl_btn_transparent_bg_color"
+                android:contentDescription=""
+                android:foregroundGravity="right" />
+
         </LinearLayout>
 
         <Space

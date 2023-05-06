@@ -1,4 +1,5 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using Org.Apache.Http.Impl.Client;
+using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using System;
 using System.Threading.Tasks;
@@ -96,6 +97,17 @@ namespace preguntaods.Persistencia.Repository.impl
                     .Set(x => x.Fallos, preguntas)
                     .Update();
             }
+        }
+
+        public async Task UpdateNombre(string uuid, string newNombre) 
+        {
+          
+            await conexion.Cliente
+                .From<Usuario>()
+                .Where(x => x.Uuid == uuid)
+                .Set(x => x.Nombre, newNombre)
+                .Update();
+
         }
 
         public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)

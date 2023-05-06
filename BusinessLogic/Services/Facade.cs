@@ -72,6 +72,14 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async Task CambiarNombre(string nombre) 
+        {
+
+            var a = conexion.Usuario.Id;
+            await repositorioUser.UpdateNombre(a,nombre);
+
+        }
+
         public async Task NewUsuario(Usuario user)
         {
             await repositorioUser.Add(user);
