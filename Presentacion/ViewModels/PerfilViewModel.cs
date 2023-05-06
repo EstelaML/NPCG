@@ -94,7 +94,6 @@ namespace preguntaods.Presentacion.ViewModels
                 if (fileResult != null)
                 {
                     Bitmap bitmap = await BitmapFactory.DecodeFileAsync(fileResult.FullPath);
-                    bitmap.
                     avatar.SetImageBitmap(bitmap);
                 }
             }
