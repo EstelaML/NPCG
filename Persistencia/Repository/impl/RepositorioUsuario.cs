@@ -1,11 +1,5 @@
-﻿using Android.Bluetooth;
-using Java.Lang;
-using Java.Util;
-using Org.Apache.Http.Authentication;
-using Org.Apache.Http.Impl.Client;
-using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
-using Supabase.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -37,7 +31,6 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Single();
             return response;
         }
-
 
         public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS)
         {
@@ -105,9 +98,8 @@ namespace preguntaods.Persistencia.Repository.impl
             }
         }
 
-        public async Task UpdateNombre(string uuid, string newNombre) 
+        public async Task UpdateNombre(string uuid, string newNombre)
         {
-          
             await conexion.Cliente
                 .From<Usuario>()
                 .Where(x => x.Uuid == uuid)
@@ -121,9 +113,8 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Update();
         }
 
-        public async Task UpdateFoto(string uuid, byte[] foto) 
+        public async Task UpdateFoto(string uuid, byte[] foto)
         {
-        
             string fotoT = Convert.ToBase64String(foto);
             await conexion.Cliente
                .From<Usuario>()
@@ -188,11 +179,13 @@ namespace preguntaods.Persistencia.Repository.impl
             var id = conexion.Usuario.Id;
             var estadisticas = await GetEstadisticasByUuid(id);
             var told = estadisticas.Tiempo;
-           
+
             float sumatorio;
-            if (told == null) {
+            if (told == null)
+            {
                 sumatorio = (float)horas;
-            } else
+            }
+            else
             {
                 sumatorio = (float)horas + (float)told;
             }

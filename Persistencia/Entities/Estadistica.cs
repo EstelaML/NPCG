@@ -1,6 +1,5 @@
 ﻿using Postgrest.Attributes;
 using Postgrest.Models;
-using System;
 
 namespace preguntaods.Entities
 {

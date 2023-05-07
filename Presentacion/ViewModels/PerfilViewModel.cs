@@ -3,7 +3,6 @@ using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
@@ -12,7 +11,6 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Xamarin.Essentials;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -28,7 +26,6 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView puntuacion;
         private ImageButton avatar;
         private Estadistica estadisticas;
-
 
         private int retosAcertados;
         private int retosFallados;
@@ -88,7 +85,7 @@ namespace preguntaods.Presentacion.ViewModels
             fallos.Text = probAcierto < 0 ? "0" : probFallo.ToString();
         }
 
-        public async void CambiarFoto(object sender, EventArgs e) 
+        public async void CambiarFoto(object sender, EventArgs e)
         {
             // Obtener una lista de IDs de recursos de imágenes predefinidas
             List<int> profilePictureIds = new List<int>
@@ -107,14 +104,13 @@ namespace preguntaods.Presentacion.ViewModels
 
             // Mostrar un cuadro de diálogo emergente con la lista de miniaturas de las imágenes predefinidas
             List<string> pictureTitles = new List<string> { "Hombre", "Mujer" }; // Aquí puede agregar títulos para las imágenes
-            string selectedPictureTitle = await UserDialogs.Instance.ActionSheetAsync("Seleccionar imagen", "Cancelar", null, null , pictureTitles.ToArray());
+            string selectedPictureTitle = await UserDialogs.Instance.ActionSheetAsync("Seleccionar imagen", "Cancelar", null, null, pictureTitles.ToArray());
             int selectedPictureIndex = pictureTitles.IndexOf(selectedPictureTitle);
 
             if (selectedPictureIndex >= 0)
             {
                 // Convertir la imagen seleccionada en un arreglo de bytes
                 byte[] photoData = ConvertBitmapToByteArray(profilePictures[selectedPictureIndex]);
-
 
                 // Convertir el arreglo de bytes en un Bitmap
                 Bitmap selectedPhoto = BitmapFactory.DecodeByteArray(photoData, 0, photoData.Length);
@@ -123,15 +119,12 @@ namespace preguntaods.Presentacion.ViewModels
                 avatar.SetImageBitmap(selectedPhoto);
 
                 // Actualizar la imagen de perfil del usuario con la imagen seleccionada
-                await fachada.CambiarFoto(usuario.Uuid,photoData);
+                await fachada.CambiarFoto(usuario.Uuid, photoData);
             }
-
-            
         }
 
-        public async void CambiarNombre(object sender, EventArgs e) 
+        public async void CambiarNombre(object sender, EventArgs e)
         {
-
             var config = new PromptConfig
             {
                 Title = "Introduce tu nuevo nombre",
@@ -145,15 +138,14 @@ namespace preguntaods.Presentacion.ViewModels
                 nombre.Text = newNombre;
                 await fachada.CambiarNombre(newNombre);
             }
-
         }
 
         private void iniciarFoto()
         {
             var uf = usuario.Foto;
 
-            if (uf != null) 
-            { 
+            if (uf != null)
+            {
                 var foto = Convert.FromBase64String(uf);
 
                 avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));

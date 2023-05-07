@@ -11,7 +11,6 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Android.Resource;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -30,7 +29,7 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
             fachada = new Facade();
-            
+
             tablaRanking = FindViewById<TableLayout>(Resource.Id.tablaRanking);
             animoLinearLayout = FindViewById<LinearLayout>(Resource.Id.animoLinearLayout);
             textAnimo = FindViewById<TextView>(Resource.Id.textAnimo);
@@ -42,7 +41,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var usuarios = await fachada.GetAllUsersOrdered();
             var topRanking = usuarios.Take(NumFilas).ToList();
-            
+
             CrearRanking(topRanking);
             MensajeAnimo(topRanking, usuarios);
         }
