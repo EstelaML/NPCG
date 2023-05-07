@@ -1,8 +1,11 @@
-﻿using Java.Lang;
+﻿using Android.Bluetooth;
+using Java.Lang;
 using Java.Util;
+using Org.Apache.Http.Authentication;
 using Org.Apache.Http.Impl.Client;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
+using Supabase.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -177,6 +180,27 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Where(x => x.Usuario == uuid)
                 .Single();
             return response;
+        }
+
+        public async Task UpdateTimeUsedAsync(TimeSpan tnew)
+        {
+            var horas = tnew.TotalSeconds / 3600;
+            var id = conexion.Usuario.Id;
+            var estadisticas = await GetEstadisticasByUuid(id);
+            var told = estadisticas.Tiempo;
+           
+            float sumatorio;
+            if (told == null) {
+                sumatorio = (float)horas;
+            } else
+            {
+                sumatorio = (float)horas + (float)told;
+            }
+            var response = await conexion.Cliente
+                .From<Estadistica>()
+                .Where(x => x.Usuario == id)
+                .Set(x => x.Tiempo, sumatorio)
+               .Update();
         }
     }
 }

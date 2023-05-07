@@ -13,6 +13,7 @@ namespace preguntaods.Entities
             Aciertos = aciertos;
             Fallos = fallos;
             Nombre = nombre;
+            Tiempo = null;
         }
     }
 }

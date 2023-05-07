@@ -6,6 +6,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
