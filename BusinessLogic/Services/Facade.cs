@@ -73,19 +73,15 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public async Task CambiarNombre(string nombre) 
+        public async Task CambiarNombre(string nombre)
         {
-
             var a = conexion.Usuario.Id;
-            await repositorioUser.UpdateNombre(a,nombre);
-
+            await repositorioUser.UpdateNombre(a, nombre);
         }
 
         public async Task CambiarFoto(string uuid, byte[] foto)
         {
-
             await repositorioUser.UpdateFoto(uuid, foto);
-
         }
 
         public async Task NewUsuario(Usuario user)
@@ -166,7 +162,8 @@ namespace preguntaods.BusinessLogic.Services
             return respuesto;
         }
 
-        public async Task GuardarTiempo() {
+        public async Task GuardarTiempo()
+        {
             // calculas el tiempo que lleva esta vez
             Supabase.Gotrue.Session s = conexion.Cliente.Auth.CurrentSession;
             DateTime created = s.CreatedAt;

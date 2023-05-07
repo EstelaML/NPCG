@@ -11,7 +11,6 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Android.Resource;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -30,7 +29,7 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
             fachada = new Facade();
-            
+
             tablaRanking = FindViewById<TableLayout>(Resource.Id.tablaRanking);
             textAnimo = FindViewById<TextView>(Resource.Id.textAnimo);
 
@@ -41,16 +40,17 @@ namespace preguntaods.Presentacion.ViewModels
 
             var usuarios = await fachada.GetAllUsersOrdered();
             var topRanking = usuarios.Take(NumFilas).ToList();
-            
+
             CrearRanking(topRanking);
             MensajeAnimo(topRanking, usuarios);
         }
+
         private void CrearRanking(List<Estadistica> topRanking)
         {
             // Introducir los datos de ejemplo
             for (int i = 0; i < NumFilas; i++)
             {
-                TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center};
+                TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
                 TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
                 txtPosicion.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
