@@ -164,5 +164,15 @@ namespace preguntaods.BusinessLogic.Services
             var respuesto = await repositorioUser.GetEstadisticasByUuid(uuid);
             return respuesto;
         }
+
+        public async Task GuardarTiempo() {
+            // calculas el tiempo que lleva esta vez
+            Supabase.Gotrue.Session s = conexion.Cliente.Auth.CurrentSession;
+            DateTime created = s.CreatedAt;
+            TimeSpan start = created.TimeOfDay;
+            TimeSpan now = DateTime.Now.TimeOfDay;
+            TimeSpan dif = now - start;
+            await repositorioUser.UpdateTimeUsedAsync(dif);
+        }
     }
 }

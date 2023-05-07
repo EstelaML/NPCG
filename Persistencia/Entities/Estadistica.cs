@@ -1,5 +1,6 @@
 ﻿using Postgrest.Attributes;
 using Postgrest.Models;
+using System;
 
 namespace preguntaods.Entities
 {
@@ -23,5 +24,8 @@ namespace preguntaods.Entities
 
         [Column("Nombre")]
         public string Nombre { get; set; }
+
+        [Column("Tiempo")]
+        public float? Tiempo { get; set; }
     }
 }
