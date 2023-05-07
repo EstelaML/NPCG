@@ -35,17 +35,6 @@ namespace preguntaods.Presentacion.ViewModels
             if (nuevaPartida != null) nuevaPartida.Click += NuevaPartida_Click;
         }
 
-        protected override async void OnDestroy()
-        {
-            base.OnDestroy();
-
-            System.Console.WriteLine("\n OnDestroy ---------------------------------------------------------------------------- \n --------------");
-            await fachada.GuardarTiempo();
-            // Realizar alguna acción aquí antes de que la aplicación se cierre
-            // Guardar tiempo en bd
-            System.Console.WriteLine("\n OnDestroy ----------------------------------------------------------------- \n -------------------------");
-        }
-
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.mainMenu, menu);

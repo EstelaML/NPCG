@@ -37,6 +37,7 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task LogoutAsync()
         {
+            await GuardarTiempo();
             await conexion.Cliente.Auth.SignOut();
         }
 
