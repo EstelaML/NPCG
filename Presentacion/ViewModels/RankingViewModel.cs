@@ -23,6 +23,9 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView textAnimo;
         private LinearLayout animoLinearLayout;
         private const int NumFilas = 10;
+        private List<Estadistica> topRanking;
+        private List<Estadistica> usuariosOrdenados;
+        private Usuario usuarioLogged;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -39,13 +42,14 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
-            var usuarios = await fachada.GetAllUsersOrdered();
-            var topRanking = usuarios.Take(NumFilas).ToList();
+            usuariosOrdenados = await fachada.GetAllUsersOrdered();
+            topRanking = usuariosOrdenados.Take(NumFilas).ToList();
+            usuarioLogged = await fachada.GetUsuarioLogged();
 
-            CrearRanking(topRanking);
-            MensajeAnimo(topRanking, usuarios);
+            CrearRanking();
+            MensajeAnimo();
         }
-        private void CrearFilaLlena(List<Estadistica> topRanking, int indice)
+        private void CrearFilaLlena(int indice)
         {
             TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
@@ -67,7 +71,7 @@ namespace preguntaods.Presentacion.ViewModels
             tablaRanking.AddView(fila);
         }
 
-        private void CrearFilaVacia(List<Estadistica> topRanking, int indice)
+        private void CrearFilaVacia(int indice)
         {
             TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
@@ -88,29 +92,31 @@ namespace preguntaods.Presentacion.ViewModels
 
             tablaRanking.AddView(fila);
         }
-        private void CrearRanking(List<Estadistica> topRanking)
+        private void CrearRanking()
         {
-            // Introducir los datos de ejemplo
             for (int i = 0; i < NumFilas; i++)
             {
                 if (i < topRanking.Count)
                 {
-                    CrearFilaLlena(topRanking, i);
+                    CrearFilaLlena(i);
                 }
                 else
                 {
-                    CrearFilaVacia(topRanking, i);
+                    CrearFilaVacia(i);
                 }
             }
         }
 
-        private async void MensajeAnimo(List<Estadistica> topRanking, List<Estadistica> usuarios)
+        private Boolean EstaEnElRanking()
         {
-            var usuarioLogged = await fachada.GetUsuarioLogged();
-            bool estaEnElRanking = topRanking.Any(u => u.Nombre == usuarioLogged.Nombre);
-            int indice = usuarios.FindIndex(u => u.Nombre == usuarioLogged.Nombre);
+            return topRanking.Any(u => u.Nombre == usuarioLogged.Nombre);
+        }
+
+        private void MensajeAnimo()
+        {
+            int indice = usuariosOrdenados.FindIndex(u => u.Nombre == usuarioLogged.Nombre);
             int pos = indice + 1;
-            if (estaEnElRanking)
+            if (EstaEnElRanking())
             {
                 textAnimo.Text = "Eres el Top " + pos + ". ¡ENHORABUENA!";
             }
