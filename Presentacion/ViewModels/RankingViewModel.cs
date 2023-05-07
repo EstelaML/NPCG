@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -10,7 +11,7 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
+using static Android.Resource;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -41,36 +42,41 @@ namespace preguntaods.Presentacion.ViewModels
             var usuarios = await fachada.GetAllUsersOrdered();
             var topRanking = usuarios.Take(NumFilas).ToList();
             
-            CrearRankingConTabla(topRanking);
+            CrearRanking(topRanking);
             MensajeAnimo(topRanking, usuarios);
         }
-        private void CrearRankingConTabla(List<Estadistica> topRanking)
+        private void CrearRanking(List<Estadistica> topRanking)
         {
             // Introducir los datos de ejemplo
             for (int i = 0; i < NumFilas; i++)
             {
                 TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center};
 
-                TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center };
+                TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                txtPosicion.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                 txtPosicion.Text = (i + 1).ToString() + ".";
                 fila.AddView(txtPosicion);
                 if (i < topRanking.Count)
                 {
-                    TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                    txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                     txtNombre.Text = topRanking[i].Nombre;
                     fila.AddView(txtNombre);
 
-                    TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                    txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                     txtPuntos.Text = topRanking[i].Puntuacion.ToString();
                     fila.AddView(txtPuntos);
                 }
                 else
                 {
-                    TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                    txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                     txtNombre.Text = "---";
                     fila.AddView(txtNombre);
 
-                    TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                    txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                     txtPuntos.Text = "---";
                     fila.AddView(txtPuntos);
                 }
