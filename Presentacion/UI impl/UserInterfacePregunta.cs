@@ -10,6 +10,7 @@ using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Partida;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -139,24 +140,53 @@ namespace preguntaods.Presentacion.UI_impl
 
         private void PistaClick(object sender, EventArgs e)
         {
-            if (pistasUsadas < 2 && tienePista)
+            if (pistasUsadas >= 3) return;
+
+            if (tienePista)
             {
-                UserDialogs.Instance.Confirm(new ConfirmConfig
+                if (puntuacionTotal >= (puntuacion / 2))
                 {
-                    Message = "¿Estás seguro de usar una pista? Te quedan un total de " + (2 - pistasUsadas) + " pistas por usar.",
-                    OkText = "Si, estoy seguro",
-                    CancelText = "No quiero",
-                    OnAction = (confirmed) =>
+                    UserDialogs.Instance.Confirm(new ConfirmConfig
                     {
-                        if (!confirmed) return;
-                        OcultarBoton();
-                        OcultarBoton();
+                        Message = "¿Estás seguro de usar una pista? Te quedan un total de " + (3 - pistasUsadas) + " pistas por usar.",
+                        OkText = "Si, estoy seguro",
+                        CancelText = "No quiero",
+                        OnAction = (confirmed) =>
+                        {
+                            if (!confirmed) return;
+                            OcultarBoton();
+                            OcultarBoton();
 
-                        pistasUsadas++;
-                        tienePista = false;
+                            pistasUsadas++;
+                            tienePista = false;
 
-                        puntuacion /= 2;
-                    }
+                            puntuacionTotal -= puntuacion / 2;
+
+                            if (pistasUsadas < 3) return;
+
+                            UserDialogs.Instance.Alert(new AlertConfig
+                            {
+                                Message = "Has gastado todas las pistas disponibles en la partida.",
+                                OkText = "Entendido"
+                            });
+                        }
+                    });
+                }
+                else
+                {
+                    UserDialogs.Instance.Alert(new AlertConfig
+                    {
+                        Message = "No tienes puntuación suficiente para pedir una pista.",
+                        OkText = "Entendido"
+                    });
+                }
+            }
+            else
+            {
+                UserDialogs.Instance.Alert(new AlertConfig
+                {
+                    Message = "No te quedan pistas disponibles para este reto.",
+                    OkText = "Entendido"
                 });
             }
         }
