@@ -66,14 +66,26 @@
             android:layout_height="wrap_content"
             android:id="@+id/linearLayout1">
 
-            <GridLayout
-                android:minHeight="100px"
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rankingGridLayout"
-                android:columnCount="3"
-                android:rowCount="20"
-                android:background="#ffe68b14" />
+                android:stretchColumns="*"
+                android:background="#ffe68b14"
+                android:textAlignment="center"
+                android:id="@+id/tablaRanking">
+                <TableRow
+                    android:textAlignment="center">
+                    <TextView
+                        android:text="Posición"
+                        android:textAlignment="center" />
+                    <TextView
+                        android:text="Nombre"
+                        android:textAlignment="center"/>
+                    <TextView
+                        android:text="Puntos"
+                        android:textAlignment="center"/>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

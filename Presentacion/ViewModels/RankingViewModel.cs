@@ -10,6 +10,7 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -17,17 +18,19 @@ namespace preguntaods.Presentacion.ViewModels
     public class RankingViewModel : AppCompatActivity
     {
         private Sonido sonido;
-        private GridLayout rankingGridLayout;
+        private TableLayout tablaRanking;
         private Facade fachada;
         private TextView textAnimo;
         private const int NumFilas = 10;
+        private const int NumColumnas = 3;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
             fachada = new Facade();
-            rankingGridLayout = FindViewById<GridLayout>(Resource.Id.rankingGridLayout);
+            
+            tablaRanking = FindViewById<TableLayout>(Resource.Id.tablaRanking);
             textAnimo = FindViewById<TextView>(Resource.Id.textAnimo);
 
             sonido = new Sonido();
@@ -37,39 +40,41 @@ namespace preguntaods.Presentacion.ViewModels
 
             var usuarios = await fachada.GetAllUsersOrdered();
             var topRanking = usuarios.Take(NumFilas).ToList();
-            CrearRanking(topRanking);
+            
+            CrearRankingConTabla(topRanking);
             MensajeAnimo(topRanking, usuarios);
         }
-
-        private void CrearRanking(List<Estadistica> topRanking)
+        private void CrearRankingConTabla(List<Estadistica> topRanking)
         {
-            List<string> posiciones = new List<string>();
-            int i = 1;
-            while (i <= NumFilas)
+            // Introducir los datos de ejemplo
+            for (int i = 0; i < NumFilas; i++)
             {
-                posiciones.Add(i.ToString() + ".");
-                i++;
-            }
+                TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center};
 
-            // Agregar la fila de encabezado al GridLayout
-            rankingGridLayout.AddView(new TextView(this) { Text = "Posición", TextAlignment = TextAlignment.Center });
-            rankingGridLayout.AddView(new TextView(this) { Text = "Nombre", TextAlignment = TextAlignment.Center });
-            rankingGridLayout.AddView(new TextView(this) { Text = "Puntos", TextAlignment = TextAlignment.Center });
-
-            // Agregar los datos al GridLayout
-            for (int j = 0; j < NumFilas; j++)
-            {
-                rankingGridLayout.AddView(new TextView(this) { Text = posiciones[j], TextAlignment = TextAlignment.Center });
-                if (j < topRanking.Count)
+                TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center };
+                txtPosicion.Text = (i + 1).ToString() + ".";
+                fila.AddView(txtPosicion);
+                if (i < topRanking.Count)
                 {
-                    rankingGridLayout.AddView(new TextView(this) { Text = topRanking[j].Nombre, TextAlignment = TextAlignment.Center });
-                    rankingGridLayout.AddView(new TextView(this) { Text = topRanking[j].Puntuacion.ToString(), TextAlignment = TextAlignment.Center });
+                    TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    txtNombre.Text = topRanking[i].Nombre;
+                    fila.AddView(txtNombre);
+
+                    TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    txtPuntos.Text = topRanking[i].Puntuacion.ToString();
+                    fila.AddView(txtPuntos);
                 }
                 else
                 {
-                    rankingGridLayout.AddView(new TextView(this) { Text = "---", TextAlignment = TextAlignment.Center });
-                    rankingGridLayout.AddView(new TextView(this) { Text = "---", TextAlignment = TextAlignment.Center });
+                    TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    txtNombre.Text = "---";
+                    fila.AddView(txtNombre);
+
+                    TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center };
+                    txtPuntos.Text = "---";
+                    fila.AddView(txtPuntos);
                 }
+                tablaRanking.AddView(fila);
             }
         }
 
