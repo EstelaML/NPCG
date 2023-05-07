@@ -235,9 +235,8 @@ namespace preguntaods.Presentacion.UI_impl
         private async void Letter_Click(object sender, EventArgs e)
         {
             var button = (Button)sender;
-            if (button == null) return;
 
-            if (button.Text == null) return;
+            if (button?.Text == null) return;
             var letter = char.Parse(button.Text);
 
             if (palabraAdivinar.Contains(letter))
