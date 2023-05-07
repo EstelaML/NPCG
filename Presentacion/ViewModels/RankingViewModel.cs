@@ -21,7 +21,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TableLayout tablaRanking;
         private Facade fachada;
         private TextView textAnimo;
-        private LinearLayout animoLinearLayout;
+        private TableLayout fueraRanking;
         private const int NumFilas = 10;
         private List<Estadistica> topRanking;
         private List<Estadistica> usuariosOrdenados;
@@ -34,7 +34,7 @@ namespace preguntaods.Presentacion.ViewModels
             fachada = new Facade();
 
             tablaRanking = FindViewById<TableLayout>(Resource.Id.tablaRanking);
-            animoLinearLayout = FindViewById<LinearLayout>(Resource.Id.animoLinearLayout);
+            fueraRanking = FindViewById<TableLayout>(Resource.Id.fueraRanking);
             textAnimo = FindViewById<TextView>(Resource.Id.textAnimo);
 
             sonido = new Sonido();
@@ -49,7 +49,7 @@ namespace preguntaods.Presentacion.ViewModels
             CrearRanking();
             MensajeAnimo();
         }
-        private void CrearFilaLlena(int indice)
+        private void CrearFilaLlena(TableLayout tabla, int indice)
         {
             TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
@@ -62,12 +62,12 @@ namespace preguntaods.Presentacion.ViewModels
 
                 TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
-                txtNombre.Text = topRanking[indice].Nombre;
+                txtNombre.Text = usuariosOrdenados[indice].Nombre;
                 fila.AddView(txtNombre);
 
                 TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
-                txtPuntos.Text = topRanking[indice].Puntuacion.ToString();
+                txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
                 fila.AddView(txtPuntos);
             }
             else
@@ -79,16 +79,16 @@ namespace preguntaods.Presentacion.ViewModels
 
                 TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
                 txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
-                txtNombre.Text = topRanking[indice].Nombre;
+                txtNombre.Text = usuariosOrdenados[indice].Nombre;
                 fila.AddView(txtNombre);
 
                 TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
-                txtPuntos.Text = topRanking[indice].Puntuacion.ToString();
+                txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
                 fila.AddView(txtPuntos);
             }
             
-            tablaRanking.AddView(fila);
+            tabla.AddView(fila);
         }
 
         private void CrearFilaVacia(int indice)
@@ -118,7 +118,7 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 if (i < topRanking.Count)
                 {
-                    CrearFilaLlena(i);
+                    CrearFilaLlena(tablaRanking, i);
                 }
                 else
                 {
@@ -146,7 +146,8 @@ namespace preguntaods.Presentacion.ViewModels
             }
             else
             {
-                textAnimo.Text = "Estás en la posición " + pos + ". Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
+                CrearFilaLlena(fueraRanking, GetIndiceLogged());
+                textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
             }
         }
 
