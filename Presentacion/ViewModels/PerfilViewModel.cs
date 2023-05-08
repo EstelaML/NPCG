@@ -72,6 +72,8 @@ namespace preguntaods.Presentacion.ViewModels
 
             iniciarFoto();
 
+            iniciarTiempo();
+
             puntuacion.Text = estadisticas.Puntuacion.ToString();
 
             retosFallados = estadisticas.Fallos.Length;
@@ -80,11 +82,11 @@ namespace preguntaods.Presentacion.ViewModels
             retosTotales = retosFallados + retosAcertados;
             probAcierto = (int)((retosAcertados / (float)retosTotales) * 100);
 
-            aciertos.Text = probAcierto < 0 ? "0" : probAcierto.ToString();
+            aciertos.Text = probAcierto < 0 ? "0" : probAcierto.ToString() + "%";
 
             probFallo = (100 - probAcierto);
 
-            fallos.Text = probAcierto < 0 ? "0" : probFallo.ToString();
+            fallos.Text = probAcierto < 0 ? "0" : probFallo.ToString() + "%";
         }
 
         public async void CambiarFoto(object sender, EventArgs e)
@@ -152,6 +154,22 @@ namespace preguntaods.Presentacion.ViewModels
 
                 avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));
             }
+        }
+
+        private void iniciarTiempo() 
+        {
+            var tiempoTotal = estadisticas.Tiempo;
+
+            if (tiempoTotal != null)
+            {
+
+                var horas = (int)tiempoTotal;
+                var minutos = (int)((tiempoTotal - horas) * 60);
+
+                tiempo.Text = string.Format("{0:D2} h {1:D2} min", horas, minutos);
+            }
+            else { tiempo.Text = "0 h 0 min"; }
+
         }
 
         private void Atras(object sender, EventArgs e)
