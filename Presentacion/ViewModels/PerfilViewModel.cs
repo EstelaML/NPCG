@@ -24,6 +24,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView aciertos;
         private TextView fallos;
         private TextView puntuacion;
+        private TextView tiempo;
         private ImageButton avatar;
         private Estadistica estadisticas;
 
@@ -60,6 +61,7 @@ namespace preguntaods.Presentacion.ViewModels
             aciertos = FindViewById<TextView>(Resource.Id.textViewAciertos);
             fallos = FindViewById<TextView>(Resource.Id.textViewFallos);
             puntuacion = FindViewById<TextView>(Resource.Id.textViewPuntuacion);
+            tiempo = FindViewById<TextView>(Resource.Id.textViewTiempo);
 
             Init();
         }
