@@ -165,12 +165,15 @@ namespace preguntaods.BusinessLogic.Services
         public async Task GuardarTiempo()
         {
             // calculas el tiempo que lleva esta vez
-            Supabase.Gotrue.Session s = conexion.Cliente.Auth.CurrentSession;
-            DateTime created = s.CreatedAt;
-            TimeSpan start = created.TimeOfDay;
-            TimeSpan now = DateTime.Now.TimeOfDay;
-            TimeSpan dif = now - start;
-            await repositorioUser.UpdateTimeUsedAsync(dif);
+            var s = conexion.Cliente.Auth.CurrentSession;
+            if (s != null)
+            {
+                var created = s.CreatedAt;
+                var start = created.TimeOfDay;
+                var now = DateTime.Now.TimeOfDay;
+                var dif = now - start;
+                await repositorioUser.UpdateTimeUsedAsync(dif);
+            }
         }
     }
 }

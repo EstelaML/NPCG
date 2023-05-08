@@ -11,6 +11,7 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -70,9 +71,9 @@ namespace preguntaods.Presentacion.ViewModels
         {
             nombre.Text = usuario.Nombre;
 
-            iniciarFoto();
+            IniciarFoto();
 
-            iniciarTiempo();
+            IniciarTiempo();
 
             puntuacion.Text = estadisticas.Puntuacion.ToString();
 
@@ -92,7 +93,7 @@ namespace preguntaods.Presentacion.ViewModels
         public async void CambiarFoto(object sender, EventArgs e)
         {
             // Obtener una lista de IDs de recursos de imágenes predefinidas
-            List<int> profilePictureIds = new List<int>
+            var profilePictureIds = new List<int>
             {
                  Resource.Drawable.icon_hombre,
                  Resource.Drawable.icon_mujer,
@@ -100,31 +101,26 @@ namespace preguntaods.Presentacion.ViewModels
             };
 
             // Crear una lista de miniaturas de las imágenes predefinidas
-            List<Bitmap> profilePictures = new List<Bitmap>();
-            foreach (int id in profilePictureIds)
-            {
-                profilePictures.Add(BitmapFactory.DecodeResource(Resources, id));
-            }
+            var profilePictures = profilePictureIds.Select(id => BitmapFactory.DecodeResource(Resources, id)).ToList();
 
             // Mostrar un cuadro de diálogo emergente con la lista de miniaturas de las imágenes predefinidas
-            List<string> pictureTitles = new List<string> { "Hombre", "Mujer" }; // Aquí puede agregar títulos para las imágenes
-            string selectedPictureTitle = await UserDialogs.Instance.ActionSheetAsync("Seleccionar imagen", "Cancelar", null, null, pictureTitles.ToArray());
-            int selectedPictureIndex = pictureTitles.IndexOf(selectedPictureTitle);
+            var pictureTitles = new List<string> { "Hombre", "Mujer" }; // Aquí puede agregar títulos para las imágenes
+            var selectedPictureTitle = await UserDialogs.Instance.ActionSheetAsync("Seleccionar imagen", "Cancelar", null, null, pictureTitles.ToArray());
+            var selectedPictureIndex = pictureTitles.IndexOf(selectedPictureTitle);
 
-            if (selectedPictureIndex >= 0)
-            {
-                // Convertir la imagen seleccionada en un arreglo de bytes
-                byte[] photoData = ConvertBitmapToByteArray(profilePictures[selectedPictureIndex]);
+            if (selectedPictureIndex < 0) return;
+            // Convertir la imagen seleccionada en un arreglo de bytes
+            var photoData = ConvertBitmapToByteArray(profilePictures[selectedPictureIndex]);
 
-                // Convertir el arreglo de bytes en un Bitmap
-                Bitmap selectedPhoto = BitmapFactory.DecodeByteArray(photoData, 0, photoData.Length);
+            // Convertir el arreglo de bytes en un Bitmap
+            // ReSharper disable once MethodHasAsyncOverload
+            var selectedPhoto = BitmapFactory.DecodeByteArray(photoData, 0, photoData.Length);
 
-                // Actualizar la imagen de perfil del usuario con la imagen seleccionada
-                avatar.SetImageBitmap(selectedPhoto);
+            // Actualizar la imagen de perfil del usuario con la imagen seleccionada
+            avatar.SetImageBitmap(selectedPhoto);
 
-                // Actualizar la imagen de perfil del usuario con la imagen seleccionada
-                await fachada.CambiarFoto(usuario.Uuid, photoData);
-            }
+            // Actualizar la imagen de perfil del usuario con la imagen seleccionada
+            await fachada.CambiarFoto(usuario.Uuid, photoData);
         }
 
         public async void CambiarNombre(object sender, EventArgs e)
@@ -155,19 +151,17 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private void iniciarFoto()
+        private void IniciarFoto()
         {
             var uf = usuario.Foto;
 
-            if (uf != null)
-            {
-                var foto = Convert.FromBase64String(uf);
+            if (uf == null) return;
+            var foto = Convert.FromBase64String(uf);
 
-                avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));
-            }
+            avatar.SetImageBitmap(BitmapFactory.DecodeByteArray(foto, 0, foto.Length));
         }
 
-        private void iniciarTiempo()
+        private void IniciarTiempo()
         {
             var tiempoTotal = estadisticas.Tiempo;
 
@@ -176,7 +170,7 @@ namespace preguntaods.Presentacion.ViewModels
                 var horas = (int)tiempoTotal;
                 var minutos = (int)((tiempoTotal - horas) * 60);
 
-                tiempo.Text = string.Format("{0:D2} h {1:D2} min", horas, minutos);
+                tiempo.Text = $"{horas:D2} h {minutos:D2} min";
             }
             else { tiempo.Text = "0 h 0 min"; }
         }
@@ -192,11 +186,9 @@ namespace preguntaods.Presentacion.ViewModels
 
         public byte[] ConvertBitmapToByteArray(Bitmap bitmap)
         {
-            using (var stream = new MemoryStream())
-            {
-                bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
-                return stream.ToArray();
-            }
+            using var stream = new MemoryStream();
+            bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            return stream.ToArray();
         }
     }
 }

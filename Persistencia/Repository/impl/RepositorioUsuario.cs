@@ -189,7 +189,7 @@ namespace preguntaods.Persistencia.Repository.impl
             {
                 sumatorio = (float)horas + (float)told;
             }
-            var response = await conexion.Cliente
+            await conexion.Cliente
                 .From<Estadistica>()
                 .Where(x => x.Usuario == id)
                 .Set(x => x.Tiempo, sumatorio)
