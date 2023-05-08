@@ -129,6 +129,8 @@ namespace preguntaods.Presentacion.ViewModels
 
         public async void CambiarNombre(object sender, EventArgs e)
         {
+
+            
             var config = new PromptConfig
             {
                 Title = "Introduce tu nuevo nombre",
@@ -136,11 +138,21 @@ namespace preguntaods.Presentacion.ViewModels
                 CancelText = "Cancelar"
             };
             var result = await UserDialogs.Instance.PromptAsync(config);
-            if (result.Ok)
+
+            var usuarioCorrect = await fachada.ComprobarUsuario(result.Text);
+
+            if (result.Ok && usuarioCorrect)
             {
                 string newNombre = result.Text;
                 nombre.Text = newNombre;
                 await fachada.CambiarNombre(newNombre);
+            } else {
+                UserDialogs.Instance.Alert(new AlertConfig
+                {
+                    Message = "Ese nombre de usuario ya existe o no es valido, prueba con otro",
+                    OkText = "Aceptar",
+
+                });
             }
         }
 
