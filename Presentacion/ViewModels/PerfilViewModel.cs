@@ -149,7 +149,7 @@ namespace preguntaods.Presentacion.ViewModels
             } else {
                 UserDialogs.Instance.Alert(new AlertConfig
                 {
-                    Message = "Ese nombre de usuario ya existe o no es valido, prueba con otro",
+                    Message = "Ese nombre de usuario ya existe o no es válido, prueba con otro",
                     OkText = "Aceptar",
 
                 });
