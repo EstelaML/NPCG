@@ -10,7 +10,6 @@ using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Partida;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -325,84 +324,84 @@ namespace preguntaods.Presentacion.UI_impl
             switch (acertado)
             {
                 case true when !fin:
-                {
-                    titulo = "Felicitaciones";
-                    mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                    {
+                        titulo = "Felicitaciones";
+                        mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
 
-                    alertBuilder.SetMessage(mensaje);
-                    alertBuilder.SetTitle(titulo);
-                    alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
-                    {
-                        tcs.TrySetResult(true);
-
-                        // sigue generando pregunta
-                    });
-                    alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                    {
-                        // vuelves a menu principal
-                        ((VistaPartidaViewModel)Activity).Abandonar();
-                    });
-                    if (!((VistaPartidaViewModel)Activity).GetConsolidado())
-                    {
-                        alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                        alertBuilder.SetMessage(mensaje);
+                        alertBuilder.SetTitle(titulo);
+                        alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
-                            _puntosConsolidados = puntuacionTotal;
-                            animation.Pause();
-                            ((VistaPartidaViewModel)Activity).Consolidar(_puntosConsolidados);
                             tcs.TrySetResult(true);
+
+                            // sigue generando pregunta
                         });
-                    }
-                    alertBuilder.SetCancelable(false);
-                    var alertDialog = alertBuilder.Create();
-                    alertDialog?.Show();
+                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                        {
+                            // vuelves a menu principal
+                            ((VistaPartidaViewModel)Activity).Abandonar();
+                        });
+                        if (!((VistaPartidaViewModel)Activity).GetConsolidado())
+                        {
+                            alertBuilder.SetNegativeButton("Consolidar", (sender, args) =>
+                            {
+                                _puntosConsolidados = puntuacionTotal;
+                                animation.Pause();
+                                ((VistaPartidaViewModel)Activity).Consolidar(_puntosConsolidados);
+                                tcs.TrySetResult(true);
+                            });
+                        }
+                        alertBuilder.SetCancelable(false);
+                        var alertDialog = alertBuilder.Create();
+                        alertDialog?.Show();
 
 #pragma warning disable CS0618 // El tipo o el miembro están obsoletos
-                    new Handler().PostDelayed(() =>
-                    {
-                        // Acciones a realizar cuando quedan 10 segundos o menos
-                        if (alertDialog is { IsShowing: false }) return;
-                        sonido.SetEstrategia(reloj, Activity);
-                        sonido.PararSonido();
-                        alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
-                    }, 15000);
+                        new Handler().PostDelayed(() =>
+                        {
+                            // Acciones a realizar cuando quedan 10 segundos o menos
+                            if (alertDialog is { IsShowing: false }) return;
+                            sonido.SetEstrategia(reloj, Activity);
+                            sonido.PararSonido();
+                            alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
+                        }, 15000);
 #pragma warning restore CS0618 // El tipo o el miembro están obsoletos
-                    await tcs.Task;
-                    break;
-                }
+                        await tcs.Task;
+                        break;
+                    }
                 case false when !fin:
-                {
-                    // sumar los consolidados
-                    titulo = "Vuelve a intentarlo";
-                    mensaje = $"Tienes {puntuacionTotal} puntos.";
-                    alertBuilder.SetMessage(mensaje);
-                    alertBuilder.SetTitle(titulo);
-                    alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                     {
-                        tcs.TrySetResult(true);
+                        // sumar los consolidados
+                        titulo = "Vuelve a intentarlo";
+                        mensaje = $"Tienes {puntuacionTotal} puntos.";
+                        alertBuilder.SetMessage(mensaje);
+                        alertBuilder.SetTitle(titulo);
+                        alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
+                        {
+                            tcs.TrySetResult(true);
 
-                        // se genera nueva pregunta
-                    });
-                    alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                    {
-                        ((VistaPartidaViewModel)Activity).Abandonar();
-                    });
-                    alertBuilder.SetCancelable(false);
-                    var alertDialog = alertBuilder.Create();
-                    alertDialog?.Show();
+                            // se genera nueva pregunta
+                        });
+                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
+                        {
+                            ((VistaPartidaViewModel)Activity).Abandonar();
+                        });
+                        alertBuilder.SetCancelable(false);
+                        var alertDialog = alertBuilder.Create();
+                        alertDialog?.Show();
 
 #pragma warning disable CS0618
-                    new Handler().PostDelayed(() =>
+                        new Handler().PostDelayed(() =>
 #pragma warning restore CS0618
-                    {
-                        // Acciones a realizar cuando quedan 10 segundos o menos
-                        if (alertDialog is { IsShowing: false }) return;
-                        sonido.SetEstrategia(reloj, Activity);
-                        sonido.PararSonido();
-                        alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
-                    }, 15000);
-                    await tcs.Task;
-                    break;
-                }
+                        {
+                            // Acciones a realizar cuando quedan 10 segundos o menos
+                            if (alertDialog is { IsShowing: false }) return;
+                            sonido.SetEstrategia(reloj, Activity);
+                            sonido.PararSonido();
+                            alertDialog?.GetButton((int)DialogButtonType.Positive)?.PerformClick();
+                        }, 15000);
+                        await tcs.Task;
+                        break;
+                    }
                 default:
                     ((VistaPartidaViewModel)Activity).AbandonarFallido(puntuacionTotal);
                     break;

@@ -49,6 +49,7 @@ namespace preguntaods.Presentacion.ViewModels
             CrearRanking();
             MensajeAnimo();
         }
+
         private void CrearFilaLlena(TableLayout tabla, int indice)
         {
             TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
@@ -87,7 +88,7 @@ namespace preguntaods.Presentacion.ViewModels
                 txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
                 fila.AddView(txtPuntos);
             }
-            
+
             tabla.AddView(fila);
         }
 
@@ -112,6 +113,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             tablaRanking.AddView(fila);
         }
+
         private void CrearRanking()
         {
             for (int i = 0; i < NumFilas; i++)

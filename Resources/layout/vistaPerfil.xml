@@ -118,7 +118,6 @@
             android:paddingBottom="20dp"
             tools:ignore="HardcodedText" />
 
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

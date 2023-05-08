@@ -129,8 +129,6 @@ namespace preguntaods.Presentacion.ViewModels
 
         public async void CambiarNombre(object sender, EventArgs e)
         {
-
-            
             var config = new PromptConfig
             {
                 Title = "Introduce tu nuevo nombre",
@@ -146,12 +144,13 @@ namespace preguntaods.Presentacion.ViewModels
                 string newNombre = result.Text;
                 nombre.Text = newNombre;
                 await fachada.CambiarNombre(newNombre);
-            } else {
+            }
+            else
+            {
                 UserDialogs.Instance.Alert(new AlertConfig
                 {
                     Message = "Ese nombre de usuario ya existe o no es válido, prueba con otro",
                     OkText = "Aceptar",
-
                 });
             }
         }
@@ -168,20 +167,18 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private void iniciarTiempo() 
+        private void iniciarTiempo()
         {
             var tiempoTotal = estadisticas.Tiempo;
 
             if (tiempoTotal != null)
             {
-
                 var horas = (int)tiempoTotal;
                 var minutos = (int)((tiempoTotal - horas) * 60);
 
                 tiempo.Text = string.Format("{0:D2} h {1:D2} min", horas, minutos);
             }
             else { tiempo.Text = "0 h 0 min"; }
-
         }
 
         private void Atras(object sender, EventArgs e)
