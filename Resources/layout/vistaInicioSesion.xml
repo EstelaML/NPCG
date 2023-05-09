@@ -92,7 +92,7 @@
             android:id="@+id/linearLayoutRecuperarPass">
 
             <TextView
-                android:text="¿Aun no tienes cuenta?"
+                android:text="¿Aún no tienes cuenta?"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
