@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using Java.Security;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
@@ -386,6 +387,10 @@ namespace preguntaods.Presentacion.UI_impl
 
             tienePista = true;
         }
+        public static int GetPuntosConsolidados()
+        {
+            return _puntosConsolidados;
+        }
 
         private async Task MostrarAlerta(bool acertado, bool fin)
         {
@@ -422,7 +427,7 @@ namespace preguntaods.Presentacion.UI_impl
                             {
                                 _puntosConsolidados = puntuacionTotal;
                                 animation.Pause();
-                                ((VistaPartidaViewModel)Activity).Consolidar(_puntosConsolidados);
+                                ((VistaPartidaViewModel)Activity).Consolidar(puntuacionTotal);
                                 tcs.TrySetResult(true);
                             });
                         }
@@ -483,6 +488,8 @@ namespace preguntaods.Presentacion.UI_impl
                     ((VistaPartidaViewModel)Activity).AbandonarFallido(puntuacionTotal);
                     break;
             }
+
+            
         }
     }
 }
