@@ -20,20 +20,12 @@ namespace preguntaods.Entities
         public string Nombre { get; set; }
 
         // ReSharper disable once RedundantArgumentDefaultValue
-        [Column("Puntos")]
-        public int Puntos { get; set; }
-
-        // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Sonidos")]
         public bool Sonidos { get; set; }
 
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Musica")]
         public int Musica { get; set; }
-
-        // ReSharper disable once RedundantArgumentDefaultValue
-        [Column("PreguntasRealizadas")]
-        public int[] PreguntasRealizadas { get; set; }
 
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Foto")]
