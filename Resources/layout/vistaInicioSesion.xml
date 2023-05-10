@@ -78,7 +78,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout1">
 
-
             <ImageButton
                 android:layout_marginTop="2sp"
                 android:layout_marginLeft="0sp"
