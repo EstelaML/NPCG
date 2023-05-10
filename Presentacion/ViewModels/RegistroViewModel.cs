@@ -11,6 +11,8 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
+using static Android.Renderscripts.ScriptGroup;
+using System.Text.RegularExpressions;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -200,6 +202,18 @@ namespace preguntaods.Presentacion.ViewModels
                 return;
             }
 
+            // que la contraseña cumpla los requisitos
+            if (password.Text.Length >= 8 && Regex.IsMatch(password.Text, @"^\w*[0-9]\w*[.,;:!?]?\w*$"))
+            {
+                // El texto cumple con los requisitos
+                // Realizar alguna acción aquí
+            }
+            else {
+                error.Text = "La contraseña no cumple los requisitos";
+                passwordCorrect = false;
+                return;
+            }
+
             // Las 2 contraseñas sean iguales
             if (password.Text != password2.Text)
             {
@@ -207,6 +221,7 @@ namespace preguntaods.Presentacion.ViewModels
                 passwordCorrect = false;
                 return;
             }
+
 
             // El usuario no está en la base de datos registrado
 
