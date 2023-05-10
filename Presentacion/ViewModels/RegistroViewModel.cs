@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Text;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
@@ -23,9 +24,14 @@ namespace preguntaods.Presentacion.ViewModels
         private bool emailCorrect;
         private Button registroB;
         private TextView error;
+        private bool vistaContraseña = false;
+        private bool vistaContraseña2 = false;
+        private ImageView ojo;
+        private ImageView ojo2;
 
         private Facade fachada;
         private Sonido sonido;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -50,14 +56,57 @@ namespace preguntaods.Presentacion.ViewModels
             if (email != null) email.TextChanged += Email_TextChanged;
 
             password = FindViewById<EditText>(Resource.Id.contraseña);
+            password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
 
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
             if (password2 != null) password2.TextChanged += Password_Click;
+            password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
 
             error = FindViewById<TextView>(Resource.Id.error);
 
             registroB = FindViewById<Button>(Resource.Id.registroB);
             if (registroB != null) registroB.Click += Registrar;
+
+            ojo = FindViewById<ImageView>(Resource.Id.ojoContraseña);
+            ojo.Click += Ojo_Click1;
+
+            ojo2 = FindViewById<ImageView>(Resource.Id.ojoContraseña2);
+            ojo2.Click += Ojo_Click2;
+        }
+
+        private void Ojo_Click1(object sender, EventArgs e)
+        {
+            vistaContraseña = !vistaContraseña;
+            var type = password.InputType;
+            if (vistaContraseña)
+            {
+                // se muestra
+                password.InputType = InputTypes.TextVariationVisiblePassword;
+                ojo.SetImageResource(Resource.Drawable.ojo_cerrado);
+            }
+            else
+            {
+                // no se muestra
+                password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                ojo.SetImageResource(Resource.Drawable.ojo_abierto);
+            }
+        }
+
+        private void Ojo_Click2(object sender, EventArgs e)
+        {
+            vistaContraseña2 = !vistaContraseña2;
+            if (vistaContraseña2)
+            {
+                // se muestra
+                password2.InputType = InputTypes.TextVariationVisiblePassword;
+                ojo2.SetImageResource(Resource.Drawable.ojo_cerrado);
+            }
+            else
+            {
+                // no se muestra
+                password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                ojo2.SetImageResource(Resource.Drawable.ojo_abierto);
+            }
         }
 
         private void User_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
