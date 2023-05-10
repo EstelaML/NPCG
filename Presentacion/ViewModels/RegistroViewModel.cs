@@ -31,7 +31,7 @@ namespace preguntaods.Presentacion.ViewModels
         private ImageView ojo;
         private ImageView ojo2;
         private ImageView popup1;
-        private object _lock = new object();
+        private ImageView popupCorreo;
 
         private Facade fachada;
         private Sonido sonido;
@@ -57,10 +57,11 @@ namespace preguntaods.Presentacion.ViewModels
 
             email = FindViewById<EditText>(Resource.Id.correo);
             if (email != null) email.TextChanged += Email_TextChanged;
+            email.FocusChange += Email_FocusChange; 
 
             password = FindViewById<EditText>(Resource.Id.contraseña);
             password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-            password.FocusChange += Password_FocusChange; ;
+            password.FocusChange += Password_FocusChange; 
 
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
             if (password2 != null) password2.TextChanged += Password_Click;
@@ -79,6 +80,31 @@ namespace preguntaods.Presentacion.ViewModels
 
             popup1 = FindViewById<ImageView>(Resource.Id.imageView1);
             popup1.Visibility = Android.Views.ViewStates.Invisible;
+
+            popupCorreo = FindViewById<ImageView>(Resource.Id.popupCorreo);
+            popupCorreo.Visibility = Android.Views.ViewStates.Invisible;
+        }
+
+        private void Email_FocusChange(object sender, View.FocusChangeEventArgs e)
+        {
+            if (email.HasFocus)
+            {
+                AlphaAnimation animacion = new AlphaAnimation(0f, 1f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
+
+                // Asignar la animación a la imagen y hacerla invisible
+                popupCorreo.StartAnimation(animacion);
+                popupCorreo.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                AlphaAnimation animacion = new AlphaAnimation(1f, 0f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
+
+                // Asignar la animación a la imagen y hacerla invisible
+                popupCorreo.StartAnimation(animacion);
+                popupCorreo.Visibility = ViewStates.Invisible;
+            }
         }
 
         private void Password_FocusChange(object sender, Android.Views.View.FocusChangeEventArgs e)
