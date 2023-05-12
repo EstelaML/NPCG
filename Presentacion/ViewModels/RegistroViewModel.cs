@@ -3,15 +3,14 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Text;
-using Android.Views.Animations;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
-using static Android.Renderscripts.ScriptGroup;
 using System.Text.RegularExpressions;
 
 namespace preguntaods.Presentacion.ViewModels
@@ -59,11 +58,11 @@ namespace preguntaods.Presentacion.ViewModels
 
             email = FindViewById<EditText>(Resource.Id.correo);
             if (email != null) email.TextChanged += Email_TextChanged;
-            email.FocusChange += Email_FocusChange; 
+            email.FocusChange += Email_FocusChange;
 
             password = FindViewById<EditText>(Resource.Id.contraseña);
             password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-            password.FocusChange += Password_FocusChange; 
+            password.FocusChange += Password_FocusChange;
 
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
             if (password2 != null) password2.TextChanged += Password_Click;
@@ -111,24 +110,24 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Password_FocusChange(object sender, Android.Views.View.FocusChangeEventArgs e)
         {
-                if (password.HasFocus)
-                {
-                    AlphaAnimation animacion = new AlphaAnimation(0f, 1f);
-                    animacion.Duration = 500; // Duración de la animación en milisegundos
+            if (password.HasFocus)
+            {
+                AlphaAnimation animacion = new AlphaAnimation(0f, 1f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
 
-                    // Asignar la animación a la imagen y hacerla invisible
-                    popup1.StartAnimation(animacion);
-                    popup1.Visibility = ViewStates.Visible;
-                }
-                else
-                {
-                    AlphaAnimation animacion = new AlphaAnimation(1f, 0f);
-                    animacion.Duration = 500; // Duración de la animación en milisegundos
+                // Asignar la animación a la imagen y hacerla invisible
+                popup1.StartAnimation(animacion);
+                popup1.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                AlphaAnimation animacion = new AlphaAnimation(1f, 0f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
 
-                    // Asignar la animación a la imagen y hacerla invisible
-                    popup1.StartAnimation(animacion);
-                    popup1.Visibility = ViewStates.Invisible;
-                }
+                // Asignar la animación a la imagen y hacerla invisible
+                popup1.StartAnimation(animacion);
+                popup1.Visibility = ViewStates.Invisible;
+            }
         }
 
         private void Ojo_Click1(object sender, EventArgs e)
@@ -208,7 +207,8 @@ namespace preguntaods.Presentacion.ViewModels
                 // El texto cumple con los requisitos
                 // Realizar alguna acción aquí
             }
-            else {
+            else
+            {
                 error.Text = "La contraseña no cumple los requisitos";
                 passwordCorrect = false;
                 return;
@@ -221,7 +221,6 @@ namespace preguntaods.Presentacion.ViewModels
                 passwordCorrect = false;
                 return;
             }
-
 
             // El usuario no está en la base de datos registrado
 

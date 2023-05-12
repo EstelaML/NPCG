@@ -4,7 +4,6 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using Java.Security;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
@@ -387,6 +386,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             tienePista = true;
         }
+
         public static int GetPuntosConsolidados()
         {
             return _puntosConsolidados;
@@ -488,8 +488,6 @@ namespace preguntaods.Presentacion.UI_impl
                     ((VistaPartidaViewModel)Activity).AbandonarFallido(puntuacionTotal);
                     break;
             }
-
-            
         }
     }
 }
