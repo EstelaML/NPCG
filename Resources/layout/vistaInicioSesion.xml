@@ -93,10 +93,6 @@
 
         </RelativeLayout>
 
-
-
-       
-
         <TextView
             android:paddingTop="7dp"
             android:paddingBottom="5dp"

@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="preguntaods.Entities.Ahorcado" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAAIAAAAAAAAAAAAgICAIAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Entities\Ahorcado.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.Entities.Estadistica" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAEAQAAAAA=</HashCode>
+      <FileName>BusinessLogic\Entities\Estadistica.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.Entities.Ods" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAgAABAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Entities\ODS.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.Entities.Pregunta" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAAAAAgICAIAAHAMQAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Entities\Pregunta.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.Entities.RetosRealizados" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAAAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Entities\RetosRealizados.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="preguntaods.Entities.Usuario" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAEABAAAAAAQAAAAgAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Entities\Usuario.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoAcierto" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoAcierto.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoClick" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoClick.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoDerrota" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoError" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoError.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoLetraAcierto" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoLetraAcierto.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoMusica" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoMusica.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoReloj" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoReloj.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.EstrategiaSonidoVictoria" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAACAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\EstrategiaSonidoVictoria.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.EstrategiaSonido.Sonido" Collapsed="true">
+    <Position X="11.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEAAAAAAAAAEAABAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\Sonido.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.Partida" Collapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABBEBEAIABAIAIgACCBAAiAAFjAJJAAQAAAEQAASAI=</HashCode>
+      <FileName>BusinessLogic\Partida\Partida.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.PartidaBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACBAAAAAAAAKAAAAAAAAAAAAAAAAACAAAAAAIA=</HashCode>
+      <FileName>BusinessLogic\Partida\PartidaBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.PartidaDirector" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Partida\PartidaDirector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.Retos.Reto" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAAAAAAAAEAAABAAEUBAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Partida\Retos\Reto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.Retos.RetoAhorcado" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAAAEAAgAAAAAAAAACAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>BusinessLogic\Partida\Retos\RetoAhorcado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.Retos.RetoFrase" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Partida\Retos\RetoFrase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.Retos.RetoPre" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAEAAgCAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Partida\Retos\RetoPre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Partida.Retos.RetoSopa" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Partida\Retos\RetoSopa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Services.Facade" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAEAAAIBgAAAAAAAwAIAAAAACAAgQAMAAQAgAYAAE=</HashCode>
+      <FileName>BusinessLogic\Services\Facade.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="preguntaods.BusinessLogic.Services.PreguntadosService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAQBAAIAAAAAAAAAAAAAAAYAAAAQAIAAAAAABEQA=</HashCode>
+      <FileName>BusinessLogic\Services\PreguntadosService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.744" />
+  </Class>
+  <Class Name="preguntaods.Persistencia.Repository.impl.RepositorioAhorcado" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAARAAAIAAAAAAAAAAEAAAAAAAAAE=</HashCode>
+      <FileName>Persistencia\Repository\impl\RepositorioAhorcado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Persistencia.Repository.impl.RepositorioPregunta" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAgAAAAAAQAAAAAAEAAAAAAAAAE=</HashCode>
+      <FileName>Persistencia\Repository\impl\RepositorioPregunta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Persistencia.Repository.impl.RepositorioUsuario" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIIAAAAAAAAAAIAAAAAAACQAAQAAAAACCABAQQAgIAE=</HashCode>
+      <FileName>Persistencia\Repository\impl\RepositorioUsuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Persistencia.Repository.impl.Repository&lt;T&gt;" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIE=</HashCode>
+      <FileName>Persistencia\Repository\impl\Repositorycs.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="preguntaods.Persistencia.SingletonConexion" Collapsed="true">
+    <Position X="9.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAgAAAAAAAACAACAAAAABAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Persistencia\SingletonConexion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.UI_impl.UserInterface" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgBAAAAgAAAEAAJACAAAAAACAEAAAAA=</HashCode>
+      <FileName>Presentacion\UI impl\UserInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.UI_impl.UserInterfaceAhorcado" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iAJFRAAQIiJAAoAAiAggAIAMABwAAABBIkACAAAESBA=</HashCode>
+      <FileName>Presentacion\UI impl\UserInterfaceAhorcado.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.UI_impl.UserInterfaceFrase" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAgAAAEAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Presentacion\UI impl\UserInterfaceFrase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.UI_impl.UserInterfacePregunta" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIFBAAQIAJgAoAAyAggAIAMABgAAAABAkACBQAEAoA=</HashCode>
+      <FileName>Presentacion\UI impl\UserInterfacePregunta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.UI_impl.UserInterfaceSopa" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAgAAAEAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Presentacion\UI impl\UserInterfaceSopa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.InicioSesionViewModel" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAQhAAEAAAAAiAEgAAAAACgAAACAAAAAAgAAAAA=</HashCode>
+      <FileName>Presentacion\ViewModels\InicioSesionViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.MenuViewModel" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgCAAAAAAAhChAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentacion\ViewModels\MenuViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.PerfilViewModel" Collapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBUAAAAEABAgACAKAQAIAAEACgAAAQBBQACAAAAAgA=</HashCode>
+      <FileName>Presentacion\ViewModels\PerfilViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.RankingViewModel" Collapsed="true">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgBAACAAEAQFAACgAAAABAAEEQAABAAI=</HashCode>
+      <FileName>Presentacion\ViewModels\RankingViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.RegistroViewModel" Collapsed="true">
+    <Position X="15" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAABQBABCAgQAgCAkgAAEwADgAAAAAAAAQAgoACAQ=</HashCode>
+      <FileName>Presentacion\ViewModels\RegistroViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.SeleccionRetoViewModel" Collapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAUACAAAAAAAgCgAgABAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentacion\ViewModels\SeleccionRetoViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="preguntaods.Presentacion.ViewModels.VistaPartidaViewModel" Collapsed="true">
+    <Position X="15" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAQAAAADAABAAAAkAAAAAACAIAAAAACAEAAAECIA=</HashCode>
+      <FileName>Presentacion\ViewModels\VistaPartidaViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="preguntaods.Entities.IEntity" Collapsed="true">
+    <Position X="9.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Persistencia\Entities\IEntity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="preguntaods.BusinessLogic.EstrategiaSonido.IEstrategiaSonido" Collapsed="true">
+    <Position X="11.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\EstrategiaSonido\IEstrategiaSonido.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="preguntaods.BusinessLogic.Partida.IPartidaBuilder" Collapsed="true">
+    <Position X="15" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACBAAAAAAAAKAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Partida\IPartidaBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="preguntaods.BusinessLogic.Services.IFacade" Collapsed="true">
+    <Position X="13.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAA=</HashCode>
+      <FileName>BusinessLogic\Services\IFacade.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="preguntaods.BusinessLogic.Services.IPreguntadosService" Collapsed="true">
+    <Position X="16.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLogic\Services\IPreguntadosService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="preguntaods.Persistencia.Repository.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="18.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Persistencia\Repository\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

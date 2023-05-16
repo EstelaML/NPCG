@@ -63,7 +63,8 @@ namespace preguntaods.Presentacion.ViewModels
                 password.InputType = InputTypes.TextVariationVisiblePassword;
                 ojo.SetImageResource(Resource.Drawable.ojo_cerrado);
             }
-            else {
+            else
+            {
                 // no se muestra
                 password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
                 ojo.SetImageResource(Resource.Drawable.ojo_abierto);

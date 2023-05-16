@@ -192,7 +192,7 @@ namespace preguntaods.BusinessLogic.Partida
             if (((VistaPartidaViewModel)activity).GetConsolidado())
             {
                 var puntosP = UserInterfacePregunta.GetPuntosConsolidados();
-                if (puntosP == 0) { puntosP = UserInterfaceAhorcado.GetPuntosConsolidados();  }
+                if (puntosP == 0) { puntosP = UserInterfaceAhorcado.GetPuntosConsolidados(); }
                 titulo = "¿Estás seguro?";
                 mensaje = "Si aceptas se te guardarán los puntos consolidados: " + puntosP;
             }
