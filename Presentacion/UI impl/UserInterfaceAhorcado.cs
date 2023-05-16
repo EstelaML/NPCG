@@ -454,7 +454,7 @@ namespace preguntaods.Presentacion.UI_impl
                         sonido.EjecutarSonido();
                         // sumar los consolidados
                         titulo = "Vuelve a intentarlo";
-                        mensaje = $"Tienes {puntuacionTotal} puntos.";
+                        mensaje = $"Sigues con {puntuacionTotal} puntos.";
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
