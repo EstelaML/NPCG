@@ -372,7 +372,7 @@ namespace preguntaods.Presentacion.UI_impl
                     {
                         // sumar los consolidados
                         titulo = "Vuelve a intentarlo";
-                        mensaje = $"Pierdes {puntuacion*2} puntos.";
+                        mensaje = $"Pierdes {puntuacion * 2} puntos.";
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>

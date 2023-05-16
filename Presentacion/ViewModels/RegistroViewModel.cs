@@ -193,7 +193,6 @@ namespace preguntaods.Presentacion.ViewModels
             // Si ha sido incorrecta, que se haya cambiado
             if (!passwordCorrect || !emailCorrect || !userCorrect) return;
 
-
             // El correo contenga @gmail.com
             if (email.Text != null && !email.Text.Contains("@gmail.com"))
             {
@@ -206,7 +205,8 @@ namespace preguntaods.Presentacion.ViewModels
             Regex regexNumero = new Regex("\\d");
 
             // que la contraseña cumpla los requisitos
-            if (!regexPuntuacion.IsMatch(password.Text) || !regexNumero.IsMatch(password.Text) || password.Text.Length < 8) {             
+            if (!regexPuntuacion.IsMatch(password.Text) || !regexNumero.IsMatch(password.Text) || password.Text.Length < 8)
+            {
                 error.Text = "La contraseña no cumple los requisitos";
                 passwordCorrect = false;
                 return;
