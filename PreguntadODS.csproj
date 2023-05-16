@@ -75,6 +75,11 @@
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoVictoria.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\Sonido.cs" />
+    <Compile Include="BusinessLogic\Partida\FabricaRetos\FabricaRetoAhorcado.cs" />
+    <Compile Include="BusinessLogic\Partida\FabricaRetos\FabricaRetoSopa.cs" />
+    <Compile Include="BusinessLogic\Partida\FabricaRetos\FabricaRetoFrase.cs" />
+    <Compile Include="BusinessLogic\Partida\FabricaRetos\FabricaRetoPregunta.cs" />
+    <Compile Include="BusinessLogic\Partida\FabricaRetos\FabricaReto.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoFrase.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoSopa.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoAhorcado.cs" />
@@ -126,7 +131,7 @@
     <Compile Include="BusinessLogic\EstrategiaSonido\IEstrategiaSonido.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Diagrama de clases.cd" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
@@ -431,6 +436,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\popupCorreo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.

@@ -123,7 +123,7 @@ namespace preguntaods.Persistencia.Repository.impl
                .Update();
         }
 
-        public async Task<int[]> GetPreguntasAcertadasAsync(string a, Reto reto, Usuario usuario)
+        public async Task<int[]> GetPreguntasAcertadasAsync(string a, IReto reto, Usuario usuario)
         {
             if (usuario.Id == null) return null;
             var id = (int)usuario.Id;

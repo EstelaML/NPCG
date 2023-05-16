@@ -331,7 +331,7 @@ namespace preguntaods.Presentacion.UI_impl
             ahorcadoImg.SetImageResource(idDeImagen);
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(IReto reto)
         {
             // comienza cuentra atrás
             animation.Start();

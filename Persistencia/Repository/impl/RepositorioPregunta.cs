@@ -40,7 +40,7 @@ namespace preguntaods.Persistencia.Repository.impl
             return response.Models.ToList();
         }
 
-        public async Task AñadirPreguntaRealizada(int id, Reto reto)
+        public async Task AñadirPreguntaRealizada(int id, IReto reto)
         {
             // cogemos del usuario las preguntas acertadas ya
             var pregunta = ((RetoPre)reto).GetPregunta();
@@ -83,7 +83,7 @@ namespace preguntaods.Persistencia.Repository.impl
             }
         }
 
-        public async Task AñadirPreguntaFallada(Reto reto)
+        public async Task AñadirPreguntaFallada(IReto reto)
         {
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);

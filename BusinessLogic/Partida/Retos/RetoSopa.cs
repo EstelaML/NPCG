@@ -1,15 +1,30 @@
-﻿using System.Threading.Tasks;
+﻿using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Partida.Retos
 {
-    public class RetoSopa : Reto
+    public class RetoSopa : IReto
     {
-        public RetoSopa()
+        private static PreguntadosService _servicio;
+        private readonly int numeroReto;
+
+        public RetoSopa(int orden)
         {
-            SetType(TypeSopa);
+            Type = IReto.TypeSopa;
+
+            _servicio = new PreguntadosService();
+            numeroReto = orden;
         }
 
-        public override async Task SetValues()
+        public Task SetDif(int orden)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Type { get; set; }
+
+        public async Task SetValues()
         {
             await Task.CompletedTask;
         }

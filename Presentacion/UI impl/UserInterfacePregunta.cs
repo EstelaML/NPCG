@@ -211,7 +211,7 @@ namespace preguntaods.Presentacion.UI_impl
             }
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(IReto reto)
         {
             var pregunta = (reto as RetoPre)?.GetPregunta();
 

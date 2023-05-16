@@ -15,7 +15,7 @@ namespace preguntaods.Presentacion.ViewModels
     public class VistaPartidaViewModel : AppCompatActivity
     {
         // Vars
-        private Reto reto;
+        private IReto reto;
 
         private Partida partida;
         private bool consolidado;
@@ -49,22 +49,22 @@ namespace preguntaods.Presentacion.ViewModels
         {
             switch (reto.GetType())
             {
-                case Reto.TypePregunta:
+                case IReto.TypePregunta:
                     {
                         SetContentView(Resource.Layout.vistaRetoPregunta);
                         break;
                     }
-                case Reto.TypeAhorcado:
+                case IReto.TypeAhorcado:
                     {
                         SetContentView(Resource.Layout.vistaRetoAhorcado);
                         break;
                     }
-                case Reto.TypeFrase:
+                case IReto.TypeFrase:
                     {
                         SetContentView(Resource.Layout.vistaRetoFrase);
                         break;
                     }
-                case Reto.TypeSopa:
+                case IReto.TypeSopa:
                     {
                         SetContentView(Resource.Layout.vistaRetoSopa);
                         break;
