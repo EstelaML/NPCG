@@ -9,7 +9,7 @@ namespace preguntaods.Presentacion.UI_impl
             throw new System.NotImplementedException();
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(IReto reto)
         {
             throw new System.NotImplementedException();
         }

@@ -20,7 +20,8 @@ namespace preguntaods.BusinessLogic.Partida
         {
             for (var i = 0; i < 12; i++)
             {
-                Reto reto;
+                IReto reto;
+                FabricaReto fabrica;
                 int n = numeroReto;
 
                 if (numeroReto == 5)
@@ -34,25 +35,27 @@ namespace preguntaods.BusinessLogic.Partida
                 {
                     case 1:
                         {
-                            reto = new RetoPre(i);
+                            fabrica = new FabricaRetoPregunta();
                             break;
                         }
                     case 2:
                         {
-                            reto = new RetoAhorcado(i);
+                            fabrica = new FabricaRetoAhorcado();
                             break;
                         }
                     case 3:
                         {
-                            reto = new RetoFrase();
+                            fabrica = new FabricaRetoFrase();
                             break;
                         }
                     default:
                         {
-                            reto = new RetoSopa();
+                            fabrica = new FabricaRetoSopa();
                             break;
                         }
                 }
+
+                reto = fabrica.CrearReto(i);
 
                 await reto.SetValues();
 

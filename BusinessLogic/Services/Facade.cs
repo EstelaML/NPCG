@@ -89,7 +89,7 @@ namespace preguntaods.BusinessLogic.Services
             await repositorioUser.Add(user);
         }
 
-        public async Task GuardarPregunta(Reto reto)
+        public async Task GuardarPregunta(IReto reto)
         {
             // obtengo el id del usuario
             var usuario = await GetUsuarioLogged();
@@ -110,7 +110,7 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public async Task GuardarPreguntaFallada(Reto reto)
+        public async Task GuardarPreguntaFallada(IReto reto)
         {
             // obtengo el id del usuario
             var usuario = await GetUsuarioLogged();

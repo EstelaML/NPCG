@@ -15,8 +15,8 @@ namespace preguntaods.BusinessLogic.Partida
     public class Partida
     {
         public Usuario User;
-        private readonly List<Reto> listaRetos;
-        private Reto retoActual;
+        private readonly List<IReto> listaRetos;
+        private IReto retoActual;
         private UserInterface userInterface;
         public Facade Fachada;
 
@@ -35,7 +35,7 @@ namespace preguntaods.BusinessLogic.Partida
         public Partida()
         {
             contadorRetoSiguiente = 0;
-            listaRetos = new List<Reto>();
+            listaRetos = new List<IReto>();
             falloFacil = false;
             primeraVez = true;
         }
@@ -53,17 +53,17 @@ namespace preguntaods.BusinessLogic.Partida
             primeraVez = false;
         }
 
-        public Reto GetRetoActual()
+        public IReto GetRetoActual()
         {
             return retoActual;
         }
 
-        public List<Reto> GetRetos()
+        public List<IReto> GetRetos()
         {
             return listaRetos;
         }
 
-        public void AddReto(Reto reto)
+        public void AddReto(IReto reto)
         {
             listaRetos.Add(reto);
         }
@@ -152,22 +152,22 @@ namespace preguntaods.BusinessLogic.Partida
         {
             switch (listaRetos[contadorRetoSiguiente - 1].GetType())
             {
-                case Reto.TypePregunta:
+                case IReto.TypePregunta:
                     {
                         SetUi(new UserInterfacePregunta());
                         break;
                     }
-                case Reto.TypeAhorcado:
+                case IReto.TypeAhorcado:
                     {
                         SetUi(new UserInterfaceAhorcado());
                         break;
                     }
-                case Reto.TypeFrase:
+                case IReto.TypeFrase:
                     {
                         SetUi(new UserInterfaceFrase());
                         break;
                     }
-                case Reto.TypeSopa:
+                case IReto.TypeSopa:
                     {
                         SetUi(new UserInterfaceSopa());
                         break;
@@ -175,12 +175,12 @@ namespace preguntaods.BusinessLogic.Partida
             }
         }
 
-        public async Task GuardarPreguntaUsuario(Reto reto)
+        public async Task GuardarPreguntaUsuario(IReto reto)
         {
             await Fachada.GuardarPregunta(reto);
         }
 
-        public async Task GuardarPreguntaFalladaUsuario(Reto reto)
+        public async Task GuardarPreguntaFalladaUsuario(IReto reto)
         {
             await Fachada.GuardarPreguntaFallada(reto);
         }
