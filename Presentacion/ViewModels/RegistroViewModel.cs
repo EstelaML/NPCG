@@ -101,7 +101,7 @@ namespace preguntaods.Presentacion.ViewModels
         {
             if (email.HasFocus)
             {
-                AlphaAnimation animacion = new AlphaAnimation(0f, 1f);
+                var animacion = new AlphaAnimation(0f, 1f);
                 animacion.Duration = 500; // Duración de la animación en milisegundos
 
                 // Asignar la animación a la imagen y hacerla invisible
@@ -110,7 +110,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
             else
             {
-                AlphaAnimation animacion = new AlphaAnimation(1f, 0f);
+                var animacion = new AlphaAnimation(1f, 0f);
                 animacion.Duration = 500; // Duración de la animación en milisegundos
 
                 // Asignar la animación a la imagen y hacerla invisible
@@ -123,7 +123,7 @@ namespace preguntaods.Presentacion.ViewModels
         {
             if (password.HasFocus)
             {
-                AlphaAnimation animacion = new AlphaAnimation(0f, 1f);
+                var animacion = new AlphaAnimation(0f, 1f);
                 animacion.Duration = 500; // Duración de la animación en milisegundos
 
                 // Asignar la animación a la imagen y hacerla invisible
@@ -132,7 +132,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
             else
             {
-                AlphaAnimation animacion = new AlphaAnimation(1f, 0f);
+                var animacion = new AlphaAnimation(1f, 0f);
                 animacion.Duration = 500; // Duración de la animación en milisegundos
 
                 // Asignar la animación a la imagen y hacerla invisible
@@ -211,8 +211,8 @@ namespace preguntaods.Presentacion.ViewModels
                 return;
             }
 
-            Regex regexPuntuacion = new Regex("[.,@#*!?¿¡`·_-]");
-            Regex regexNumero = new Regex("\\d");
+            var regexPuntuacion = new Regex("[.,@#*!?¿¡`·_-]");
+            var regexNumero = new Regex("\\d");
 
             // que la contraseña cumpla los requisitos
             if (password.Text != null && (!regexPuntuacion.IsMatch(password.Text) || !regexNumero.IsMatch(password.Text) || password.Text.Length < 8))

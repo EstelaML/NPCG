@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -38,7 +39,7 @@ namespace preguntaods.Persistencia.Repository.impl
             return response.Models.ToList();
         }
 
-        public async Task AñadirAhorcadoRealizado(int id, IReto reto)
+        public async Task AñadirAhorcadoRealizado(IReto reto)
         {
             // cogemos del usuario las preguntas acertadas ya
             var pregunta = ((RetoAhorcado)reto).GetAhorcado();

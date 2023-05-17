@@ -137,7 +137,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             if (result.Ok && usuarioCorrect)
             {
-                string newNombre = result.Text;
+                var newNombre = result.Text;
                 nombre.Text = newNombre;
                 await fachada.CambiarNombre(newNombre);
             }

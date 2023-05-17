@@ -1,8 +1,8 @@
-﻿using preguntaods.BusinessLogic.Services;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Services;
+using preguntaods.Entities;
 
-// ReSharper disable once CheckNamespace
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Retos
 {
     public class RetoPre : IReto
     {

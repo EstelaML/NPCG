@@ -1,6 +1,7 @@
 ﻿using preguntaods.Entities;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -33,7 +34,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS)
         {
-            int p = puntosA + puntosS;
+            var p = puntosA + puntosS;
             await conexion.Cliente
                         .From<Estadistica>()
                         .Where(x => x.Usuario == uuid)
@@ -114,7 +115,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdateFoto(string uuid, byte[] foto)
         {
-            string fotoT = Convert.ToBase64String(foto);
+            var fotoT = Convert.ToBase64String(foto);
             await conexion.Cliente
                .From<Usuario>()
                .Where(x => x.Uuid == uuid)
@@ -127,22 +128,17 @@ namespace preguntaods.Persistencia.Repository.impl
             if (usuario.Id == null) return null;
             var id = (int)usuario.Id;
             var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
-            if (respuesta == null)
-            {
-                var inser = new RetosRealizados((int)usuario.Id, null, null);
-                await conexion.Cliente.From<RetosRealizados>().Insert(inser);
-                return null;
-            }
-            if (reto is RetoPre)
-            {
-                return respuesta.PreguntasRealizadas;
-            }
-            else if (reto is RetoAhorcado)
-            {
-                return respuesta.AhorcadosRealizados;
-            }
-
+            if (respuesta != null)
+                return reto switch
+                {
+                    RetoPre _ => respuesta.PreguntasRealizadas,
+                    RetoAhorcado _ => respuesta.AhorcadosRealizados,
+                    _ => null
+                };
+            var inser = new RetosRealizados((int)usuario.Id, null, null);
+            await conexion.Cliente.From<RetosRealizados>().Insert(inser);
             return null;
+
         }
 
         public async Task<int[]> GetRetosAcertadosAsync(Usuario usuario)

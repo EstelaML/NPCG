@@ -1,9 +1,9 @@
 ﻿using preguntaods.BusinessLogic.EstrategiaSonido;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.FabricaRetos;
 using preguntaods.BusinessLogic.Fachada;
-using preguntaods.BusinessLogic.Partida.FabricaRetos;
-using preguntaods.Entities;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.BusinessLogic.Partida
 {

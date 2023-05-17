@@ -4,6 +4,7 @@ using preguntaods.Persistencia.Repository.impl;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 using Random = Java.Util.Random;
 using preguntaods.Persistencia;
 using Supabase.Gotrue;
@@ -57,16 +58,16 @@ namespace preguntaods.BusinessLogic.Services
             {
                 case Pregunta.DifBaja:
                     {
-                        Random rnd = new Random();
-                        int indiceAleatorio = rnd.NextInt(_preguntasBajas.Count);
+                        var rnd = new Random();
+                        var indiceAleatorio = rnd.NextInt(_preguntasBajas.Count);
                         respuesta = _preguntasBajas[indiceAleatorio];
                         _preguntasBajas.Remove(respuesta);
                         break;
                     }
                 case Pregunta.DifMedia:
                     {
-                        Random rnd = new Random();
-                        int indiceAleatorio = rnd.NextInt(_preguntasMedias.Count);
+                        var rnd = new Random();
+                        var indiceAleatorio = rnd.NextInt(_preguntasMedias.Count);
                         respuesta = _preguntasMedias[indiceAleatorio];
                         _preguntasMedias.Remove(respuesta);
 
@@ -74,8 +75,8 @@ namespace preguntaods.BusinessLogic.Services
                     }
                 case Pregunta.DifAlta:
                     {
-                        Random rnd = new Random();
-                        int indiceAleatorio = rnd.NextInt(_preguntasAltas.Count);
+                        var rnd = new Random();
+                        var indiceAleatorio = rnd.NextInt(_preguntasAltas.Count);
                         respuesta = _preguntasAltas[indiceAleatorio];
                         _preguntasAltas.Remove(respuesta);
                         break;
@@ -108,16 +109,16 @@ namespace preguntaods.BusinessLogic.Services
             {
                 case Ahorcado.DifBaja:
                     {
-                        Random rnd = new Random();
-                        int indiceAleatorio = rnd.NextInt(_ahorcadoBajo.Count);
+                        var rnd = new Random();
+                        var indiceAleatorio = rnd.NextInt(_ahorcadoBajo.Count);
                         ahorca = _ahorcadoBajo[indiceAleatorio];
                         _ahorcadoBajo.Remove(ahorca);
                         break;
                     }
                 case Ahorcado.DifMedia:
                     {
-                        Random rnd = new Random();
-                        int indiceAleatorio = rnd.NextInt(_ahorcadoMedio.Count);
+                        var rnd = new Random();
+                        var indiceAleatorio = rnd.NextInt(_ahorcadoMedio.Count);
                         ahorca = _ahorcadoMedio[indiceAleatorio];
                         _ahorcadoMedio.Remove(ahorca);
 
@@ -125,8 +126,8 @@ namespace preguntaods.BusinessLogic.Services
                     }
                 case Ahorcado.DifAlta:
                     {
-                        Random rnd = new Random();
-                        int indiceAleatorio = rnd.NextInt(_ahorcadoAlto.Count);
+                        var rnd = new Random();
+                        var indiceAleatorio = rnd.NextInt(_ahorcadoAlto.Count);
                         ahorca = _ahorcadoAlto[indiceAleatorio];
                         _ahorcadoAlto.Remove(ahorca);
                         break;
@@ -243,42 +244,31 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task GuardarPregunta(IReto reto)
         {
-            // obtengo el id del usuario
-            var usuario = await GetUsuarioLogged();
-            if (usuario?.Id != null)
+            switch (reto.Type)
             {
-                var id = (int)usuario.Id;
-                switch (reto.Type)
-                {
-                    // añado a la BD ese reto
-                    case IReto.TypePregunta:
-                        await repositorioPregunta.AñadirPreguntaRealizada(id, reto);
-                        break;
+                // añado a la BD ese reto
+                case IReto.TypePregunta:
+                    await repositorioPregunta.AñadirPreguntaRealizada(reto);
+                    break;
 
-                    case IReto.TypeAhorcado:
-                        await repositorioAhorcado.AñadirAhorcadoRealizado(id, reto);
-                        break;
-                }
+                case IReto.TypeAhorcado:
+                    await repositorioAhorcado.AñadirAhorcadoRealizado(reto);
+                    break;
             }
         }
 
         public async Task GuardarPreguntaFallada(IReto reto)
         {
-            // obtengo el id del usuario
-            var usuario = await GetUsuarioLogged();
-            if (usuario?.Id != null)
+            switch (reto.Type)
             {
-                switch (reto.Type)
-                {
-                    // añado a la BD ese reto
-                    case IReto.TypePregunta:
-                        await repositorioPregunta.AñadirPreguntaFallada(reto);
-                        break;
+                // añado a la BD ese reto
+                case IReto.TypePregunta:
+                    await repositorioPregunta.AñadirPreguntaFallada(reto);
+                    break;
 
-                    case IReto.TypeAhorcado:
-                        await repositorioAhorcado.AñadirAhorcadoFallado(reto);
-                        break;
-                }
+                case IReto.TypeAhorcado:
+                    await repositorioAhorcado.AñadirAhorcadoFallado(reto);
+                    break;
             }
         }
 

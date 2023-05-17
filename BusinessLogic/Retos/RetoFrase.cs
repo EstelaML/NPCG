@@ -1,13 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-// ReSharper disable once CheckNamespace
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Retos
 {
-    public class RetoSopa : IReto
+    public class RetoFrase : IReto
     {
-        public RetoSopa(int orden)
+        public RetoFrase(int orden)
         {
-            Type = IReto.TypeSopa;
+            Type = IReto.TypeFrase;
         }
 
         public Task SetDif(int orden)

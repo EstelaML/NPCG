@@ -9,6 +9,7 @@ using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Presentacion.UI_impl
 {

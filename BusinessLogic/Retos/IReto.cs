@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-// ReSharper disable once CheckNamespace
-namespace preguntaods.Entities
+namespace preguntaods.BusinessLogic.Retos
 {
     public interface IReto
     {

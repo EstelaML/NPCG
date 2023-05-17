@@ -1,6 +1,6 @@
-﻿using preguntaods.Entities;
+﻿using preguntaods.BusinessLogic.Retos;
 
-namespace preguntaods.BusinessLogic.Partida.FabricaRetos
+namespace preguntaods.BusinessLogic.FabricaRetos
 {
     public class FabricaRetoAhorcado : FabricaReto
     {
