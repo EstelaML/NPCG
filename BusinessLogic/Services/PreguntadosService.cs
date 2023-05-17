@@ -248,11 +248,11 @@ namespace preguntaods.BusinessLogic.Services
             {
                 // añado a la BD ese reto
                 case IReto.TypePregunta:
-                    await repositorioPregunta.AñadirPreguntaRealizada(reto);
+                    await repositorioPregunta.AñadirPreguntaRealizada(((RetoPre)reto).GetPregunta());
                     break;
 
                 case IReto.TypeAhorcado:
-                    await repositorioAhorcado.AñadirAhorcadoRealizado(reto);
+                    await repositorioAhorcado.AñadirAhorcadoRealizado(((RetoAhorcado)reto).GetAhorcado());
                     break;
             }
         }

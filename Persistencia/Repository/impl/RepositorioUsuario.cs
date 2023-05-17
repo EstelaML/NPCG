@@ -123,22 +123,30 @@ namespace preguntaods.Persistencia.Repository.impl
                .Update();
         }
 
-        public async Task<int[]> GetPreguntasAcertadasAsync(string a, IReto reto, Usuario usuario)
+        public async Task<int[]> GetPreguntasAcertadasAsync(Usuario usuario)
         {
             if (usuario.Id == null) return null;
             var id = (int)usuario.Id;
             var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
             if (respuesta != null)
-                return reto switch
-                {
-                    RetoPre _ => respuesta.PreguntasRealizadas,
-                    RetoAhorcado _ => respuesta.AhorcadosRealizados,
-                    _ => null
-                };
+                return respuesta.PreguntasRealizadas;
+
             var inser = new RetosRealizados((int)usuario.Id, null, null);
             await conexion.Cliente.From<RetosRealizados>().Insert(inser);
             return null;
+        }
 
+        public async Task<int[]> GetAhorcadosAcertadosAsync(Usuario usuario)
+        {
+            if (usuario.Id == null) return null;
+            var id = (int)usuario.Id;
+            var respuesta = await conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single();
+            if (respuesta != null)
+                return respuesta.AhorcadosRealizados;
+
+            var inser = new RetosRealizados((int)usuario.Id, null, null);
+            await conexion.Cliente.From<RetosRealizados>().Insert(inser);
+            return null;
         }
 
         public async Task<int[]> GetRetosAcertadosAsync(Usuario usuario)
