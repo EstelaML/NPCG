@@ -1,4 +1,6 @@
-﻿namespace preguntaods.BusinessLogic.Partida.Retos
+﻿using preguntaods.BusinessLogic.Partida.Retos;
+
+namespace preguntaods.BusinessLogic.Partida.FabricaRetos
 {
     public class FabricaRetoPregunta : FabricaReto
     {

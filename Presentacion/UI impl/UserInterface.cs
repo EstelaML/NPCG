@@ -25,7 +25,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public void SetActivity(Activity activity)
         {
-            this.Activity = activity;
+            Activity = activity;
         }
 
         public abstract void Init();

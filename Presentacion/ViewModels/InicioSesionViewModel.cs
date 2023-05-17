@@ -21,7 +21,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView registrar;
         private Facade fachada;
         private Sonido sonido;
-        private bool vistaContraseña = false;
+        private bool vistaContraseña;
         private ImageView ojo;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -31,6 +31,8 @@ namespace preguntaods.Presentacion.ViewModels
             SetContentView(Resource.Layout.vistaInicioSesion);
             fachada = new Facade();
 
+            vistaContraseña = false;
+
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
@@ -39,7 +41,7 @@ namespace preguntaods.Presentacion.ViewModels
             // Create your application here
             correo = FindViewById<EditText>(Resource.Id.correo);
             password = FindViewById<EditText>(Resource.Id.contraseña);
-            password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+            if (password != null) password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
 
             iniciarSesion = FindViewById<Button>(Resource.Id.inicioSesion);
             if (iniciarSesion != null) iniciarSesion.Click += IniciarSesion_Click;
@@ -50,13 +52,12 @@ namespace preguntaods.Presentacion.ViewModels
             if (registrar != null) registrar.Click += NavigateRegistro;
 
             ojo = FindViewById<ImageView>(Resource.Id.ojoContraseña);
-            ojo.Click += Ojo_Click;
+            if (ojo != null) ojo.Click += Ojo_Click;
         }
 
         private void Ojo_Click(object sender, EventArgs e)
         {
             vistaContraseña = !vistaContraseña;
-            var type = password.InputType;
             if (vistaContraseña)
             {
                 // se muestra
@@ -93,7 +94,7 @@ namespace preguntaods.Presentacion.ViewModels
                 UserDialogs.Instance.HideLoading();
 
                 // inicia sesion
-                Intent i = new Intent(this, typeof(MenuViewModel));
+                var i = new Intent(this, typeof(MenuViewModel));
                 StartActivity(i);
             }
             catch (Exception)

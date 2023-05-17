@@ -3,6 +3,7 @@ using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.BusinessLogic.Services;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Partida.FabricaRetos;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -22,38 +23,22 @@ namespace preguntaods.BusinessLogic.Partida
             {
                 IReto reto;
                 FabricaReto fabrica;
-                int n = numeroReto;
+                var n = numeroReto;
 
                 if (numeroReto == 5)
                 {
-                    Random random = new Random();
+                    var random = new Random();
 
                     n = random.Next(1, 3);
                 }
 
-                switch (n) //ampliar conforme se añadan nuevos >> random.Next(1,5)
+                fabrica = n switch //ampliar conforme se añadan nuevos >> random.Next(1,5)
                 {
-                    case 1:
-                        {
-                            fabrica = new FabricaRetoPregunta();
-                            break;
-                        }
-                    case 2:
-                        {
-                            fabrica = new FabricaRetoAhorcado();
-                            break;
-                        }
-                    case 3:
-                        {
-                            fabrica = new FabricaRetoFrase();
-                            break;
-                        }
-                    default:
-                        {
-                            fabrica = new FabricaRetoSopa();
-                            break;
-                        }
-                }
+                    1 => new FabricaRetoPregunta(),
+                    2 => new FabricaRetoAhorcado(),
+                    3 => new FabricaRetoFrase(),
+                    _ => new FabricaRetoSopa()
+                };
 
                 reto = fabrica.CrearReto(i);
 
@@ -61,11 +46,6 @@ namespace preguntaods.BusinessLogic.Partida
 
                 partida.AddReto(reto);
             }
-        }
-
-        public void BuildUserInterface()
-        {
-            //partida.UpdateUi();
         }
 
         public void BuildFacade()

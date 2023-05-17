@@ -27,8 +27,8 @@ namespace preguntaods.Presentacion.ViewModels
         private bool emailCorrect;
         private Button registroB;
         private TextView error;
-        private bool vistaContraseña = false;
-        private bool vistaContraseña2 = false;
+        private bool vistaContraseña;
+        private bool vistaContraseña2;
         private ImageView ojo;
         private ImageView ojo2;
         private ImageView popup1;
@@ -50,6 +50,9 @@ namespace preguntaods.Presentacion.ViewModels
             emailCorrect = false;
             userCorrect = false;
 
+            vistaContraseña = false;
+            vistaContraseña2 = false;
+
             var atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
 
@@ -57,16 +60,24 @@ namespace preguntaods.Presentacion.ViewModels
             if (username != null) username.TextChanged += User_TextChanged;
 
             email = FindViewById<EditText>(Resource.Id.correo);
-            if (email != null) email.TextChanged += Email_TextChanged;
-            email.FocusChange += Email_FocusChange;
+            if (email != null) {
+                email.TextChanged += Email_TextChanged;
+                email.FocusChange += Email_FocusChange;
+            }
 
             password = FindViewById<EditText>(Resource.Id.contraseña);
-            password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-            password.FocusChange += Password_FocusChange;
+            if (password != null)
+            {
+                password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                password.FocusChange += Password_FocusChange;
+            }
 
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
-            if (password2 != null) password2.TextChanged += Password_Click;
-            password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+            if (password2 != null)
+            {
+                password2.TextChanged += Password_Click;
+                password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+            }
 
             error = FindViewById<TextView>(Resource.Id.error);
 
@@ -74,16 +85,16 @@ namespace preguntaods.Presentacion.ViewModels
             if (registroB != null) registroB.Click += Registrar;
 
             ojo = FindViewById<ImageView>(Resource.Id.ojoContraseña);
-            ojo.Click += Ojo_Click1;
+            if (ojo != null) ojo.Click += Ojo_Click1;
 
             ojo2 = FindViewById<ImageView>(Resource.Id.ojoContraseña2);
-            ojo2.Click += Ojo_Click2;
+            if (ojo2 != null) ojo2.Click += Ojo_Click2;
 
             popup1 = FindViewById<ImageView>(Resource.Id.imageView1);
-            popup1.Visibility = Android.Views.ViewStates.Invisible;
+            if (popup1 != null) popup1.Visibility = ViewStates.Invisible;
 
             popupCorreo = FindViewById<ImageView>(Resource.Id.popupCorreo);
-            popupCorreo.Visibility = Android.Views.ViewStates.Invisible;
+            if (popupCorreo != null) popupCorreo.Visibility = ViewStates.Invisible;
         }
 
         private void Email_FocusChange(object sender, View.FocusChangeEventArgs e)
@@ -108,7 +119,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private void Password_FocusChange(object sender, Android.Views.View.FocusChangeEventArgs e)
+        private void Password_FocusChange(object sender, View.FocusChangeEventArgs e)
         {
             if (password.HasFocus)
             {
@@ -133,7 +144,6 @@ namespace preguntaods.Presentacion.ViewModels
         private void Ojo_Click1(object sender, EventArgs e)
         {
             vistaContraseña = !vistaContraseña;
-            var type = password.InputType;
             if (vistaContraseña)
             {
                 // se muestra
@@ -165,13 +175,13 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
 
-        private void User_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        private void User_TextChanged(object sender, TextChangedEventArgs e)
         {
             userCorrect = true;
             error.Text = "";
         }
 
-        private void Email_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
         {
             emailCorrect = true;
             error.Text = "";
@@ -205,7 +215,7 @@ namespace preguntaods.Presentacion.ViewModels
             Regex regexNumero = new Regex("\\d");
 
             // que la contraseña cumpla los requisitos
-            if (!regexPuntuacion.IsMatch(password.Text) || !regexNumero.IsMatch(password.Text) || password.Text.Length < 8)
+            if (password.Text != null && (!regexPuntuacion.IsMatch(password.Text) || !regexNumero.IsMatch(password.Text) || password.Text.Length < 8))
             {
                 error.Text = "La contraseña no cumple los requisitos";
                 passwordCorrect = false;
