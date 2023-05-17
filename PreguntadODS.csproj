@@ -84,7 +84,7 @@
     <Compile Include="BusinessLogic\Partida\Retos\RetoSopa.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoAhorcado.cs" />
     <Compile Include="BusinessLogic\Partida\Retos\RetoPre.cs" />
-    <Compile Include="BusinessLogic\Partida\Retos\Reto.cs" />
+    <Compile Include="BusinessLogic\Partida\Retos\IReto.cs" />
     <Compile Include="BusinessLogic\Partida\Partida.cs" />
     <Compile Include="BusinessLogic\Partida\PartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\IPartidaBuilder.cs" />
@@ -119,8 +119,8 @@
     <Compile Include="Presentacion\ViewModels\RegistroViewModel.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />
     <Compile Include="BusinessLogic\Entities\Pregunta.cs" />
-    <Compile Include="BusinessLogic\Services\IFacade.cs" />
-    <Compile Include="BusinessLogic\Services\Facade.cs" />
+    <Compile Include="BusinessLogic\Fachada\IFacade.cs" />
+    <Compile Include="BusinessLogic\Fachada\Facade.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
     <Compile Include="Persistencia\Entities\Pregunta.cs" />
     <Compile Include="Presentacion\ViewModels\SeleccionRetoViewModel.cs" />

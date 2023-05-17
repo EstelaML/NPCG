@@ -1,10 +1,10 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using Supabase.Gotrue;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace preguntaods.BusinessLogic.Services
+namespace preguntaods.BusinessLogic.Fachada
 {
     public class Facade : IFacade
     {

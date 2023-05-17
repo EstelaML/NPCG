@@ -6,8 +6,8 @@ using Android.Text;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Services;
 using System;
+using preguntaods.BusinessLogic.Fachada;
 
 namespace preguntaods.Presentacion.ViewModels
 {

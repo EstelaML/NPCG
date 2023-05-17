@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Random = Java.Util.Random;
 using preguntaods.Persistencia;
-using preguntaods.BusinessLogic.Partida.Retos;
 using Supabase.Gotrue;
 
 namespace preguntaods.BusinessLogic.Services
@@ -249,14 +248,14 @@ namespace preguntaods.BusinessLogic.Services
             if (usuario?.Id != null)
             {
                 var id = (int)usuario.Id;
-                switch (reto)
+                switch (reto.Type)
                 {
                     // añado a la BD ese reto
-                    case RetoPre _:
+                    case IReto.TypePregunta:
                         await repositorioPregunta.AñadirPreguntaRealizada(id, reto);
                         break;
 
-                    case RetoAhorcado _:
+                    case IReto.TypeAhorcado:
                         await repositorioAhorcado.AñadirAhorcadoRealizado(id, reto);
                         break;
                 }
@@ -269,14 +268,14 @@ namespace preguntaods.BusinessLogic.Services
             var usuario = await GetUsuarioLogged();
             if (usuario?.Id != null)
             {
-                switch (reto)
+                switch (reto.Type)
                 {
                     // añado a la BD ese reto
-                    case RetoPre _:
+                    case IReto.TypePregunta:
                         await repositorioPregunta.AñadirPreguntaFallada(reto);
                         break;
 
-                    case RetoAhorcado _:
+                    case IReto.TypeAhorcado:
                         await repositorioAhorcado.AñadirAhorcadoFallado(reto);
                         break;
                 }

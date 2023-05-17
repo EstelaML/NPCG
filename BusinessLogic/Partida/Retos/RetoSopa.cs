@@ -1,19 +1,13 @@
-﻿using preguntaods.BusinessLogic.Services;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace preguntaods.BusinessLogic.Partida.Retos
+// ReSharper disable once CheckNamespace
+namespace preguntaods.Entities
 {
     public class RetoSopa : IReto
     {
-        private static PreguntadosService _servicio;
-        private readonly int numeroReto;
-
         public RetoSopa(int orden)
         {
             Type = IReto.TypeSopa;
-
-            _servicio = new PreguntadosService();
-            numeroReto = orden;
         }
 
         public Task SetDif(int orden)

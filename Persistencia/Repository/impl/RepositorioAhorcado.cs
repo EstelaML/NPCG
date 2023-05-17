@@ -1,5 +1,4 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

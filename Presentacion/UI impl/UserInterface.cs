@@ -1,5 +1,5 @@
 ﻿using Android.Widget;
-using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.Entities;
 using Activity = Android.App.Activity;
 
 namespace preguntaods.Presentacion.UI_impl

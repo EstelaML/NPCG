@@ -5,7 +5,6 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;

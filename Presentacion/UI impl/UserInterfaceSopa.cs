@@ -1,4 +1,4 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.Entities;
 
 namespace preguntaods.Presentacion.UI_impl
 {

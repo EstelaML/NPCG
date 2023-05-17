@@ -8,10 +8,10 @@ using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
 using System.Text.RegularExpressions;
+using preguntaods.BusinessLogic.Fachada;
 
 namespace preguntaods.Presentacion.ViewModels
 {
