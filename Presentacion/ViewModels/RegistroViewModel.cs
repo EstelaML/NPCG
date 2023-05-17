@@ -211,7 +211,7 @@ namespace preguntaods.Presentacion.ViewModels
                 return;
             }
 
-            Regex regexPuntuacion = new Regex("[.,@#*]");
+            Regex regexPuntuacion = new Regex("[.,@#*!?¿¡`·_-]");
             Regex regexNumero = new Regex("\\d");
 
             // que la contraseña cumpla los requisitos
