@@ -1,8 +1,9 @@
 ﻿using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Services;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.FabricaRetos;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -20,49 +21,31 @@ namespace preguntaods.BusinessLogic.Partida
         {
             for (var i = 0; i < 12; i++)
             {
-                Reto reto;
-                int n = numeroReto;
+                IReto reto;
+                FabricaReto fabrica;
+                var n = numeroReto;
 
                 if (numeroReto == 5)
                 {
-                    Random random = new Random();
+                    var random = new Random();
 
                     n = random.Next(1, 3);
                 }
 
-                switch (n) //ampliar conforme se añadan nuevos >> random.Next(1,5)
+                fabrica = n switch //ampliar conforme se añadan nuevos >> random.Next(1,5)
                 {
-                    case 1:
-                        {
-                            reto = new RetoPre(i);
-                            break;
-                        }
-                    case 2:
-                        {
-                            reto = new RetoAhorcado(i);
-                            break;
-                        }
-                    case 3:
-                        {
-                            reto = new RetoFrase();
-                            break;
-                        }
-                    default:
-                        {
-                            reto = new RetoSopa();
-                            break;
-                        }
-                }
+                    1 => new FabricaRetoPregunta(),
+                    2 => new FabricaRetoAhorcado(),
+                    3 => new FabricaRetoFrase(),
+                    _ => new FabricaRetoSopa()
+                };
+
+                reto = fabrica.CrearReto(i);
 
                 await reto.SetValues();
 
                 partida.AddReto(reto);
             }
-        }
-
-        public void BuildUserInterface()
-        {
-            //partida.UpdateUi();
         }
 
         public void BuildFacade()

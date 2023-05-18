@@ -1,22 +1,23 @@
 ﻿using Android.Content;
+using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.UI_impl;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.BusinessLogic.Partida
 {
     public class Partida
     {
         public Usuario User;
-        private readonly List<Reto> listaRetos;
-        private Reto retoActual;
+        private readonly List<IReto> listaRetos;
+        private IReto retoActual;
         private UserInterface userInterface;
         public Facade Fachada;
 
@@ -35,7 +36,7 @@ namespace preguntaods.BusinessLogic.Partida
         public Partida()
         {
             contadorRetoSiguiente = 0;
-            listaRetos = new List<Reto>();
+            listaRetos = new List<IReto>();
             falloFacil = false;
             primeraVez = true;
         }
@@ -53,17 +54,17 @@ namespace preguntaods.BusinessLogic.Partida
             primeraVez = false;
         }
 
-        public Reto GetRetoActual()
+        public IReto GetRetoActual()
         {
             return retoActual;
         }
 
-        public List<Reto> GetRetos()
+        public List<IReto> GetRetos()
         {
             return listaRetos;
         }
 
-        public void AddReto(Reto reto)
+        public void AddReto(IReto reto)
         {
             listaRetos.Add(reto);
         }
@@ -105,6 +106,8 @@ namespace preguntaods.BusinessLogic.Partida
             userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
+            bool cons = ((VistaPartidaViewModel)activity).GetConsolidado();
+            if (!cons) botonAbandonar.Visibility = ViewStates.Invisible; 
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
@@ -152,37 +155,27 @@ namespace preguntaods.BusinessLogic.Partida
         {
             switch (listaRetos[contadorRetoSiguiente - 1].GetType())
             {
-                case Reto.TypePregunta:
+                case IReto.TypePregunta:
                     {
                         SetUi(new UserInterfacePregunta());
                         break;
                     }
-                case Reto.TypeAhorcado:
+                case IReto.TypeAhorcado:
                     {
                         SetUi(new UserInterfaceAhorcado());
                         break;
                     }
-                case Reto.TypeFrase:
+                case IReto.TypeFrase:
                     {
                         SetUi(new UserInterfaceFrase());
                         break;
                     }
-                case Reto.TypeSopa:
+                case IReto.TypeSopa:
                     {
                         SetUi(new UserInterfaceSopa());
                         break;
                     }
             }
-        }
-
-        public async Task GuardarPreguntaUsuario(Reto reto)
-        {
-            await Fachada.GuardarPregunta(reto);
-        }
-
-        public async Task GuardarPreguntaFalladaUsuario(Reto reto)
-        {
-            await Fachada.GuardarPreguntaFallada(reto);
         }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)
@@ -192,7 +185,7 @@ namespace preguntaods.BusinessLogic.Partida
             if (((VistaPartidaViewModel)activity).GetConsolidado())
             {
                 var puntosP = UserInterfacePregunta.GetPuntosConsolidados();
-                if (puntosP == 0) { puntosP = UserInterfaceAhorcado.GetPuntosConsolidados();  }
+                if (puntosP == 0) { puntosP = UserInterfaceAhorcado.GetPuntosConsolidados(); }
                 titulo = "¿Estás seguro?";
                 mensaje = "Si aceptas se te guardarán los puntos consolidados: " + puntosP;
             }

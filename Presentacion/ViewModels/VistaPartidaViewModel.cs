@@ -4,10 +4,11 @@ using Android.Content;
 using Android.OS;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Partida;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Presentacion.UI_impl;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -15,7 +16,9 @@ namespace preguntaods.Presentacion.ViewModels
     public class VistaPartidaViewModel : AppCompatActivity
     {
         // Vars
-        private Reto reto;
+        private IReto reto;
+
+        private Facade fachada;
 
         private Partida partida;
         private bool consolidado;
@@ -39,6 +42,8 @@ namespace preguntaods.Presentacion.ViewModels
             await director.ConstructPartida(builder, botonPulsado);
             partida = builder.GetPartida();
 
+            fachada = new Facade();
+
             //Ocultar dialogo
             UserDialogs.Instance.HideLoading();
 
@@ -49,22 +54,22 @@ namespace preguntaods.Presentacion.ViewModels
         {
             switch (reto.GetType())
             {
-                case Reto.TypePregunta:
+                case IReto.TypePregunta:
                     {
                         SetContentView(Resource.Layout.vistaRetoPregunta);
                         break;
                     }
-                case Reto.TypeAhorcado:
+                case IReto.TypeAhorcado:
                     {
                         SetContentView(Resource.Layout.vistaRetoAhorcado);
                         break;
                     }
-                case Reto.TypeFrase:
+                case IReto.TypeFrase:
                     {
                         SetContentView(Resource.Layout.vistaRetoFrase);
                         break;
                     }
-                case Reto.TypeSopa:
+                case IReto.TypeSopa:
                     {
                         SetContentView(Resource.Layout.vistaRetoSopa);
                         break;
@@ -74,12 +79,12 @@ namespace preguntaods.Presentacion.ViewModels
 
         public async void GuardarPreguntaAcertada()
         {
-            await partida.GuardarPreguntaUsuario(partida.GetRetoActual());
+            await fachada.GuardarPregunta(partida.GetRetoActual());
         }
 
         public async void GuardarPreguntaFallada()
         {
-            await partida.GuardarPreguntaFalladaUsuario(partida.GetRetoActual());
+            await fachada.GuardarPreguntaFallada(partida.GetRetoActual());
         }
 
         public void RetoSiguiente(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados)

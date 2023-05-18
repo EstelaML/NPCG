@@ -54,15 +54,44 @@
             android:paddingTop="20dp"
             android:textColor="@android:color/black"
             tools:ignore="HardcodedText" />
-
-        <EditText
-            android:inputType="textPassword"
-            android:layout_marginTop="10dp"
+        <RelativeLayout
+            android:minWidth="25px"
+            android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="10dp"
-            android:background="@drawable/style_camposInf"
-            android:id="@+id/contraseña" />
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeLayout1">
+
+            <EditText
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/style_camposInf"
+                android:id="@+id/contraseña" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:minWidth="25px"
+                android:gravity="right"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout1">
+
+            <ImageButton
+                android:layout_marginTop="2sp"
+                android:layout_marginLeft="0sp"
+                android:src="@drawable/ojo_abierto"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:scaleType="centerInside"
+                android:backgroundTint="@android:color/transparent"
+                android:id="@+id/ojoContraseña"
+                android:contentDescription="description" />
+
+                </LinearLayout>
+
+        </RelativeLayout>
 
         <TextView
             android:paddingTop="7dp"
@@ -92,7 +121,7 @@
             android:id="@+id/linearLayoutRecuperarPass">
 
             <TextView
-                android:text="¿Aun no tienes cuenta?"
+                android:text="¿Aún no tienes cuenta?"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

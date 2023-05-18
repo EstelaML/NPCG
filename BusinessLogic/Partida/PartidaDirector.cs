@@ -10,7 +10,6 @@ namespace preguntaods.BusinessLogic.Partida
             builder.BuildSonido();
             builder.BuildPlayer();
             await builder.BuildRetos(numeroReto);
-            builder.BuildUserInterface();
 
             return builder.GetPartida();
         }

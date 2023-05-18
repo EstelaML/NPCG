@@ -75,11 +75,16 @@
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoDerrota.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\EstrategiaSonidoVictoria.cs" />
     <Compile Include="BusinessLogic\EstrategiaSonido\Sonido.cs" />
-    <Compile Include="BusinessLogic\Partida\Retos\RetoFrase.cs" />
-    <Compile Include="BusinessLogic\Partida\Retos\RetoSopa.cs" />
-    <Compile Include="BusinessLogic\Partida\Retos\RetoAhorcado.cs" />
-    <Compile Include="BusinessLogic\Partida\Retos\RetoPre.cs" />
-    <Compile Include="BusinessLogic\Partida\Retos\Reto.cs" />
+    <Compile Include="BusinessLogic\FabricaRetos\FabricaRetoAhorcado.cs" />
+    <Compile Include="BusinessLogic\FabricaRetos\FabricaRetoSopa.cs" />
+    <Compile Include="BusinessLogic\FabricaRetos\FabricaRetoFrase.cs" />
+    <Compile Include="BusinessLogic\FabricaRetos\FabricaRetoPregunta.cs" />
+    <Compile Include="BusinessLogic\FabricaRetos\FabricaReto.cs" />
+    <Compile Include="BusinessLogic\Retos\RetoFrase.cs" />
+    <Compile Include="BusinessLogic\Retos\RetoSopa.cs" />
+    <Compile Include="BusinessLogic\Retos\RetoAhorcado.cs" />
+    <Compile Include="BusinessLogic\Retos\RetoPre.cs" />
+    <Compile Include="BusinessLogic\Retos\IReto.cs" />
     <Compile Include="BusinessLogic\Partida\Partida.cs" />
     <Compile Include="BusinessLogic\Partida\PartidaBuilder.cs" />
     <Compile Include="BusinessLogic\Partida\IPartidaBuilder.cs" />
@@ -114,8 +119,8 @@
     <Compile Include="Presentacion\ViewModels\RegistroViewModel.cs" />
     <Compile Include="BusinessLogic\Entities\ODS.cs" />
     <Compile Include="BusinessLogic\Entities\Pregunta.cs" />
-    <Compile Include="BusinessLogic\Services\IFacade.cs" />
-    <Compile Include="BusinessLogic\Services\Facade.cs" />
+    <Compile Include="BusinessLogic\Fachada\IFacade.cs" />
+    <Compile Include="BusinessLogic\Fachada\Facade.cs" />
     <Compile Include="Persistencia\Entities\ODS.cs" />
     <Compile Include="Persistencia\Entities\Pregunta.cs" />
     <Compile Include="Presentacion\ViewModels\SeleccionRetoViewModel.cs" />
@@ -126,6 +131,7 @@
     <Compile Include="BusinessLogic\EstrategiaSonido\IEstrategiaSonido.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Diagrama de clases.cd" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
@@ -418,6 +424,19 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_mujer.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ojo_abierto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ojo_cerrado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\popup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\popupCorreo.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.

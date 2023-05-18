@@ -5,11 +5,11 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -211,7 +211,7 @@ namespace preguntaods.Presentacion.UI_impl
             }
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(IReto reto)
         {
             var pregunta = (reto as RetoPre)?.GetPregunta();
 
@@ -372,7 +372,7 @@ namespace preguntaods.Presentacion.UI_impl
                     {
                         // sumar los consolidados
                         titulo = "Vuelve a intentarlo";
-                        mensaje = $"Tienes {puntuacionTotal} puntos.";
+                        mensaje = $"Pierdes {puntuacion * 2} puntos.";
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>

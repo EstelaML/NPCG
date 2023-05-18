@@ -1,5 +1,5 @@
 ﻿using Android.Widget;
-using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Retos;
 using Activity = Android.App.Activity;
 
 namespace preguntaods.Presentacion.UI_impl
@@ -10,7 +10,7 @@ namespace preguntaods.Presentacion.UI_impl
         private TextView textoPuntosConsolidados;
         protected Activity Activity;
 
-        public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, Reto retoActual)
+        public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, IReto retoActual)
         {
             SetValues(fallos, pistasUsadas, ptsTotales, ptsConsolidados);
             Init();
@@ -25,12 +25,12 @@ namespace preguntaods.Presentacion.UI_impl
 
         public void SetActivity(Activity activity)
         {
-            this.Activity = activity;
+            Activity = activity;
         }
 
         public abstract void Init();
 
-        public abstract void SetDatosReto(Reto reto);
+        public abstract void SetDatosReto(IReto reto);
 
         public abstract void SetValues(int fallos, int pistasUsadas, int puntuacion, int ptsConsolidados);
 

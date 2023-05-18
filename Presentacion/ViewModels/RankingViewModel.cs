@@ -6,11 +6,11 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using preguntaods.BusinessLogic.Fachada;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -52,38 +52,38 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void CrearFilaLlena(TableLayout tabla, int indice)
         {
-            TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
+            var fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
             if (indice == GetIndiceLogged())
             {
-                TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
+                var txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtPosicion.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
                 txtPosicion.Text = (indice + 1).ToString() + ".";
                 fila.AddView(txtPosicion);
 
-                TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
+                var txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
                 txtNombre.Text = usuariosOrdenados[indice].Nombre;
                 fila.AddView(txtNombre);
 
-                TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
+                var txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
                 txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
                 fila.AddView(txtPuntos);
             }
             else
             {
-                TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                var txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
                 txtPosicion.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                 txtPosicion.Text = (indice + 1).ToString() + ".";
                 fila.AddView(txtPosicion);
 
-                TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                var txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
                 txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                 txtNombre.Text = usuariosOrdenados[indice].Nombre;
                 fila.AddView(txtNombre);
 
-                TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+                var txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
                 txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
                 fila.AddView(txtPuntos);
@@ -94,19 +94,19 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void CrearFilaVacia(int indice)
         {
-            TableRow fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
+            var fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
-            TextView txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+            var txtPosicion = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
             txtPosicion.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
             txtPosicion.Text = (indice + 1).ToString() + ".";
             fila.AddView(txtPosicion);
 
-            TextView txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+            var txtNombre = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
             txtNombre.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
             txtNombre.Text = "---";
             fila.AddView(txtNombre);
 
-            TextView txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
+            var txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 16 };
             txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Black));
             txtPuntos.Text = "---";
             fila.AddView(txtPuntos);
@@ -116,7 +116,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void CrearRanking()
         {
-            for (int i = 0; i < NumFilas; i++)
+            for (var i = 0; i < NumFilas; i++)
             {
                 if (i < topRanking.Count)
                 {
@@ -141,7 +141,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void MensajeAnimo()
         {
-            int pos = GetIndiceLogged() + 1;
+            var pos = GetIndiceLogged() + 1;
             if (EstaEnElRanking())
             {
                 textAnimo.Text = "Eres el Top " + pos + ". ¡ENHORABUENA!";

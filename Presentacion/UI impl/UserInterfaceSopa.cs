@@ -1,4 +1,4 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
+﻿using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -9,7 +9,7 @@ namespace preguntaods.Presentacion.UI_impl
             throw new System.NotImplementedException();
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(IReto reto)
         {
             throw new System.NotImplementedException();
         }

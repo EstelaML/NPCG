@@ -1,24 +1,26 @@
-﻿using preguntaods.BusinessLogic.Services;
+﻿using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
-using System.Threading.Tasks;
 
-namespace preguntaods.BusinessLogic.Partida.Retos
+namespace preguntaods.BusinessLogic.Retos
 {
-    public class RetoPre : Reto
+    public class RetoPre : IReto
     {
         private Pregunta pregunta;
         private static PreguntadosService _servicio;
         private readonly int numeroReto;
 
+        public int Type { get; set; }
+
         public RetoPre(int orden)
         {
-            SetType(TypePregunta);
+            Type = IReto.TypePregunta;
 
             _servicio = new PreguntadosService();
             numeroReto = orden;
         }
 
-        public override async Task SetValues()
+        public async Task SetValues()
         {
             await _servicio.InitPreguntaList().ContinueWith(t => { _ = SetDif(numeroReto); });
         }
@@ -28,7 +30,7 @@ namespace preguntaods.BusinessLogic.Partida.Retos
             return pregunta;
         }
 
-        private async Task SetDif(int orden)
+        public async Task SetDif(int orden)
         {
             if (orden < 4 || orden == 10)
             {

@@ -4,15 +4,14 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using Java.Security;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Entities;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Presentacion.UI_impl
 {
@@ -332,7 +331,7 @@ namespace preguntaods.Presentacion.UI_impl
             ahorcadoImg.SetImageResource(idDeImagen);
         }
 
-        public override void SetDatosReto(Reto reto)
+        public override void SetDatosReto(IReto reto)
         {
             // comienza cuentra atrás
             animation.Start();
@@ -387,6 +386,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             tienePista = true;
         }
+
         public static int GetPuntosConsolidados()
         {
             return _puntosConsolidados;
@@ -454,7 +454,7 @@ namespace preguntaods.Presentacion.UI_impl
                         sonido.EjecutarSonido();
                         // sumar los consolidados
                         titulo = "Vuelve a intentarlo";
-                        mensaje = $"Tienes {puntuacionTotal} puntos.";
+                        mensaje = $"Sigues con {puntuacionTotal} puntos.";
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
@@ -488,8 +488,6 @@ namespace preguntaods.Presentacion.UI_impl
                     ((VistaPartidaViewModel)Activity).AbandonarFallido(puntuacionTotal);
                     break;
             }
-
-            
         }
     }
 }

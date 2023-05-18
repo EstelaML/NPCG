@@ -2,12 +2,16 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Text;
+using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
+using System.Text.RegularExpressions;
+using preguntaods.BusinessLogic.Fachada;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -23,6 +27,12 @@ namespace preguntaods.Presentacion.ViewModels
         private bool emailCorrect;
         private Button registroB;
         private TextView error;
+        private bool vistaContraseña;
+        private bool vistaContraseña2;
+        private ImageView ojo;
+        private ImageView ojo2;
+        private ImageView popup1;
+        private ImageView popupCorreo;
 
         private Facade fachada;
         private Sonido sonido;
@@ -40,6 +50,9 @@ namespace preguntaods.Presentacion.ViewModels
             emailCorrect = false;
             userCorrect = false;
 
+            vistaContraseña = false;
+            vistaContraseña2 = false;
+
             var atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
 
@@ -47,26 +60,128 @@ namespace preguntaods.Presentacion.ViewModels
             if (username != null) username.TextChanged += User_TextChanged;
 
             email = FindViewById<EditText>(Resource.Id.correo);
-            if (email != null) email.TextChanged += Email_TextChanged;
+            if (email != null) {
+                email.TextChanged += Email_TextChanged;
+                email.FocusChange += Email_FocusChange;
+            }
 
             password = FindViewById<EditText>(Resource.Id.contraseña);
+            if (password != null)
+            {
+                password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                password.FocusChange += Password_FocusChange;
+            }
 
             password2 = FindViewById<EditText>(Resource.Id.contraseña2);
-            if (password2 != null) password2.TextChanged += Password_Click;
+            if (password2 != null)
+            {
+                password2.TextChanged += Password_Click;
+                password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+            }
 
             error = FindViewById<TextView>(Resource.Id.error);
 
             registroB = FindViewById<Button>(Resource.Id.registroB);
             if (registroB != null) registroB.Click += Registrar;
+
+            ojo = FindViewById<ImageView>(Resource.Id.ojoContraseña);
+            if (ojo != null) ojo.Click += Ojo_Click1;
+
+            ojo2 = FindViewById<ImageView>(Resource.Id.ojoContraseña2);
+            if (ojo2 != null) ojo2.Click += Ojo_Click2;
+
+            popup1 = FindViewById<ImageView>(Resource.Id.imageView1);
+            if (popup1 != null) popup1.Visibility = ViewStates.Invisible;
+
+            popupCorreo = FindViewById<ImageView>(Resource.Id.popupCorreo);
+            if (popupCorreo != null) popupCorreo.Visibility = ViewStates.Invisible;
         }
 
-        private void User_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        private void Email_FocusChange(object sender, View.FocusChangeEventArgs e)
+        {
+            if (email.HasFocus)
+            {
+                var animacion = new AlphaAnimation(0f, 1f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
+
+                // Asignar la animación a la imagen y hacerla invisible
+                popupCorreo.StartAnimation(animacion);
+                popupCorreo.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                var animacion = new AlphaAnimation(1f, 0f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
+
+                // Asignar la animación a la imagen y hacerla invisible
+                popupCorreo.StartAnimation(animacion);
+                popupCorreo.Visibility = ViewStates.Invisible;
+            }
+        }
+
+        private void Password_FocusChange(object sender, View.FocusChangeEventArgs e)
+        {
+            if (password.HasFocus)
+            {
+                var animacion = new AlphaAnimation(0f, 1f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
+
+                // Asignar la animación a la imagen y hacerla invisible
+                popup1.StartAnimation(animacion);
+                popup1.Visibility = ViewStates.Visible;
+            }
+            else
+            {
+                var animacion = new AlphaAnimation(1f, 0f);
+                animacion.Duration = 500; // Duración de la animación en milisegundos
+
+                // Asignar la animación a la imagen y hacerla invisible
+                popup1.StartAnimation(animacion);
+                popup1.Visibility = ViewStates.Invisible;
+            }
+        }
+
+        private void Ojo_Click1(object sender, EventArgs e)
+        {
+            vistaContraseña = !vistaContraseña;
+            if (vistaContraseña)
+            {
+                // se muestra
+                password.InputType = InputTypes.TextVariationVisiblePassword;
+                ojo.SetImageResource(Resource.Drawable.ojo_cerrado);
+            }
+            else
+            {
+                // no se muestra
+                password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                ojo.SetImageResource(Resource.Drawable.ojo_abierto);
+            }
+        }
+
+        private void Ojo_Click2(object sender, EventArgs e)
+        {
+            vistaContraseña2 = !vistaContraseña2;
+            if (vistaContraseña2)
+            {
+                // se muestra
+                password2.InputType = InputTypes.TextVariationVisiblePassword;
+                ojo2.SetImageResource(Resource.Drawable.ojo_cerrado);
+            }
+            else
+            {
+                // no se muestra
+                password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
+                ojo2.SetImageResource(Resource.Drawable.ojo_abierto);
+            }
+        }
+
+        private void User_TextChanged(object sender, TextChangedEventArgs e)
         {
             userCorrect = true;
             error.Text = "";
         }
 
-        private void Email_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
+        private void Email_TextChanged(object sender, TextChangedEventArgs e)
         {
             emailCorrect = true;
             error.Text = "";
@@ -93,6 +208,17 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 error.Text = "Elija un correo electrónico válido";
                 emailCorrect = false;
+                return;
+            }
+
+            var regexPuntuacion = new Regex("[.,@#*!?¿¡`·_-]");
+            var regexNumero = new Regex("\\d");
+
+            // que la contraseña cumpla los requisitos
+            if (password.Text != null && (!regexPuntuacion.IsMatch(password.Text) || !regexNumero.IsMatch(password.Text) || password.Text.Length < 8))
+            {
+                error.Text = "La contraseña no cumple los requisitos";
+                passwordCorrect = false;
                 return;
             }
 
@@ -128,7 +254,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 if (userAux != null)
                 {
-                    var user = new Usuario(userAux.Id, username.Text, true, 0, 100, null);
+                    var user = new Usuario(userAux.Id, username.Text, true, 100);
                     await fachada.NewUsuario(user);
                     await fachada.CrearEstadisticas(user);
 
