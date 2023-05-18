@@ -1,4 +1,5 @@
 ﻿using Android.Content;
+using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Partida.Retos;
@@ -105,6 +106,8 @@ namespace preguntaods.BusinessLogic.Partida
             userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
+            bool cons = ((VistaPartidaViewModel)activity).GetConsolidado();
+            if (!cons) botonAbandonar.Visibility = ViewStates.Invisible; 
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
