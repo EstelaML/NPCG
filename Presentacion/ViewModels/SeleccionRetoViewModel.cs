@@ -55,17 +55,6 @@ namespace preguntaods.Presentacion.ViewModels
                     }
                 case Resource.Id.menuItem2:
                     {
-                        // add your code
-                        break;
-                    }
-                case Resource.Id.menuItem3:
-                    {
-                        var i = new Intent(this, typeof(RankingViewModel));
-                        StartActivity(i);
-                        break;
-                    }
-                case Resource.Id.menuItem4:
-                    {
                         _ = fachada.LogoutAsync();
 
                         var i = new Intent(this, typeof(InicioSesionViewModel));
