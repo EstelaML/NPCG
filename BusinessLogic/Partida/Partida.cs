@@ -2,14 +2,14 @@
 using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using preguntaods.Presentacion.UI_impl;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -176,16 +176,6 @@ namespace preguntaods.BusinessLogic.Partida
                         break;
                     }
             }
-        }
-
-        public async Task GuardarPreguntaUsuario(IReto reto)
-        {
-            await Fachada.GuardarPregunta(reto);
-        }
-
-        public async Task GuardarPreguntaFalladaUsuario(IReto reto)
-        {
-            await Fachada.GuardarPreguntaFallada(reto);
         }
 
         public void EventoAbandonarBoton(object sender, EventArgs e)

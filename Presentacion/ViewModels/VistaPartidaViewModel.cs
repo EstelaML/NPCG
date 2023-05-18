@@ -4,10 +4,11 @@ using Android.Content;
 using Android.OS;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Partida;
-using preguntaods.BusinessLogic.Partida.Retos;
 using preguntaods.Presentacion.UI_impl;
 using System;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -16,6 +17,8 @@ namespace preguntaods.Presentacion.ViewModels
     {
         // Vars
         private IReto reto;
+
+        private Facade fachada;
 
         private Partida partida;
         private bool consolidado;
@@ -38,6 +41,8 @@ namespace preguntaods.Presentacion.ViewModels
             var builder = new PartidaBuilder();
             await director.ConstructPartida(builder, botonPulsado);
             partida = builder.GetPartida();
+
+            fachada = new Facade();
 
             //Ocultar dialogo
             UserDialogs.Instance.HideLoading();
@@ -74,12 +79,12 @@ namespace preguntaods.Presentacion.ViewModels
 
         public async void GuardarPreguntaAcertada()
         {
-            await partida.GuardarPreguntaUsuario(partida.GetRetoActual());
+            await fachada.GuardarPregunta(partida.GetRetoActual());
         }
 
         public async void GuardarPreguntaFallada()
         {
-            await partida.GuardarPreguntaFalladaUsuario(partida.GetRetoActual());
+            await fachada.GuardarPreguntaFallada(partida.GetRetoActual());
         }
 
         public void RetoSiguiente(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados)

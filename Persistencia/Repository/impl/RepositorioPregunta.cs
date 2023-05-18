@@ -1,9 +1,9 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -26,7 +26,7 @@ namespace preguntaods.Persistencia.Repository.impl
             var id = (int)user.Id;
             var task1 = (conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single());
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
-            List<Task> tareas = new List<Task> { task1, task2 };
+            var tareas = new List<Task> { task1, task2 };
             await Task.WhenAll(tareas);
 
             var retos = task1.Result;
@@ -40,13 +40,12 @@ namespace preguntaods.Persistencia.Repository.impl
             return response.Models.ToList();
         }
 
-        public async Task AñadirPreguntaRealizada(int id, IReto reto)
+        public async Task AñadirPreguntaRealizada(Pregunta pregunta)
         {
             // cogemos del usuario las preguntas acertadas ya
-            var pregunta = ((RetoPre)reto).GetPregunta();
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
-            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a, reto, usuario);
+            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(usuario);
             var retosAcertados = await repositorioUser.GetRetosAcertadosAsync(usuario);
             if (preguntas != null)
             {
@@ -83,11 +82,10 @@ namespace preguntaods.Persistencia.Repository.impl
             }
         }
 
-        public async Task AñadirPreguntaFallada(IReto reto)
+        public async Task AñadirPreguntaFallada(Pregunta pregunta)
         {
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
-            var pregunta = ((RetoPre)reto).GetPregunta();
             var retosFallados = await repositorioUser.GetRetosFalladosAsync(usuario);
             if (retosFallados != null)
             {

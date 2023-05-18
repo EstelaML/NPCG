@@ -1,9 +1,9 @@
-﻿using preguntaods.BusinessLogic.Partida.Retos;
-using preguntaods.Entities;
+﻿using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -39,13 +39,12 @@ namespace preguntaods.Persistencia.Repository.impl
             return response.Models.ToList();
         }
 
-        public async Task AñadirAhorcadoRealizado(int id, IReto reto)
+        public async Task AñadirAhorcadoRealizado(Ahorcado pregunta)
         {
             // cogemos del usuario las preguntas acertadas ya
-            var pregunta = ((RetoAhorcado)reto).GetAhorcado();
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
-            var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(a, reto, usuario);
+            var preguntas = await repositorioUser.GetAhorcadosAcertadosAsync(usuario);
             var retosAcertados = await repositorioUser.GetRetosAcertadosAsync(usuario);
             if (preguntas != null)
             {
@@ -82,11 +81,10 @@ namespace preguntaods.Persistencia.Repository.impl
             }
         }
 
-        public async Task AñadirAhorcadoFallado(IReto reto)
+        public async Task AñadirAhorcadoFallado(Ahorcado pregunta)
         {
             var a = conexion.Usuario.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
-            var pregunta = ((RetoAhorcado)reto).GetAhorcado();
             var retosFallados = await repositorioUser.GetRetosFalladosAsync(usuario);
             if (retosFallados != null)
             {

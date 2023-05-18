@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace preguntaods.BusinessLogic.Partida.Retos
+namespace preguntaods.BusinessLogic.Retos
 {
     public interface IReto
     {

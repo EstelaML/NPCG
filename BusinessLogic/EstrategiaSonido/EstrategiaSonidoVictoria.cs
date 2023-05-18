@@ -14,7 +14,7 @@ namespace preguntaods.BusinessLogic.EstrategiaSonido
 
         public void Play(Android.Content.Context t)
         {
-            Android.Net.Uri uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_victoria);
+            var uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_victoria);
             mp.SetDataSource(t, uri ?? throw new InvalidOperationException());
             mp.Prepare();
             mp.Start();

@@ -6,12 +6,12 @@ using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
-using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using preguntaods.BusinessLogic.Fachada;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -137,7 +137,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             if (result.Ok && usuarioCorrect)
             {
-                string newNombre = result.Text;
+                var newNombre = result.Text;
                 nombre.Text = newNombre;
                 await fachada.CambiarNombre(newNombre);
             }

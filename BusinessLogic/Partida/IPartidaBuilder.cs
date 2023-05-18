@@ -8,8 +8,6 @@ namespace preguntaods.BusinessLogic.Partida
 
         Task BuildRetos(int numeroReto);
 
-        void BuildUserInterface();
-
         void BuildFacade();
 
         void BuildSonido();

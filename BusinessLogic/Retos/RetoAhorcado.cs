@@ -1,8 +1,8 @@
-﻿using preguntaods.BusinessLogic.Services;
+﻿using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
-using System.Threading.Tasks;
 
-namespace preguntaods.BusinessLogic.Partida.Retos
+namespace preguntaods.BusinessLogic.Retos
 {
     public class RetoAhorcado : IReto
     {

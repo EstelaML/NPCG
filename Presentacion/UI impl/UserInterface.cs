@@ -1,5 +1,5 @@
 ﻿using Android.Widget;
-using preguntaods.BusinessLogic.Partida.Retos;
+using preguntaods.BusinessLogic.Retos;
 using Activity = Android.App.Activity;
 
 namespace preguntaods.Presentacion.UI_impl
@@ -25,7 +25,7 @@ namespace preguntaods.Presentacion.UI_impl
 
         public void SetActivity(Activity activity)
         {
-            this.Activity = activity;
+            Activity = activity;
         }
 
         public abstract void Init();
