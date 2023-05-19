@@ -26,6 +26,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView fallos;
         private TextView puntuacion;
         private TextView tiempo;
+        private TextView nivel;
         private ImageButton avatar;
         private Estadistica estadisticas;
 
@@ -63,6 +64,7 @@ namespace preguntaods.Presentacion.ViewModels
             fallos = FindViewById<TextView>(Resource.Id.textViewFallos);
             puntuacion = FindViewById<TextView>(Resource.Id.textViewPuntuacion);
             tiempo = FindViewById<TextView>(Resource.Id.textViewTiempo);
+            nivel = FindViewById<TextView>(Resource.Id.textViewNivel);
 
             Init();
         }
@@ -76,6 +78,8 @@ namespace preguntaods.Presentacion.ViewModels
             IniciarTiempo();
 
             puntuacion.Text = estadisticas.Puntuacion.ToString();
+
+            nivel.Text = "Nivel" + usuario.Nivel;
 
             retosFallados = estadisticas.Fallos.Length;
             retosAcertados = estadisticas.Aciertos.Length;
