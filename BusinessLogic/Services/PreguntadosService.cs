@@ -178,6 +178,18 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async Task UpdatePartidasGanadas(int partidas) 
+        {
+
+            if (conexion.Usuario != null)
+            {
+                var a = conexion.Usuario.Id;
+                var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
+                await repositorioUser.UpdatePuntosUsuario(a, estadisticas.PartidasGanadas, partidas);
+            }
+
+        }
+
         #endregion
 
         #region Usuario

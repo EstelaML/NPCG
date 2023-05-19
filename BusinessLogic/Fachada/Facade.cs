@@ -52,6 +52,13 @@ namespace preguntaods.BusinessLogic.Fachada
         
         }
 
+        public async Task UpdatePartidasGanadas(int partidas)
+        {
+
+            await _servicio.UpdatePartidasGanadas(partidas);
+
+        }
+
         public async Task CambiarNombre(string nombre)
         {
             await _servicio.CambiarNombre(nombre);

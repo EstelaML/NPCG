@@ -42,6 +42,18 @@ namespace preguntaods.Persistencia.Repository.impl
                         .Update();
         }
 
+        public async Task UpdatePartidasGanadas(string uuid, int partidasA, int partidasS) 
+        {
+
+            var p = partidasA + partidasS;
+            await conexion.Cliente
+                        .From<Estadistica>()
+                        .Where(x => x.Usuario == uuid)
+                        .Set(x => x.PartidasGanadas, p)
+                        .Update();
+
+        }
+
         public async Task UpdatePreguntaAcertada(string a, int[] preguntas, Usuario usuario)
         {
             preguntas ??= Array.Empty<int>();

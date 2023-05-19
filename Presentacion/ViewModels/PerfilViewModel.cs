@@ -79,7 +79,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             puntuacion.Text = estadisticas.Puntuacion.ToString();
 
-            nivel.Text = "Nivel" + usuario.Nivel;
+            nivel.Text = "Nivel " + usuario.Nivel;
 
             retosFallados = estadisticas.Fallos.Length;
             retosAcertados = estadisticas.Aciertos.Length;
