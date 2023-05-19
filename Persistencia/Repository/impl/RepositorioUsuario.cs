@@ -1,7 +1,6 @@
 ﻿using preguntaods.Entities;
 using System;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.Persistencia.Repository.impl
 {
@@ -42,16 +41,14 @@ namespace preguntaods.Persistencia.Repository.impl
                         .Update();
         }
 
-        public async Task UpdatePartidasGanadas(string uuid, int partidasA) 
+        public async Task UpdatePartidasGanadas(string uuid, int partidasA)
         {
-
             var p = partidasA + 1;
             await conexion.Cliente
                         .From<Estadistica>()
                         .Where(x => x.Usuario == uuid)
                         .Set(x => x.PartidasGanadas, p)
                         .Update();
-
         }
 
         public async Task UpdatePreguntaAcertada(string a, int[] preguntas, Usuario usuario)
@@ -135,9 +132,8 @@ namespace preguntaods.Persistencia.Repository.impl
                .Update();
         }
 
-        public async Task UpdateNivel(string uuid, int nivel) 
+        public async Task UpdateNivel(string uuid, int nivel)
         {
-
             await conexion.Cliente
                 .From<Usuario>()
                 .Where(x => x.Uuid == uuid)

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Retos;
+﻿using preguntaods.BusinessLogic.Retos;
 using preguntaods.BusinessLogic.Services;
 using preguntaods.Entities;
 using Supabase.Gotrue;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace preguntaods.BusinessLogic.Fachada
 {
@@ -45,18 +45,14 @@ namespace preguntaods.BusinessLogic.Fachada
             await _servicio.UpdatePuntos(puntos);
         }
 
-        public async Task UpdateNivel(int nivel) 
+        public async Task UpdateNivel(int nivel)
         {
-        
             await _servicio.UpdateNivel(nivel);
-        
         }
 
         public async Task UpdatePartidasGanadas()
         {
-
             await _servicio.UpdatePartidasGanadas();
-
         }
 
         public async Task CambiarNombre(string nombre)
@@ -118,6 +114,6 @@ namespace preguntaods.BusinessLogic.Fachada
             await _servicio.GuardarTiempo();
         }
 
-        #endregion
+        #endregion Estadisticas
     }
 }

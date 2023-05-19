@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
-using Android.Content;
 using Android.OS;
 using Android.Text;
 using Android.Views;
@@ -8,10 +7,10 @@ using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
 using System.Text.RegularExpressions;
-using preguntaods.BusinessLogic.Fachada;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -60,7 +59,8 @@ namespace preguntaods.Presentacion.ViewModels
             if (username != null) username.TextChanged += User_TextChanged;
 
             email = FindViewById<EditText>(Resource.Id.correo);
-            if (email != null) {
+            if (email != null)
+            {
                 email.TextChanged += Email_TextChanged;
                 email.FocusChange += Email_FocusChange;
             }
@@ -265,8 +265,7 @@ namespace preguntaods.Presentacion.ViewModels
                         OkText = "Entendido",
                         OnAction = () =>
                         {
-                            var i = new Intent(this, typeof(InicioSesionViewModel));
-                            StartActivity(i);
+                            Finish();
                         }
                     });
                 }
@@ -290,8 +289,7 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
-            var i = new Intent(this, typeof(InicioSesionViewModel));
-            StartActivity(i);
+            Finish();
         }
     }
 }

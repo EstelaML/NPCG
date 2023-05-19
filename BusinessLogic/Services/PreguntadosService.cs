@@ -1,13 +1,13 @@
-﻿using System;
+﻿using preguntaods.BusinessLogic.Retos;
 using preguntaods.Entities;
+using preguntaods.Persistencia;
 using preguntaods.Persistencia.Repository.impl;
+using Supabase.Gotrue;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Retos;
 using Random = Java.Util.Random;
-using preguntaods.Persistencia;
-using Supabase.Gotrue;
 
 namespace preguntaods.BusinessLogic.Services
 {
@@ -178,19 +178,17 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public async Task UpdatePartidasGanadas() 
+        public async Task UpdatePartidasGanadas()
         {
-
             if (conexion.Usuario != null)
             {
                 var a = conexion.Usuario.Id;
                 var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
                 await repositorioUser.UpdatePartidasGanadas(a, estadisticas.PartidasGanadas);
             }
-
         }
 
-        #endregion
+        #endregion Estadisticas
 
         #region Usuario
 
@@ -238,15 +236,13 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
-        public async Task UpdateNivel(int nivel) 
+        public async Task UpdateNivel(int nivel)
         {
-
             if (conexion.Usuario != null)
             {
                 var a = conexion.Usuario.Id;
-                await repositorioUser.UpdateNivel(a,  nivel);
+                await repositorioUser.UpdateNivel(a, nivel);
             }
-
         }
 
         public async Task CambiarNombre(string nombre)
@@ -302,6 +298,6 @@ namespace preguntaods.BusinessLogic.Services
             return respuesta.All(u => !u.Nombre.Equals(nombre));
         }
 
-        #endregion
+        #endregion Usuario
     }
 }
