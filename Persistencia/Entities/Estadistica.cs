@@ -34,5 +34,8 @@ namespace preguntaods.Entities
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Tiempo")]
         public float? Tiempo { get; set; }
+
+        [Column("PartidasGanadas")]
+        public int PartidasGanadas { get; set; }
     }
 }

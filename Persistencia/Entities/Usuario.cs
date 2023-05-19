@@ -30,5 +30,9 @@ namespace preguntaods.Entities
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Foto")]
         public string Foto { get; set; }
+
+        [Column("Nivel")]
+        public int Nivel { get; set; }
+
     }
 }
