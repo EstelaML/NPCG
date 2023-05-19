@@ -11,9 +11,6 @@ using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using preguntaods.BusinessLogic.Fachada;
-using Supabase.Storage;
-using AndroidX.AppCompat.View.Menu;
 
 namespace preguntaods.Presentacion.ViewModels
 {

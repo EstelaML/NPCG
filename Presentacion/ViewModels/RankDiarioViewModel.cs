@@ -1,5 +1,9 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
+using Android.Widget;
+using preguntaods.BusinessLogic.EstrategiaSonido;
+using System;
 
 namespace preguntaods.Presentacion.ViewModels
 {
