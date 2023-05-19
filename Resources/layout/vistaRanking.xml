@@ -35,11 +35,13 @@
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:id="@+id/botonIzq"
             android:text="Diario" />
         <Button
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:id="@+id/botonDer"
             android:text="Semanal" />
     </LinearLayout>
 
@@ -57,7 +59,7 @@
             android:text="Ranking general"
             android:gravity="center"
             android:textStyle="bold"
-            android:id="@+id/textRanking"
+            android:id="@+id/tipoRanking"
             android:textColor="@android:color/black"
             tools:ignore="HardcodedText"
             android:textSize="18sp" />
