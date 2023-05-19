@@ -248,6 +248,7 @@ namespace preguntaods.BusinessLogic.Partida
                 sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
                 await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
+                await Fachada.UpdatePartidasGanadas();
             }
             else
             {

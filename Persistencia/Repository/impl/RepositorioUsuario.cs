@@ -42,10 +42,10 @@ namespace preguntaods.Persistencia.Repository.impl
                         .Update();
         }
 
-        public async Task UpdatePartidasGanadas(string uuid, int partidasA, int partidasS) 
+        public async Task UpdatePartidasGanadas(string uuid, int partidasA) 
         {
 
-            var p = partidasA + partidasS;
+            var p = partidasA + 1;
             await conexion.Cliente
                         .From<Estadistica>()
                         .Where(x => x.Usuario == uuid)

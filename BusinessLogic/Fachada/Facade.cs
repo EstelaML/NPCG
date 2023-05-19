@@ -52,10 +52,10 @@ namespace preguntaods.BusinessLogic.Fachada
         
         }
 
-        public async Task UpdatePartidasGanadas(int partidas)
+        public async Task UpdatePartidasGanadas()
         {
 
-            await _servicio.UpdatePartidasGanadas(partidas);
+            await _servicio.UpdatePartidasGanadas();
 
         }
 
