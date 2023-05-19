@@ -33,6 +33,5 @@ namespace preguntaods.Entities
 
         [Column("Nivel")]
         public int Nivel { get; set; }
-
     }
 }

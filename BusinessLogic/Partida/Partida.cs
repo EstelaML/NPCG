@@ -2,14 +2,14 @@
 using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.BusinessLogic.Retos;
 using preguntaods.Entities;
 using preguntaods.Presentacion.UI_impl;
 using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using preguntaods.BusinessLogic.Fachada;
-using preguntaods.BusinessLogic.Retos;
 
 namespace preguntaods.BusinessLogic.Partida
 {
@@ -107,7 +107,7 @@ namespace preguntaods.BusinessLogic.Partida
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
             bool cons = ((VistaPartidaViewModel)activity).GetConsolidado();
-            if (!cons) botonAbandonar.Visibility = ViewStates.Invisible; 
+            if (!cons) botonAbandonar.Visibility = ViewStates.Invisible;
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
