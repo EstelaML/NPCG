@@ -29,6 +29,7 @@ namespace preguntaods.Presentacion.ViewModels
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.vistaInicioSesion);
+
             fachada = new Facade();
 
             vistaContraseña = false;
