@@ -226,6 +226,17 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async Task UpdateNivel(int nivel) 
+        {
+
+            if (conexion.Usuario != null)
+            {
+                var a = conexion.Usuario.Id;
+                await repositorioUser.UpdateNivel(a,  nivel);
+            }
+
+        }
+
         public async Task CambiarNombre(string nombre)
         {
             var a = conexion.Usuario.Id;

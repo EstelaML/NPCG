@@ -123,6 +123,16 @@ namespace preguntaods.Persistencia.Repository.impl
                .Update();
         }
 
+        public async Task UpdateNivel(string uuid, int nivel) 
+        {
+
+            await conexion.Cliente
+                .From<Usuario>()
+                .Where(x => x.Uuid == uuid)
+                .Set(x => x.Nivel, nivel)
+                .Update();
+        }
+
         public async Task<int[]> GetPreguntasAcertadasAsync(Usuario usuario)
         {
             if (usuario.Id == null) return null;

@@ -45,6 +45,13 @@ namespace preguntaods.BusinessLogic.Fachada
             await _servicio.UpdatePuntos(puntos);
         }
 
+        public async Task UpdateNivel(int nivel) 
+        {
+        
+            await _servicio.UpdateNivel(nivel);
+        
+        }
+
         public async Task CambiarNombre(string nombre)
         {
             await _servicio.CambiarNombre(nombre);
