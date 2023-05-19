@@ -191,6 +191,18 @@
                     android:text="----" />
             </LinearLayout>
         </LinearLayout>
+
+            <TextView
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:id="@+id/textViewNivel"
+                    android:textColor="@android:color/black"
+                    android:paddingBottom="20dp"
+                    tools:ignore="HardcodedText"
+                    android:text="Nivel ---" />
+
     </LinearLayout>
 
     <LinearLayout
