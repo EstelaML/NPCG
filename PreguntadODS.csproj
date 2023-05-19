@@ -112,6 +112,8 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
     <Compile Include="Presentacion\ViewModels\PerfilViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\RankDiarioViewModel.cs" />
+    <Compile Include="Presentacion\ViewModels\RankSemanalViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RankingViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\MenuViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\VistaPartidaViewModel.cs" />
