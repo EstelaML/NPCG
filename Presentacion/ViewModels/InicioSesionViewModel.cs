@@ -79,6 +79,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(RegistroViewModel));
             StartActivity(i);
+            Finish();
         }
 
         private async void IniciarSesion_Click(object sender, EventArgs e)
@@ -97,6 +98,7 @@ namespace preguntaods.Presentacion.ViewModels
                 // inicia sesion
                 var i = new Intent(this, typeof(MenuViewModel));
                 StartActivity(i);
+                Finish();
             }
             catch (Exception)
             {

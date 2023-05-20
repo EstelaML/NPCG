@@ -11,6 +11,7 @@ using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
 using System.Text.RegularExpressions;
+using Android.Content;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -265,6 +266,8 @@ namespace preguntaods.Presentacion.ViewModels
                         OkText = "Entendido",
                         OnAction = () =>
                         {
+                            var i = new Intent(this, typeof(InicioSesionViewModel));
+                            StartActivity(i);
                             Finish();
                         }
                     });
@@ -289,6 +292,8 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
+            var i = new Intent(this, typeof(InicioSesionViewModel));
+            StartActivity(i);
             Finish();
         }
     }

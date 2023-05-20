@@ -215,6 +215,7 @@ namespace preguntaods.BusinessLogic.Partida
                     {
                         var i = new Intent(activity, typeof(MenuViewModel));
                         activity.StartActivity(i);
+                        activity.Finish();
                     });
                     dialogoMal.Create()?.Show();
                 }
@@ -222,6 +223,7 @@ namespace preguntaods.BusinessLogic.Partida
                 {
                     var i = new Intent(activity, typeof(MenuViewModel));
                     activity.StartActivity(i);
+                    activity.Finish();
                 }
             });
             alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
@@ -270,6 +272,7 @@ namespace preguntaods.BusinessLogic.Partida
 
                 var i = new Intent(activity, typeof(MenuViewModel));
                 activity.StartActivity(i);
+                activity.Finish();
             });
             alertBuilder.SetCancelable(false);
 

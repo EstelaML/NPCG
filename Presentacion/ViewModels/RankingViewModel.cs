@@ -160,6 +160,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
+            Finish();
         }
     }
 }
