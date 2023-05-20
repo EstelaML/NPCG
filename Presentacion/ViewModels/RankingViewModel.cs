@@ -17,7 +17,7 @@ namespace preguntaods.Presentacion.ViewModels
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class RankingViewModel : AppCompatActivity
     {
-        private Sonido sonido;
+        protected Sonido sonido;
         private TableLayout tablaRanking;
         private Facade fachada;
         private TextView textAnimo;
@@ -42,12 +42,36 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
+            var botonIzq = FindViewById<Button>(Resource.Id.botonIzq);
+            if (botonIzq != null) { botonIzq.Click += BotonIzq; }
+
+            var botonDer = FindViewById<Button>(Resource.Id.botonDer);
+            if (botonDer != null) { botonDer.Click += BotonDer; }
+
             usuariosOrdenados = await fachada.GetAllUsersOrdered();
             topRanking = usuariosOrdenados.Take(NumFilas).ToList();
             usuarioLogged = await fachada.GetUsuarioLogged();
 
             CrearRanking();
             MensajeAnimo();
+        }
+
+        private void BotonIzq(object sender, EventArgs e)
+        {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            sonido.EjecutarSonido();
+
+            var i = new Intent(this, typeof(RankDiarioViewModel));
+            StartActivity(i);
+        }
+
+        private void BotonDer(object sender, EventArgs e)
+        {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            sonido.EjecutarSonido();
+
+            var i = new Intent(this, typeof(RankSemanalViewModel));
+            StartActivity(i);
         }
 
         private void CrearFilaLlena(TableLayout tabla, int indice)
