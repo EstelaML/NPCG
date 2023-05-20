@@ -30,6 +30,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(RankingViewModel));
             StartActivity(i);
+            Finish();
         }
     }
 }

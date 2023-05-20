@@ -63,6 +63,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(RankDiarioViewModel));
             StartActivity(i);
+            Finish();
         }
 
         private void BotonDer(object sender, EventArgs e)
@@ -72,6 +73,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(RankSemanalViewModel));
             StartActivity(i);
+            Finish();
         }
 
         private void CrearFilaLlena(TableLayout tabla, int indice)
