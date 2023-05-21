@@ -63,13 +63,13 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 // se muestra
                 password.InputType = InputTypes.TextVariationVisiblePassword;
-                ojo.SetImageResource(Resource.Drawable.ojo_cerrado);
+                ojo.SetImageResource(Resource.Drawable.icon_ojo_cerrado);
             }
             else
             {
                 // no se muestra
                 password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-                ojo.SetImageResource(Resource.Drawable.ojo_abierto);
+                ojo.SetImageResource(Resource.Drawable.icon_ojo_abierto);
             }
         }
 

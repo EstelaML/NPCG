@@ -111,6 +111,7 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\SingletonConexion.cs" />
+    <Compile Include="Presentacion\ViewModels\ConfiguracionViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\PerfilViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RankDiarioViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RankSemanalViewModel.cs" />
@@ -427,16 +428,25 @@
     <AndroidResource Include="Resources\drawable\icon_mujer.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ojo_abierto.png" />
+    <AndroidResource Include="Resources\drawable\icon_ojo_abierto.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ojo_cerrado.png" />
+    <AndroidResource Include="Resources\drawable\icon_ojo_cerrado.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\popup.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\popupCorreo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\vistaConfiguracion.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_silencio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_sonido.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -47,7 +47,10 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 case Resource.Id.menuItem1:
                     {
-                        // add your code
+                        var i = new Intent(this, typeof(ConfiguracionViewModel));
+                        StartActivity(i);
+                        Finish();
+
                         break;
                     }
                 case Resource.Id.menuItem2:
