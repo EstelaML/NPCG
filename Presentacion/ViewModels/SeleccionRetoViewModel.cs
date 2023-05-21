@@ -6,6 +6,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
+using preguntaods.Entities;
 using System;
 
 namespace preguntaods.Presentacion.ViewModels
@@ -16,8 +17,18 @@ namespace preguntaods.Presentacion.ViewModels
         private Facade fachada;
         private Sonido sonido;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        private Usuario usuario;
+
+        private Button partida;
+        private Button ahorcado;
+        private Button fiesta;
+        private ImageButton atras;
+
+        private int level;
+
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
+
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaSeleccionReto);
             sonido = new Sonido();
@@ -25,17 +36,53 @@ namespace preguntaods.Presentacion.ViewModels
 
             fachada = new Facade();
 
-            var partida = FindViewById<Button>(Resource.Id.partidaB);
+            usuario = await fachada.GetUsuarioLogged();
+
+
+            partida = FindViewById<Button>(Resource.Id.partidaB);
             if (partida != null) partida.Click += Partida_Click;
 
-            var ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
+
+            ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
             if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
 
-            var fiesta = FindViewById<Button>(Resource.Id.fiestaB);
+            ahorcado.Enabled = false;
+
+            fiesta = FindViewById<Button>(Resource.Id.fiestaB);
             if (fiesta != null) fiesta.Click += Fiesta_Click;
 
-            var atras = FindViewById<ImageButton>(Resource.Id.button1);
+            fiesta.Enabled = false;
+
+            atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
+
+            InitBoton();
+        }
+
+        public void InitBoton()
+        {
+
+            level = usuario.Nivel;
+
+            if (level == 1)
+            {
+
+                ahorcado.Enabled = true;
+                ahorcado.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
+
+            }
+            else if (level > 1)
+            {
+
+                ahorcado.Enabled = true;
+                ahorcado.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
+
+                fiesta.Enabled = true;
+                fiesta.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
+
+            }
+
+
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

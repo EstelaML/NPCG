@@ -134,10 +134,11 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task UpdateNivel(string uuid, int nivel)
         {
+            var nivelS = nivel + 1;
             await conexion.Cliente
                 .From<Usuario>()
                 .Where(x => x.Uuid == uuid)
-                .Set(x => x.Nivel, nivel)
+                .Set(x => x.Nivel, nivelS)
                 .Update();
         }
 

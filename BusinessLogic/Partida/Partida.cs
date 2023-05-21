@@ -1,4 +1,5 @@
-﻿using Android.Content;
+﻿using Acr.UserDialogs;
+using Android.Content;
 using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
@@ -245,6 +246,10 @@ namespace preguntaods.BusinessLogic.Partida
         {
             string titulo;
             string mensaje;
+
+            var stats = await Fachada.PedirEstadisticas(User.Uuid);
+            int partidasGanadas = stats.PartidasGanadas;
+
             sonido.PararSonido();
             if (acertado)
             {
@@ -254,6 +259,9 @@ namespace preguntaods.BusinessLogic.Partida
                 sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
                 await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados - puntosRestadosConsol);
+
+                await subirNivel(partidasGanadas);
+
                 await Fachada.UpdatePartidasGanadas();
             }
             else
@@ -299,6 +307,26 @@ namespace preguntaods.BusinessLogic.Partida
         public int GetFalloTrasConsolidado() { 
             if (falloTrasConsolidado) return puntosRestadosConsol;
             return 0;
+        }
+
+        public async Task subirNivel(int partidasGanadas)
+        {
+
+            if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 15)
+            {
+                await Fachada.UpdateNivel(User.Nivel);
+
+                await UserDialogs.Instance.AlertAsync(new AlertConfig
+                {
+                    Title = "¡¡Enhorabuena!!",
+                    Message = "Has subido de nivel",
+                    OkText = "Entendido",
+
+                });
+
+
+            }
+
         }
     }
 }
