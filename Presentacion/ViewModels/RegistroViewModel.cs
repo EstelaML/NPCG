@@ -255,7 +255,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 if (userAux != null)
                 {
-                    var user = new Usuario(userAux.Id, username.Text, true, 100);
+                    var user = new Usuario(userAux.Id, username.Text, 100, 100);
                     await fachada.NewUsuario(user);
                     await fachada.CrearEstadisticas(user);
 
