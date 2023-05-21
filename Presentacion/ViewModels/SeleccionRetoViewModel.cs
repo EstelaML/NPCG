@@ -59,6 +59,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                         var i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
+                        Finish();
 
                         break;
                     }
@@ -73,6 +74,7 @@ namespace preguntaods.Presentacion.ViewModels
             var i = new Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "1");
             StartActivity(i);
+            Finish();
         }
 
         private void Ahorcado_Click(object sender, EventArgs e)
@@ -81,6 +83,7 @@ namespace preguntaods.Presentacion.ViewModels
             var i = new Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "2");
             StartActivity(i);
+            Finish();
         }
 
         private void Fiesta_Click(object sender, EventArgs e)
@@ -89,6 +92,7 @@ namespace preguntaods.Presentacion.ViewModels
             var i = new Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "5");
             StartActivity(i);
+            Finish();
         }
 
         private void Atras(object sender, EventArgs e)
@@ -98,6 +102,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
+            Finish();
         }
     }
 }

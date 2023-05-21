@@ -186,6 +186,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
+            Finish();
         }
 
         public byte[] ConvertBitmapToByteArray(Bitmap bitmap)

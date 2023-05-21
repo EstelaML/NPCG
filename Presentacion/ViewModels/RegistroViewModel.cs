@@ -11,6 +11,7 @@ using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
 using System.Text.RegularExpressions;
+using Android.Content;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -148,13 +149,13 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 // se muestra
                 password.InputType = InputTypes.TextVariationVisiblePassword;
-                ojo.SetImageResource(Resource.Drawable.ojo_cerrado);
+                ojo.SetImageResource(Resource.Drawable.icon_ojo_cerrado);
             }
             else
             {
                 // no se muestra
                 password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-                ojo.SetImageResource(Resource.Drawable.ojo_abierto);
+                ojo.SetImageResource(Resource.Drawable.icon_ojo_abierto);
             }
         }
 
@@ -165,13 +166,13 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 // se muestra
                 password2.InputType = InputTypes.TextVariationVisiblePassword;
-                ojo2.SetImageResource(Resource.Drawable.ojo_cerrado);
+                ojo2.SetImageResource(Resource.Drawable.icon_ojo_cerrado);
             }
             else
             {
                 // no se muestra
                 password2.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-                ojo2.SetImageResource(Resource.Drawable.ojo_abierto);
+                ojo2.SetImageResource(Resource.Drawable.icon_ojo_abierto);
             }
         }
 
@@ -254,7 +255,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 if (userAux != null)
                 {
-                    var user = new Usuario(userAux.Id, username.Text, true, 100);
+                    var user = new Usuario(userAux.Id, username.Text, 100, 100);
                     await fachada.NewUsuario(user);
                     await fachada.CrearEstadisticas(user);
 
@@ -265,6 +266,8 @@ namespace preguntaods.Presentacion.ViewModels
                         OkText = "Entendido",
                         OnAction = () =>
                         {
+                            var i = new Intent(this, typeof(InicioSesionViewModel));
+                            StartActivity(i);
                             Finish();
                         }
                     });
@@ -289,6 +292,8 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
+            var i = new Intent(this, typeof(InicioSesionViewModel));
+            StartActivity(i);
             Finish();
         }
     }

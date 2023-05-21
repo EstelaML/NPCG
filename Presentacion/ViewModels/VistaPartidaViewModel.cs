@@ -140,9 +140,10 @@ namespace preguntaods.Presentacion.ViewModels
                 }
                 else path = "https://www.fao.org/sustainable-development-goals/goals/goal-" + ods + "/es/";
                 var uri = Android.Net.Uri.Parse(path);
-                var intent = new Intent(Intent.ActionView, uri);
-                intent.SetFlags(ActivityFlags.NewTask);
-                Application.Context.StartActivity(intent);
+                var i = new Intent(Intent.ActionView, uri);
+                i.SetFlags(ActivityFlags.NewTask);
+                StartActivity(i);
+
             });
             alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
             {

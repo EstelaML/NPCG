@@ -21,7 +21,7 @@ namespace preguntaods.Entities
 
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Sonidos")]
-        public bool Sonidos { get; set; }
+        public int Sonidos { get; set; }
 
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Musica")]

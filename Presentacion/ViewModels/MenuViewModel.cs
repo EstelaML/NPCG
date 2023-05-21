@@ -6,6 +6,7 @@ using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using System;
+using Android.Content;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -46,15 +47,19 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 case Resource.Id.menuItem1:
                     {
-                        // add your code
+                        var i = new Intent(this, typeof(ConfiguracionViewModel));
+                        StartActivity(i);
+                        Finish();
+
                         break;
                     }
                 case Resource.Id.menuItem2:
                     {
                         _ = fachada.LogoutAsync();
 
-                        var i = new Android.Content.Intent(this, typeof(InicioSesionViewModel));
+                        var i = new Intent(this, typeof(InicioSesionViewModel));
                         StartActivity(i);
+                        Finish();
 
                         break;
                     }
@@ -68,8 +73,9 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
-            var i = new Android.Content.Intent(this, typeof(PerfilViewModel));
+            var i = new Intent(this, typeof(PerfilViewModel));
             StartActivity(i);
+            Finish();
         }
 
         private void Ranking_Click(object sender, EventArgs e)
@@ -77,8 +83,9 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
-            var i = new Android.Content.Intent(this, typeof(RankingViewModel));
+            var i = new Intent(this, typeof(RankingViewModel));
             StartActivity(i);
+            Finish();
         }
 
         private void NuevaPartida_Click(object sender, EventArgs e)
@@ -86,8 +93,9 @@ namespace preguntaods.Presentacion.ViewModels
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
-            var i = new Android.Content.Intent(this, typeof(SeleccionRetoViewModel));
+            var i = new Intent(this, typeof(SeleccionRetoViewModel));
             StartActivity(i);
+            Finish();
         }
     }
 }

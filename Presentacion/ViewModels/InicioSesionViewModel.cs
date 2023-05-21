@@ -63,13 +63,13 @@ namespace preguntaods.Presentacion.ViewModels
             {
                 // se muestra
                 password.InputType = InputTypes.TextVariationVisiblePassword;
-                ojo.SetImageResource(Resource.Drawable.ojo_cerrado);
+                ojo.SetImageResource(Resource.Drawable.icon_ojo_cerrado);
             }
             else
             {
                 // no se muestra
                 password.InputType = InputTypes.TextVariationPassword | InputTypes.ClassText;
-                ojo.SetImageResource(Resource.Drawable.ojo_abierto);
+                ojo.SetImageResource(Resource.Drawable.icon_ojo_abierto);
             }
         }
 
@@ -79,6 +79,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             var i = new Intent(this, typeof(RegistroViewModel));
             StartActivity(i);
+            Finish();
         }
 
         private async void IniciarSesion_Click(object sender, EventArgs e)
@@ -97,6 +98,7 @@ namespace preguntaods.Presentacion.ViewModels
                 // inicia sesion
                 var i = new Intent(this, typeof(MenuViewModel));
                 StartActivity(i);
+                Finish();
             }
             catch (Exception)
             {

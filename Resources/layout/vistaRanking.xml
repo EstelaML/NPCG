@@ -24,8 +24,9 @@
             android:id="@+id/buttonAtras"
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:contentDescription=""
-            android:foregroundGravity="right" />
+            android:foregroundGravity="right"/>
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

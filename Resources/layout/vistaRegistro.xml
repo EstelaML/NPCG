@@ -137,7 +137,7 @@
                     <ImageButton
                         android:layout_marginTop="2sp"
                         android:layout_marginLeft="0sp"
-                        android:src="@drawable/ojo_abierto"
+                        android:src="@drawable/icon_ojo_abierto"
                         android:layout_width="50sp"
                         android:layout_height="50sp"
                         android:scaleType="centerInside"
@@ -189,7 +189,7 @@
                         <ImageButton
                             android:layout_marginTop="2sp"
                             android:layout_marginLeft="0sp"
-                            android:src="@drawable/ojo_abierto"
+                            android:src="@drawable/icon_ojo_abierto"
                             android:layout_width="50sp"
                             android:layout_height="50sp"
                             android:scaleType="centerInside"
