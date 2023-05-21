@@ -305,8 +305,6 @@ namespace preguntaods.Presentacion.UI_impl
             botonPregunta4.Click += null!;
 
             animation.Pause();
-
-            //actualizar datos usuario
         }
 
         public static int GetPuntosConsolidados()

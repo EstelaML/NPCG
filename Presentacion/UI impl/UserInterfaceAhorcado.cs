@@ -76,7 +76,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             #region buttonletters FindByID
 
-            buttonValuePairs = new Dictionary<char, Button>
+          /*  buttonValuePairs = new Dictionary<char, Button>
             {
                 { 'A', Activity.FindViewById<Button>(Resource.Id.buttonA) },
                 { 'B', Activity.FindViewById<Button>(Resource.Id.buttonB) },
@@ -105,39 +105,25 @@ namespace preguntaods.Presentacion.UI_impl
                 { 'X', Activity.FindViewById<Button>(Resource.Id.buttonX) },
                 { 'Y', Activity.FindViewById<Button>(Resource.Id.buttonY) },
                 { 'Z', Activity.FindViewById<Button>(Resource.Id.buttonZ) }
-            };
+            };*/
+
+            buttonValuePairs = new Dictionary<char, Button>();
+
+            char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+
+            foreach (char letter in letters)
+            {
+                buttonValuePairs[letter] = Activity.FindViewById<Button>(Resource.Id.(button + letter.ToString()));
+            }
 
             #endregion buttonletters FindByID
 
             #region buttonLetters Handler
 
-            buttonValuePairs['A'].Click += Letter_Click;
-            buttonValuePairs['B'].Click += Letter_Click;
-            buttonValuePairs['C'].Click += Letter_Click;
-            buttonValuePairs['D'].Click += Letter_Click;
-            buttonValuePairs['E'].Click += Letter_Click;
-            buttonValuePairs['F'].Click += Letter_Click;
-            buttonValuePairs['G'].Click += Letter_Click;
-            buttonValuePairs['H'].Click += Letter_Click;
-            buttonValuePairs['I'].Click += Letter_Click;
-            buttonValuePairs['J'].Click += Letter_Click;
-            buttonValuePairs['K'].Click += Letter_Click;
-            buttonValuePairs['L'].Click += Letter_Click;
-            buttonValuePairs['M'].Click += Letter_Click;
-            buttonValuePairs['N'].Click += Letter_Click;
-            buttonValuePairs['Ñ'].Click += Letter_Click;
-            buttonValuePairs['O'].Click += Letter_Click;
-            buttonValuePairs['P'].Click += Letter_Click;
-            buttonValuePairs['Q'].Click += Letter_Click;
-            buttonValuePairs['R'].Click += Letter_Click;
-            buttonValuePairs['S'].Click += Letter_Click;
-            buttonValuePairs['T'].Click += Letter_Click;
-            buttonValuePairs['U'].Click += Letter_Click;
-            buttonValuePairs['V'].Click += Letter_Click;
-            buttonValuePairs['W'].Click += Letter_Click;
-            buttonValuePairs['X'].Click += Letter_Click;
-            buttonValuePairs['Y'].Click += Letter_Click;
-            buttonValuePairs['Z'].Click += Letter_Click;
+            foreach (var abc in buttonValuePairs)
+            {
+                abc.Value.Click += Letter_Click;
+            }
 
             #endregion buttonLetters Handler
 

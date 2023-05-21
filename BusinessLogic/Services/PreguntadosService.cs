@@ -41,9 +41,9 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task InitPreguntaList()
         {
-            _preguntasBajas ??= await repositorioPregunta.GetByDificultad(Pregunta.DifBaja);
-            _preguntasMedias ??= await repositorioPregunta.GetByDificultad(Pregunta.DifMedia);
-            var p = await repositorioPregunta.GetByDificultad(Pregunta.DifAlta);
+            _preguntasBajas ??= await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifBaja);
+            _preguntasMedias ??= await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifMedia);
+            var p = await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifAlta);
             lock (sync)
             {
                 _preguntasAltas ??= p;
