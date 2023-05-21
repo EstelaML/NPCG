@@ -32,6 +32,8 @@ namespace preguntaods.BusinessLogic.Partida
         private int ptsConsolidados;
         private bool falloFacil;
         private bool primeraVez;
+        private bool falloTrasConsolidado;
+        private int puntosRestadosConsol;
 
         public Partida()
         {
@@ -39,6 +41,8 @@ namespace preguntaods.BusinessLogic.Partida
             listaRetos = new List<IReto>();
             falloFacil = false;
             primeraVez = true;
+            falloTrasConsolidado = false;
+            puntosRestadosConsol = 0;
         }
 
         #region Setters/Getters
@@ -187,7 +191,7 @@ namespace preguntaods.BusinessLogic.Partida
                 var puntosP = UserInterfacePregunta.GetPuntosConsolidados();
                 if (puntosP == 0) { puntosP = UserInterfaceAhorcado.GetPuntosConsolidados(); }
                 titulo = "¿Estás seguro?";
-                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + puntosP;
+                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + (puntosP - puntosRestadosConsol*2);
             }
             else
             {
@@ -249,7 +253,7 @@ namespace preguntaods.BusinessLogic.Partida
 
                 sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
-                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
+                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados - puntosRestadosConsol);
                 await Fachada.UpdatePartidasGanadas();
             }
             else
@@ -284,6 +288,17 @@ namespace preguntaods.BusinessLogic.Partida
         public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
         {
             await Fachada.UpdatePuntos(puntosConsolidados);
+        }
+
+        public bool SetFalloTrasConsolidado(int puntos) {
+            if (ptsConsolidados == 0) { return false;  }
+            falloTrasConsolidado = true;
+            puntosRestadosConsol = puntos;
+            return true;
+        }
+        public int GetFalloTrasConsolidado() { 
+            if (falloTrasConsolidado) return puntosRestadosConsol;
+            return 0;
         }
     }
 }

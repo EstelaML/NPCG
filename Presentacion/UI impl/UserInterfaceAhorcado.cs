@@ -111,33 +111,10 @@ namespace preguntaods.Presentacion.UI_impl
 
             #region buttonLetters Handler
 
-            buttonValuePairs['A'].Click += Letter_Click;
-            buttonValuePairs['B'].Click += Letter_Click;
-            buttonValuePairs['C'].Click += Letter_Click;
-            buttonValuePairs['D'].Click += Letter_Click;
-            buttonValuePairs['E'].Click += Letter_Click;
-            buttonValuePairs['F'].Click += Letter_Click;
-            buttonValuePairs['G'].Click += Letter_Click;
-            buttonValuePairs['H'].Click += Letter_Click;
-            buttonValuePairs['I'].Click += Letter_Click;
-            buttonValuePairs['J'].Click += Letter_Click;
-            buttonValuePairs['K'].Click += Letter_Click;
-            buttonValuePairs['L'].Click += Letter_Click;
-            buttonValuePairs['M'].Click += Letter_Click;
-            buttonValuePairs['N'].Click += Letter_Click;
-            buttonValuePairs['Ñ'].Click += Letter_Click;
-            buttonValuePairs['O'].Click += Letter_Click;
-            buttonValuePairs['P'].Click += Letter_Click;
-            buttonValuePairs['Q'].Click += Letter_Click;
-            buttonValuePairs['R'].Click += Letter_Click;
-            buttonValuePairs['S'].Click += Letter_Click;
-            buttonValuePairs['T'].Click += Letter_Click;
-            buttonValuePairs['U'].Click += Letter_Click;
-            buttonValuePairs['V'].Click += Letter_Click;
-            buttonValuePairs['W'].Click += Letter_Click;
-            buttonValuePairs['X'].Click += Letter_Click;
-            buttonValuePairs['Y'].Click += Letter_Click;
-            buttonValuePairs['Z'].Click += Letter_Click;
+            foreach (var abc in buttonValuePairs)
+            {
+                abc.Value.Click += Letter_Click;
+            }
 
             #endregion buttonLetters Handler
 
@@ -406,7 +383,7 @@ namespace preguntaods.Presentacion.UI_impl
                         sonido.SetEstrategia(new EstrategiaSonidoAcierto(), Activity);
                         sonido.EjecutarSonido();
                         titulo = "Felicitaciones";
-                        mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                        mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos." : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida) o seguir?";
 
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
@@ -415,11 +392,6 @@ namespace preguntaods.Presentacion.UI_impl
                             tcs.TrySetResult(true);
 
                             // sigue generando pregunta
-                        });
-                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                        {
-                            // vuelves a menu principal
-                            ((VistaPartidaViewModel)Activity).Abandonar();
                         });
                         if (!((VistaPartidaViewModel)Activity).GetConsolidado())
                         {
@@ -459,13 +431,13 @@ namespace preguntaods.Presentacion.UI_impl
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
+                            if (((VistaPartidaViewModel)Activity).GetConsolidado())
+                            {
+                                ((VistaPartidaViewModel)Activity).SetFalloTrasConsolidado(puntuacion);
+                            }
                             tcs.TrySetResult(true);
                             FinReto();
                             // se genera nueva pregunta
-                        });
-                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                        {
-                            ((VistaPartidaViewModel)Activity).Abandonar();
                         });
                         alertBuilder.SetCancelable(false);
                         var alertDialog = alertBuilder.Create();

@@ -155,5 +155,14 @@ namespace preguntaods.Presentacion.ViewModels
             alertDialog.Window?.SetDimAmount(0.8f);
             alertDialog.Show();
         }
+
+        public bool SetFalloTrasConsolidado(int puntuacion)
+        {
+            return partida.SetFalloTrasConsolidado(puntuacion);
+        }
+        public bool GetFalloTrasConsolidado()
+        {
+            return true;
+        }
     }
 }

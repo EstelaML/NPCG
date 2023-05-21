@@ -305,8 +305,6 @@ namespace preguntaods.Presentacion.UI_impl
             botonPregunta4.Click += null!;
 
             animation.Pause();
-
-            //actualizar datos usuario
         }
 
         public static int GetPuntosConsolidados()
@@ -326,7 +324,7 @@ namespace preguntaods.Presentacion.UI_impl
                 case true when !fin:
                     {
                         titulo = "Felicitaciones";
-                        mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos. ¿Deseas abandonar o seguir?" : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida), abandonar o seguir?";
+                        mensaje = ((VistaPartidaViewModel)Activity).GetConsolidado() ? $"Tienes {puntuacionTotal} puntos." : $"Sumas {puntuacion} a tus {puntuacionTotal - puntuacion} puntos. ¿Deseas consolidarlos (solo una vez por partida) o seguir?";
 
                         alertBuilder.SetMessage(mensaje);
                         alertBuilder.SetTitle(titulo);
@@ -335,11 +333,6 @@ namespace preguntaods.Presentacion.UI_impl
                             tcs.TrySetResult(true);
 
                             // sigue generando pregunta
-                        });
-                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                        {
-                            // vuelves a menu principal
-                            ((VistaPartidaViewModel)Activity).Abandonar();
                         });
                         if (!((VistaPartidaViewModel)Activity).GetConsolidado())
                         {
@@ -377,13 +370,13 @@ namespace preguntaods.Presentacion.UI_impl
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
+                            if (((VistaPartidaViewModel)Activity).GetConsolidado())
+                            {
+                                ((VistaPartidaViewModel)Activity).SetFalloTrasConsolidado(puntuacion);
+                            }
                             tcs.TrySetResult(true);
 
                             // se genera nueva pregunta
-                        });
-                        alertBuilder.SetNeutralButton("Abandonar", (sender, args) =>
-                        {
-                            ((VistaPartidaViewModel)Activity).Abandonar();
                         });
                         alertBuilder.SetCancelable(false);
                         var alertDialog = alertBuilder.Create();
