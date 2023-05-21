@@ -370,6 +370,10 @@ namespace preguntaods.Presentacion.UI_impl
                         alertBuilder.SetTitle(titulo);
                         alertBuilder.SetPositiveButton("Seguir", (sender, args) =>
                         {
+                            if (((VistaPartidaViewModel)Activity).GetConsolidado())
+                            {
+                                ((VistaPartidaViewModel)Activity).SetFalloTrasConsolidado(puntuacion);
+                            }
                             tcs.TrySetResult(true);
 
                             // se genera nueva pregunta
