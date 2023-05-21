@@ -45,16 +45,16 @@
                 android:contentDescription="" />
 
             <TextView
-              android:text="-------"
-              android:textAppearance="?android:attr/textAppearanceLarge"
-              android:layout_width="wrap_content"
-              android:layout_height="match_parent"
-              android:gravity="center_vertical"
-              android:padding="10dp"
-              android:textStyle="bold"
-              android:id="@+id/textViewNombre"
-              android:textColor="@android:color/black"
-              tools:ignore="HardcodedText" />
+                android:text="-------"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:textStyle="bold"
+                android:id="@+id/textViewNombre"
+                android:textColor="@android:color/black"
+                tools:ignore="HardcodedText" />
 
             <ImageButton
                 android:src="@drawable/icon_editar"
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingBottom="75dp">
+            android:paddingBottom="30dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -161,10 +161,10 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:minWidth="25px"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:minWidth="25px"
                 android:minHeight="25px">
 
                 <TextView
@@ -192,17 +192,29 @@
             </LinearLayout>
         </LinearLayout>
 
-            <TextView
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="55px"
-                    android:id="@+id/textViewNivel"
-                    android:textColor="@android:color/black"
-                    android:paddingBottom="20dp"
-                    tools:ignore="HardcodedText"
-                    android:text="Nivel ---" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="55px"
+            android:id="@+id/textViewNivel"
+            android:textColor="@android:color/black"
+            android:paddingBottom="20dp"
+            tools:ignore="HardcodedText"
+            android:text="Nivel ---" />
+
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="40px"
+            android:id="@+id/textViewRequisitos"
+            android:textColor="@android:color/black"
+            android:paddingBottom="20dp"
+            tools:ignore="HardcodedText"
+            android:text="Te quedan --- partidas para subir al siguiente nivel" />
 
     </LinearLayout>
 

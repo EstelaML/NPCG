@@ -27,6 +27,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView puntuacion;
         private TextView tiempo;
         private TextView nivel;
+        private TextView requisitos;
         private ImageButton avatar;
         private Estadistica estadisticas;
 
@@ -65,6 +66,7 @@ namespace preguntaods.Presentacion.ViewModels
             puntuacion = FindViewById<TextView>(Resource.Id.textViewPuntuacion);
             tiempo = FindViewById<TextView>(Resource.Id.textViewTiempo);
             nivel = FindViewById<TextView>(Resource.Id.textViewNivel);
+            requisitos = FindViewById<TextView>(Resource.Id.textViewRequisitos);
 
             Init();
         }
@@ -76,6 +78,8 @@ namespace preguntaods.Presentacion.ViewModels
             IniciarFoto();
 
             IniciarTiempo();
+
+            IniciarRequisitos();
 
             puntuacion.Text = estadisticas.Puntuacion.ToString();
 
@@ -177,6 +181,21 @@ namespace preguntaods.Presentacion.ViewModels
                 tiempo.Text = $"{horas:D2} h {minutos:D2} min";
             }
             else { tiempo.Text = "0 h 0 min"; }
+        }
+
+        private void IniciarRequisitos() 
+        {
+           
+            if (usuario.Nivel < 3) 
+            {
+               int partidasRestantes = estadisticas.PartidasGanadas / 5;
+               int res = (partidasRestantes + 1) * 5 - estadisticas.PartidasGanadas;
+
+             requisitos.Text = "Te quedan " + res + " partidas para subir al siguiente nivel";
+                
+            
+            } else { requisitos.Text = "Has llegado al nivel máximo"; }
+        
         }
 
         private void Atras(object sender, EventArgs e)
