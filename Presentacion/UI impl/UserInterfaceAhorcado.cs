@@ -76,7 +76,7 @@ namespace preguntaods.Presentacion.UI_impl
 
             #region buttonletters FindByID
 
-          /*  buttonValuePairs = new Dictionary<char, Button>
+            buttonValuePairs = new Dictionary<char, Button>
             {
                 { 'A', Activity.FindViewById<Button>(Resource.Id.buttonA) },
                 { 'B', Activity.FindViewById<Button>(Resource.Id.buttonB) },
@@ -105,16 +105,7 @@ namespace preguntaods.Presentacion.UI_impl
                 { 'X', Activity.FindViewById<Button>(Resource.Id.buttonX) },
                 { 'Y', Activity.FindViewById<Button>(Resource.Id.buttonY) },
                 { 'Z', Activity.FindViewById<Button>(Resource.Id.buttonZ) }
-            };*/
-
-            buttonValuePairs = new Dictionary<char, Button>();
-
-            char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-
-            foreach (char letter in letters)
-            {
-                buttonValuePairs[letter] = Activity.FindViewById<Button>(Resource.Id.(button + letter.ToString()));
-            }
+            };
 
             #endregion buttonletters FindByID
 
