@@ -42,6 +42,7 @@ namespace preguntaods.BusinessLogic.Partida
             falloFacil = false;
             primeraVez = true;
             falloTrasConsolidado = false;
+            puntosRestadosConsol = 0;
         }
 
         #region Setters/Getters
@@ -252,7 +253,7 @@ namespace preguntaods.BusinessLogic.Partida
 
                 sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
-                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados);
+                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados - puntosRestadosConsol);
                 await Fachada.UpdatePartidasGanadas();
             }
             else
