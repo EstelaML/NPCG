@@ -245,6 +245,18 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async Task UpdateVolumenMusica(int volumenMusica)
+        {
+            var a = conexion.Usuario.Id;
+            await repositorioUser.UpdateVolumenMusica(a, volumenMusica);
+        }
+
+        public async Task UpdateVolumenSonidos(int volumenSonidos)
+        {
+            var a = conexion.Usuario.Id;
+            await repositorioUser.UpdateVolumenMusica(a, volumenSonidos);
+        }
+
         public async Task CambiarNombre(string nombre)
         {
             var a = conexion.Usuario.Id;

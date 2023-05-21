@@ -141,6 +141,24 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Update();
         }
 
+        public async Task UpdateVolumenMusica(string uuid, int volumenMusica)
+        {
+            await conexion.Cliente
+                .From<Usuario>()
+                .Where(x => x.Uuid == uuid)
+                .Set(x => x.Musica, volumenMusica)
+                .Update();
+        }
+
+        public async Task UpdateVolumenSonidos(string uuid, int volumenSonidos)
+        {
+            await conexion.Cliente
+                .From<Usuario>()
+                .Where(x => x.Uuid == uuid)
+                .Set(x => x.Sonidos, volumenSonidos)
+                .Update();
+        }
+
         public async Task<int[]> GetPreguntasAcertadasAsync(Usuario usuario)
         {
             if (usuario.Id == null) return null;

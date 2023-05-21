@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.Graphics.Drawables;
 using Android.OS;
@@ -6,7 +7,10 @@ using Android.Text;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Fachada;
+using preguntaods.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -20,8 +24,11 @@ namespace preguntaods.Presentacion.ViewModels
         private ImageButton atras;
         private ImageButton imagenApp;
         private ImageButton imagenMusica;
+        private Button guardarCambios;
 
         private Sonido sonido;
+        private Facade fachada;
+        private Usuario usuario;
 
         private int volumenApp;
         private int volumenMusica;
@@ -29,7 +36,7 @@ namespace preguntaods.Presentacion.ViewModels
         private bool toggleImagenApp;
         private bool toggleImagenMusica;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaConfiguracion);
@@ -53,11 +60,17 @@ namespace preguntaods.Presentacion.ViewModels
             atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             atras.Click += Atras;
 
+            guardarCambios = FindViewById<Button>(Resource.Id.guardarCambios);
+            guardarCambios.Click += GuardarCambios;
+
+            fachada = new Facade();
+            usuario = await fachada.GetUsuarioLogged();
+
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
-            volumenApp = 100;
-            volumenMusica = 100;
+            volumenApp = usuario.Sonidos;
+            volumenMusica = usuario.Musica;
 
             toggleImagenApp = false;
             toggleImagenMusica = false;
@@ -77,6 +90,16 @@ namespace preguntaods.Presentacion.ViewModels
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
             Finish();
+        }
+
+        private async void GuardarCambios(object sender, EventArgs e)
+        {
+            UserDialogs.Instance.ShowLoading("Guardando cambios...",MaskType.Clear);
+
+            await fachada.UpdateVolumenSonidos(volumenApp);
+            await fachada.UpdateVolumenMusica(volumenMusica);
+
+            UserDialogs.Instance.HideLoading();
         }
 
         private void ProgressChangedVolumenApp(object sender, SeekBar.ProgressChangedEventArgs e)

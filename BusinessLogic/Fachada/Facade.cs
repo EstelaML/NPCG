@@ -45,6 +45,16 @@ namespace preguntaods.BusinessLogic.Fachada
             await _servicio.UpdatePuntos(puntos);
         }
 
+        public async Task UpdateVolumenMusica(int volumenMusica)
+        {
+            await _servicio.UpdateVolumenMusica(volumenMusica);
+        }
+
+        public async Task UpdateVolumenSonidos(int volumenSonidos)
+        {
+            await _servicio.UpdateVolumenMusica(volumenSonidos);
+        }
+
         public async Task UpdateNivel(int nivel)
         {
             await _servicio.UpdateNivel(nivel);
