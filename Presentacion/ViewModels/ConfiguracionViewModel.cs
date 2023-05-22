@@ -8,6 +8,7 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -98,6 +99,11 @@ namespace preguntaods.Presentacion.ViewModels
             await fachada.UpdateVolumenMusica(volumenMusica);
 
             UserDialogs.Instance.HideLoading();
+            UserDialogs.Instance.Alert(new AlertConfig
+            {
+                Message = "Cambios guardados de manera satisfactoria.",
+                OkText = "Entendido"
+            });
         }
 
         private void ProgressChangedVolumenApp(object sender, SeekBar.ProgressChangedEventArgs e)
