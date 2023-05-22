@@ -254,7 +254,7 @@ namespace preguntaods.BusinessLogic.Services
         public async Task UpdateVolumenSonidos(int volumenSonidos)
         {
             var a = conexion.Usuario.Id;
-            await repositorioUser.UpdateVolumenMusica(a, volumenSonidos);
+            await repositorioUser.UpdateVolumenSonidos(a, volumenSonidos);
         }
 
         public async Task CambiarNombre(string nombre)

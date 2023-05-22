@@ -159,10 +159,5 @@ namespace preguntaods.Presentacion.ViewModels
         {
             return partida.SetFalloTrasConsolidado(puntuacion);
         }
-
-        public bool GetFalloTrasConsolidado()
-        {
-            return true;
-        }
     }
 }
