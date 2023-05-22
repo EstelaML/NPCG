@@ -24,12 +24,16 @@ namespace preguntaods.BusinessLogic.Services
         private readonly Repository<Estadistica> repositorioEstadisticas;
         private readonly RepositorioUsuario repositorioUser;
 
-        private static List<Pregunta> _preguntasBajas;
-        private static List<Pregunta> _preguntasMedias;
-        private static List<Pregunta> _preguntasAltas;
-        private static List<Ahorcado> _ahorcadoBajo;
-        private static List<Ahorcado> _ahorcadoMedio;
-        private static List<Ahorcado> _ahorcadoAlto;
+        private List<Pregunta> preguntasBajas;
+        private List<Pregunta> preguntasMedias;
+        private List<Pregunta> preguntasAltas;
+
+        private List<Ahorcado> ahorcadoBajo;
+        private List<Ahorcado> ahorcadoMedio;
+        private List<Ahorcado> ahorcadoAlto;
+
+        public int volumenMusica;
+        public int volumenSonidos;
 
         private PreguntadosService()
         {
@@ -38,6 +42,9 @@ namespace preguntaods.BusinessLogic.Services
             repositorioAhorcado = new RepositorioAhorcado();
             repositorioEstadisticas = new Repository<Estadistica>();
             repositorioUser = new RepositorioUsuario();
+
+            volumenMusica = conexion.UsuarioApp?.Musica ?? 1;
+            volumenSonidos = conexion.UsuarioApp?.Sonidos ?? 1;
         }
 
         public static PreguntadosService GetInstance()
@@ -49,12 +56,12 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task InitPreguntaList()
         {
-            _preguntasBajas ??= await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifBaja);
-            _preguntasMedias ??= await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifMedia);
+            preguntasBajas ??= await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifBaja);
+            preguntasMedias ??= await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifMedia);
             var p = await repositorioPregunta.GetPreguntasByDificultad(Pregunta.DifAlta);
             lock (sync)
             {
-                _preguntasAltas ??= p;
+                preguntasAltas ??= p;
             }
         }
 
@@ -67,26 +74,26 @@ namespace preguntaods.BusinessLogic.Services
                 case Pregunta.DifBaja:
                     {
                         var rnd = new Random();
-                        var indiceAleatorio = rnd.NextInt(_preguntasBajas.Count);
-                        respuesta = _preguntasBajas[indiceAleatorio];
-                        _preguntasBajas.Remove(respuesta);
+                        var indiceAleatorio = rnd.NextInt(preguntasBajas.Count);
+                        respuesta = preguntasBajas[indiceAleatorio];
+                        preguntasBajas.Remove(respuesta);
                         break;
                     }
                 case Pregunta.DifMedia:
                     {
                         var rnd = new Random();
-                        var indiceAleatorio = rnd.NextInt(_preguntasMedias.Count);
-                        respuesta = _preguntasMedias[indiceAleatorio];
-                        _preguntasMedias.Remove(respuesta);
+                        var indiceAleatorio = rnd.NextInt(preguntasMedias.Count);
+                        respuesta = preguntasMedias[indiceAleatorio];
+                        preguntasMedias.Remove(respuesta);
 
                         break;
                     }
                 case Pregunta.DifAlta:
                     {
                         var rnd = new Random();
-                        var indiceAleatorio = rnd.NextInt(_preguntasAltas.Count);
-                        respuesta = _preguntasAltas[indiceAleatorio];
-                        _preguntasAltas.Remove(respuesta);
+                        var indiceAleatorio = rnd.NextInt(preguntasAltas.Count);
+                        respuesta = preguntasAltas[indiceAleatorio];
+                        preguntasAltas.Remove(respuesta);
                         break;
                     }
             }
@@ -100,12 +107,12 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task InitAhorcadoList()
         {
-            _ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
-            _ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
+            ahorcadoBajo ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifBaja);
+            ahorcadoMedio ??= await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifMedia);
             var p = await repositorioAhorcado.GetAhorcadoDificultad(Ahorcado.DifAlta);
             lock (sync)
             {
-                _ahorcadoAlto ??= p;
+                ahorcadoAlto ??= p;
             }
         }
 
@@ -118,26 +125,26 @@ namespace preguntaods.BusinessLogic.Services
                 case Ahorcado.DifBaja:
                     {
                         var rnd = new Random();
-                        var indiceAleatorio = rnd.NextInt(_ahorcadoBajo.Count);
-                        ahorca = _ahorcadoBajo[indiceAleatorio];
-                        _ahorcadoBajo.Remove(ahorca);
+                        var indiceAleatorio = rnd.NextInt(ahorcadoBajo.Count);
+                        ahorca = ahorcadoBajo[indiceAleatorio];
+                        ahorcadoBajo.Remove(ahorca);
                         break;
                     }
                 case Ahorcado.DifMedia:
                     {
                         var rnd = new Random();
-                        var indiceAleatorio = rnd.NextInt(_ahorcadoMedio.Count);
-                        ahorca = _ahorcadoMedio[indiceAleatorio];
-                        _ahorcadoMedio.Remove(ahorca);
+                        var indiceAleatorio = rnd.NextInt(ahorcadoMedio.Count);
+                        ahorca = ahorcadoMedio[indiceAleatorio];
+                        ahorcadoMedio.Remove(ahorca);
 
                         break;
                     }
                 case Ahorcado.DifAlta:
                     {
                         var rnd = new Random();
-                        var indiceAleatorio = rnd.NextInt(_ahorcadoAlto.Count);
-                        ahorca = _ahorcadoAlto[indiceAleatorio];
-                        _ahorcadoAlto.Remove(ahorca);
+                        var indiceAleatorio = rnd.NextInt(ahorcadoAlto.Count);
+                        ahorca = ahorcadoAlto[indiceAleatorio];
+                        ahorcadoAlto.Remove(ahorca);
                         break;
                     }
             }
@@ -188,9 +195,9 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task UpdatePartidasGanadas()
         {
-            if (conexion.Usuario != null)
+            if (conexion.UsuarioBD != null)
             {
-                var a = conexion.Usuario.Id;
+                var a = conexion.UsuarioBD.Id;
                 var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
                 await repositorioUser.UpdatePartidasGanadas(a, estadisticas.PartidasGanadas);
             }
@@ -203,7 +210,11 @@ namespace preguntaods.BusinessLogic.Services
         public async Task LoginAsync(string correo, string password)
         {
             var session = await conexion.Cliente.Auth.SignIn(correo, password);
-            conexion.Usuario = session?.User;
+            conexion.UsuarioBD = session?.User;
+            conexion.UsuarioApp = await repositorioUser.GetUserByUUid(session?.User?.Id);
+
+            volumenMusica = conexion.UsuarioApp.Musica;
+            volumenSonidos = conexion.UsuarioApp.Sonidos;
         }
 
         public async Task LogoutAsync()
@@ -216,29 +227,25 @@ namespace preguntaods.BusinessLogic.Services
         {
             var session = await conexion.Cliente.Auth.SignUp(correo, password);
             if (session?.User?.AppMetadata == null) return null;
-            conexion.Usuario = session.User;
+            conexion.UsuarioBD = session.User;
             return session.User;
         }
 
         public async Task<Usuario> GetUsuarioLogged()
         {
-            if (conexion.Usuario != null)
-            {
-                var a = conexion.Usuario.Id;
-                var respuesta = await repositorioUser.GetUserByUUid(a);
-                return respuesta;
-            }
-            else
-            {
-                return null;
-            }
+            if (conexion.UsuarioBD == null) return null;
+
+            var a = conexion.UsuarioBD.Id;
+            var respuesta = await repositorioUser.GetUserByUUid(a);
+            return respuesta;
+
         }
 
         public async Task UpdatePuntos(int puntos)
         {
-            if (conexion.Usuario != null)
+            if (conexion.UsuarioBD != null)
             {
-                var a = conexion.Usuario.Id;
+                var a = conexion.UsuarioBD.Id;
                 var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
                 await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos);
             }
@@ -246,28 +253,30 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task UpdateNivel(int nivel)
         {
-            if (conexion.Usuario != null)
+            if (conexion.UsuarioBD != null)
             {
-                var a = conexion.Usuario.Id;
+                var a = conexion.UsuarioBD.Id;
                 await repositorioUser.UpdateNivel(a, nivel);
             }
         }
 
         public async Task UpdateVolumenMusica(int volumenMusica)
         {
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
+            this.volumenMusica = volumenMusica;
             await repositorioUser.UpdateVolumenMusica(a, volumenMusica);
         }
 
         public async Task UpdateVolumenSonidos(int volumenSonidos)
         {
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
+            this.volumenSonidos = volumenSonidos;
             await repositorioUser.UpdateVolumenSonidos(a, volumenSonidos);
         }
 
         public async Task CambiarNombre(string nombre)
         {
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
             await repositorioUser.UpdateNombre(a, nombre);
         }
 

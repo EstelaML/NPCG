@@ -216,7 +216,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task UpdateTimeUsedAsync(TimeSpan tnew)
         {
             var horas = tnew.TotalSeconds / 3600;
-            var id = conexion.Usuario.Id;
+            var id = conexion.UsuarioBD.Id;
             var estadisticas = await GetEstadisticasByUuid(id);
             var told = estadisticas.Tiempo;
 

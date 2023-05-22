@@ -19,7 +19,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<List<Ahorcado>> GetAhorcadoDificultad(int dificultad)
         {
-            var user = await repositorioUser.GetUserByUUid(conexion.Usuario.Id);
+            var user = await repositorioUser.GetUserByUUid(conexion.UsuarioBD.Id);
             if (user?.Id == null) return null;
             var id = (int)user.Id;
             var task1 = (conexion.Cliente.From<RetosRealizados>().Where(x => x.Usuario == id).Single());
@@ -41,7 +41,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task AñadirAhorcadoRealizado(Ahorcado pregunta)
         {
             // cogemos del usuario las preguntas acertadas ya
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
             var preguntas = await repositorioUser.GetAhorcadosAcertadosAsync(usuario);
             var retosAcertados = await repositorioUser.GetRetosAcertadosAsync(usuario);
@@ -82,7 +82,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task AñadirAhorcadoFallado(Ahorcado pregunta)
         {
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
             var retosFallados = await repositorioUser.GetRetosFalladosAsync(usuario);
             if (retosFallados != null)

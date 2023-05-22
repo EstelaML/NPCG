@@ -21,7 +21,7 @@ namespace preguntaods.Persistencia.Repository.impl
         {
             #region concurrenciaPeticiones
 
-            var uuid = (conexion.Usuario.Id);
+            var uuid = (conexion.UsuarioBD.Id);
             var user = await repositorioUser.GetUserByUUid(uuid);
             if (user?.Id == null) return null;
             var id = (int)user.Id;
@@ -54,7 +54,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task AñadirPreguntaRealizada(Pregunta pregunta)
         {
             // cogemos del usuario las preguntas acertadas ya
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
             var preguntas = await repositorioUser.GetPreguntasAcertadasAsync(usuario);
             var retosAcertados = await repositorioUser.GetRetosAcertadosAsync(usuario);
@@ -95,7 +95,7 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task AñadirPreguntaFallada(Pregunta pregunta)
         {
-            var a = conexion.Usuario.Id;
+            var a = conexion.UsuarioBD.Id;
             var usuario = await repositorioUser.GetUserByUUid(a);
             var retosFallados = await repositorioUser.GetRetosFalladosAsync(usuario);
             if (retosFallados != null)
