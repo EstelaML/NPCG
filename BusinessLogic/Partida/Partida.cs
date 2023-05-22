@@ -111,8 +111,10 @@ namespace preguntaods.BusinessLogic.Partida
             userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
-            bool cons = ((VistaPartidaViewModel)activity).GetConsolidado();
-            if (!cons) botonAbandonar.Visibility = ViewStates.Invisible;
+            var cons = ((VistaPartidaViewModel)activity).GetConsolidado();
+            if (!cons)
+                if (botonAbandonar != null)
+                    botonAbandonar.Visibility = ViewStates.Invisible;
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
@@ -260,7 +262,7 @@ namespace preguntaods.BusinessLogic.Partida
 
                 await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados - puntosRestadosConsol);
 
-                await subirNivel(partidasGanadas);
+                await SubirNivel(partidasGanadas);
 
                 await Fachada.UpdatePartidasGanadas();
             }
@@ -308,11 +310,10 @@ namespace preguntaods.BusinessLogic.Partida
 
         public int GetFalloTrasConsolidado()
         {
-            if (falloTrasConsolidado) return puntosRestadosConsol;
-            return 0;
+            return falloTrasConsolidado ? puntosRestadosConsol : 0;
         }
 
-        public async Task subirNivel(int partidasGanadas)
+        public async Task SubirNivel(int partidasGanadas)
         {
             if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 15)
             {

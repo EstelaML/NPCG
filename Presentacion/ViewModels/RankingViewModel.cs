@@ -17,7 +17,7 @@ namespace preguntaods.Presentacion.ViewModels
     [Activity(Label = "", Theme = "@style/HiddenTitleTheme")]
     public class RankingViewModel : AppCompatActivity
     {
-        protected Sonido sonido;
+        protected Sonido Sonido;
         private TableLayout tablaRanking;
         private Facade fachada;
         private TextView textAnimo;
@@ -37,8 +37,8 @@ namespace preguntaods.Presentacion.ViewModels
             fueraRanking = FindViewById<TableLayout>(Resource.Id.fueraRanking);
             textAnimo = FindViewById<TextView>(Resource.Id.textAnimo);
 
-            sonido = new Sonido();
-            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            Sonido = new Sonido();
+            Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) { atras.Click += Atras; }
 
@@ -58,8 +58,8 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void BotonIzq(object sender, EventArgs e)
         {
-            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
-            sonido.EjecutarSonido();
+            Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            Sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(RankDiarioViewModel));
             StartActivity(i);
@@ -68,8 +68,8 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void BotonDer(object sender, EventArgs e)
         {
-            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
-            sonido.EjecutarSonido();
+            Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            Sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(RankSemanalViewModel));
             StartActivity(i);
@@ -181,8 +181,8 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Atras(object sender, EventArgs e)
         {
-            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
-            sonido.EjecutarSonido();
+            Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            Sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);

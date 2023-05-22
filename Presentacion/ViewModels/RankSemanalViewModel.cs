@@ -17,17 +17,20 @@ namespace preguntaods.Presentacion.ViewModels
         {
             base.OnCreate(savedInstanceState);
             tipoRanking = FindViewById<TextView>(Resource.Id.tipoRanking);
-            tipoRanking.Text = "Ranking semanal";
+            if (tipoRanking != null) tipoRanking.Text = "Ranking semanal";
 
             botonDer = FindViewById<Button>(Resource.Id.botonDer);
-            botonDer.Text = "General";
-            if (botonDer != null) { botonDer.Click += BotonDer; }
+            if (botonDer != null)
+            {
+                botonDer.Text = "General";
+                botonDer.Click += BotonDer;
+            }
         }
 
         private void BotonDer(object sender, EventArgs e)
         {
-            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
-            sonido.EjecutarSonido();
+            Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            Sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(RankingViewModel));
             StartActivity(i);

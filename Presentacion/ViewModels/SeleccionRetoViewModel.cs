@@ -8,6 +8,7 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
+using Android.Graphics;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -43,12 +44,12 @@ namespace preguntaods.Presentacion.ViewModels
             ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
             if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
 
-            ahorcado.Enabled = false;
+            if (ahorcado != null) ahorcado.Enabled = false;
 
             fiesta = FindViewById<Button>(Resource.Id.fiestaB);
             if (fiesta != null) fiesta.Click += Fiesta_Click;
 
-            fiesta.Enabled = false;
+            if (fiesta != null) fiesta.Enabled = false;
 
             atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
@@ -63,15 +64,15 @@ namespace preguntaods.Presentacion.ViewModels
             if (level == 1)
             {
                 ahorcado.Enabled = true;
-                ahorcado.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
+                ahorcado.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
             }
             else if (level > 1)
             {
                 ahorcado.Enabled = true;
-                ahorcado.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
+                ahorcado.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
 
                 fiesta.Enabled = true;
-                fiesta.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
+                fiesta.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
             }
         }
 

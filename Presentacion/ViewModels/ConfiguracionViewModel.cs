@@ -39,26 +39,26 @@ namespace preguntaods.Presentacion.ViewModels
             SetContentView(Resource.Layout.vistaConfiguracion);
 
             scrollVolumenApp = FindViewById<SeekBar>(Resource.Id.scrollVolumenApp);
-            scrollVolumenApp.ProgressChanged += ProgressChangedVolumenApp;
+            if (scrollVolumenApp != null) scrollVolumenApp.ProgressChanged += ProgressChangedVolumenApp;
 
             textoVolumenApp = FindViewById<TextView>(Resource.Id.textoVolumenApp);
 
             imagenApp = FindViewById<ImageButton>(Resource.Id.sonidoApp);
-            imagenApp.Click += ChangeButtonApp;
+            if (imagenApp != null) imagenApp.Click += ChangeButtonApp;
 
             scrollVolumenMusica = FindViewById<SeekBar>(Resource.Id.scrollVolumenMusica);
-            scrollVolumenMusica.ProgressChanged += ProgressChangedVolumenMusica;
+            if (scrollVolumenMusica != null) scrollVolumenMusica.ProgressChanged += ProgressChangedVolumenMusica;
 
             textoVolumenMusica = FindViewById<TextView>(Resource.Id.textoVolumenMusica);
 
             imagenMusica = FindViewById<ImageButton>(Resource.Id.sonidoMusica);
-            imagenMusica.Click += ChangeButtonMusica;
+            if (imagenMusica != null) imagenMusica.Click += ChangeButtonMusica;
 
             atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
-            atras.Click += Atras;
+            if (atras != null) atras.Click += Atras;
 
             guardarCambios = FindViewById<Button>(Resource.Id.guardarCambios);
-            guardarCambios.Click += GuardarCambios;
+            if (guardarCambios != null) guardarCambios.Click += GuardarCambios;
 
             fachada = new Facade();
             usuario = await fachada.GetUsuarioLogged();
@@ -72,11 +72,12 @@ namespace preguntaods.Presentacion.ViewModels
             toggleImagenApp = false;
             toggleImagenMusica = false;
 
-            scrollVolumenApp.Progress = volumenApp;
-            textoVolumenApp.Text = volumenApp + "%";
+            if (scrollVolumenApp != null) scrollVolumenApp.Progress = volumenApp;
 
-            scrollVolumenMusica.Progress = volumenMusica;
-            textoVolumenMusica.Text = volumenMusica + "%";
+            if (textoVolumenApp != null) textoVolumenApp.Text = volumenApp + "%";
+
+            if (scrollVolumenMusica != null) scrollVolumenMusica.Progress = volumenMusica;
+            if (textoVolumenMusica != null) textoVolumenMusica.Text = volumenMusica + "%";
         }
 
         private void Atras(object sender, EventArgs e)
