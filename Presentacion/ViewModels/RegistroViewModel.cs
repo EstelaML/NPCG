@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Text;
 using Android.Views;
@@ -11,7 +12,6 @@ using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
 using System.Text.RegularExpressions;
-using Android.Content;
 
 namespace preguntaods.Presentacion.ViewModels
 {

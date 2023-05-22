@@ -12,6 +12,7 @@ namespace preguntaods.Presentacion.ViewModels
     {
         private TextView tipoRanking;
         private Button botonIzq;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

@@ -20,6 +20,7 @@ namespace preguntaods.Persistencia.Repository.impl
         public async Task<List<Pregunta>> GetPreguntasByDificultad(int dificultad)
         {
             #region concurrenciaPeticiones
+
             var uuid = (conexion.Usuario.Id);
             var user = await repositorioUser.GetUserByUUid(uuid);
             if (user?.Id == null) return null;
@@ -28,18 +29,25 @@ namespace preguntaods.Persistencia.Repository.impl
             var task2 = (conexion.Cliente.From<Pregunta>().Where(x => x.Dificultad == dificultad).Get());
             var tareas = new List<Task> { task1, task2 };
             await Task.WhenAll(tareas);
+
             #endregion concurrenciaPeticiones
+
             #region eliminarPreguntasRealizadas
+
             var retos = task1.Result;
             var response = task2.Result;
             var preguntas = response.Models.ToList();
             var preguntasHechas = retos?.PreguntasRealizadas?.ToList();
             preguntas = preguntasHechas != null ? preguntas.Where(pregunta => pregunta.Id != null && !preguntasHechas.Contains((int)pregunta.Id)).ToList() : preguntas;
+
             #endregion eliminarPreguntasRealizadas
+
             #region return
+
             if (preguntas.Count >= 5) return preguntas;
             _ = repositorioUser.UpdatePreguntaAcertada("", null, user);
             return response.Models.ToList();
+
             #endregion return
         }
 

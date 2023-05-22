@@ -1,16 +1,13 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
 using Android.Content;
-using Android.Graphics.Drawables;
 using Android.OS;
-using Android.Text;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -94,7 +91,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private async void GuardarCambios(object sender, EventArgs e)
         {
-            UserDialogs.Instance.ShowLoading("Guardando cambios...",MaskType.Clear);
+            UserDialogs.Instance.ShowLoading("Guardando cambios...", MaskType.Clear);
 
             await fachada.UpdateVolumenSonidos(volumenApp);
             await fachada.UpdateVolumenMusica(volumenMusica);
@@ -148,5 +145,4 @@ namespace preguntaods.Presentacion.ViewModels
             }
         }
     }
-
 }

@@ -143,7 +143,6 @@ namespace preguntaods.Presentacion.ViewModels
                 var i = new Intent(Intent.ActionView, uri);
                 i.SetFlags(ActivityFlags.NewTask);
                 StartActivity(i);
-
             });
             alertBuilder.SetNegativeButton("Cancelar", (o, args) =>
             {
@@ -160,6 +159,7 @@ namespace preguntaods.Presentacion.ViewModels
         {
             return partida.SetFalloTrasConsolidado(puntuacion);
         }
+
         public bool GetFalloTrasConsolidado()
         {
             return true;

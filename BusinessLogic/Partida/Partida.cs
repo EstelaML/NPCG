@@ -192,7 +192,7 @@ namespace preguntaods.BusinessLogic.Partida
                 var puntosP = UserInterfacePregunta.GetPuntosConsolidados();
                 if (puntosP == 0) { puntosP = UserInterfaceAhorcado.GetPuntosConsolidados(); }
                 titulo = "¿Estás seguro?";
-                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + (puntosP - puntosRestadosConsol*2);
+                mensaje = "Si aceptas se te guardarán los puntos consolidados: " + (puntosP - puntosRestadosConsol * 2);
             }
             else
             {
@@ -298,20 +298,22 @@ namespace preguntaods.BusinessLogic.Partida
             await Fachada.UpdatePuntos(puntosConsolidados);
         }
 
-        public bool SetFalloTrasConsolidado(int puntos) {
-            if (ptsConsolidados == 0) { return false;  }
+        public bool SetFalloTrasConsolidado(int puntos)
+        {
+            if (ptsConsolidados == 0) { return false; }
             falloTrasConsolidado = true;
             puntosRestadosConsol = puntos;
             return true;
         }
-        public int GetFalloTrasConsolidado() { 
+
+        public int GetFalloTrasConsolidado()
+        {
             if (falloTrasConsolidado) return puntosRestadosConsol;
             return 0;
         }
 
         public async Task subirNivel(int partidasGanadas)
         {
-
             if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 15)
             {
                 await Fachada.UpdateNivel(User.Nivel);
@@ -321,12 +323,8 @@ namespace preguntaods.BusinessLogic.Partida
                     Title = "¡¡Enhorabuena!!",
                     Message = "Has subido de nivel",
                     OkText = "Entendido",
-
                 });
-
-
             }
-
         }
     }
 }

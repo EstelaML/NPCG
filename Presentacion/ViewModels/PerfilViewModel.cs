@@ -183,19 +183,16 @@ namespace preguntaods.Presentacion.ViewModels
             else { tiempo.Text = "0 h 0 min"; }
         }
 
-        private void IniciarRequisitos() 
+        private void IniciarRequisitos()
         {
-           
-            if (usuario.Nivel < 3) 
+            if (usuario.Nivel < 3)
             {
-               int partidasRestantes = estadisticas.PartidasGanadas / 5;
-               int res = (partidasRestantes + 1) * 5 - estadisticas.PartidasGanadas;
+                int partidasRestantes = estadisticas.PartidasGanadas / 5;
+                int res = (partidasRestantes + 1) * 5 - estadisticas.PartidasGanadas;
 
-             requisitos.Text = "Te quedan " + res + " partidas para subir al siguiente nivel";
-                
-            
-            } else { requisitos.Text = "Has llegado al nivel máximo"; }
-        
+                requisitos.Text = "Te quedan " + res + " partidas para subir al siguiente nivel";
+            }
+            else { requisitos.Text = "Has llegado al nivel máximo"; }
         }
 
         private void Atras(object sender, EventArgs e)

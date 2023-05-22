@@ -28,7 +28,6 @@ namespace preguntaods.Presentacion.ViewModels
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaSeleccionReto);
             sonido = new Sonido();
@@ -38,10 +37,8 @@ namespace preguntaods.Presentacion.ViewModels
 
             usuario = await fachada.GetUsuarioLogged();
 
-
             partida = FindViewById<Button>(Resource.Id.partidaB);
             if (partida != null) partida.Click += Partida_Click;
-
 
             ahorcado = FindViewById<Button>(Resource.Id.ahorcadoB);
             if (ahorcado != null) ahorcado.Click += Ahorcado_Click;
@@ -61,28 +58,21 @@ namespace preguntaods.Presentacion.ViewModels
 
         public void InitBoton()
         {
-
             level = usuario.Nivel;
 
             if (level == 1)
             {
-
                 ahorcado.Enabled = true;
                 ahorcado.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
-
             }
             else if (level > 1)
             {
-
                 ahorcado.Enabled = true;
                 ahorcado.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
 
                 fiesta.Enabled = true;
                 fiesta.SetBackgroundColor(Resources.GetColor(Resource.Color.colorPrimary));
-
             }
-
-
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
