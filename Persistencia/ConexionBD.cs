@@ -1,15 +1,15 @@
 ﻿namespace preguntaods.Persistencia
 {
-    internal class SingletonConexion
+    internal class ConexionBD
     {
-        private static SingletonConexion _instance;
+        private static ConexionBD _instance;
         private const string SupabaseUrl = "https://ilsulfckdfhvgljvvmhb.supabase.co";
         private const string SupabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlsc3VsZmNrZGZodmdsanZ2bWhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzY5ODI1MTksImV4cCI6MTk5MjU1ODUxOX0.9Uab8BACftEFrG90mMNJ_b6XTk9biLGn8IkyS3oIIoE";
 
         public Supabase.Client Cliente;
         public Supabase.Gotrue.User Usuario;
 
-        private SingletonConexion()
+        private ConexionBD()
         {
             var options = new Supabase.SupabaseOptions
             {
@@ -20,9 +20,9 @@
             Cliente.InitializeAsync();
         }
 
-        public static SingletonConexion GetInstance()
+        public static ConexionBD GetInstance()
         {
-            return _instance ??= new SingletonConexion();
+            return _instance ??= new ConexionBD();
         }
     }
 }

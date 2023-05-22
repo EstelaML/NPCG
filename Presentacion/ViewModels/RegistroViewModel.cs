@@ -44,7 +44,7 @@ namespace preguntaods.Presentacion.ViewModels
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
-            fachada = new Facade();
+            fachada = Facade.GetInstance();
 
             passwordCorrect = false;
             emailCorrect = false;

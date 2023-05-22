@@ -7,15 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Android.Provider.CalendarContract;
 using Random = Java.Util.Random;
 
 namespace preguntaods.BusinessLogic.Services
 {
-    public class PreguntadosService : IPreguntadosService
+    public class PreguntadosService
     {
+        private static PreguntadosService _instance;
+
         private readonly object sync = new object();
 
-        private readonly SingletonConexion conexion;
+        private readonly ConexionBD conexion;
         private readonly RepositorioPregunta repositorioPregunta;
         private readonly RepositorioAhorcado repositorioAhorcado;
         private readonly Repository<Estadistica> repositorioEstadisticas;
@@ -28,13 +31,18 @@ namespace preguntaods.BusinessLogic.Services
         private static List<Ahorcado> _ahorcadoMedio;
         private static List<Ahorcado> _ahorcadoAlto;
 
-        public PreguntadosService()
+        private PreguntadosService()
         {
-            conexion = SingletonConexion.GetInstance();
+            conexion = ConexionBD.GetInstance();
             repositorioPregunta = new RepositorioPregunta();
             repositorioAhorcado = new RepositorioAhorcado();
             repositorioEstadisticas = new Repository<Estadistica>();
             repositorioUser = new RepositorioUsuario();
+        }
+
+        public static PreguntadosService GetInstance()
+        {
+            return _instance ??= new PreguntadosService();
         }
 
         #region RetoPregunta

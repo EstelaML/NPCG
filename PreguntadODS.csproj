@@ -80,7 +80,6 @@
     <Compile Include="BusinessLogic\FabricaRetos\FabricaRetoFrase.cs" />
     <Compile Include="BusinessLogic\FabricaRetos\FabricaRetoPregunta.cs" />
     <Compile Include="BusinessLogic\FabricaRetos\FabricaReto.cs" />
-    <Compile Include="BusinessLogic\Fachada\IFacade.cs" />
     <Compile Include="BusinessLogic\Retos\RetoFrase.cs" />
     <Compile Include="BusinessLogic\Retos\RetoSopa.cs" />
     <Compile Include="BusinessLogic\Retos\RetoAhorcado.cs" />
@@ -102,7 +101,6 @@
     <Compile Include="BusinessLogic\Sonidos\EstrategiaSonidoError.cs" />
     <Compile Include="BusinessLogic\Sonidos\EstrategiaSonidoMusica.cs" />
     <Compile Include="BusinessLogic\Sonidos\EstrategiaSonidoClick.cs" />
-    <Compile Include="BusinessLogic\Services\IPreguntadosService.cs" />
     <Compile Include="BusinessLogic\Services\PreguntadosService.cs" />
     <Compile Include="Persistencia\Entities\Ahorcado.cs" />
     <Compile Include="Persistencia\Entities\RetosRealizados.cs" />
@@ -111,7 +109,7 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioAhorcado.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
-    <Compile Include="Persistencia\SingletonConexion.cs" />
+    <Compile Include="Persistencia\ConexionBD.cs" />
     <Compile Include="Presentacion\ViewModels\ConfiguracionViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\PerfilViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RankDiarioViewModel.cs" />

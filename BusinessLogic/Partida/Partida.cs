@@ -20,7 +20,7 @@ namespace preguntaods.BusinessLogic.Partida
         private readonly List<IReto> listaRetos;
         private IReto retoActual;
         private UserInterface userInterface;
-        public Facade Fachada;
+        private Facade fachada;
 
         private Android.App.Activity activity;
         private Button botonAbandonar;
@@ -76,12 +76,12 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void SetFacade(Facade fachada)
         {
-            Fachada = fachada;
+            this.fachada = fachada;
         }
 
         public Facade GetFacade()
         {
-            return Fachada;
+            return fachada;
         }
 
         private void SetUi(UserInterface newUserInterface)
@@ -249,7 +249,7 @@ namespace preguntaods.BusinessLogic.Partida
             string titulo;
             string mensaje;
 
-            var stats = await Fachada.PedirEstadisticas(User.Uuid);
+            var stats = await fachada.PedirEstadisticas(User.Uuid);
             int partidasGanadas = stats.PartidasGanadas;
 
             sonido.PararSonido();
@@ -260,11 +260,11 @@ namespace preguntaods.BusinessLogic.Partida
 
                 sonido.SetEstrategia(new EstrategiaSonidoVictoria(), activity);
 
-                await Fachada.UpdatePuntos(puntosFinales - puntosConsolidados - puntosRestadosConsol);
+                await fachada.UpdatePuntos(puntosFinales - puntosConsolidados - puntosRestadosConsol);
 
                 await SubirNivel(partidasGanadas);
 
-                await Fachada.UpdatePartidasGanadas();
+                await fachada.UpdatePartidasGanadas();
             }
             else
             {
@@ -297,7 +297,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async void EventoConsolidarBoton(object sender, EventArgs e, int puntosConsolidados)
         {
-            await Fachada.UpdatePuntos(puntosConsolidados);
+            await fachada.UpdatePuntos(puntosConsolidados);
         }
 
         public bool SetFalloTrasConsolidado(int puntos)
@@ -317,7 +317,7 @@ namespace preguntaods.BusinessLogic.Partida
         {
             if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 15)
             {
-                await Fachada.UpdateNivel(User.Nivel);
+                await fachada.UpdateNivel(User.Nivel);
 
                 await UserDialogs.Instance.AlertAsync(new AlertConfig
                 {

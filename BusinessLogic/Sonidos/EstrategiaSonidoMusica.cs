@@ -14,9 +14,12 @@ namespace preguntaods.BusinessLogic.EstrategiaSonido
 
         public void Play(Android.Content.Context t)
         {
+            float leftVolume = 0.4f;
+            float rightVolume = 0.4f;
+
             var uri = Android.Net.Uri.Parse("android.resource://" + t.PackageName + "/" + Resource.Raw.sonido_musica);
             mp.SetDataSource(t, uri ?? throw new InvalidOperationException());
-            mp.SetVolume(0.4f, 0.4f);
+            mp.SetVolume(leftVolume, rightVolume);
             mp.Prepare();
             mp.Start();
         }

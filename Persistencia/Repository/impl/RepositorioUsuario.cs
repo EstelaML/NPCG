@@ -6,11 +6,11 @@ namespace preguntaods.Persistencia.Repository.impl
 {
     public class RepositorioUsuario : Repository<Usuario>
     {
-        private SingletonConexion conexion;
+        private ConexionBD conexion;
 
         public RepositorioUsuario()
         {
-            conexion = SingletonConexion.GetInstance();
+            conexion = ConexionBD.GetInstance();
         }
 
         public async Task<Usuario> GetUserByUUid(string uuid)

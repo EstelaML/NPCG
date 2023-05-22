@@ -42,7 +42,7 @@ namespace preguntaods.Presentacion.ViewModels
             await director.ConstructPartida(builder, botonPulsado);
             partida = builder.GetPartida();
 
-            fachada = new Facade();
+            fachada = Facade.GetInstance();
 
             //Ocultar dialogo
             UserDialogs.Instance.HideLoading();

@@ -50,7 +50,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void BuildFacade()
         {
-            partida.SetFacade(new Facade());
+            partida.SetFacade(Facade.GetInstance());
         }
 
         public void BuildSonido()

@@ -23,7 +23,7 @@ namespace preguntaods.Presentacion.ViewModels
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
-            fachada = new Facade();
+            fachada = Facade.GetInstance();
 
             var perfil = FindViewById<Button>(Resource.Id.perfil);
             if (perfil != null) perfil.Click += Perfil_Click;

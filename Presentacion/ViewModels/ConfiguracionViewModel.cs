@@ -60,7 +60,7 @@ namespace preguntaods.Presentacion.ViewModels
             guardarCambios = FindViewById<Button>(Resource.Id.guardarCambios);
             if (guardarCambios != null) guardarCambios.Click += GuardarCambios;
 
-            fachada = new Facade();
+            fachada = Facade.GetInstance();
             usuario = await fachada.GetUsuarioLogged();
 
             sonido = new Sonido();

@@ -8,11 +8,11 @@ namespace preguntaods.Persistencia.Repository.impl
 {
     public class Repository<T> : IRepository<T> where T : BaseModel, IEntity, new()
     {
-        private readonly SingletonConexion conexion;
+        private readonly ConexionBD conexion;
 
         public Repository()
         {
-            conexion = SingletonConexion.GetInstance();
+            conexion = ConexionBD.GetInstance();
         }
 
         public async Task<T> GetById(int id)

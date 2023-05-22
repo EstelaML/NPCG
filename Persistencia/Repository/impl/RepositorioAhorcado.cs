@@ -8,12 +8,12 @@ namespace preguntaods.Persistencia.Repository.impl
 {
     public class RepositorioAhorcado : Repository<Ahorcado>
     {
-        private readonly SingletonConexion conexion;
+        private readonly ConexionBD conexion;
         private readonly RepositorioUsuario repositorioUser;
 
         public RepositorioAhorcado()
         {
-            conexion = SingletonConexion.GetInstance();
+            conexion = ConexionBD.GetInstance();
             repositorioUser = new RepositorioUsuario();
         }
 

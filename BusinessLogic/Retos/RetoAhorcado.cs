@@ -16,7 +16,7 @@ namespace preguntaods.BusinessLogic.Retos
         {
             Type = IReto.TypeAhorcado;
 
-            _servicio = new PreguntadosService();
+            _servicio = PreguntadosService.GetInstance();
             numeroReto = orden;
         }
 

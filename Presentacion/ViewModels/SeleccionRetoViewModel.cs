@@ -34,7 +34,7 @@ namespace preguntaods.Presentacion.ViewModels
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
-            fachada = new Facade();
+            fachada = Facade.GetInstance();
 
             usuario = await fachada.GetUsuarioLogged();
 

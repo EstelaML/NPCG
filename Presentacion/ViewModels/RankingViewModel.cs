@@ -31,7 +31,7 @@ namespace preguntaods.Presentacion.ViewModels
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
-            fachada = new Facade();
+            fachada = Facade.GetInstance();
 
             tablaRanking = FindViewById<TableLayout>(Resource.Id.tablaRanking);
             fueraRanking = FindViewById<TableLayout>(Resource.Id.fueraRanking);

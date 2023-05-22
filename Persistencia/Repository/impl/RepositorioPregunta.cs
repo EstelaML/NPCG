@@ -8,12 +8,12 @@ namespace preguntaods.Persistencia.Repository.impl
 {
     public class RepositorioPregunta : Repository<Pregunta>
     {
-        private SingletonConexion conexion;
+        private ConexionBD conexion;
         private readonly RepositorioUsuario repositorioUser;
 
         public RepositorioPregunta()
         {
-            conexion = SingletonConexion.GetInstance();
+            conexion = ConexionBD.GetInstance();
             repositorioUser = new RepositorioUsuario();
         }
 
