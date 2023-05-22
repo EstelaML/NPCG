@@ -104,12 +104,14 @@ namespace preguntaods.Presentacion.ViewModels
         {
             if (toggleImagenApp) return;
             textoVolumenApp.Text = e.Progress + "%";
+            volumenApp = e.Progress;
         }
 
         private void ProgressChangedVolumenMusica(object sender, SeekBar.ProgressChangedEventArgs e)
         {
             if (toggleImagenMusica) return;
             textoVolumenMusica.Text = e.Progress + "%";
+            volumenMusica = e.Progress;
         }
 
         private void ChangeButtonApp(object sender, EventArgs e)
