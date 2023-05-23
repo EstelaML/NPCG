@@ -3,6 +3,7 @@ using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Text;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Retos;
@@ -27,7 +28,6 @@ namespace preguntaods.Presentacion.UI_impl
         private EstrategiaSonidoReloj reloj;
         private int? odsRelacion;
         private bool tienePista;
-
         // UI Elements
         private TextView enunciado;
 
@@ -51,7 +51,6 @@ namespace preguntaods.Presentacion.UI_impl
             puntuacionTotal = newPuntuacion;
             _puntosConsolidados = newPtsConsolidados;
             pistasUsadas = newPistasUsadas;
-
             tienePista = true;
         }
 
@@ -69,12 +68,10 @@ namespace preguntaods.Presentacion.UI_impl
             imagenCorazon2 = Activity.FindViewById<ImageView>(Resource.Id.heart2);
             interroganteButton = Activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
             pistaButton = Activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
-
             if (fallos == 1)
             {
                 imagenCorazon1?.SetImageResource(Resource.Drawable.icon_emptyHeart);
             }
-
             // Initialization of Services
             sonido = new Sonido();
 
