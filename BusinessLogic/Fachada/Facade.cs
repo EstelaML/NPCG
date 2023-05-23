@@ -62,6 +62,11 @@ namespace preguntaods.BusinessLogic.Fachada
             await servicio.UpdateVolumenSonidos(volumenSonidos);
         }
 
+        public async Task UpdateVolumenActivado(int[] volumenActivado)
+        {
+            await servicio.UpdateVolumenActivado(volumenActivado);
+        }
+
         public async Task UpdateNivel(int nivel)
         {
             await servicio.UpdateNivel(nivel);

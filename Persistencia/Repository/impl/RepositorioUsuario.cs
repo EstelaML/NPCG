@@ -163,6 +163,15 @@ namespace preguntaods.Persistencia.Repository.impl
                 .Update();
         }
 
+        public async Task UpdateVolumenActivado(string uuid, int[] volumenActivado)
+        {
+            await conexion.Cliente
+                .From<Usuario>()
+                .Where(x => x.Uuid == uuid)
+                .Set(x => x.VolumenActivado, volumenActivado)
+                .Update();
+        }
+
         public async Task<int[]> GetPreguntasAcertadasAsync(Usuario usuario)
         {
             if (usuario.Id == null) return null;

@@ -34,5 +34,9 @@ namespace preguntaods.Entities
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("Nivel")]
         public int Nivel { get; set; }
+
+        // ReSharper disable once RedundantArgumentDefaultValue
+        [Column("VolumenActivado")]
+        public int[] VolumenActivado { get; set; }
     }
 }

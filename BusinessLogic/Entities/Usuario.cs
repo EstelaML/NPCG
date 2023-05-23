@@ -6,12 +6,13 @@ namespace preguntaods.Entities
         public Usuario()
         { }
 
-        public Usuario(string uid, string nombre, int sonidos, int musica)
+        public Usuario(string uid, string nombre, int sonidos, int musica, int[] volumenActivado)
         {
             Uuid = uid;
             Nombre = nombre;
             Sonidos = sonidos;
             Musica = musica;
+            VolumenActivado = volumenActivado;
         }
     }
 }

@@ -174,7 +174,7 @@ namespace preguntaods.BusinessLogic.Services
 
             return listaUsuarios;
         }
-        
+
         public async void PonerPuntuacionDiaria() {
             // coges todas las estadisticas de todos los usuarios
             var respuesta = await repositorioEstadisticas.GetAll();
@@ -300,6 +300,12 @@ namespace preguntaods.BusinessLogic.Services
             var a = conexion.UsuarioBD.Id;
             this.volumenSonidos = volumenSonidos;
             await repositorioUser.UpdateVolumenSonidos(a, volumenSonidos);
+        }
+
+        public async Task UpdateVolumenActivado(int[] volumenActivado)
+        {
+            var a = conexion.UsuarioBD.Id;
+            await repositorioUser.UpdateVolumenActivado(a, volumenActivado);
         }
 
         public async Task CambiarNombre(string nombre)

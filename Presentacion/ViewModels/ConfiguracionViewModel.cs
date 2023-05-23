@@ -40,20 +40,17 @@ namespace preguntaods.Presentacion.ViewModels
             SetContentView(Resource.Layout.vistaConfiguracion);
 
             scrollVolumenApp = FindViewById<SeekBar>(Resource.Id.scrollVolumenApp);
-            if (scrollVolumenApp != null) scrollVolumenApp.ProgressChanged += ProgressChangedVolumenApp;
-
             textoVolumenApp = FindViewById<TextView>(Resource.Id.textoVolumenApp);
 
             imagenApp = FindViewById<ImageButton>(Resource.Id.sonidoApp);
             if (imagenApp != null) imagenApp.Click += ChangeButtonApp;
 
             scrollVolumenMusica = FindViewById<SeekBar>(Resource.Id.scrollVolumenMusica);
-            if (scrollVolumenMusica != null) scrollVolumenMusica.ProgressChanged += ProgressChangedVolumenMusica;
-
             textoVolumenMusica = FindViewById<TextView>(Resource.Id.textoVolumenMusica);
 
             imagenMusica = FindViewById<ImageButton>(Resource.Id.sonidoMusica);
             if (imagenMusica != null) imagenMusica.Click += ChangeButtonMusica;
+
 
             atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) atras.Click += Atras;
@@ -61,17 +58,37 @@ namespace preguntaods.Presentacion.ViewModels
             guardarCambios = FindViewById<Button>(Resource.Id.guardarCambios);
             if (guardarCambios != null) guardarCambios.Click += GuardarCambios;
 
+
             fachada = Facade.GetInstance();
             usuario = await fachada.GetUsuarioLogged();
 
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
-            volumenApp = usuario.Sonidos;
-            volumenMusica = usuario.Musica;
+            if (usuario.VolumenActivado[0] == 1)
+            {
+                toggleImagenApp = false;
+                volumenApp = usuario.Sonidos;
+            }
+            else
+            {
+                toggleImagenApp = true;
+                ChangeButtonApp(null, null);
+            }
 
-            toggleImagenApp = false;
-            toggleImagenMusica = false;
+            if (usuario.VolumenActivado[1] == 1)
+            {
+                toggleImagenMusica = false;
+                volumenMusica = usuario.Musica;
+            }
+            else
+            {
+                toggleImagenMusica = true;
+                ChangeButtonMusica(null, null);
+            }
+
+            if (scrollVolumenApp != null) scrollVolumenApp.ProgressChanged += ProgressChangedVolumenApp;
+            if (scrollVolumenMusica != null) scrollVolumenMusica.ProgressChanged += ProgressChangedVolumenMusica;
 
             if (scrollVolumenApp != null) scrollVolumenApp.Progress = volumenApp;
 
@@ -100,6 +117,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             await fachada.UpdateVolumenSonidos(volumenApp);
             await fachada.UpdateVolumenMusica(volumenMusica);
+            await fachada.UpdateVolumenActivado(new[] { toggleImagenApp ? 0 : 1, toggleImagenMusica ? 0 : 1});
 
             UserDialogs.Instance.HideLoading();
             UserDialogs.Instance.Alert(new AlertConfig
@@ -111,16 +129,14 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void ProgressChangedVolumenApp(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-            if (toggleImagenApp) return;
-            textoVolumenApp.Text = e.Progress + "%";
-            volumenApp = e.Progress;
+            textoVolumenApp.Text = scrollVolumenApp.Progress + "%";
+            volumenApp = scrollVolumenApp.Progress;
         }
 
         private void ProgressChangedVolumenMusica(object sender, SeekBar.ProgressChangedEventArgs e)
         {
-            if (toggleImagenMusica) return;
-            textoVolumenMusica.Text = e.Progress + "%";
-            volumenMusica = e.Progress;
+            textoVolumenMusica.Text = scrollVolumenMusica.Progress + "%";
+            volumenMusica = scrollVolumenMusica.Progress;
         }
 
         private void ChangeButtonApp(object sender, EventArgs e)
@@ -136,6 +152,7 @@ namespace preguntaods.Presentacion.ViewModels
             else
             {
                 imagenApp.SetImageResource(Resource.Drawable.icon_sonido);
+                scrollVolumenApp.Progress = volumenMusica;
                 scrollVolumenApp.Enabled = true;
             }
         }
@@ -153,6 +170,7 @@ namespace preguntaods.Presentacion.ViewModels
             else
             {
                 imagenMusica.SetImageResource(Resource.Drawable.icon_sonido);
+                scrollVolumenMusica.Progress = volumenMusica;
                 scrollVolumenMusica.Enabled = true;
             }
         }
