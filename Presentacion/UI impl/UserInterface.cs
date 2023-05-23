@@ -8,9 +8,10 @@ namespace preguntaods.Presentacion.UI_impl
     {
         private TextView textoPuntosTotales;
         private TextView textoPuntosConsolidados;
+        private TextView textoNumReto;
         protected Activity Activity;
 
-        public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, IReto retoActual)
+        public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, IReto retoActual, int orden)
         {
             SetValues(fallos, pistasUsadas, ptsTotales, ptsConsolidados);
             Init();
@@ -21,6 +22,9 @@ namespace preguntaods.Presentacion.UI_impl
 
             textoPuntosConsolidados = Activity.FindViewById<TextView>(Resource.Id.textPtsConsolidados);
             if (textoPuntosConsolidados != null) textoPuntosConsolidados.Text = "Puntos consolidados: " + ptsConsolidados;
+
+            textoNumReto = Activity.FindViewById<TextView>(Resource.Id.numReto);
+            if (textoNumReto != null) textoNumReto.Text = orden + "/10";
         }
 
         public void SetActivity(Activity activity)

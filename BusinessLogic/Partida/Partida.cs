@@ -108,7 +108,7 @@ namespace preguntaods.BusinessLogic.Partida
 
         public void InitValues()
         {
-            userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual);
+            userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual, contadorRetoSiguiente);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
