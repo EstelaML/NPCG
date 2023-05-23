@@ -63,7 +63,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text=""
+                android:text="Puntuación total: 0"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:gravity="left"
@@ -71,7 +71,7 @@
                 android:id="@+id/textView2" />
 
             <TextView
-                android:text=""
+                android:text="Puntuación consolidada:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:gravity="left"
@@ -83,6 +83,15 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+
+        <TextView
+            android:paddingTop="10sp"
+            android:paddingRight="20sp"
+            android:text="1/10"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/numReto" />
 
         <ImageView
             android:src="@drawable/icon_heart"
