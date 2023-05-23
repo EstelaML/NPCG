@@ -136,7 +136,7 @@ namespace preguntaods.Presentacion.ViewModels
             else
             {
                 imagenApp.SetImageResource(Resource.Drawable.icon_sonido);
-                scrollVolumenApp.Enabled = false;
+                scrollVolumenApp.Enabled = true;
             }
         }
 
