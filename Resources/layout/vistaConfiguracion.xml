@@ -144,7 +144,10 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:text="Guardar cambios"
-                android:id="@+id/guardarCambios"/>
+                android:id="@+id/guardarCambios"
+                android:textColor="@android:color/black"
+                android:background="@drawable/style_camposinf"
+                android:backgroundTint="@color/colorPrimary"/>
 
         </LinearLayout>
 
