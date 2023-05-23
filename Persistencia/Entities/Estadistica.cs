@@ -45,5 +45,8 @@ namespace preguntaods.Entities
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("FechaDiaria")]
         public DateTime? FechaDiaria { get; set; }
+        // ReSharper disable once RedundantArgumentDefaultValue
+        [Column("PuntuacionSemanal")]
+        public int PuntuacionSemanal { get; set; }
     }
 }

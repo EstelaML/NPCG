@@ -35,6 +35,7 @@ namespace preguntaods.Presentacion.ViewModels
             if (nuevaPartida != null) nuevaPartida.Click += NuevaPartida_Click;
 
             fachada.PonerPuntuacionDiaria();
+            fachada.PonerPuntuacionSemanal();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

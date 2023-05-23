@@ -5,6 +5,7 @@ using preguntaods.Persistencia.Repository.impl;
 using Supabase.Gotrue;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using static Android.Provider.CalendarContract;
@@ -174,7 +175,17 @@ namespace preguntaods.BusinessLogic.Services
 
             return listaUsuarios;
         }
-        
+
+        public async Task<List<Estadistica>> GetAllUsersOrderedByWeek()
+        {
+            var respuesta = await repositorioEstadisticas.GetAll();
+            var listaUsuarios = respuesta.Select(estadisticas => new Estadistica { Nombre = estadisticas.Nombre, PuntuacionSemanal = estadisticas.PuntuacionSemanal })
+                .OrderByDescending(estadisticas => estadisticas.PuntuacionSemanal)
+                .ToList();
+
+            return listaUsuarios;
+        }
+
         public async void PonerPuntuacionDiaria() {
             // coges todas las estadisticas de todos los usuarios
             var respuesta = await repositorioEstadisticas.GetAll();
@@ -194,10 +205,36 @@ namespace preguntaods.BusinessLogic.Services
             }
         }
 
+        public async void PonerPuntuacionSemanal()
+        {
+            // coges todas las estadisticas de todos los usuarios
+            var respuesta = await repositorioEstadisticas.GetAll();
+
+            // pones a 0 aquellas que no sean de hoy
+            foreach (Estadistica estadistica in respuesta)
+            {
+                CultureInfo culture = CultureInfo.CurrentCulture; // Cultura actual del sistema
+                Calendar calendar = culture.Calendar; // Calendario de la cultura actual
+                int numeroSemana = calendar.GetWeekOfYear(((DateTime) estadistica.FechaDiaria), culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+                int numeroSemanaActual = calendar.GetWeekOfYear(DateTime.Now, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+
+
+                // compruebas si la fecha es diferente a la actual
+                if (estadistica.FechaDiaria == null || numeroSemana != numeroSemanaActual)
+                {
+                    // ponemos la PuntuacionDiaria en 0
+                    estadistica.PuntuacionSemanal = 0;
+                    estadistica.FechaDiaria = DateTime.Now;
+                    // lo guardamos
+                    await repositorioEstadisticas.Update(estadistica);
+                }
+            }
+        }
+
         public async Task CrearEstadisticas(Usuario user)
         {
             var aux = Array.Empty<int>();
-            var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre, 0, DateTime.Now);
+            var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre, 0, DateTime.Now, 0);
             await repositorioEstadisticas.Add(a);
         }
 
