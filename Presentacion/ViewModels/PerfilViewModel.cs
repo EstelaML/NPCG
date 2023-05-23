@@ -194,7 +194,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void IniciarRequisitos()
         {
-            if (usuario.Nivel < 3)
+            if (usuario.Nivel < 2)
             {
                 int partidasRestantes = estadisticas.PartidasGanadas / 5;
                 int res = (partidasRestantes + 1) * 5 - estadisticas.PartidasGanadas;
