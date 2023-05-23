@@ -111,10 +111,6 @@ namespace preguntaods.BusinessLogic.Partida
             userInterface.InitializeUi(fallos, pistasUsadas, ptsTotales, ptsConsolidados, retoActual);
 
             botonAbandonar = activity.FindViewById<Button>(Resource.Id.volver);
-            var cons = ((VistaPartidaViewModel)activity).GetConsolidado();
-            if (!cons)
-                if (botonAbandonar != null)
-                    botonAbandonar.Visibility = ViewStates.Invisible;
             if (botonAbandonar != null) botonAbandonar.Click += EventoAbandonarBoton;
         }
 
