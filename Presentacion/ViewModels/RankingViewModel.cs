@@ -26,7 +26,6 @@ namespace preguntaods.Presentacion.ViewModels
         private List<Estadistica> topRanking;
         protected List<Estadistica> usuariosOrdenados;
         private Usuario usuarioLogged;
-        private string nombreRanking = "General";
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -53,7 +52,7 @@ namespace preguntaods.Presentacion.ViewModels
             topRanking = usuariosOrdenados.Take(NumFilas).ToList();
             usuarioLogged = await fachada.GetUsuarioLogged();
 
-            CrearRanking(nombreRanking);
+            CrearRanking();
             MensajeAnimo();
         }
 
@@ -77,7 +76,7 @@ namespace preguntaods.Presentacion.ViewModels
             Finish();
         }
 
-        private void CrearFilaLlena(TableLayout tabla, int indice, string nombreRanking)
+        private void CrearFilaLlena(TableLayout tabla, int indice)
         {
             var fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
@@ -95,9 +94,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 var txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
-                if (nombreRanking == "General") { txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString(); }
-                if (nombreRanking == "Diario") { txtPuntos.Text = usuariosOrdenados[indice].PuntuacionDiaria.ToString(); }
-                if (nombreRanking == "Semanal") { return; }
+                txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString(); 
                 fila.AddView(txtPuntos);
             }
             else
@@ -143,13 +140,13 @@ namespace preguntaods.Presentacion.ViewModels
             tablaRanking.AddView(fila);
         }
 
-        protected void CrearRanking(string nombreRanking)
+        protected void CrearRanking()
         {
             for (var i = 0; i < NumFilas; i++)
             {
                 if (i < topRanking.Count)
                 {
-                    CrearFilaLlena(tablaRanking, i, nombreRanking);
+                    CrearFilaLlena(tablaRanking, i);
                 }
                 else
                 {
@@ -177,7 +174,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
             else
             {
-                CrearFilaLlena(fueraRanking, GetIndiceLogged(), nombreRanking);
+                CrearFilaLlena(fueraRanking, GetIndiceLogged());
                 textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
             }
         }

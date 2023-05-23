@@ -42,7 +42,7 @@ namespace preguntaods.Presentacion.ViewModels
             if (atras != null) { atras.Click += Atras; }
 
             var botonIzq = FindViewById<Button>(Resource.Id.botonIzq);
-            botonIzq.Text = "GLOBAL";
+            botonIzq.Text = "GENERAL";
             if (botonIzq != null) { botonIzq.Click += BotonIzq; }
             var botonDer = FindViewById<Button>(Resource.Id.botonDer);
             if (botonDer != null) { botonDer.Click += BotonDer; }

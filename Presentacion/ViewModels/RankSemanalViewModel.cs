@@ -42,12 +42,12 @@ namespace preguntaods.Presentacion.ViewModels
             if (atras != null) { atras.Click += Atras; }
 
             var botonIzq = FindViewById<Button>(Resource.Id.botonIzq);
-            botonIzq.Text = "Diario";
+            botonIzq.Text = "DIARIO";
             if (botonIzq != null) { botonIzq.Click += BotonIzq; }
 
             var botonDer = FindViewById<Button>(Resource.Id.botonDer);
             if (botonDer != null) { botonDer.Click += BotonDer; }
-            botonDer.Text = "GLOBAL";
+            botonDer.Text = "GENERAL";
 
             TextView tipoRanking = FindViewById<TextView>(Resource.Id.tipoRanking);
             tipoRanking.Text = "Ranking semanal";
