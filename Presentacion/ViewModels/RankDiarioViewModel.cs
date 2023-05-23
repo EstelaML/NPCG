@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Content.Res;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
@@ -26,7 +24,7 @@ namespace preguntaods.Presentacion.ViewModels
         private List<Estadistica> usuariosOrdenados;
         private Usuario usuarioLogged;
 
-        protected override async void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaRanking);
