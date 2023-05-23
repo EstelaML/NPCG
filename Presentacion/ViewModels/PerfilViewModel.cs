@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -48,6 +49,8 @@ namespace preguntaods.Presentacion.ViewModels
 
             estadisticas = await fachada.PedirEstadisticas(usuario.Uuid);
 
+            UserDialogs.Init(this);
+
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
@@ -68,11 +71,17 @@ namespace preguntaods.Presentacion.ViewModels
             nivel = FindViewById<TextView>(Resource.Id.textViewNivel);
             requisitos = FindViewById<TextView>(Resource.Id.textViewRequisitos);
 
-            Init();
+            UserDialogs.Instance.ShowLoading("Cargando...");
+
+            await Init();
+
+            UserDialogs.Instance.HideLoading();
         }
 
-        private void Init()
+        private async Task Init()
         {
+            await Task.Delay(500);
+
             nombre.Text = usuario.Nombre;
 
             IniciarFoto();

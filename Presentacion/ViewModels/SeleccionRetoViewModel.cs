@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
@@ -9,6 +10,7 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -38,6 +40,8 @@ namespace preguntaods.Presentacion.ViewModels
 
             usuario = await fachada.GetUsuarioLogged();
 
+            UserDialogs.Init(this);
+
             partida = FindViewById<Button>(Resource.Id.partidaB);
             if (partida != null) partida.Click += Partida_Click;
 
@@ -54,26 +58,36 @@ namespace preguntaods.Presentacion.ViewModels
             atras = FindViewById<ImageButton>(Resource.Id.button1);
             if (atras != null) atras.Click += Atras;
 
-            InitBoton();
+            UserDialogs.Instance.ShowLoading("Cargando...");
+
+            await InitBoton();
+
+            UserDialogs.Instance.HideLoading();
         }
 
-        public void InitBoton()
+        public async Task InitBoton()
         {
             level = usuario.Nivel;
+
+            var color = new Color(150, 220, 240);
+
+            await Task.Delay(500);
 
             if (level == 1)
             {
                 ahorcado.Enabled = true;
-                ahorcado.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
+                ahorcado.SetBackgroundColor(color);
             }
             else if (level > 1)
             {
                 ahorcado.Enabled = true;
-                ahorcado.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
+                ahorcado.SetBackgroundColor(color);
 
                 fiesta.Enabled = true;
-                fiesta.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
+                fiesta.SetBackgroundColor(color);
             }
+
+            
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
