@@ -31,19 +31,29 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:gravity="center_horizontal"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp">
         <Button
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:id="@+id/botonIzq"
-            android:text="Diario" />
+            android:text="Diario"
+            android:background="@drawable/style_camposinf"
+            android:textColor="@android:color/black"
+        android:backgroundTint="@color/colorPrimary"/>
+        <Space
+        android:layout_width="10dp"
+        android:layout_height="wrap_content" />
         <Button
             android:layout_width="100sp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:id="@+id/botonDer"
-            android:text="Semanal" />
+            android:text="Semanal"
+            android:background="@drawable/style_camposinf"
+            android:textColor="@android:color/black"
+        android:backgroundTint="@color/colorPrimary"/>
     </LinearLayout>
 
     <LinearLayout
