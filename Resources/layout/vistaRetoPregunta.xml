@@ -32,21 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-        <ImageButton
-            android:src="@drawable/icon_silencio"
-            android:paddingRight="12sp"  
-            android:layout_width="wrap_content"
-            android:background="@drawable/m3_tabs_transparent_background"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:layout_height="match_parent"
-            android:id="@+id/sonido" />
-
-
-
-         <Space
-            android:layout_width="4sp"
-            android:layout_height="6sp" />
 
         <ImageButton
             android:layout_width="wrap_content"

@@ -31,7 +31,6 @@ namespace preguntaods.Presentacion.UI_impl
         private char[] guionesPalabra;
         private int ronda;
         private int? odsRelacion;
-        private ImageButton sonidoIcon;
 
         // UI
         private ImageView ahorcadoImg;
@@ -61,8 +60,6 @@ namespace preguntaods.Presentacion.UI_impl
             imagenCorazon2 = Activity.FindViewById<ImageView>(Resource.Id.heart2);
             interroganteButton = Activity.FindViewById<ImageButton>(Resource.Id.interroganteButton);
             pistaButton = Activity.FindViewById<ImageButton>(Resource.Id.pistaButton);
-            sonidoIcon = Activity.FindViewById<ImageButton>(Resource.Id.sonido);
-            sonidoIcon.Click += SonidoIcon_Click;
 
             if (fallos == 1)
             {
@@ -170,10 +167,6 @@ namespace preguntaods.Presentacion.UI_impl
         {
             if (odsRelacion >= 1 && odsRelacion <= 17) { ((VistaPartidaViewModel)Activity).AbrirApoyo((int)odsRelacion); }
             else ((VistaPartidaViewModel)Activity).AbrirApoyo(0);
-        }
-        private void SonidoIcon_Click(object sender, EventArgs e)
-        {
-            ((VistaPartidaViewModel)Activity).SonidoClick(sonidoIcon);
         }
 
         private void PistaClick(object sender, EventArgs e)

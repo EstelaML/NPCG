@@ -165,20 +165,5 @@ namespace preguntaods.Presentacion.ViewModels
             return partida.SetFalloTrasConsolidado(puntuacion);
         }
 
-        public void SonidoClick(ImageButton sonidoIcon)
-        {
-            musica = !musica;
-            if (musica)
-            {
-                // sonido activo e icono de apagar
-                sonidoIcon.SetImageResource(Resource.Drawable.icon_silencio);
-                
-            }
-            else
-            {
-                // sonido inactvo e icono de activar
-                sonidoIcon.SetImageResource(Resource.Drawable.icon_sonido);
-            }
-        }
     }
 }
