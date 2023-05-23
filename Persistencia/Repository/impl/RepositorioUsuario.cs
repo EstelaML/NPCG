@@ -40,7 +40,7 @@ namespace preguntaods.Persistencia.Repository.impl
                         .Set(x => x.Puntuacion, p)
                         .Update();
 
-            var puntosD = puntosDiarios+puntosS;
+            var puntosD = puntosDiarios + puntosS;
             await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Set(x => x.PuntuacionDiaria, puntosD).Update();
         }
 

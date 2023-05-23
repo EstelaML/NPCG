@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Android.Content;
-using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
@@ -313,7 +312,6 @@ namespace preguntaods.BusinessLogic.Partida
         {
             if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 10)
             {
-
                 await fachada.UpdateNivel(User.Nivel);
 
                 await UserDialogs.Instance.AlertAsync(new AlertConfig

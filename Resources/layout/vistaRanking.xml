@@ -24,7 +24,7 @@
             android:id="@+id/buttonAtras"
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:contentDescription=""
-            android:foregroundGravity="right"/>
+            android:foregroundGravity="right" />
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +41,7 @@
             android:text="Diario"
             android:background="@drawable/style_camposinf"
             android:textColor="@android:color/black"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:backgroundTint="@color/colorPrimary" />
         <Space
         android:layout_width="10dp"
         android:layout_height="wrap_content" />
@@ -53,7 +53,7 @@
             android:text="Semanal"
             android:background="@drawable/style_camposinf"
             android:textColor="@android:color/black"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:backgroundTint="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,12 +70,11 @@
             android:text="Ranking general"
             android:gravity="center"
             android:textStyle="bold"
-           
+
             android:id="@+id/tipoRanking"
             android:textColor="@android:color/black"
             tools:ignore="HardcodedText"
             android:textSize="30sp" />
-
 
         <Space
         android:layout_width="match_parent"

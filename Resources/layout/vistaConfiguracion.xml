@@ -24,7 +24,6 @@
                 android:background="@color/mtrl_btn_transparent_bg_color"
                 android:contentDescription=""
                 android:foregroundGravity="right" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -50,12 +49,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Volumen de la aplicación: "/>
+                    android:text="Volumen de la aplicación: " />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textoVolumenApp"/>
+                    android:id="@+id/textoVolumenApp" />
              </LinearLayout>
 
             <LinearLayout
@@ -69,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="10dp"
                     android:layout_weight="1"
-                    android:id="@+id/scrollVolumenApp"/>
+                    android:id="@+id/scrollVolumenApp" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -79,8 +78,7 @@
                     android:adjustViewBounds="true"
                     android:background="@color/mtrl_btn_transparent_bg_color"
                     android:src="@drawable/icon_sonido"
-                    android:id="@+id/sonidoApp"/>
-
+                    android:id="@+id/sonidoApp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -98,12 +96,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Volumen de la música: "/>
+                    android:text="Volumen de la música: " />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textoVolumenMusica"/>
+                    android:id="@+id/textoVolumenMusica" />
              </LinearLayout>
 
             <LinearLayout
@@ -117,7 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="10dp"
                     android:layout_weight="1"
-                    android:id="@+id/scrollVolumenMusica"/>
+                    android:id="@+id/scrollVolumenMusica" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -127,8 +125,7 @@
                     android:adjustViewBounds="true"
                     android:src="@drawable/icon_sonido"
                     android:background="@color/mtrl_btn_transparent_bg_color"
-                    android:id="@+id/sonidoMusica"/>
-
+                    android:id="@+id/sonidoMusica" />
             </LinearLayout>
         </LinearLayout>
 
@@ -147,10 +144,8 @@
                 android:id="@+id/guardarCambios"
                 android:textColor="@android:color/black"
                 android:background="@drawable/style_camposinf"
-                android:backgroundTint="@color/colorPrimary"/>
-
+                android:backgroundTint="@color/colorPrimary" />
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout

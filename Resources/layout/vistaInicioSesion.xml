@@ -88,9 +88,7 @@
                 android:backgroundTint="@android:color/transparent"
                 android:id="@+id/ojoContraseña"
                 android:contentDescription="description" />
-
                 </LinearLayout>
-
         </RelativeLayout>
 
         <TextView

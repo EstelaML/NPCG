@@ -8,7 +8,6 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -51,13 +50,11 @@ namespace preguntaods.Presentacion.ViewModels
             imagenMusica = FindViewById<ImageButton>(Resource.Id.sonidoMusica);
             if (imagenMusica != null) imagenMusica.Click += ChangeButtonMusica;
 
-
             atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) atras.Click += Atras;
 
             guardarCambios = FindViewById<Button>(Resource.Id.guardarCambios);
             if (guardarCambios != null) guardarCambios.Click += GuardarCambios;
-
 
             fachada = Facade.GetInstance();
             usuario = await fachada.GetUsuarioLogged();
@@ -117,7 +114,7 @@ namespace preguntaods.Presentacion.ViewModels
 
             await fachada.UpdateVolumenSonidos(volumenApp);
             await fachada.UpdateVolumenMusica(volumenMusica);
-            await fachada.UpdateVolumenActivado(new[] { toggleImagenApp ? 0 : 1, toggleImagenMusica ? 0 : 1});
+            await fachada.UpdateVolumenActivado(new[] { toggleImagenApp ? 0 : 1, toggleImagenMusica ? 0 : 1 });
 
             UserDialogs.Instance.HideLoading();
             UserDialogs.Instance.Alert(new AlertConfig

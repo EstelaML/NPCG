@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using static Android.Provider.CalendarContract;
 using Random = Java.Util.Random;
 
 namespace preguntaods.BusinessLogic.Services
@@ -167,7 +166,8 @@ namespace preguntaods.BusinessLogic.Services
             return listaUsuarios;
         }
 
-        public async Task<List<Estadistica>> GetAllUsersOrderedByDay() {
+        public async Task<List<Estadistica>> GetAllUsersOrderedByDay()
+        {
             var respuesta = await repositorioEstadisticas.GetAll();
             var listaUsuarios = respuesta.Select(estadisticas => new Estadistica { Nombre = estadisticas.Nombre, PuntuacionDiaria = estadisticas.PuntuacionDiaria })
                 .OrderByDescending(estadisticas => estadisticas.PuntuacionDiaria)
@@ -186,7 +186,8 @@ namespace preguntaods.BusinessLogic.Services
             return listaUsuarios;
         }
 
-        public async void PonerPuntuacionDiaria() {
+        public async void PonerPuntuacionDiaria()
+        {
             // coges todas las estadisticas de todos los usuarios
             var respuesta = await repositorioEstadisticas.GetAll();
 
@@ -198,7 +199,7 @@ namespace preguntaods.BusinessLogic.Services
                 {
                     // ponemos la PuntuacionDiaria en 0
                     estadistica.PuntuacionDiaria = 0;
-                    estadistica.FechaDiaria= DateTime.Now;
+                    estadistica.FechaDiaria = DateTime.Now;
                     // lo guardamos
                     await repositorioEstadisticas.Update(estadistica);
                 }
@@ -215,9 +216,8 @@ namespace preguntaods.BusinessLogic.Services
             {
                 CultureInfo culture = CultureInfo.CurrentCulture; // Cultura actual del sistema
                 Calendar calendar = culture.Calendar; // Calendario de la cultura actual
-                int numeroSemana = calendar.GetWeekOfYear(((DateTime) estadistica.FechaDiaria), culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+                int numeroSemana = calendar.GetWeekOfYear(((DateTime)estadistica.FechaDiaria), culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
                 int numeroSemanaActual = calendar.GetWeekOfYear(DateTime.Now, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
-
 
                 // compruebas si la fecha es diferente a la actual
                 if (estadistica.FechaDiaria == null || numeroSemana != numeroSemanaActual)
@@ -303,7 +303,6 @@ namespace preguntaods.BusinessLogic.Services
             var a = conexion.UsuarioBD.Id;
             var respuesta = await repositorioUser.GetUserByUUid(a);
             return respuesta;
-
         }
 
         public async Task UpdatePuntos(int puntos)

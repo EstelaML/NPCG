@@ -2,7 +2,6 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
@@ -26,6 +25,7 @@ namespace preguntaods.Presentacion.ViewModels
         private bool consolidado;
         private bool musica;
         private Sonido sonido;
+
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             // Inicio de la vista
@@ -164,6 +164,5 @@ namespace preguntaods.Presentacion.ViewModels
         {
             return partida.SetFalloTrasConsolidado(puntuacion);
         }
-
     }
 }

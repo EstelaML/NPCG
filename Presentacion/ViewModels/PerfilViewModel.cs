@@ -218,16 +218,14 @@ namespace preguntaods.Presentacion.ViewModels
             Finish();
         }
 
-        private void CoberturaODS_Click(object sender, EventArgs e) 
+        private void CoberturaODS_Click(object sender, EventArgs e)
         {
-
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(CoberturaODSViewModel));
             StartActivity(i);
             Finish();
-
         }
 
         public byte[] ConvertBitmapToByteArray(Bitmap bitmap)

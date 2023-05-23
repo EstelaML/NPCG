@@ -17,7 +17,7 @@ namespace preguntaods.Entities
             Nombre = nombre;
             Tiempo = null;
             PuntuacionDiaria = p;
-            FechaDiaria= d;
+            FechaDiaria = d;
             PuntuacionSemanal = s;
         }
     }

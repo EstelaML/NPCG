@@ -144,9 +144,7 @@
                         android:backgroundTint="@android:color/transparent"
                         android:id="@+id/ojoContraseña"
                         android:contentDescription="description" />
-
                 </LinearLayout>
-
             </RelativeLayout>
 
              <TextView
@@ -196,11 +194,8 @@
                             android:backgroundTint="@android:color/transparent"
                             android:id="@+id/ojoContraseña2"
                             android:contentDescription="description" />
-
                         </LinearLayout>
-
                 </RelativeLayout>
-
         </RelativeLayout>
 
     <TextView

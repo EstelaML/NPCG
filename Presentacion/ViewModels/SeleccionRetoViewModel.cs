@@ -86,8 +86,6 @@ namespace preguntaods.Presentacion.ViewModels
                 fiesta.Enabled = true;
                 fiesta.SetBackgroundColor(color);
             }
-
-            
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

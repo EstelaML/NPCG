@@ -23,7 +23,7 @@
             android:id="@+id/buttonAtras"
             android:background="@color/mtrl_btn_transparent_bg_color"
             android:contentDescription=""
-            android:foregroundGravity="right"/>
+            android:foregroundGravity="right" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,7 +75,6 @@
                 android:contentDescription=""
                 android:foregroundGravity="right"
                 android:layout_marginTop="15.5dp" />
-
         </LinearLayout>
 
          <Space
@@ -235,7 +234,6 @@
             android:paddingBottom="10dp"
             tools:ignore="HardcodedText"
             android:text="Te quedan --- partidas para subir al siguiente nivel" />
-
     </LinearLayout>
 
     <LinearLayout

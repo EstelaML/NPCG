@@ -119,6 +119,7 @@ namespace preguntaods.BusinessLogic.Fachada
 
             return listaUsuarios;
         }
+
         // lo mismo pero por día
         public async Task<List<Estadistica>> GetAllUsersOrderedByDay()
         {
@@ -126,6 +127,7 @@ namespace preguntaods.BusinessLogic.Fachada
 
             return listaUsuarios;
         }
+
         // lo mismo pero por semana
         public async Task<List<Estadistica>> GetAllUsersOrderedByWeek()
         {
@@ -133,7 +135,6 @@ namespace preguntaods.BusinessLogic.Fachada
 
             return listaUsuarios;
         }
-
 
         public async Task CrearEstadisticas(Usuario user)
         {
@@ -151,9 +152,11 @@ namespace preguntaods.BusinessLogic.Fachada
             await servicio.GuardarTiempo();
         }
 
-        public void PonerPuntuacionDiaria() {
+        public void PonerPuntuacionDiaria()
+        {
             servicio.PonerPuntuacionDiaria();
         }
+
         public void PonerPuntuacionSemanal()
         {
             servicio.PonerPuntuacionSemanal();

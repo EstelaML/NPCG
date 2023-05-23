@@ -1,6 +1,4 @@
-﻿using preguntaods.BusinessLogic.Services;
-
-namespace preguntaods.BusinessLogic.EstrategiaSonido
+﻿namespace preguntaods.BusinessLogic.EstrategiaSonido
 {
     public class Sonido
     {
