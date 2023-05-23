@@ -83,6 +83,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Atras(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(MenuViewModel));
@@ -92,6 +93,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private async void GuardarCambios(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             UserDialogs.Instance.ShowLoading("Guardando cambios...", MaskType.Clear);
