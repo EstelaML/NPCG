@@ -2,7 +2,9 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Widget;
 using AndroidX.AppCompat.App;
+using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.BusinessLogic.Partida;
 using preguntaods.BusinessLogic.Retos;
@@ -22,7 +24,8 @@ namespace preguntaods.Presentacion.ViewModels
 
         private Partida partida;
         private bool consolidado;
-
+        private bool musica;
+        private Sonido sonido;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             // Inicio de la vista
@@ -35,6 +38,7 @@ namespace preguntaods.Presentacion.ViewModels
             // Mostrar dialogo
             UserDialogs.Instance.ShowLoading("Iniciando...", MaskType.Clear);
             await Task.Delay(1);
+            sonido = new Sonido();
 
             // Cargar partida
             var director = new PartidaDirector();
@@ -48,6 +52,7 @@ namespace preguntaods.Presentacion.ViewModels
             UserDialogs.Instance.HideLoading();
 
             RetoSiguiente(0, 0, 0, 0);
+            musica = true;
         }
 
         public void UpdateView()
@@ -159,5 +164,6 @@ namespace preguntaods.Presentacion.ViewModels
         {
             return partida.SetFalloTrasConsolidado(puntuacion);
         }
+
     }
 }

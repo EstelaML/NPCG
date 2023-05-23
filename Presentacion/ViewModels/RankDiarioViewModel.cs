@@ -1,8 +1,11 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using preguntaods.BusinessLogic.EstrategiaSonido;
+using preguntaods.BusinessLogic.Fachada;
 using System;
 
 namespace preguntaods.Presentacion.ViewModels
@@ -12,8 +15,9 @@ namespace preguntaods.Presentacion.ViewModels
     {
         private TextView tipoRanking;
         private Button botonIzq;
+        private string nombreRanking = "Diario";
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             tipoRanking = FindViewById<TextView>(Resource.Id.tipoRanking);
@@ -25,6 +29,8 @@ namespace preguntaods.Presentacion.ViewModels
                 botonIzq.Text = "General";
                 botonIzq.Click += BotonIzq;
             }
+            usuariosOrdenados = await fachada.GetAllUsersOrderedByDay();
+            
         }
 
         private void BotonIzq(object sender, EventArgs e)

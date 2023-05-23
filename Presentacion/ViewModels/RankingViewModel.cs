@@ -19,13 +19,14 @@ namespace preguntaods.Presentacion.ViewModels
     {
         protected Sonido Sonido;
         private TableLayout tablaRanking;
-        private Facade fachada;
+        protected Facade fachada;
         private TextView textAnimo;
         private TableLayout fueraRanking;
         private const int NumFilas = 10;
         private List<Estadistica> topRanking;
-        private List<Estadistica> usuariosOrdenados;
+        protected List<Estadistica> usuariosOrdenados;
         private Usuario usuarioLogged;
+        private string nombreRanking = "General";
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -52,7 +53,7 @@ namespace preguntaods.Presentacion.ViewModels
             topRanking = usuariosOrdenados.Take(NumFilas).ToList();
             usuarioLogged = await fachada.GetUsuarioLogged();
 
-            CrearRanking();
+            CrearRanking(nombreRanking);
             MensajeAnimo();
         }
 
@@ -76,7 +77,7 @@ namespace preguntaods.Presentacion.ViewModels
             Finish();
         }
 
-        private void CrearFilaLlena(TableLayout tabla, int indice)
+        private void CrearFilaLlena(TableLayout tabla, int indice, string nombreRanking)
         {
             var fila = new TableRow(this) { TextAlignment = TextAlignment.Center };
 
@@ -94,7 +95,9 @@ namespace preguntaods.Presentacion.ViewModels
 
                 var txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
-                txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
+                if (nombreRanking == "General") { txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString(); }
+                if (nombreRanking == "Diario") { txtPuntos.Text = usuariosOrdenados[indice].PuntuacionDiaria.ToString(); }
+                if (nombreRanking == "Semanal") { return; }
                 fila.AddView(txtPuntos);
             }
             else
@@ -140,13 +143,13 @@ namespace preguntaods.Presentacion.ViewModels
             tablaRanking.AddView(fila);
         }
 
-        private void CrearRanking()
+        protected void CrearRanking(string nombreRanking)
         {
             for (var i = 0; i < NumFilas; i++)
             {
                 if (i < topRanking.Count)
                 {
-                    CrearFilaLlena(tablaRanking, i);
+                    CrearFilaLlena(tablaRanking, i, nombreRanking);
                 }
                 else
                 {
@@ -160,7 +163,7 @@ namespace preguntaods.Presentacion.ViewModels
             return topRanking.Any(u => u.Nombre == usuarioLogged.Nombre);
         }
 
-        private int GetIndiceLogged()
+        protected int GetIndiceLogged()
         {
             return usuariosOrdenados.FindIndex(u => u.Nombre == usuarioLogged.Nombre);
         }
@@ -174,7 +177,7 @@ namespace preguntaods.Presentacion.ViewModels
             }
             else
             {
-                CrearFilaLlena(fueraRanking, GetIndiceLogged());
+                CrearFilaLlena(fueraRanking, GetIndiceLogged(), nombreRanking);
                 textAnimo.Text = "Todavía puedes seguir jugando y sumar puntos para llegar a la cima.";
             }
         }

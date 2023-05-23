@@ -14,7 +14,7 @@ namespace preguntaods
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.0.93")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.0.5")]
 	public partial class Resource
 	{
 		
@@ -14228,28 +14228,34 @@ namespace preguntaods
 			public const int letra_correcta_sonido = 2131755008;
 			
 			// aapt resource value: 0x7F100001
-			public const int sonido_acierto = 2131755009;
+			public const int sinsonido = 2131755009;
 			
 			// aapt resource value: 0x7F100002
-			public const int sonido_click = 2131755010;
+			public const int sonido = 2131755010;
 			
 			// aapt resource value: 0x7F100003
-			public const int sonido_derrota = 2131755011;
+			public const int sonido_acierto = 2131755011;
 			
 			// aapt resource value: 0x7F100004
-			public const int sonido_error = 2131755012;
+			public const int sonido_click = 2131755012;
 			
 			// aapt resource value: 0x7F100005
-			public const int sonido_musica = 2131755013;
+			public const int sonido_derrota = 2131755013;
 			
 			// aapt resource value: 0x7F100006
-			public const int sonido_reloj = 2131755014;
+			public const int sonido_error = 2131755014;
 			
 			// aapt resource value: 0x7F100007
-			public const int sonido_victoria = 2131755015;
+			public const int sonido_musica = 2131755015;
 			
 			// aapt resource value: 0x7F100008
-			public const int tictac = 2131755016;
+			public const int sonido_reloj = 2131755016;
+			
+			// aapt resource value: 0x7F100009
+			public const int sonido_victoria = 2131755017;
+			
+			// aapt resource value: 0x7F10000A
+			public const int tictac = 2131755018;
 			
 			static Raw()
 			{
