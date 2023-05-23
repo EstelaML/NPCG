@@ -61,18 +61,20 @@ namespace preguntaods.Presentacion.ViewModels
         {
             level = usuario.Nivel;
 
+            var color = new Color(150, 220, 240);
+
             if (level == 1)
             {
                 ahorcado.Enabled = true;
-                ahorcado.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
+                ahorcado.SetBackgroundColor(color);
             }
             else if (level > 1)
             {
                 ahorcado.Enabled = true;
-                ahorcado.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
+                ahorcado.SetBackgroundColor(color);
 
                 fiesta.Enabled = true;
-                fiesta.SetBackgroundColor(new Color(Resource.Color.colorPrimary));
+                fiesta.SetBackgroundColor(color);
             }
         }
 
