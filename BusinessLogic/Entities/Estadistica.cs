@@ -1,4 +1,6 @@
 ﻿// ReSharper disable once CheckNamespace
+using System;
+
 namespace preguntaods.Entities
 {
     public partial class Estadistica
@@ -6,7 +8,7 @@ namespace preguntaods.Entities
         public Estadistica()
         { }
 
-        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre)
+        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre, int p, DateTime d)
         {
             Usuario = user;
             Puntuacion = puntuacion;
@@ -14,6 +16,8 @@ namespace preguntaods.Entities
             Fallos = fallos;
             Nombre = nombre;
             Tiempo = null;
+            PuntuacionDiaria = p;
+            FechaDiaria= d;
         }
     }
 }

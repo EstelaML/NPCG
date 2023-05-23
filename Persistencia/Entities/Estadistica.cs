@@ -1,5 +1,6 @@
 ﻿using Postgrest.Attributes;
 using Postgrest.Models;
+using System;
 
 // ReSharper disable once CheckNamespace
 namespace preguntaods.Entities
@@ -38,5 +39,11 @@ namespace preguntaods.Entities
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("PartidasGanadas")]
         public int PartidasGanadas { get; set; }
+        // ReSharper disable once RedundantArgumentDefaultValue
+        [Column("PuntuacionDiaria")]
+        public int PuntuacionDiaria { get; set; }
+        // ReSharper disable once RedundantArgumentDefaultValue
+        [Column("FechaDiaria")]
+        public DateTime? FechaDiaria { get; set; }
     }
 }

@@ -122,6 +122,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Partida_Click(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
             var i = new Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "1");
@@ -131,6 +132,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Ahorcado_Click(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
             var i = new Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "2");
@@ -140,6 +142,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void Fiesta_Click(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
             var i = new Intent(this, typeof(VistaPartidaViewModel));
             i.PutExtra("BOTON_PULSADO", "5");

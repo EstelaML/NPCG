@@ -114,6 +114,13 @@ namespace preguntaods.BusinessLogic.Fachada
 
             return listaUsuarios;
         }
+        // lo mismo pero por día
+        public async Task<List<Estadistica>> GetAllUsersOrderedByDay()
+        {
+            var listaUsuarios = await servicio.GetAllUsersOrderedByDay();
+
+            return listaUsuarios;
+        }
 
         public async Task CrearEstadisticas(Usuario user)
         {
@@ -129,6 +136,10 @@ namespace preguntaods.BusinessLogic.Fachada
         public async Task GuardarTiempo()
         {
             await servicio.GuardarTiempo();
+        }
+
+        public void PonerPuntuacionDiaria() {
+            servicio.PonerPuntuacionDiaria();
         }
 
         #endregion Estadisticas

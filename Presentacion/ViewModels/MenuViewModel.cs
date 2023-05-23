@@ -33,6 +33,8 @@ namespace preguntaods.Presentacion.ViewModels
 
             var nuevaPartida = FindViewById<Button>(Resource.Id.nuevaPartida);
             if (nuevaPartida != null) nuevaPartida.Click += NuevaPartida_Click;
+
+            fachada.PonerPuntuacionDiaria();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

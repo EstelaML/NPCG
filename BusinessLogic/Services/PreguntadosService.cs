@@ -166,10 +166,38 @@ namespace preguntaods.BusinessLogic.Services
             return listaUsuarios;
         }
 
+        public async Task<List<Estadistica>> GetAllUsersOrderedByDay() {
+            var respuesta = await repositorioEstadisticas.GetAll();
+            var listaUsuarios = respuesta.Select(estadisticas => new Estadistica { Nombre = estadisticas.Nombre, PuntuacionDiaria = estadisticas.PuntuacionDiaria })
+                .OrderByDescending(estadisticas => estadisticas.PuntuacionDiaria)
+                .ToList();
+
+            return listaUsuarios;
+        }
+        
+        public async void PonerPuntuacionDiaria() {
+            // coges todas las estadisticas de todos los usuarios
+            var respuesta = await repositorioEstadisticas.GetAll();
+
+            // pones a 0 aquellas que no sean de hoy
+            foreach (Estadistica estadistica in respuesta)
+            {
+                // compruebas si la fecha es diferente a la actual
+                if (estadistica.FechaDiaria == null || ((DateTime)estadistica.FechaDiaria).Date != DateTime.Now.Date)
+                {
+                    // ponemos la PuntuacionDiaria en 0
+                    estadistica.PuntuacionDiaria = 0;
+                    estadistica.FechaDiaria= DateTime.Now;
+                    // lo guardamos
+                    await repositorioEstadisticas.Update(estadistica);
+                }
+            }
+        }
+
         public async Task CrearEstadisticas(Usuario user)
         {
             var aux = Array.Empty<int>();
-            var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre);
+            var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre, 0, DateTime.Now);
             await repositorioEstadisticas.Add(a);
         }
 
@@ -247,7 +275,7 @@ namespace preguntaods.BusinessLogic.Services
             {
                 var a = conexion.UsuarioBD.Id;
                 var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
-                await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos);
+                await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos, estadisticas.PuntuacionDiaria);
             }
         }
 

@@ -75,6 +75,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private void NavigateRegistro(object sender, EventArgs e)
         {
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             sonido.EjecutarSonido();
 
             var i = new Intent(this, typeof(RegistroViewModel));
