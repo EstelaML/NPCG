@@ -311,14 +311,15 @@ namespace preguntaods.BusinessLogic.Partida
 
         public async Task SubirNivel(int partidasGanadas)
         {
-            if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 15)
+            if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 10)
             {
+
                 await fachada.UpdateNivel(User.Nivel);
 
                 await UserDialogs.Instance.AlertAsync(new AlertConfig
                 {
-                    Title = "¡¡Enhorabuena!!",
-                    Message = "Has subido de nivel",
+                    Title = "¡¡Felicidades!!",
+                    Message = "Has subido de nivel, has conseguido un nuevo modo de juego.",
                     OkText = "Entendido",
                 });
             }
