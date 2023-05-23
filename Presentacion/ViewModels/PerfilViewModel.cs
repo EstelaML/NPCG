@@ -30,6 +30,7 @@ namespace preguntaods.Presentacion.ViewModels
         private TextView nivel;
         private TextView requisitos;
         private ImageButton avatar;
+        private Button coberturaODS;
         private Estadistica estadisticas;
 
         private int retosAcertados;
@@ -62,6 +63,9 @@ namespace preguntaods.Presentacion.ViewModels
 
             avatar = FindViewById<ImageButton>(Resource.Id.buttonAvatar);
             if (avatar != null) avatar.Click += CambiarFoto;
+
+            coberturaODS = FindViewById<Button>(Resource.Id.coberturaOds);
+            if (coberturaODS != null) coberturaODS.Click += CoberturaODS_Click;
 
             nombre = FindViewById<TextView>(Resource.Id.textViewNombre);
             aciertos = FindViewById<TextView>(Resource.Id.textViewAciertos);
@@ -212,6 +216,18 @@ namespace preguntaods.Presentacion.ViewModels
             var i = new Intent(this, typeof(MenuViewModel));
             StartActivity(i);
             Finish();
+        }
+
+        private void CoberturaODS_Click(object sender, EventArgs e) 
+        {
+
+            sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
+            sonido.EjecutarSonido();
+
+            var i = new Intent(this, typeof(CoberturaODSViewModel));
+            StartActivity(i);
+            Finish();
+
         }
 
         public byte[] ConvertBitmapToByteArray(Bitmap bitmap)

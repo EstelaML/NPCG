@@ -126,6 +126,14 @@ namespace preguntaods.BusinessLogic.Fachada
 
             return listaUsuarios;
         }
+        // lo mismo pero por semana
+        public async Task<List<Estadistica>> GetAllUsersOrderedByWeek()
+        {
+            var listaUsuarios = await servicio.GetAllUsersOrderedByWeek();
+
+            return listaUsuarios;
+        }
+
 
         public async Task CrearEstadisticas(Usuario user)
         {
@@ -145,6 +153,10 @@ namespace preguntaods.BusinessLogic.Fachada
 
         public void PonerPuntuacionDiaria() {
             servicio.PonerPuntuacionDiaria();
+        }
+        public void PonerPuntuacionSemanal()
+        {
+            servicio.PonerPuntuacionSemanal();
         }
 
         #endregion Estadisticas

@@ -110,6 +110,7 @@
     <Compile Include="Persistencia\Repository\impl\RepositorioPregunta.cs" />
     <Compile Include="Persistencia\Repository\impl\RepositorioUsuario.cs" />
     <Compile Include="Persistencia\ConexionBD.cs" />
+    <Compile Include="Presentacion\ViewModels\CoberturaODSViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\ConfiguracionViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\PerfilViewModel.cs" />
     <Compile Include="Presentacion\ViewModels\RankDiarioViewModel.cs" />
@@ -445,6 +446,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon_sonido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\vistaCoberturaOds.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\custom_progress_drawable.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\raw\sonido.png" />

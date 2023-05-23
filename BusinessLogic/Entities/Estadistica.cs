@@ -8,7 +8,7 @@ namespace preguntaods.Entities
         public Estadistica()
         { }
 
-        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre, int p, DateTime d)
+        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre, int p, DateTime d, int s)
         {
             Usuario = user;
             Puntuacion = puntuacion;
@@ -18,6 +18,7 @@ namespace preguntaods.Entities
             Tiempo = null;
             PuntuacionDiaria = p;
             FechaDiaria= d;
+            PuntuacionSemanal = s;
         }
     }
 }

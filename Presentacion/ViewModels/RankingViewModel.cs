@@ -45,10 +45,10 @@ namespace preguntaods.Presentacion.ViewModels
 
             var botonIzq = FindViewById<Button>(Resource.Id.botonIzq);
             if (botonIzq != null) { botonIzq.Click += BotonIzq; }
-
+            botonIzq.Text = "DIARIO";
             var botonDer = FindViewById<Button>(Resource.Id.botonDer);
             if (botonDer != null) { botonDer.Click += BotonDer; }
-
+            botonDer.Text = "SEMANAL";
             usuariosOrdenados = await fachada.GetAllUsersOrdered();
             topRanking = usuariosOrdenados.Take(NumFilas).ToList();
             usuarioLogged = await fachada.GetUsuarioLogged();

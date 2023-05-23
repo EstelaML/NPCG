@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorPrimary">
+
+        <ImageButton
+            android:src="@android:drawable/ic_menu_revert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="1dp"
+            android:id="@+id/buttonAtras"
+            android:background="@color/mtrl_btn_transparent_bg_color"
+            android:contentDescription=""
+            android:foregroundGravity="right"/>
+
+ 
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/scrollView"
+        android:paddingLeft="75px"
+        android:paddingRight="75px"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+            
+            <TextView
+            android:id="@+id/ods1Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 1 Fin de la pobreza"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods1ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods1PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods2Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 2: Hambre cero"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods2ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods2PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods3Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 3: Salud y bienestar"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods3ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods3PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods4Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 4: Educación de calidad"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods4ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods4PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+        
+                    <TextView
+            android:id="@+id/ods5Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 5: Igualdad de género"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods5ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods5PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods6Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 6: Agua limpia y saneamiento"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods6ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods6PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods7Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 7: Energía asequible y no contaminante"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods7ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods7PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods8Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 8: Trabajo decente y crecimiento económico"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods8ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods8PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods9Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 9: Industria, innovación e infraestructura"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods9ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods9PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods10Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 10: Reducción de las desigualdades"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods10ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods10PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods11Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 11: Ciudades y comunidades sostenibles"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods11ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods11PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+
+            <TextView
+            android:id="@+id/ods12Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ODS 12: Producción y consumo responsable"
+            android:gravity="left"
+            android:padding="16dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/ods12ProgressBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="100"
+                    android:progress="0"
+                    style="@style/CustomProgressBar" />
+
+                <TextView
+                    android:id="@+id/ods12PercentageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingVertical="1dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_logo"
+            android:contentDescription="" />
+    </LinearLayout>
+</LinearLayout>

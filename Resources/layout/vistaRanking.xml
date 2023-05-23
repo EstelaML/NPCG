@@ -70,10 +70,17 @@
             android:text="Ranking general"
             android:gravity="center"
             android:textStyle="bold"
+           
             android:id="@+id/tipoRanking"
             android:textColor="@android:color/black"
             tools:ignore="HardcodedText"
-            android:textSize="18sp" />
+            android:textSize="30sp" />
+
+
+        <Space
+        android:layout_width="match_parent"
+        android:layout_height="25sp" />
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -131,6 +138,10 @@
                 android:textAlignment="center"
                 android:id="@+id/fueraRanking">
             </TableLayout>
+
+             <Space
+        android:layout_width="match_parent"
+        android:layout_height="25sp" />
 
             <TextView
                 android:layout_width="match_parent"
