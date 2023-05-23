@@ -313,12 +313,17 @@ namespace preguntaods.BusinessLogic.Partida
         {
             if ((partidasGanadas + 1) % 5 == 0 && partidasGanadas < 15)
             {
+
                 await fachada.UpdateNivel(User.Nivel);
+                string mensaje;
+
+                if (User.Nivel < 2) { mensaje = "has conseguido un nuevo modo de juego."; }
+                else { mensaje = "ahora tienes un pista extra en tus proximas partidas"; }
 
                 await UserDialogs.Instance.AlertAsync(new AlertConfig
                 {
-                    Title = "¡¡Enhorabuena!!",
-                    Message = "Has subido de nivel",
+                    Title = "¡¡Felicidades!!",
+                    Message = "Has subido de nivel, " + mensaje,
                     OkText = "Entendido",
                 });
             }
