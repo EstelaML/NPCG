@@ -44,7 +44,6 @@ namespace preguntaods.Presentacion.ViewModels
             var botonIzq = FindViewById<Button>(Resource.Id.botonIzq);
             botonIzq.Text = "GLOBAL";
             if (botonIzq != null) { botonIzq.Click += BotonIzq; }
-            botonIzq.Text = "DIARIO";
             var botonDer = FindViewById<Button>(Resource.Id.botonDer);
             if (botonDer != null) { botonDer.Click += BotonDer; }
             botonDer.Text = "SEMANAL";
