@@ -169,7 +169,7 @@ namespace preguntaods.BusinessLogic.Services
         public async Task CrearEstadisticas(Usuario user)
         {
             var aux = Array.Empty<int>();
-            var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre, 0, 0);
+            var a = new Estadistica(user.Uuid, 0, aux, aux, user.Nombre);
             await repositorioEstadisticas.Add(a);
         }
 
