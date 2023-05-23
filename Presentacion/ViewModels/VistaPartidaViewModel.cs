@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Widget;
 using AndroidX.AppCompat.App;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.BusinessLogic.Partida;
@@ -22,7 +23,7 @@ namespace preguntaods.Presentacion.ViewModels
 
         private Partida partida;
         private bool consolidado;
-
+        private bool musica;
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             // Inicio de la vista
@@ -48,6 +49,7 @@ namespace preguntaods.Presentacion.ViewModels
             UserDialogs.Instance.HideLoading();
 
             RetoSiguiente(0, 0, 0, 0);
+            musica = true;
         }
 
         public void UpdateView()
@@ -158,6 +160,21 @@ namespace preguntaods.Presentacion.ViewModels
         public bool SetFalloTrasConsolidado(int puntuacion)
         {
             return partida.SetFalloTrasConsolidado(puntuacion);
+        }
+
+        public void SonidoClick(ImageButton sonidoIcon)
+        {
+            musica = !musica;
+            if (musica)
+            {
+                // sonido activo e icono de apagar
+                sonidoIcon.SetImageResource(Resource.Drawable.icon_silencio);
+            }
+            else
+            {
+                // sonido inactvo e icono de activar
+                sonidoIcon.SetImageResource(Resource.Drawable.icon_sonido);
+            }
         }
     }
 }
