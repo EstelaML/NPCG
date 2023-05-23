@@ -6,7 +6,7 @@ namespace preguntaods.Entities
         public Estadistica()
         { }
 
-        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre)
+        public Estadistica(string user, int puntuacion, int[] aciertos, int[] fallos, string nombre, int ptsDiarios, int ptsSemanales)
         {
             Usuario = user;
             Puntuacion = puntuacion;
@@ -14,6 +14,8 @@ namespace preguntaods.Entities
             Fallos = fallos;
             Nombre = nombre;
             Tiempo = null;
+            PtsDiarios = ptsDiarios;
+            PtsSemanales = ptsSemanales;
         }
     }
 }

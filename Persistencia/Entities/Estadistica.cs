@@ -38,5 +38,13 @@ namespace preguntaods.Entities
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("PartidasGanadas")]
         public int PartidasGanadas { get; set; }
+
+        // ReSharper disable once RedundantArgumentDefaultValue
+        [Column("Pts_diarios")]
+        public int PtsDiarios { get; set; }
+
+        // ReSharper disable once RedundantArgumentDefaultValue
+        [Column("Pts_semanales")]
+        public int PtsSemanales { get; set; }
     }
 }
