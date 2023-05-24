@@ -113,6 +113,8 @@ namespace preguntaods.Presentacion.UI_impl
                         break;
                 }
 
+                puntuacionTotal -= puntuacion * 2;
+                if (puntuacionTotal < 0) puntuacionTotal = 0;
                 sonido.SetEstrategia(reloj, Activity);
                 sonido.PararSonido();
 
