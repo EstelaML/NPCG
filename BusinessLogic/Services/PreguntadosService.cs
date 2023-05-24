@@ -152,6 +152,22 @@ namespace preguntaods.BusinessLogic.Services
             return Task.FromResult(ahorca);
         }
 
+        public async Task<List<Pregunta>> GetPreguntasByODS(int ods)
+        {
+
+            var res = await repositorioPregunta.GetPreguntasByODS(ods);
+            return res;
+
+        }
+
+        public async Task<List<Ahorcado>> GetAhorcadoByODS(int ods)
+        {
+
+            var res = await repositorioAhorcado.GetAhorcadosByODS(ods);
+            return res;
+
+        }
+
         #endregion RetoAhorcado
 
         #region Estadisticas
@@ -399,20 +415,6 @@ namespace preguntaods.BusinessLogic.Services
 
         #endregion Usuario
 
-        public async Task<List<Pregunta>> GetPreguntasByODS(int ods)
-        {
 
-            var res = await repositorioPregunta.GetPreguntasByODS(ods);
-            return res;
-
-        }
-
-        public async Task<List<Ahorcado>> GetAhorcadoByODS(int ods)
-        {
-
-            var res = await repositorioAhorcado.GetAhorcadosByODS(ods);
-            return res;
-
-        }
     }
 }

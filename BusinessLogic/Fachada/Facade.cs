@@ -164,7 +164,7 @@ namespace preguntaods.BusinessLogic.Fachada
 
         #endregion Estadisticas
 
-
+        #region Retos
         public async Task<List<Pregunta>> GetPreguntasByODS(int ods)
         {
 
@@ -180,5 +180,7 @@ namespace preguntaods.BusinessLogic.Fachada
             return res;
 
         }
+
+        #endregion Retos
     }
 }
