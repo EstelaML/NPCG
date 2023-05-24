@@ -38,6 +38,14 @@ namespace preguntaods.Persistencia.Repository.impl
             return response.Models.ToList();
         }
 
+        public async Task<List<Ahorcado>> GetAhorcadosByODS(int ods)
+        {
+
+            var preguntas = await conexion.Cliente.From<Ahorcado>().Where(x => x.OdsRelacionada == ods).Get();
+            return preguntas.Models.ToList();
+
+        }
+
         public async Task AñadirAhorcadoRealizado(Ahorcado pregunta)
         {
             // cogemos del usuario las preguntas acertadas ya

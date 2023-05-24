@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
@@ -7,6 +8,7 @@ using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace preguntaods.Presentacion.ViewModels
 {
@@ -16,11 +18,17 @@ namespace preguntaods.Presentacion.ViewModels
         private Sonido sonido;
         private Facade fachada;
         private Usuario usuario;
+        private Estadistica estadisticas;
+        private TextView odsTitleTextView;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.vistaCoberturaOds);
+
+            UserDialogs.Init(this);
+
+            UserDialogs.Instance.ShowLoading("Cargando...");
 
             ScrollView scrollView = FindViewById<ScrollView>(Resource.Id.scrollView);
             scrollView.NestedScrollingEnabled = true;
@@ -28,12 +36,18 @@ namespace preguntaods.Presentacion.ViewModels
             sonido = new Sonido();
             sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
 
+            fachada = Facade.GetInstance();
+
+            usuario = await fachada.GetUsuarioLogged();
+
+            estadisticas = await fachada.PedirEstadisticas(usuario.Uuid);
+
             string odsTitle = "ODS 1: Fin de la pobreza";
             int preguntasAcertadas = 10;
             int preguntasFalladas = 5;
             int totalPreguntas = preguntasAcertadas + preguntasFalladas;
 
-            TextView odsTitleTextView = FindViewById<TextView>(Resource.Id.ods1Title);
+            odsTitleTextView = FindViewById<TextView>(Resource.Id.ods1Title);
             ProgressBar odsProgressBar = FindViewById<ProgressBar>(Resource.Id.ods1ProgressBar);
             TextView odsPercentageTextView = FindViewById<TextView>(Resource.Id.ods1PercentageTextView);
 
@@ -46,6 +60,10 @@ namespace preguntaods.Presentacion.ViewModels
 
             odsProgressBar.SetProgress(porcentajeAcertadas, true);
             odsPercentageTextView.Text = $"{porcentajeAcertadas}%";
+
+            await RellenarEstats();
+
+            UserDialogs.Instance.HideLoading();
         }
 
         private void Atras(object sender, EventArgs e)
@@ -56,6 +74,20 @@ namespace preguntaods.Presentacion.ViewModels
             var i = new Intent(this, typeof(PerfilViewModel));
             StartActivity(i);
             Finish();
+        }
+
+        private async Task RellenarEstats()
+        {
+
+
+            var ahorcados = await fachada.GetAhorcadoByODS(2);
+            var preguntas = await fachada.GetPreguntasByODS(10);
+
+            var res = ahorcados.Count;
+
+            odsTitleTextView.Text = res.ToString();
+
+
         }
     }
 }

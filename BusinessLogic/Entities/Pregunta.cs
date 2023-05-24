@@ -10,7 +10,7 @@ namespace preguntaods.Entities
         public Pregunta()
         { }
 
-        public Pregunta(string enunciado, string respuesta1, string respuesta2, string respuesta3, string respuesta4, string solucion, int dificultad, string ods)
+        public Pregunta(string enunciado, string respuesta1, string respuesta2, string respuesta3, string respuesta4, string solucion, int dificultad, int? ods)
         {
             Enunciado = enunciado;
             Respuesta1 = respuesta1;

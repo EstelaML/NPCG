@@ -243,7 +243,7 @@ namespace preguntaods.Presentacion.UI_impl
                 }
                 else
                 {
-                    odsRelacion = int.Parse(pregunta.OdsRelacionada);
+                    odsRelacion = int.Parse(pregunta.OdsRelacionada.ToString()); ;
                     var nombreDeImagen =
                         "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
                     if (Activity.Resources != null)
