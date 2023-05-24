@@ -178,7 +178,7 @@ namespace preguntaods.Presentacion.ViewModels
             Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             Sonido.EjecutarSonido();
 
-            var i = new Intent(this, typeof(RankSemanalViewModel));
+            var i = new Intent(this, typeof(RankingViewModel));
             StartActivity(i);
             Finish();
         }
@@ -188,7 +188,7 @@ namespace preguntaods.Presentacion.ViewModels
             Sonido.SetEstrategia(new EstrategiaSonidoClick(), this);
             Sonido.EjecutarSonido();
 
-            var i = new Intent(this, typeof(RankingViewModel));
+            var i = new Intent(this, typeof(RankDiarioViewModel));
             StartActivity(i);
             Finish();
         }
