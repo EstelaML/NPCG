@@ -31,7 +31,7 @@ namespace preguntaods.Persistencia.Repository.impl
             return response;
         }
 
-        public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS, int puntosDiarios)
+        public async Task UpdatePuntosUsuario(string uuid, int puntosA, int puntosS, int puntosDiarios, int puntosSemanales)
         {
             var p = puntosA + puntosS;
             await conexion.Cliente
@@ -41,7 +41,9 @@ namespace preguntaods.Persistencia.Repository.impl
                         .Update();
 
             var puntosD = puntosDiarios + puntosS;
+            var punstosSemana = puntosSemanales + puntosS;
             await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Set(x => x.PuntuacionDiaria, puntosD).Update();
+            await conexion.Cliente.From<Estadistica>().Where(x => x.Usuario == uuid).Set(x => x.PuntuacionSemanal, punstosSemana).Update();
         }
 
         public async Task UpdatePartidasGanadas(string uuid, int partidasA)

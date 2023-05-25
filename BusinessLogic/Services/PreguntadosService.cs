@@ -16,6 +16,7 @@ namespace preguntaods.BusinessLogic.Services
     {
         private static PreguntadosService _instance;
 
+        #region atributos
         private readonly object sync = new object();
 
         private readonly ConexionBD conexion;
@@ -34,7 +35,7 @@ namespace preguntaods.BusinessLogic.Services
 
         public int volumenMusica;
         public int volumenSonidos;
-
+        #endregion
         private PreguntadosService()
         {
             conexion = ConexionBD.GetInstance();
@@ -46,7 +47,6 @@ namespace preguntaods.BusinessLogic.Services
             volumenMusica = conexion.UsuarioApp?.Musica ?? 1;
             volumenSonidos = conexion.UsuarioApp?.Sonidos ?? 1;
         }
-
         public static PreguntadosService GetInstance()
         {
             return _instance ??= new PreguntadosService();
@@ -64,7 +64,7 @@ namespace preguntaods.BusinessLogic.Services
                 preguntasAltas ??= p;
             }
         }
-
+    
         public Task<Pregunta> SolicitarPregunta(int dificultad)
         {
             Pregunta respuesta = null;
@@ -311,7 +311,7 @@ namespace preguntaods.BusinessLogic.Services
             {
                 var a = conexion.UsuarioBD.Id;
                 var estadisticas = await repositorioUser.GetEstadisticasByUuid(a);
-                await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos, estadisticas.PuntuacionDiaria);
+                await repositorioUser.UpdatePuntosUsuario(a, estadisticas.Puntuacion, puntos, estadisticas.PuntuacionDiaria, estadisticas.PuntuacionSemanal);
             }
         }
 
