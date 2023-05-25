@@ -113,6 +113,8 @@ namespace preguntaods.Presentacion.UI_impl
                         break;
                 }
 
+                puntuacionTotal -= puntuacion * 2;
+                if (puntuacionTotal < 0) puntuacionTotal = 0;
                 sonido.SetEstrategia(reloj, Activity);
                 sonido.PararSonido();
 
@@ -241,7 +243,7 @@ namespace preguntaods.Presentacion.UI_impl
                 }
                 else
                 {
-                    odsRelacion = int.Parse(pregunta.OdsRelacionada);
+                    odsRelacion = int.Parse(pregunta.OdsRelacionada.ToString()); ;
                     var nombreDeImagen =
                         "icon_ods" + pregunta.OdsRelacionada; // construir el nombre del recurso dinámicamente
                     if (Activity.Resources != null)

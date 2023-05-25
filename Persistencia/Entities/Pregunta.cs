@@ -41,6 +41,6 @@ namespace preguntaods.Entities
 
         // ReSharper disable once RedundantArgumentDefaultValue
         [Column("OdsRelacionada")]
-        public string OdsRelacionada { get; set; }
+        public int? OdsRelacionada { get; set; }
     }
 }
