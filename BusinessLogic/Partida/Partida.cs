@@ -148,7 +148,6 @@ namespace preguntaods.BusinessLogic.Partida
             }
             else if (contadorRetoSiguiente == listaRetos.Count - 2)
             {
-                contadorRetoSiguiente++;
                 _ = EventoAbandonarAsync(new object(), EventArgs.Empty, newFallos < 2, newPtsTotales, UserInterfacePregunta.GetPuntosConsolidados());
             }
         }
