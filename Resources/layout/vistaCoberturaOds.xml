@@ -47,7 +47,7 @@
             android:id="@+id/ods1Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ODS 1 Fin de la pobreza"
+            android:text="ODS 1: Fin de la pobreza"
             android:gravity="left"
             android:padding="16dp"
             android:textSize="20sp"
