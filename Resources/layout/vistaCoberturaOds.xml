@@ -71,7 +71,8 @@
                     android:id="@+id/ods1PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp"
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -102,7 +103,7 @@
                     android:id="@+id/ods2PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -133,7 +134,8 @@
                     android:id="@+id/ods3PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp" 
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -164,7 +166,8 @@
                     android:id="@+id/ods4PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp"
+                    android:text="0%"/>
             </LinearLayout>
 
                     <TextView
@@ -195,7 +198,8 @@
                     android:id="@+id/ods5PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp"
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -226,7 +230,8 @@
                     android:id="@+id/ods6PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp"
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -257,7 +262,8 @@
                     android:id="@+id/ods7PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp"
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -288,7 +294,8 @@
                     android:id="@+id/ods8PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp" 
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -319,7 +326,8 @@
                     android:id="@+id/ods9PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp" 
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -350,7 +358,8 @@
                     android:id="@+id/ods10PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp" 
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -381,7 +390,8 @@
                     android:id="@+id/ods11PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp" 
+                    android:text="0%"/>
             </LinearLayout>
 
             <TextView
@@ -397,7 +407,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
 
                 <ProgressBar
                     android:id="@+id/ods12ProgressBar"
@@ -412,7 +423,8 @@
                     android:id="@+id/ods12PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" />
+                    android:paddingStart="8dp"
+                    android:text="0%"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
