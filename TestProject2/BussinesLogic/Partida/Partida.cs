@@ -37,15 +37,15 @@ namespace preguntaods.BusinessLogic.Partida
 
         #region Setters/Getters
 
-   /*     public void SetActivity(Android.App.Activity newActivity)
-        {
-            activity = newActivity;
-            userInterface.SetActivity(newActivity);
+        /*     public void SetActivity(Android.App.Activity newActivity)
+             {
+                 activity = newActivity;
+                 userInterface.SetActivity(newActivity);
 
-            if (!primeraVez) return;
-            primeraVez = false;
-        }
-   */
+                 if (!primeraVez) return;
+                 primeraVez = false;
+             }
+        */
 
         public IReto GetRetoActual()
         {
@@ -72,15 +72,15 @@ namespace preguntaods.BusinessLogic.Partida
             return fachada;
         }
 
-    /*    private void SetUi(UserInterface newUserInterface)
-        {
-            userInterface = newUserInterface;
-        }
+        /*    private void SetUi(UserInterface newUserInterface)
+            {
+                userInterface = newUserInterface;
+            }
 
-        public UserInterface GetUi()
-        {
-            return userInterface;
-        } */
+            public UserInterface GetUi()
+            {
+                return userInterface;
+            } */
 
         #endregion Setters/Getters
 

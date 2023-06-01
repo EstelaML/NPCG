@@ -17,6 +17,7 @@ namespace preguntaods.BusinessLogic.Services
         private static PreguntadosService _instance;
 
         #region atributos
+
         private readonly object sync = new object();
 
         private readonly ConexionBD conexion;
@@ -35,7 +36,9 @@ namespace preguntaods.BusinessLogic.Services
 
         public int volumenMusica;
         public int volumenSonidos;
-        #endregion
+
+        #endregion atributos
+
         private PreguntadosService()
         {
             conexion = ConexionBD.GetInstance();
@@ -47,6 +50,7 @@ namespace preguntaods.BusinessLogic.Services
             volumenMusica = conexion.UsuarioApp?.Musica ?? 1;
             volumenSonidos = conexion.UsuarioApp?.Sonidos ?? 1;
         }
+
         public static PreguntadosService GetInstance()
         {
             return _instance ??= new PreguntadosService();
@@ -64,7 +68,7 @@ namespace preguntaods.BusinessLogic.Services
                 preguntasAltas ??= p;
             }
         }
-    
+
         public Task<Pregunta> SolicitarPregunta(int dificultad)
         {
             Pregunta respuesta = null;
@@ -154,18 +158,14 @@ namespace preguntaods.BusinessLogic.Services
 
         public async Task<List<Pregunta>> GetPreguntasByODS(int ods)
         {
-
             var res = await repositorioPregunta.GetPreguntasByODS(ods);
             return res;
-
         }
 
         public async Task<List<Ahorcado>> GetAhorcadoByODS(int ods)
         {
-
             var res = await repositorioAhorcado.GetAhorcadosByODS(ods);
             return res;
-
         }
 
         #endregion RetoAhorcado
@@ -414,7 +414,5 @@ namespace preguntaods.BusinessLogic.Services
         }
 
         #endregion Usuario
-
-
     }
 }

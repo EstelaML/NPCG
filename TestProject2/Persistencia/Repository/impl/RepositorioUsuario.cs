@@ -10,6 +10,7 @@ namespace preguntaods.Persistencia.Repository.impl
         {
             conexion = ConexionBD.GetInstance();
         }
+
         public async Task<Usuario> GetUserByUUid(string uuid)
         {
             var response = await conexion.Cliente

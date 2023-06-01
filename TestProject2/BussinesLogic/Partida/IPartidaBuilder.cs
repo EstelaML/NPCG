@@ -1,5 +1,4 @@
-﻿
-namespace preguntaods.BusinessLogic.Partida
+﻿namespace preguntaods.BusinessLogic.Partida
 {
     public interface IPartidaBuilder
     {

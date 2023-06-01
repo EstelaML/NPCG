@@ -26,8 +26,6 @@ namespace preguntaods.Presentacion.ViewModels
         private List<ProgressBar> progressBarList;
         private List<TextView> textViewList;
 
- 
-
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -120,7 +118,6 @@ namespace preguntaods.Presentacion.ViewModels
             var atras = FindViewById<ImageButton>(Resource.Id.buttonAtras);
             if (atras != null) atras.Click += Atras;
 
-
             await RellenarEstats();
 
             UserDialogs.Instance.HideLoading();
@@ -154,22 +151,18 @@ namespace preguntaods.Presentacion.ViewModels
 
                 for (int j = 0; j < retosAcertados.Count(); j++)
                 {
-
                     if (listaIdsAhor.Contains(retosAcertados.ElementAt(j)) || listaIdsPreg.Contains(retosAcertados.ElementAt(j)))
                     {
                         totalAcertados++;
                     }
-
                 }
 
                 for (int j = 0; j < retosFallados.Count(); j++)
                 {
-
                     if (listaIdsAhor.Contains(retosFallados.ElementAt(j)) || listaIdsPreg.Contains(retosFallados.ElementAt(j)))
                     {
                         totalFallados++;
                     }
-
                 }
 
                 int totalPreguntas = totalAcertados + totalFallados;
@@ -181,11 +174,7 @@ namespace preguntaods.Presentacion.ViewModels
                 progressBar.Progress = porcentajeAcertadas;
 
                 textView.Text = $"{porcentajeAcertadas}%";
-
-
             }
-
         }
-
     }
 }

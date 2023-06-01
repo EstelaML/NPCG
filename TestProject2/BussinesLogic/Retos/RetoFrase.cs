@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace preguntaods.BusinessLogic.Retos
+﻿namespace preguntaods.BusinessLogic.Retos
 {
     public class RetoFrase : IReto
     {

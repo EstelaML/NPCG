@@ -53,12 +53,9 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<List<Pregunta>> GetPreguntasByODS(int ods)
         {
-
             var preguntas = await conexion.Cliente.From<Pregunta>().Where(x => x.OdsRelacionada == ods).Get();
             return preguntas.Models.ToList();
-
         }
-
 
         public async Task AñadirPreguntaRealizada(Pregunta pregunta)
         {

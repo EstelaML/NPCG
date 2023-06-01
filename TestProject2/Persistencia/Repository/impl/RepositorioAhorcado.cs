@@ -12,6 +12,7 @@ namespace preguntaods.Persistencia.Repository.impl
             conexion = ConexionBD.GetInstance();
             repositorioUser = new RepositorioUsuario();
         }
+
         public async Task<List<Ahorcado>> GetAhorcadoDificultad(int dificultad)
         {
             var user = await repositorioUser.GetUserByUUid(conexion.UsuarioBD.Id);
@@ -35,10 +36,8 @@ namespace preguntaods.Persistencia.Repository.impl
 
         public async Task<List<Ahorcado>> GetAhorcadosByODS(int ods)
         {
-
             var preguntas = await conexion.Cliente.From<Ahorcado>().Where(x => x.OdsRelacionada == ods).Get();
             return preguntas.Models.ToList();
-
         }
 
         public async Task AñadirAhorcadoRealizado(Ahorcado pregunta)

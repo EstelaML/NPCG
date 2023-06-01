@@ -1,11 +1,4 @@
-﻿using preguntaods.BusinessLogic.Partida;
-using preguntaods.BusinessLogic.Retos;
-using preguntaods.BusinessLogic.Services;
-using preguntaods.BusinessLogic;
-using preguntaods.Entities;
-using Moq;
-using preguntaods.Persistencia.Repository;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using preguntaods.BusinessLogic.Services;
 
 namespace TestProject2.TestRanking
 {
@@ -16,7 +9,7 @@ namespace TestProject2.TestRanking
         public async Task TestOrdenRanking()
         {
             // Inicias el servicio
-            var service = PreguntadosService.GetInstance(); 
+            var service = PreguntadosService.GetInstance();
 
             // Llamas al método
             var users = await service.GetAllUsersOrdered(); // Obtener la lista de usuarios ordenada por puntuación

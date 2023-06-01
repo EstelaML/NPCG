@@ -165,20 +165,17 @@ namespace preguntaods.BusinessLogic.Fachada
         #endregion Estadisticas
 
         #region Retos
+
         public async Task<List<Pregunta>> GetPreguntasByODS(int ods)
         {
-
             var res = await servicio.GetPreguntasByODS(ods);
             return res;
-
         }
 
         public async Task<List<Ahorcado>> GetAhorcadoByODS(int ods)
         {
-
             var res = await servicio.GetAhorcadoByODS(ods);
             return res;
-
         }
 
         #endregion Retos

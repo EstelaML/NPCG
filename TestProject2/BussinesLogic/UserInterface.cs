@@ -4,7 +4,7 @@ namespace preguntaods.Presentacion.UI_impl
 {
     public abstract class UserInterface
     {
-       // protected Activity Activity;
+        // protected Activity Activity;
 
         public void InitializeUi(int fallos, int pistasUsadas, int ptsTotales, int ptsConsolidados, IReto retoActual, int orden)
         {
@@ -13,11 +13,11 @@ namespace preguntaods.Presentacion.UI_impl
             SetDatosReto(retoActual);
         }
 
-   /*     public void SetActivity(Activity activity)
-        {
-            Activity = activity;
-        }
-   */
+        /*     public void SetActivity(Activity activity)
+             {
+                 Activity = activity;
+             }
+        */
 
         public abstract void Init();
 

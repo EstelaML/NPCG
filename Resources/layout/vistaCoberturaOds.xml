@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -103,7 +103,7 @@
                     android:id="@+id/ods2PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -134,8 +134,8 @@
                     android:id="@+id/ods3PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" 
-                    android:text="0%"/>
+                    android:paddingStart="8dp"
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -167,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
 
                     <TextView
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -231,7 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -263,7 +263,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -294,8 +294,8 @@
                     android:id="@+id/ods8PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" 
-                    android:text="0%"/>
+                    android:paddingStart="8dp"
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -326,8 +326,8 @@
                     android:id="@+id/ods9PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" 
-                    android:text="0%"/>
+                    android:paddingStart="8dp"
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -358,8 +358,8 @@
                     android:id="@+id/ods10PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" 
-                    android:text="0%"/>
+                    android:paddingStart="8dp"
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -390,8 +390,8 @@
                     android:id="@+id/ods11PercentageTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp" 
-                    android:text="0%"/>
+                    android:paddingStart="8dp"
+                    android:text="0%" />
             </LinearLayout>
 
             <TextView
@@ -424,7 +424,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="8dp"
-                    android:text="0%"/>
+                    android:text="0%" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

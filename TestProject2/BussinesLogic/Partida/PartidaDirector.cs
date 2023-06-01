@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace preguntaods.BusinessLogic.Partida
+﻿namespace preguntaods.BusinessLogic.Partida
 {
     public class PartidaDirector
     {

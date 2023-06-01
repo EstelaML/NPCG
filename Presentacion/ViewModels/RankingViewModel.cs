@@ -94,7 +94,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 var txtPuntos = new TextView(this) { TextAlignment = TextAlignment.Center, TextSize = 18, Typeface = Android.Graphics.Typeface.DefaultBold };
                 txtPuntos.SetTextColor(ColorStateList.ValueOf(Android.Graphics.Color.Red));
-                txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString(); 
+                txtPuntos.Text = usuariosOrdenados[indice].Puntuacion.ToString();
                 fila.AddView(txtPuntos);
             }
             else
