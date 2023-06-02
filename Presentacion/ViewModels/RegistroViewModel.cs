@@ -7,11 +7,11 @@ using Android.Views;
 using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
 using System.Text.RegularExpressions;
+using preguntaods.BusinessLogic.Sonidos;
 
 namespace preguntaods.Presentacion.ViewModels
 {

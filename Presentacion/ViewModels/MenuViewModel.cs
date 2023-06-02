@@ -4,9 +4,9 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using System;
+using preguntaods.BusinessLogic.Sonidos;
 
 namespace preguntaods.Presentacion.ViewModels
 {

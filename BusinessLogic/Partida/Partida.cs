@@ -1,7 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Android.Content;
 using Android.Widget;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.BusinessLogic.Retos;
 using preguntaods.Entities;
@@ -10,6 +9,7 @@ using preguntaods.Presentacion.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Sonidos;
 
 namespace preguntaods.BusinessLogic.Partida
 {

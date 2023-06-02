@@ -1,8 +1,8 @@
-﻿using Android.Media;
+﻿using System;
+using Android.Media;
 using preguntaods.BusinessLogic.Services;
-using System;
 
-namespace preguntaods.BusinessLogic.EstrategiaSonido
+namespace preguntaods.BusinessLogic.Sonidos
 {
     internal class EstrategiaSonidoLetraAcierto : IEstrategiaSonido
     {

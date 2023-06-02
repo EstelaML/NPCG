@@ -5,7 +5,6 @@ using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using AndroidX.AppCompat.App;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
@@ -13,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using preguntaods.BusinessLogic.Sonidos;
 
 namespace preguntaods.Presentacion.ViewModels
 {

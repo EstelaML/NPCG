@@ -4,12 +4,12 @@ using Android.Content.Res;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using preguntaods.BusinessLogic.EstrategiaSonido;
 using preguntaods.BusinessLogic.Fachada;
 using preguntaods.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using preguntaods.BusinessLogic.Sonidos;
 
 namespace preguntaods.Presentacion.ViewModels
 {
