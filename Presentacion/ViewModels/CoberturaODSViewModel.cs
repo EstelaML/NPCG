@@ -167,6 +167,7 @@ namespace preguntaods.Presentacion.ViewModels
 
                 int totalPreguntas = totalAcertados + totalFallados;
                 int porcentajeAcertadas = (int)((float)totalAcertados / totalPreguntas * 100);
+                if (porcentajeAcertadas < 0) { porcentajeAcertadas = 0; }
 
                 ProgressBar progressBar = progressBarList[i - 1];
                 TextView textView = textViewList[i - 1];
